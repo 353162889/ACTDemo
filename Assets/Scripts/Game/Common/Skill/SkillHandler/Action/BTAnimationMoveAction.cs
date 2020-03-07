@@ -55,7 +55,7 @@ namespace Game
             Vector3 worldOffset = AnimationMoveUtility.GetOffset(points, cacheData.startRotation, startTime, endTime);
             Vector3 velocity = worldOffset / Time.deltaTime;
             var stepMoveSystem = context.world.GetExistingSystem<StepMoveSystem>();
-            stepMoveSystem.AppendMove(context.skillComponent.entity, velocity);
+            stepMoveSystem.AppendSingleFrameVelocity(context.skillComponent.entity, velocity);
 
             if (cacheData.time >= points[points.Length - 4])
             {

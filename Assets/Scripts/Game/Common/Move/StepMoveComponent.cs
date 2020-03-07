@@ -10,16 +10,8 @@ namespace Game
 
     public class StepMoveComponent : DataComponent
     {
-        //单帧附加的移动速度（执行完当前帧后清零）
-        public Vector3 singleFrameAppendVelocity;
-        //记录上一帧最总应用到的单帧速度
-        public Vector3 prevSingleFrameAppendVelocity;
-
-        //单帧移动的位移(向量)
-        public Vector3 curVelocity;
         //渴望速度，主要给表现使用
-        public Vector3 desiredVelocity;
-
+        public Vector3 desiredVelocity = Vector3.zero;
         //当前移动的最终速度(包括方向与大小)
         public Vector3 velocity = Vector3.zero;
 
@@ -27,5 +19,12 @@ namespace Game
         public bool changeFace = false;
 
         public bool isMoving = false;
+
+        //内部使用
+        //单帧附加的移动速度（执行完当前帧后清零）
+        public Vector3 innerFrameVelocity;
+        //内部使用
+        //当前可叠加的移动速度
+        public Vector3 innerVelocity;
     }
 }

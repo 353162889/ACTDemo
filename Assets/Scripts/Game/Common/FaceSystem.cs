@@ -7,6 +7,11 @@ namespace Game
 {
     public class FaceSystem : ComponentSystem
     {
+        private ForbidSystem forbidSystem;
+        protected override void OnCreate()
+        {
+            forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
+        }
 
         public void FaceTo(FaceComponent faceComponent, Vector3 direction, bool immediately = false, bool ignoreY = true)
         {
@@ -23,6 +28,7 @@ namespace Game
 
         public void FaceTo(FaceComponent faceComponent, Quaternion rotation, bool immediately = false)
         {
+            if (forbidSystem.IsForbid(faceComponent.entity, ForbidType.Face)) return;
             faceComponent.isRotating = true;
             faceComponent.immediately = immediately;
             faceComponent.rotation = rotation;

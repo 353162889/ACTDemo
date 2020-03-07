@@ -26,6 +26,7 @@ namespace Game
         private GravitySystem gravitySystem;
         private JumpSystem jumpSystem;
         private StepMoveSystem stepMoveSystem;
+        private ForbidSystem forbidSystem;
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
@@ -43,11 +44,15 @@ namespace Game
             gravitySystem = world.GetOrCreateSystem<GravitySystem>();
             jumpSystem = world.GetOrCreateSystem<JumpSystem>();
             stepMoveSystem = world.GetOrCreateSystem<StepMoveSystem>();
+            forbidSystem = world.GetOrCreateSystem<ForbidSystem>();
 
             var entity = world.CreateEntity();
 
             var inputComponent = world.GetSingletonComponent<InputComponent>();
             inputComponent.entity = entity;
+
+            var forbidComponent = world.AddComponentOnce<ForbidComponent>(entity);
+            forbidComponent.forbiddance = forbidSystem.AddForbiddance(forbidComponent, "ForbidSystem");
 
             var prefabComponent = prefabSystem.AddPrefabComponent(entity);
             var mainPlayerGO = GameStarter.Instance.mainPlayer;
@@ -104,6 +109,8 @@ namespace Game
             faceSystem.Update();
             jumpSystem.UpdateState();
             transformSystem.Update();
+
+            forbidSystem.Update();
 
             prefabSystem.Update();
             animationSystem.Update();

@@ -6,11 +6,14 @@ namespace Game
 {
     public class SkillSystem : ComponentSystem, IBTExecutor
     {
+        private ForbidSystem forbidSystem;
         private SkillBTContext skillContext;
+
         protected override void OnCreate()
         {
             ObjectPool<SkillData>.Instance.Init(2);
             skillContext = new SkillBTContext();
+            forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
         }
 
         public void CastSkill(Entity entity, int skillId)
@@ -18,7 +21,7 @@ namespace Game
             var skillComponent = World.GetComponent<SkillComponent>(entity);
             if (null == skillComponent) return;
             if (!CanCastSkill(skillComponent, skillId)) return;
-            var skilldata = CreateSkillData(skillId);
+            var skilldata = CreateSkillData(entity, skillId);
             skillComponent.skillData = skilldata;
             CLog.LogArgs("CastSkill", skillId);
         }
@@ -32,6 +35,7 @@ namespace Game
 
         public bool CanCastSkill(SkillComponent skillComponent, int skillId)
         {
+            if (forbidSystem.IsForbid(skillComponent.entity, ForbidType.Ability)) return false;
             return skillComponent.skillData == null;
         }
 
@@ -42,6 +46,7 @@ namespace Game
             if (skillComponent.skillData == null) return;
             CLog.LogArgs("CancelSkill","skillId",skillComponent.skillData.skillId, "isBreak", isBreak);
             var skillData = skillComponent.skillData;
+            forbidSystem.RemoveForbiddance(entity, skillData.forbidance);
             skillComponent.skillData = null;
             if (skillData != null)
             {
@@ -49,12 +54,13 @@ namespace Game
             }
         }
 
-        private SkillData CreateSkillData(int skillId)
+        private SkillData CreateSkillData(Entity entity, int skillId)
         {
             var skillData = ObjectPool<SkillData>.Instance.GetObject();
             skillData.skillId = skillId;
             skillData.skillTime = -1;
             skillData.skillTimeScale = 1;
+            skillData.forbidance = forbidSystem.AddForbiddance(entity, "ability:"+skillId);
 
             return skillData;
         }
@@ -69,7 +75,6 @@ namespace Game
                     bool firstRun = false;
                     if (skillData.skillTime < 0)
                     {
-                        CLog.LogArgs("skillData", skillData.skillId, "firstRun");
                         //开始运行第一帧
                         skillData.skillTime = 0;
                         firstRun = true;

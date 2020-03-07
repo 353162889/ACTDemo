@@ -15,18 +15,26 @@ namespace Game
             faceSystem = World.GetOrCreateSystem<FaceSystem>();
         }
 
-        public void SingleFrameAppendVelocity(Entity entity, Vector3 velocity, bool changeFace)
-        {
-
-        }
-
-        public void AppendMove(Entity entity, Vector3 velocity, bool changeFace = false)
+        public void AppendSingleFrameVelocity(Entity entity, Vector3 velocity, bool changeFace = false)
         {
             var moveComponent = World.GetComponent<StepMoveComponent>(entity);
             if (velocity.AlmostZero()) return;
             if (null == moveComponent) return;
             moveComponent.isMoving = true;
-            moveComponent.curVelocity += velocity;
+            moveComponent.innerFrameVelocity += velocity;
+            if (changeFace)
+            {
+                moveComponent.changeFace = changeFace;
+            }
+        }
+
+        public void AppendVelocity(Entity entity, Vector3 velocity, bool changeFace = false)
+        {
+            var moveComponent = World.GetComponent<StepMoveComponent>(entity);
+            if (velocity.AlmostZero()) return;
+            if (null == moveComponent) return;
+            moveComponent.isMoving = true;
+            moveComponent.innerVelocity += velocity;
             if (changeFace)
             {
                 moveComponent.changeFace = changeFace;
@@ -36,10 +44,16 @@ namespace Game
         public void StopMove(Entity entity)
         {
             var moveComponent = World.GetComponent<StepMoveComponent>(entity);
+            StopMove(moveComponent);
+        }
+
+        private void StopMove(StepMoveComponent moveComponent)
+        {
             if (null == moveComponent) return;
             moveComponent.isMoving = false;
-            moveComponent.curVelocity = Vector3.zero;
             moveComponent.changeFace = false;
+            moveComponent.innerFrameVelocity = Vector3.zero;
+            moveComponent.innerVelocity = Vector3.zero;
             moveComponent.velocity = Vector3.zero;
             moveComponent.desiredVelocity = Vector3.zero;
         }
@@ -61,8 +75,9 @@ namespace Game
             {
                 if (moveComponent.isMoving)
                 {
-                    var velocity = moveComponent.curVelocity;
-
+                    var velocity = moveComponent.innerFrameVelocity + moveComponent.innerVelocity;
+                    moveComponent.desiredVelocity = velocity;
+                    groundComponent.moveFlag = 0;
                     //碰撞阻碍
                     var physicComponent = World.GetComponent<PhysicComponent>(entity);
                     if (physicComponent != null)
@@ -86,7 +101,11 @@ namespace Game
                                         if (dotValue < 0)
                                         {
                                             velocity = velocity - dotValue * normal;
+                                            moveComponent.innerVelocity -=
+                                                Vector3.Dot(moveComponent.innerVelocity, normal) * normal;
                                         }
+
+                                        groundComponent.moveFlag |= (byte)CollisionFlags.Sides;
                                     }
 
                                     //头顶或者脚底有障碍物时，变更垂直速度
@@ -94,15 +113,15 @@ namespace Game
                                     {
                                         if (normalY * velocity.y < 0)
                                         {
-                                            //头顶有障碍物，速度反向并变为当前的0.5倍
+                                            velocity.y = 0;
+                                            moveComponent.innerVelocity.y = 0;
                                             if (normalY < 0)
                                             {
-                                                velocity.y = -velocity.y * 0.5f;
+                                                groundComponent.moveFlag |= (byte)CollisionFlags.Above;
                                             }
                                             else
                                             {
-                                                //脚底有障碍物，速度变为0
-                                                velocity.y = 0;
+                                                groundComponent.moveFlag |= (byte)CollisionFlags.Below;
                                             }
                                         }
                                     }
@@ -154,12 +173,12 @@ namespace Game
                     }
 
                     moveComponent.velocity = velocity;
+                    if (velocity.AlmostZero())
+                    {
+                        StopMove(moveComponent);
+                    }
                 }
-
-                moveComponent.isMoving = false;
-                moveComponent.desiredVelocity = moveComponent.curVelocity;
-                moveComponent.curVelocity = Vector3.zero;
-                moveComponent.changeFace = false;
+                moveComponent.innerFrameVelocity = Vector3.zero;
             });
         }
     }

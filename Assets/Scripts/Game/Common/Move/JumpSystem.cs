@@ -6,12 +6,15 @@ namespace Game
     public class JumpSystem : ComponentSystem
     {
         private StepMoveSystem stepMoveSystem;
+        private ForbidSystem forbidSystem;
         protected override void OnCreate()
         {
             stepMoveSystem = World.GetOrCreateSystem<StepMoveSystem>();
+            forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
         }
         public void Jump(Entity entity)
         {
+            if (forbidSystem.IsForbid(entity, ForbidType.Jump)) return;
             var jumpComponent = World.GetComponent<JumpComponent>(entity);
             var groundComponent = World.GetComponent<GroundComponent>(entity);
             if (null == jumpComponent || null == groundComponent) return;
@@ -26,10 +29,8 @@ namespace Game
             {
                 if (jumpComponent.isJump && jumpComponent.desiredJumpSpeed > 0)
                 {
-                    if (gravityComponent.useGravity)
-                    {
-                        stepMoveSystem.AppendMove(entity, jumpComponent.jumpVelocity);
-                    }
+                    stepMoveSystem.AppendVelocity(entity, jumpComponent.jumpVelocity);
+                    jumpComponent.jumpVelocity = Vector3.zero;
                 }
             });
         }

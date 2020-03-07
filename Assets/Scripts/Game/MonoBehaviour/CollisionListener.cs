@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public struct contactInfo
+    public struct ContactInfo
     {
         public Vector3 normal;
         public Vector3 point;
@@ -13,7 +13,7 @@ namespace Game
     public class CollisionInfo : IPoolable
     {
         public Collider collider;
-        public List<contactInfo> contacts = new List<contactInfo>();
+        public List<ContactInfo> contacts = new List<ContactInfo>();
         public void Reset()
         {
             collider = null;
@@ -36,12 +36,25 @@ namespace Game
             for (int i = 0; i < collision.contactCount; i++)
             {
                 var contact = collision.GetContact(i);
-                var contactInfo = new contactInfo();
+                var contactInfo = new ContactInfo();
                 contactInfo.point = contact.point;
                 contactInfo.normal = contact.normal;
                 collisionInfo.contacts.Add(contactInfo);
             }
             lstCollisionInfos.Add(collisionInfo);
+        }
+
+        void Update()
+        {
+            for (int i = lstCollisionInfos.Count - 1; i > -1; i--)
+            {
+                var collisionInfo = lstCollisionInfos[i];
+                if (collisionInfo.collider == null)
+                {
+                    lstCollisionInfos.RemoveAt(i);
+                    ObjectPool<CollisionInfo>.Instance.SaveObject(collisionInfo);
+                }
+            }
         }
 
         void OnCollisionExit(Collision collision)

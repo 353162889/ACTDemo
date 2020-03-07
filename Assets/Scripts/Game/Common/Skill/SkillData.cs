@@ -10,6 +10,7 @@ namespace Game
         public float skillTimeScale;
         public BTBlackBoard blackBoard = new BTBlackBoard();
         public BTExecuteCache executeCache = new BTExecuteCache();
+        public Forbiddance forbidance;
 
         public void Reset()
         {

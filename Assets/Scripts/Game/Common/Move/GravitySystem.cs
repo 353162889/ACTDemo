@@ -14,18 +14,9 @@ namespace Game
         {
             Entities.ForEach((Entity entity, GravityComponent gravityComponent, GroundComponent groundComponent) =>
             {
-                if (gravityComponent.useGravity)
+                if (gravityComponent.useGravity && !groundComponent.isGround)
                 {
-                    if (groundComponent.isGround)
-                    {
-                        gravityComponent.velocity = Vector3.zero;
-                    }
-                    gravityComponent.velocity += Vector3.up * gravityComponent.gravity * Time.deltaTime;
-                    stepMoveSystem.AppendMove(entity, gravityComponent.velocity);
-                }
-                else
-                {
-                    gravityComponent.velocity = Vector3.zero;
+                    stepMoveSystem.AppendVelocity(entity, Vector3.up * gravityComponent.gravity * Time.deltaTime);
                 }
             });
         }

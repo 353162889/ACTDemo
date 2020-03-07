@@ -1,4 +1,5 @@
 ﻿using Cinemachine.Utility;
+using Framework;
 using Unity.Entities;
 using UnityEngine;
 
@@ -9,13 +10,19 @@ namespace Game
 
         private StepMoveSystem stepMoveSystem;
         private FaceSystem faceSystem;
+        private ForbidSystem forbidSystem;
         protected override void OnCreate()
         {
             stepMoveSystem = World.GetOrCreateSystem<StepMoveSystem>();
             faceSystem = World.GetOrCreateSystem<FaceSystem>();
+            forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
         }
         public void Move(Entity entity, Vector3 direction)
         {
+            if (forbidSystem.IsForbid(entity, ForbidType.InputMove))
+            {
+                return;
+            }
             if (direction.AlmostZero()) return;
             var directMoveComponent = World.GetComponent<DirectionMoveComponent>(entity);
             if (null == directMoveComponent) return;
@@ -29,6 +36,7 @@ namespace Game
         public void StopMove(Entity entity)
         {
             var directMoveComponent = World.GetComponent<DirectionMoveComponent>(entity);
+            if (directMoveComponent == null) return;
             directMoveComponent.inputDirection = Vector3.zero;
         }
 
@@ -51,12 +59,17 @@ namespace Game
                     {
                         velocity = directionMoveComponent.inputDirection * directionMoveComponent.desiredSpeed;
                     }
-                    stepMoveSystem.AppendMove(entity, velocity);
-                     var faceComponent = World.GetComponent<FaceComponent>(entity);
-                     if (faceComponent != null)
-                     {
-                         faceSystem.FaceTo(faceComponent, directionMoveComponent.inputDirection);
-                     }
+                    stepMoveSystem.AppendSingleFrameVelocity(entity, velocity);
+                    var faceComponent = World.GetComponent<FaceComponent>(entity);
+                    if (faceComponent != null)
+                    {
+                        faceSystem.FaceTo(faceComponent, directionMoveComponent.inputDirection);
+                    }
+
+                    if (forbidSystem.IsForbid(entity, ForbidType.InputMove))
+                    {
+                        StopMove(entity);
+                    }
                 }
             });
         }
