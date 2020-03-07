@@ -1,0 +1,90 @@
+﻿using Framework;
+using Unity.Entities;
+using UnityEngine;
+
+namespace Game
+{
+    public class InputSystem : ComponentSystem
+    {
+        private InputComponent inputComponent;
+        private SkillSystem skillSystem;
+        private DirectionMoveSystem directionMoveSystem;
+        private JumpSystem jumpSystem;
+        protected override void OnCreate()
+        {
+            inputComponent = World.AddSingletonComponent<InputComponent>();
+            skillSystem = World.GetOrCreateSystem<SkillSystem>();
+            directionMoveSystem = World.GetOrCreateSystem<DirectionMoveSystem>();
+            jumpSystem = World.GetOrCreateSystem<JumpSystem>();
+            ObjectPool<InputMoveDirectionCmd>.Instance.Init(5);
+            ObjectPool<InputStopMoveDirectionCmd>.Instance.Init(5);
+            ObjectPool<InputJumpCmd>.Instance.Init(2);
+            ObjectPool<InputSkillCmd>.Instance.Init(10);
+        }
+
+        public void InputMoveDirection(Vector2 moveDirection)
+        {
+            moveDirection.Normalize();
+            var cmd = ObjectPool<InputMoveDirectionCmd>.Instance.GetObject();
+            cmd.moveDirection = new Vector3(moveDirection.x, 0, moveDirection.y);
+            inputComponent.queueCmd.Enqueue(cmd);
+        }
+
+        public void InputStopMoveDirection()
+        {
+            var cmd = ObjectPool<InputStopMoveDirectionCmd>.Instance.GetObject();
+            inputComponent.queueCmd.Enqueue(cmd);
+        }
+
+        public void InputJump()
+        {
+            var cmd = ObjectPool<InputJumpCmd>.Instance.GetObject();
+            inputComponent.queueCmd.Enqueue(cmd);
+        }
+
+        public void InputSkill(int skillId)
+        {
+            var cmd = ObjectPool<InputSkillCmd>.Instance.GetObject();
+            cmd.skillId = skillId;
+            inputComponent.queueCmd.Enqueue(cmd);
+        }
+
+        protected override void OnUpdate()
+        {
+            while (inputComponent.queueCmd.Count > 0)
+            {
+                var cmd = inputComponent.queueCmd.Dequeue();
+                if (cmd.cmdType == InputCommandType.MoveDirection)
+                {
+                    var moveDirectionCmd = cmd as InputMoveDirectionCmd;
+                    inputComponent.inputMoveDirection = moveDirectionCmd.moveDirection;
+                    ObjectPool<InputMoveDirectionCmd>.Instance.SaveObject(moveDirectionCmd);
+                }
+                else if (cmd.cmdType == InputCommandType.StopMoveDirection)
+                {
+                    var stopMoveDirectionCmd = cmd as InputStopMoveDirectionCmd;
+                    inputComponent.inputMoveDirection = Vector3.zero;
+                    directionMoveSystem.StopMove(inputComponent.entity);
+                    ObjectPool<InputStopMoveDirectionCmd>.Instance.SaveObject(stopMoveDirectionCmd);
+                }
+                else if(cmd.cmdType == InputCommandType.Jump)
+                {
+                    var jumpCmd = cmd as InputJumpCmd;
+                    jumpSystem.Jump(inputComponent.entity);
+                    ObjectPool<InputJumpCmd>.Instance.SaveObject(jumpCmd);
+                }
+                else if(cmd.cmdType == InputCommandType.Skill)
+                {
+                    var skillCmd = cmd as InputSkillCmd;
+                    skillSystem.CastSkill(inputComponent.entity, skillCmd.skillId);
+                    ObjectPool<InputSkillCmd>.Instance.SaveObject(skillCmd);
+                }
+            }
+
+            if (inputComponent.inputMoveDirection != Vector3.zero)
+            {
+                directionMoveSystem.Move(inputComponent.entity, inputComponent.inputMoveDirection);
+            }
+        }
+    }
+}
