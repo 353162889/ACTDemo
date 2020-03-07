@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using Framework;
 using Game;
+using Unity.Transforms;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 namespace NodeEditor
 {
     public class PlayableAssetInspectorUtility
     {
-        public static void DrawBaseInspectorGUI(INEPlayableAsset asset, NEDataProperty[] properties, Action<INEPlayableAsset> onUpdateAssetData = null)
+        public static void DrawBaseInspectorGUI(INEPlayableAsset asset, NEDataProperty[] properties,
+            Action<INEPlayableAsset> onUpdateAssetData = null)
         {
             object data = asset.neData != null ? asset.neData.data : null;
 
@@ -38,13 +43,15 @@ namespace NodeEditor
                         {
                             pre += item.Key + "/";
                         }
+
                         for (int i = 0; i < item.Value.Count; i++)
                         {
                             Type nodeDataType = item.Value[i];
                             var dataName = nodeDataType.Name;
                             if (dataName.EndsWith("Data")) dataName = dataName.Substring(0, dataName.Length - 4);
                             string name = pre + dataName;
-                            menu.AddItem(new GUIContent(name), false, () => {
+                            menu.AddItem(new GUIContent(name), false, () =>
+                            {
                                 asset.neData = new NEData();
                                 asset.neData.lstChild = new List<NEData>();
                                 asset.neData.data = Activator.CreateInstance(nodeDataType);
@@ -58,18 +65,23 @@ namespace NodeEditor
                                 {
                                     onUpdateAssetData.Invoke(asset);
                                 }
-                                EditorUtility.SetDirty((UnityEngine.Object)asset);
+
+                                EditorUtility.SetDirty((UnityEngine.Object) asset);
                             });
                         }
+
                         if (count > 1)
                         {
                             menu.AddSeparator("");
                         }
+
                         count--;
                     }
+
                     menu.ShowAsContext();
                 }
             }
+
             EditorGUILayout.EndHorizontal();
             if (data != null)
             {
@@ -126,20 +138,22 @@ namespace NodeEditor
         public static void InitPlayAnimationInspector(NEPlayAnimationAsset asset, bool showDialog = false)
         {
             if (asset == null) return;
-            NETimelineAsset timelineAsset = (NETimelineAsset)(asset.curTimelineClip.parentTrack.timelineAsset);
-            var data = (BTPlayAnimationActionData)asset.neData.data;
+            NETimelineAsset timelineAsset = (NETimelineAsset) (asset.curTimelineClip.parentTrack.timelineAsset);
+            var data = (BTPlayAnimationActionData) asset.neData.data;
             if (timelineAsset.modelAnimTrack == null || timelineAsset.modelAnimAnimator == null)
             {
                 Display("需要动画轨道与绑定动画状态机", showDialog);
                 return;
             }
+
             var animator = timelineAsset.modelAnimAnimator;
-            var animatorController = (AnimatorController)animator.runtimeAnimatorController;
+            var animatorController = (AnimatorController) animator.runtimeAnimatorController;
             if (animatorController == null)
             {
                 Display("animator中找不到AnimatorController", showDialog);
                 return;
             }
+
             if (asset.relatedAnimationClip != null)
             {
                 bool contain = false;
@@ -151,6 +165,7 @@ namespace NodeEditor
                         break;
                     }
                 }
+
                 if (!contain)
                 {
                     asset.relatedAnimationClip = null;
@@ -164,12 +179,13 @@ namespace NodeEditor
                     Display("需要输入animName或clip", showDialog);
                     return;
                 }
+
                 if (asset.clip == null)
                 {
                     var state = GetState(animatorController, data.animName);
                     if (state != null && state.motion != null)
                     {
-                        asset.clip = (AnimationClip)state.motion;
+                        asset.clip = (AnimationClip) state.motion;
                         var timelineClip = timelineAsset.modelAnimTrack.CreateClip(asset.clip);
                         timelineClip.start = asset.curTimelineClip.start;
                         float speed = state.speed;
@@ -237,12 +253,13 @@ namespace NodeEditor
         public static void InitAnimationMoveInspector(NEAnimationMoveAsset asset, bool showDialog = false)
         {
             if (asset == null) return;
-            NETimelineAsset timelineAsset = (NETimelineAsset)(asset.curTimelineClip.parentTrack.timelineAsset);
+            NETimelineAsset timelineAsset = (NETimelineAsset) (asset.curTimelineClip.parentTrack.timelineAsset);
             if (timelineAsset.modelMoveTrack == null)
             {
                 Display("需要动画移动轨道", showDialog);
                 return;
             }
+
             if (asset.relatedAnimationClip != null)
             {
                 bool contain = false;
@@ -254,12 +271,14 @@ namespace NodeEditor
                         break;
                     }
                 }
+
                 if (!contain)
                 {
                     asset.relatedAnimationClip = null;
                 }
             }
-            var data = (BTAnimationMoveActionData)asset.neData.data;
+
+            var data = (BTAnimationMoveActionData) asset.neData.data;
             if (asset.relatedAnimationClip == null)
             {
                 var timelineClip = timelineAsset.modelMoveTrack.CreateRecordableClip("AnimationMove");
@@ -273,6 +292,7 @@ namespace NodeEditor
                         int index = (len - 1) * 4;
                         duration = data.movePoints[index];
                     }
+
                     AnimationCurve curveX = new AnimationCurve();
                     AnimationCurve curveY = new AnimationCurve();
                     AnimationCurve curveZ = new AnimationCurve();
@@ -287,11 +307,13 @@ namespace NodeEditor
                         curveY.AddKey(time, y);
                         curveZ.AddKey(time, z);
                     }
+
                     var moveClip = timelineClip.animationClip;
                     moveClip.SetCurve("", typeof(Transform), "m_LocalPosition.x", curveX);
                     moveClip.SetCurve("", typeof(Transform), "m_LocalPosition.y", curveY);
                     moveClip.SetCurve("", typeof(Transform), "m_LocalPosition.z", curveZ);
                 }
+
                 timelineClip.duration = duration;
 
                 asset.curTimelineClip.start = timelineClip.start;
@@ -304,6 +326,120 @@ namespace NodeEditor
                 var timelineClip = asset.curTimelineClip;
                 asset.curTimelineClip.start = timelineClip.start;
                 asset.curTimelineClip.duration = timelineClip.duration;
+            }
+        }
+
+        public static void InitPlayEffectInspector(NEPlayEffectAsset asset, bool showDialog = false)
+        {
+            if (asset == null) return;
+            NETimelineAsset timelineAsset = (NETimelineAsset)(asset.curTimelineClip.parentTrack.timelineAsset);
+            if (timelineAsset.effectTrack == null || timelineAsset.director == null)
+            {
+                Display("需要动画特效轨道与director", showDialog);
+                return;
+            }
+
+            if (asset.relatedAnimationClip != null)
+            {
+                bool contain = false;
+                foreach (var clip in timelineAsset.effectTrack.GetClips())
+                {
+                    if (clip == asset.relatedAnimationClip)
+                    {
+                        contain = true;
+                        break;
+                    }
+                }
+
+                if (!contain)
+                {
+                    asset.relatedAnimationClip = null;
+                }
+            }
+
+            var data = (BTPlayEffectActionData)asset.neData.data;
+            if (asset.relatedAnimationClip == null)
+            {
+                if (string.IsNullOrEmpty(data.effectName) && asset.prefab == null)
+                {
+                    Display("需要输入effectName或prefab", showDialog);
+                    return;
+                }
+
+                if (asset.prefab == null)
+                {
+                    string path = PathUtility.GetBattleEffectPath(data.effectName);
+                    path = "Assets/ResourceEx/" + path;
+                    var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                    if (prefab == null)
+                    {
+                        Display($"找不到名字为:{data.effectName}的特效预制", showDialog);
+                        return;
+                    }
+
+                    asset.prefab = prefab;
+                }
+                else
+                {
+                    var path = AssetDatabase.GetAssetPath(asset.prefab);
+                    if (string.IsNullOrEmpty(path))
+                    {
+                        Display("当前prefab不是一个预制体", showDialog);
+                        return;
+                    }
+
+                    var name = Path.GetFileNameWithoutExtension(path);
+                    data.effectName = name;
+                }
+
+                var timelineClip = timelineAsset.effectTrack.CreateDefaultClip();
+                timelineClip.start = asset.curTimelineClip.start;
+                timelineClip.duration = data.duration > 0 ? data.duration : 1;
+
+                asset.curTimelineClip.start = timelineClip.start;
+                asset.curTimelineClip.duration = timelineClip.duration;
+
+                asset.relatedAnimationClip = timelineClip;
+
+                var controllerAsset = timelineClip.asset as ControlPlayableAsset;
+                controllerAsset.prefabGameObject = asset.prefab;
+                
+            }
+            else
+            {
+                var timelineClip = asset.curTimelineClip;
+                asset.curTimelineClip.start = timelineClip.start;
+                asset.curTimelineClip.duration = timelineClip.duration;
+            }
+            //关联挂点
+            if (timelineAsset.director != null && asset.relatedAnimationClip != null)
+            {
+                var collector = timelineAsset.director.gameObject.GetComponentInChildren<MountPointCollector>();
+                if (collector != null)
+                {
+                    var mountPoint = collector.GetMountpoint(data.mountPoint);
+                    var controllerAsset = asset.relatedAnimationClip.asset as ControlPlayableAsset;
+                    bool isFirstCreate = false;
+                    if (asset.parent == null)
+                    {
+                        var go = new GameObject();
+                        asset.parent = go.transform;
+                        isFirstCreate = true;
+                    }
+                    if (mountPoint == null)
+                    {
+                        mountPoint = timelineAsset.effectGlobalParent;
+                    }
+                    mountPoint.gameObject.AddChildToParent(asset.parent.gameObject, data.effectName + "_position", true);
+                    if (isFirstCreate)
+                    {
+                        asset.parent.localPosition = data.localPos;
+                        asset.parent.localRotation = data.localRot;
+                    }
+                    timelineAsset.director.SetReferenceValue(controllerAsset.sourceGameObject.exposedName, asset.parent.gameObject);
+                    
+                    
+                }
             }
         }
     }

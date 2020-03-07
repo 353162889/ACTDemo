@@ -10,6 +10,8 @@ namespace NodeEditor
         public GroupTrack viewGroupTrack { get; set; }
         public AnimationTrack modelAnimTrack { get; set; }
         public AnimationTrack modelMoveTrack { get; set; }
+        public ControlTrack effectTrack { get; set; }
+        public Transform effectGlobalParent { get; set; }
         public PlayableDirector director { get; set; }
 
         public Animator modelAnimAnimator
@@ -23,7 +25,6 @@ namespace NodeEditor
                     if (playableBinding.streamName == modelAnimTrack.name)
                     {
                         return (Animator)director.GetGenericBinding(modelAnimTrack);
-//                        return (Animator)playableBinding.sourceObject;
                     }
                 }
 

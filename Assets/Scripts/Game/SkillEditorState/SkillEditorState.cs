@@ -27,6 +27,7 @@ namespace Game
         private JumpSystem jumpSystem;
         private StepMoveSystem stepMoveSystem;
         private ForbidSystem forbidSystem;
+        private AvatarSystem avatarSystem;
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
@@ -45,25 +46,33 @@ namespace Game
             jumpSystem = world.GetOrCreateSystem<JumpSystem>();
             stepMoveSystem = world.GetOrCreateSystem<StepMoveSystem>();
             forbidSystem = world.GetOrCreateSystem<ForbidSystem>();
+            avatarSystem = world.GetOrCreateSystem<AvatarSystem>();
 
             var entity = world.CreateEntity();
 
+            //输出
             var inputComponent = world.GetSingletonComponent<InputComponent>();
             inputComponent.entity = entity;
 
+            //禁止组件
             var forbidComponent = world.AddComponentOnce<ForbidComponent>(entity);
             forbidComponent.forbiddance = forbidSystem.AddForbiddance(forbidComponent, "ForbidSystem");
 
+            //外显
             var prefabComponent = prefabSystem.AddPrefabComponent(entity);
             var mainPlayerGO = GameStarter.Instance.mainPlayer;
             var bornPos = mainPlayerGO.transform.position;
             prefabComponent.gameObject.AddChildToParent(mainPlayerGO);
             prefabComponent.gameObject.SetLayerRecursive(LayerDefine.PlayerInt);
+
+            var avatarComponent = world.AddComponentOnce<AvatarComponent>(entity);
+            avatarComponent.mountPoint = prefabComponent.GetComponentInChildren<MountPointCollector>();
            
+            //位置
             var transformComponent = transformSystem.AddTransformComponent(entity);
             bornPos.y = mapSystem.GetGroundInfo(bornPos).point.y;
             transformComponent.position = bornPos;
-
+            //移动
             var stepMoveComponent = world.AddComponentOnce<StepMoveComponent>(entity);
             var directionMoveComponent = world.AddComponentOnce<DirectionMoveComponent>(entity);
             directionMoveComponent.desiredSpeed = 5;
@@ -72,7 +81,7 @@ namespace Game
             jumpComponent.desiredJumpSpeed = 8;
             jumpComponent.startJumpHeight = 1;
             var groundComponent = world.AddComponentOnce<GroundComponent>(entity);
-
+            //面向
             var faceComponent = world.AddComponentOnce<FaceComponent>(entity);
             faceComponent.desiredDegreeSpeed = 720;
 
@@ -90,6 +99,7 @@ namespace Game
             animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
 
             var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
+
         }
 
         protected override void OnUpdate()
@@ -123,6 +133,7 @@ namespace Game
             {
                 world.Dispose();
             }
+            SceneEffectPool.Instance.Clear();
         }
     }
 }

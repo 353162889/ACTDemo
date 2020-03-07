@@ -69,6 +69,11 @@ namespace NodeEditor
                     case NEDatapRropertyType.Vector3:
                         newValue = EditorGUILayout.Vector3Field(property.Name, (Vector3)oldValue, options);
                         break;
+                    case NEDatapRropertyType.Quaterion:
+                        Quaternion quat = (Quaternion) oldValue;
+                        Vector3 eulerAngles = EditorGUILayout.Vector3Field(property.Name, quat.eulerAngles, options);
+                        newValue = Quaternion.Euler(eulerAngles);
+                        break;
                     case NEDatapRropertyType.Enum:
                         EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.LabelField(property.Name);
@@ -184,6 +189,15 @@ namespace NodeEditor
                         array.SetValue(newValue, i);
                     }
                 }
+                else if(type == typeof(Quaternion))
+                {
+                    Quaternion quat = (Quaternion) oldValue;
+                    var eulerAngles = EditorGUILayout.Vector3Field(i.ToString(), quat.eulerAngles, options);
+                    if (eulerAngles != quat.eulerAngles)
+                    {
+                        array.SetValue(Quaternion.Euler(eulerAngles), i);
+                    }
+                }
                 else if (type.IsEnum)
                 {
                     var newValue = EditorGUILayout.EnumPopup(i.ToString(), (Enum)oldValue, options);
@@ -232,6 +246,7 @@ namespace NodeEditor
         String,
         Vector2,
         Vector3,
+        Quaterion,
         Enum,
         Array,
     }
@@ -366,6 +381,12 @@ namespace NodeEditor
             if (type == typeof(Vector3))
             {
                 propertyType = NEDatapRropertyType.Vector3;
+                return true;
+            }
+
+            if (type == typeof(Quaternion))
+            {
+                propertyType = NEDatapRropertyType.Quaterion;
                 return true;
             }
 

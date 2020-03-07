@@ -36,6 +36,7 @@ namespace Game
             Application.runInBackground = true;
             Screen.orientation = ScreenOrientation.Portrait;
             GameObject.DontDestroyOnLoad(gameObject);
+           
         }
 
         // Use this for initialization
@@ -104,6 +105,9 @@ namespace Game
             goPool.AddComponentOnce<ResourceObjectPool>();
             goPool.AddComponentOnce<PrefabPool>();
 
+            var goSceneEffectPool = new GameObject("SceneEffectPool");
+            goSceneEffectPool.AddComponentOnce<SceneEffectPool>();
+            GameObject.DontDestroyOnLoad(goSceneEffectPool);
 
             gameObject.AddComponentOnce<FPSMono>();
         }

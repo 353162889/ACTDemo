@@ -17,6 +17,7 @@ namespace NodeEditor
         {
             {typeof(BTPlayAnimationActionData), typeof(NEPlayAnimationTrack)},
             {typeof(BTAnimationMoveActionData), typeof(NEAnimationMoveTrack)},
+            {typeof(BTPlayEffectActionData), typeof(NEPlayEffectTrack)},
         };
 
         public static Type TryGetDefaultData(Type trackType)
@@ -97,6 +98,13 @@ namespace NodeEditor
             //添加一个AnimationTrack用于配置角色移动数据
             var modelMoveTrack = timelineAsset.CreateTrack<AnimationTrack>(viewGroupTrack, "AnimationMoveTrack");
             timelineAsset.modelMoveTrack = modelMoveTrack;
+
+            //添加一个controlTrack用于显示特效
+            var effectTrack = timelineAsset.CreateTrack<ControlTrack>(viewGroupTrack, "EffectTrack");
+            timelineAsset.effectTrack = effectTrack;
+            var effectGlobalParent = new GameObject("effectGlobalParent");
+            director.gameObject.AddChildToParent(effectGlobalParent);
+            timelineAsset.effectGlobalParent = effectGlobalParent.transform;
             director.SetGenericBinding(modelMoveTrack, moveAnimator);
             var type = typeof(IBTTimeLineData);
             for (int i = 0; i < neData.lstChild.Count; i++)
