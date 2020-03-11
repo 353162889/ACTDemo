@@ -12,6 +12,7 @@ namespace NodeEditor
         public AnimationTrack modelMoveTrack { get; set; }
         public ControlTrack effectTrack { get; set; }
         public Transform effectGlobalParent { get; set; }
+        public Transform colliderParent { get; set; }
         public PlayableDirector director { get; set; }
 
         public Animator modelAnimAnimator

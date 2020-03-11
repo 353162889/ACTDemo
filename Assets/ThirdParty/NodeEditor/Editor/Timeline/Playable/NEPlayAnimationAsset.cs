@@ -18,37 +18,36 @@ namespace NodeEditor
             return Playable.Create(graph);
         }
 
-        private NEData m_cNEData;
-        public NEData neData {
-            get
+        public NEData neData { get; set; }
+
+        public NEData ConvertNEData()
+        {
+            if (neData == null)
             {
-                if (m_cNEData == null)
-                {
-                    m_cNEData = new NEData();
-                    m_cNEData.lstChild = new List<NEData>();
-                }
-
-                if (m_cNEData.data == null)
-                {
-                    m_cNEData.data = new BTPlayAnimationActionData();
-                }
-                if (relatedAnimationClip != null)
-                {
-                    BTPlayAnimationActionData data = (BTPlayAnimationActionData) m_cNEData.data;
-                    if (relatedAnimationClip.timeScale == 0)
-                    {
-                        data.duration = (float)relatedAnimationClip.duration;
-                    }
-                    else
-                    {
-                        data.duration = (float)(relatedAnimationClip.duration / relatedAnimationClip.timeScale);
-                    }
-                }
-
-                return m_cNEData;
+                neData = new NEData();
+                neData.lstChild = new List<NEData>();
             }
-            set { m_cNEData = value; }
+
+            if (neData.data == null)
+            {
+                neData.data = new BTPlayAnimationActionData();
+            }
+            if (relatedAnimationClip != null)
+            {
+                BTPlayAnimationActionData data = (BTPlayAnimationActionData)neData.data;
+                if (relatedAnimationClip.timeScale == 0)
+                {
+                    data.duration = (float)relatedAnimationClip.duration;
+                }
+                else
+                {
+                    data.duration = (float)(relatedAnimationClip.duration / relatedAnimationClip.timeScale);
+                }
+            }
+
+            return neData;
         }
+
         public TimelineClip curTimelineClip { get; set; }
         public void InitInspector()
         {

@@ -442,5 +442,38 @@ namespace NodeEditor
                 }
             }
         }
+
+        public static void InitBoxColliderInspector(NEBoxColliderAsset asset, bool showDialog = false)
+        {
+            if (asset == null) return;
+            NETimelineAsset timelineAsset = (NETimelineAsset) (asset.curTimelineClip.parentTrack.timelineAsset);
+            if (timelineAsset.colliderParent == null || timelineAsset.director == null)
+            {
+                Display("需要碰撞父节点与director", showDialog);
+                return;
+            }
+
+            if (asset.boxCollider == null)
+            {
+                var go = new GameObject();
+                timelineAsset.colliderParent.gameObject.AddChildToParent(go, "BoxCollider");
+                asset.boxCollider = go.AddComponent<BoxCollider>();
+               
+            }
+
+            if (asset.playableBehaviour.GetBehaviour() != null && asset.playableBehaviour.GetBehaviour().gameObject == null)
+            {
+                asset.playableBehaviour.GetBehaviour().gameObject = asset.boxCollider.gameObject;
+            }
+
+            var data = (BTBoxColliderActionData)asset.neData.data;
+            var trans = asset.boxCollider.transform;
+            trans.localPosition = data.localPos;
+            trans.localRotation = data.localRot;
+            asset.boxCollider.size = data.size;
+            asset.boxCollider.center = Vector3.zero;
+            asset.curTimelineClip.duration = data.duration;
+
+        }
     }
 }

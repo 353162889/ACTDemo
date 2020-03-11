@@ -3,6 +3,11 @@ using Framework;
 
 namespace Game
 {
+    public static class SkillBlackBoardKeys
+    {
+        public static string ListHitInfo = "ListHitInfo";
+    }
+
     public class SkillData : IPoolable
     {
         public int skillId;

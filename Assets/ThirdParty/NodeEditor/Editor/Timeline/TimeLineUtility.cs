@@ -18,6 +18,7 @@ namespace NodeEditor
             {typeof(BTPlayAnimationActionData), typeof(NEPlayAnimationTrack)},
             {typeof(BTAnimationMoveActionData), typeof(NEAnimationMoveTrack)},
             {typeof(BTPlayEffectActionData), typeof(NEPlayEffectTrack)},
+            {typeof(BTBoxColliderActionData), typeof(NEBoxColliderTrack)},
         };
 
         public static Type TryGetDefaultData(Type trackType)
@@ -73,10 +74,10 @@ namespace NodeEditor
         {
             var timelineAsset = (NETimelineAsset)director.playableAsset;
           
-            var go = new GameObject();
-            director.gameObject.AddChildToParent(go, "ModelMove");
+            var goModelMove = new GameObject();
+            director.gameObject.AddChildToParent(goModelMove, "ModelMove");
             timelineAsset.director = director;
-            var moveAnimator = go.AddComponent<Animator>();
+            var moveAnimator = goModelMove.AddComponent<Animator>();
             var viewGroupTrack = timelineAsset.CreateTrack<GroupTrack>("ViewGroupTrack");
             timelineAsset.viewGroupTrack = viewGroupTrack;
             //添加一个AnimationTrack用于放置动画
@@ -87,7 +88,7 @@ namespace NodeEditor
             if (playerPrefab != null)
             {
                 var player = GameObject.Instantiate(playerPrefab);
-                go.AddChildToParent(player.gameObject, "Player");
+                goModelMove.AddChildToParent(player.gameObject, "Player");
                 var animator = player.transform.GetComponentInChildren<Animator>();
                 if (animator != null)
                 {
@@ -105,6 +106,11 @@ namespace NodeEditor
             var effectGlobalParent = new GameObject("effectGlobalParent");
             director.gameObject.AddChildToParent(effectGlobalParent);
             timelineAsset.effectGlobalParent = effectGlobalParent.transform;
+
+            var colliderParent = new GameObject("colliderParent");
+            goModelMove.AddChildToParent(colliderParent);
+            timelineAsset.colliderParent = colliderParent.transform;
+
             director.SetGenericBinding(modelMoveTrack, moveAnimator);
             var type = typeof(IBTTimeLineData);
             for (int i = 0; i < neData.lstChild.Count; i++)
@@ -186,12 +192,17 @@ namespace NodeEditor
             foreach (var clip in clips)
             {
                 var asset = clip.asset as INEPlayableAsset;
-                if (asset != null && asset.neData != null && asset.neData.data != null)
+                NEData convertNEData = null;
+                if (asset != null)
                 {
-                    if (asset.neData.data is IBTTimeLineData)
+                    convertNEData = asset.ConvertNEData();
+                }
+                if (convertNEData != null && convertNEData.data != null)
+                {
+                    if (convertNEData.data is IBTTimeLineData)
                     {
-                        ((IBTTimeLineData)asset.neData.data).time = (float)clip.start;
-                        lst.Add(asset.neData);
+                        ((IBTTimeLineData)convertNEData.data).time = (float)clip.start;
+                        lst.Add(convertNEData);
                     }
                     else
                     {
@@ -200,7 +211,7 @@ namespace NodeEditor
                         timeDecoratorData.time = (float)clip.start;
                         neData.data = timeDecoratorData;
                         neData.lstChild = new List<NEData>();
-                        neData.lstChild.Add(asset.neData);
+                        neData.lstChild.Add(convertNEData);
                         lst.Add(neData);
                     }
                 }

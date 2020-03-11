@@ -13,5 +13,15 @@ namespace Game
         public static string TerrainStr = "Terrain";
         public static int TerrainInt = LayerMask.NameToLayer(TerrainStr);
         public static int TerrainMask = LayerMask.GetMask(TerrainStr);
+
+        //受击框
+        public static string BehitColliderStr = "BehitCollider";
+        public static int BehitColliderInt = LayerMask.NameToLayer(BehitColliderStr);
+        public static int BehitColliderMask = LayerMask.GetMask(BehitColliderStr);
+
+        //攻击框
+        public static string AttackColliderStr = "AttackCollider";
+        public static int AttackColliderInt = LayerMask.NameToLayer(AttackColliderStr);
+        public static int AttackColliderMask = LayerMask.GetMask(AttackColliderStr);
     }
 }

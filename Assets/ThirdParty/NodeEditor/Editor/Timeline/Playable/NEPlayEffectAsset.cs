@@ -13,36 +13,32 @@ namespace NodeEditor
             return Playable.Create(graph);
         }
 
-        private NEData m_cNEData;
+        public NEData neData { get; set; }
 
-        public NEData neData
+        public NEData ConvertNEData()
         {
-            get
+            if (neData == null)
             {
-                if (m_cNEData == null)
-                {
-                    m_cNEData = new NEData();
-                    m_cNEData.lstChild = new List<NEData>();
-                }
-
-                if (m_cNEData.data == null)
-                {
-                    m_cNEData.data = new BTPlayEffectActionData();
-                }
-                BTPlayEffectActionData data = (BTPlayEffectActionData)m_cNEData.data;
-                if (this.parent != null)
-                {
-                    data.localPos = this.parent.localPosition;
-                    data.localRot = this.parent.localRotation;
-                }
-                if (relatedAnimationClip != null)
-                {
-                    data.duration = (float)relatedAnimationClip.duration;
-                }
-
-                return m_cNEData;
+                neData = new NEData();
+                neData.lstChild = new List<NEData>();
             }
-            set { m_cNEData = value; }
+
+            if (neData.data == null)
+            {
+                neData.data = new BTPlayEffectActionData();
+            }
+            BTPlayEffectActionData data = (BTPlayEffectActionData)neData.data;
+            if (this.parent != null)
+            {
+                data.localPos = this.parent.localPosition;
+                data.localRot = this.parent.localRotation;
+            }
+            if (relatedAnimationClip != null)
+            {
+                data.duration = (float)relatedAnimationClip.duration;
+            }
+
+            return neData;
         }
 
         public TimelineClip curTimelineClip { get; set; }

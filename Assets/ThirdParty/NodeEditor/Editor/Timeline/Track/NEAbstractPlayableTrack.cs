@@ -30,6 +30,8 @@ namespace NodeEditor
                     asset.neData.data = Activator.CreateInstance(type);
                 }
             }
+
+            clip.duration = 0.5f;
             TimeLineUtility.InitNEPlayableClip(clip);
         }
 

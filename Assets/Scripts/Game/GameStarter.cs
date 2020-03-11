@@ -12,6 +12,7 @@ namespace Game
     public class GameStarter : SingletonMonoBehaviour<GameStarter>
     {
         public GameObject mainPlayer;
+        public GameObject enemy;
         public Camera camera;
         public CinemachineVirtualCamera virtualCamera;
 
@@ -108,6 +109,13 @@ namespace Game
             var goSceneEffectPool = new GameObject("SceneEffectPool");
             goSceneEffectPool.AddComponentOnce<SceneEffectPool>();
             GameObject.DontDestroyOnLoad(goSceneEffectPool);
+
+            ResetObjectPool<List<EntityHitInfo>>.Instance.Init(20, list => list.Clear());
+            var goEntityHit = new GameObject("EntityHitPool");
+            GameObject.DontDestroyOnLoad(goEntityHit);
+            BehaviourPool<EntityBoxHit>.Instance.Init(30, goEntityHit.transform);
+
+            ResetObjectPool<List<Entity>>.Instance.Init(20, list => list.Clear());
 
             gameObject.AddComponentOnce<FPSMono>();
         }

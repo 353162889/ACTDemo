@@ -11,6 +11,11 @@ namespace NodeEditor
     {
         public NEData neData { get; set; }
 
+        public NEData ConvertNEData()
+        {
+            return neData;
+        }
+
         public TimelineClip curTimelineClip { get; set; }
         public void InitInspector()
         {

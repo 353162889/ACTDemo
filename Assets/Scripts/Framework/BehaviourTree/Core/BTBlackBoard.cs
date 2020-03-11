@@ -9,34 +9,36 @@ namespace BTCore
     public class BTBlackBoard
     {
         public float deltaTime { get; set; }
-        protected List<BTSharedVariable> m_lstVariable;
+        protected Dictionary<string, object> m_cacheData;
         public BTBlackBoard()
         {
-            m_lstVariable = new List<BTSharedVariable>();
+            m_cacheData = new Dictionary<string, object>();
         }
 
-        public void SetVariable(string name,BTSharedVariable variable)
+        public void SetData(string name, object data)
         {
-            if(!m_lstVariable.Contains(variable))
-            {
-                variable.Name = name;
-                m_lstVariable.Add(variable);
-            }
+            m_cacheData[name] = data;
         }
 
-        public BTSharedVariable GetVariable(string name)
+        public T GetData<T>(string name)
         {
-            for (int i = 0; i < m_lstVariable.Count; i++)
+            object result;
+            if (m_cacheData.TryGetValue(name, out result))
             {
-                if (m_lstVariable[i].Name == name) return m_lstVariable[i];
+                return (T) result;
             }
-            return null;
+            return default(T);
+        }
+
+        public void ClearData(string name)
+        {
+            m_cacheData.Remove(name);
         }
 
         public virtual void Clear()
         {
             deltaTime = 0;
-            m_lstVariable.Clear();
+            m_cacheData.Clear();
         }
     }
 }

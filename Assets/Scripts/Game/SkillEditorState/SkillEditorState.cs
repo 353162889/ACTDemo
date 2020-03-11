@@ -48,9 +48,21 @@ namespace Game
             forbidSystem = world.GetOrCreateSystem<ForbidSystem>();
             avatarSystem = world.GetOrCreateSystem<AvatarSystem>();
 
-            var entity = world.CreateEntity();
+            var playerEntity = CreatePlayer();
+            cameraSystem.SetFollow(playerEntity, GameStarter.Instance.virtualCamera);
 
-            //输出
+            CreateEnemy();
+        }
+
+        private Entity CreatePlayer()
+        {
+            var entity = world.CreateEntity();
+            //在GameObject上标识entity
+            var gameObjectComponent = world.GetComponent<GameObjectComponent>(entity);
+            var entityMono = gameObjectComponent.gameObject.AddComponentOnce<EntityMonoBehaviour>();
+            entityMono.entity = entity;
+
+            //输入
             var inputComponent = world.GetSingletonComponent<InputComponent>();
             inputComponent.entity = entity;
 
@@ -63,11 +75,10 @@ namespace Game
             var mainPlayerGO = GameStarter.Instance.mainPlayer;
             var bornPos = mainPlayerGO.transform.position;
             prefabComponent.gameObject.AddChildToParent(mainPlayerGO);
-            prefabComponent.gameObject.SetLayerRecursive(LayerDefine.PlayerInt);
 
             var avatarComponent = world.AddComponentOnce<AvatarComponent>(entity);
             avatarComponent.mountPoint = prefabComponent.GetComponentInChildren<MountPointCollector>();
-           
+
             //位置
             var transformComponent = transformSystem.AddTransformComponent(entity);
             bornPos.y = mapSystem.GetGroundInfo(bornPos).point.y;
@@ -85,7 +96,59 @@ namespace Game
             var faceComponent = world.AddComponentOnce<FaceComponent>(entity);
             faceComponent.desiredDegreeSpeed = 720;
 
-            cameraSystem.SetFollow(entity, GameStarter.Instance.virtualCamera);
+            var physicComponent = world.AddComponentOnce<PhysicComponent>(entity);
+            physicComponent.rigidbody = prefabComponent.gameObject.AddComponentOnce<Rigidbody>();
+            physicComponent.collisionListener = prefabComponent.gameObject.AddComponentOnce<CollisionListener>();
+            physicComponent.rigidbody.isKinematic = false;
+            physicComponent.rigidbody.useGravity = false;
+            physicComponent.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            physicComponent.rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            var goAttackBoxParent = new GameObject();
+            prefabComponent.gameObject.AddChildToParent(goAttackBoxParent, "AttackBoxParent");
+            physicComponent.attackBoxParent = goAttackBoxParent.transform;
+            var rigidBody = physicComponent.attackBoxParent.gameObject.AddComponent<Rigidbody>();
+            rigidBody.isKinematic = true;
+            rigidBody.useGravity = false;
+
+            var animationComponent = world.AddComponentOnce<AnimationComponent>(entity);
+            animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
+
+            var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
+
+            return entity;
+        }
+
+        private Entity CreateEnemy()
+        {
+            var entity = world.CreateEntity();
+            var gameObjectComponent = world.GetComponent<GameObjectComponent>(entity);
+            var entityMono = gameObjectComponent.gameObject.AddComponentOnce<EntityMonoBehaviour>();
+            entityMono.entity = entity;
+
+            //禁止组件
+            var forbidComponent = world.AddComponentOnce<ForbidComponent>(entity);
+            forbidComponent.forbiddance = forbidSystem.AddForbiddance(forbidComponent, "ForbidSystem");
+
+            //外显
+            var prefabComponent = prefabSystem.AddPrefabComponent(entity);
+            var enemyGO = GameStarter.Instance.enemy;
+            var bornPos = enemyGO.transform.position;
+            prefabComponent.gameObject.AddChildToParent(enemyGO);
+
+            var avatarComponent = world.AddComponentOnce<AvatarComponent>(entity);
+            avatarComponent.mountPoint = prefabComponent.GetComponentInChildren<MountPointCollector>();
+
+            //位置
+            var transformComponent = transformSystem.AddTransformComponent(entity);
+            bornPos.y = mapSystem.GetGroundInfo(bornPos).point.y;
+            transformComponent.position = bornPos;
+            //移动
+            var stepMoveComponent = world.AddComponentOnce<StepMoveComponent>(entity);
+            var gravityComponent = world.AddComponentOnce<GravityComponent>(entity);
+            var groundComponent = world.AddComponentOnce<GroundComponent>(entity);
+            //面向
+            var faceComponent = world.AddComponentOnce<FaceComponent>(entity);
+            faceComponent.desiredDegreeSpeed = 720;
 
             var physicComponent = world.AddComponentOnce<PhysicComponent>(entity);
             physicComponent.rigidbody = prefabComponent.gameObject.AddComponentOnce<Rigidbody>();
@@ -100,6 +163,7 @@ namespace Game
 
             var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
 
+            return entity;
         }
 
         protected override void OnUpdate()

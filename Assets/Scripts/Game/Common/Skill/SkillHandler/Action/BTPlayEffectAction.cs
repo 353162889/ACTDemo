@@ -70,12 +70,6 @@ namespace Game
             {
                 if (cacheData.time >= data.duration)
                 {
-                    if (cacheData.effectGO != null)
-                    {
-                        SceneEffectPool.Instance.DestroyEffectGO(cacheData.effectGO);
-                        cacheData.effectGO = null;
-                    }
-                    this.Clear(context, btData);
                     result = BTStatus.Success;
                 }
                 else
@@ -83,7 +77,23 @@ namespace Game
                     result = BTStatus.Running;
                 }
             }
+
+            if (result != BTStatus.Running)
+            {
+                this.Clear(context, btData);
+            }
             return result;
+        }
+
+        protected override void Clear(SkillBTContext context, BTData btData, BTPlayEffectActionData data)
+        {
+            var cacheData = context.executeCache.GetCache<InnerBTPlayEffectActionData>(btData.dataIndex, DefaultActionData);
+            if (cacheData.effectGO != null)
+            {
+                SceneEffectPool.Instance.DestroyEffectGO(cacheData.effectGO);
+                cacheData.effectGO = null;
+            }
+            base.Clear(context, btData, data);
         }
     }
 }

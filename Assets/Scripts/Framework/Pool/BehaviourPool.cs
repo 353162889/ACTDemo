@@ -11,14 +11,16 @@ namespace Framework
         private Queue<T> _pool;
         private int _capicity;
         private bool _inited;
+        private Transform _parent;
 
-        public void Init(int capicity)
+        public void Init(int capicity, Transform parent)
         {
             if (!_inited)
             {
                 this._capicity = capicity;
                 _pool = new Queue<T>(_capicity);
                 _inited = true;
+                _parent = parent;
             }
         }
 
@@ -27,7 +29,7 @@ namespace Framework
             this._capicity = capicity;
         }
 
-        public T GetObject(Transform parent,params object[] param)
+        public T GetObject(Transform parent = null)
         {
             T obj = null;
             while (obj == null && _pool.Count > 0)
@@ -43,19 +45,23 @@ namespace Framework
             {
                 GameObjectUtil.AddChildToParent(parent.gameObject, obj.gameObject);
             }
+            else
+            {
+                obj.transform.parent = null;
+                obj.transform.localPosition = Vector3.zero;
+                obj.transform.localEulerAngles = Vector3.zero;
+                obj.transform.localScale = Vector3.one;
+            }
             obj.gameObject.SetActive(true);
             return obj;
         }
 
-        public void SaveObject(T obj, Transform parent = null)
+        public void SaveObject(T obj)
         {
             if (obj == (UnityEngine.Object) null) return;
             obj.Reset();
             obj.gameObject.SetActive(false);
-            if(parent != null)
-            {
-                GameObjectUtil.AddChildToParent(parent.gameObject, obj.gameObject);
-            }
+            GameObjectUtil.AddChildToParent(_parent.gameObject, obj.gameObject);
             if (_pool.Count < _capicity)
             {
                 _pool.Enqueue(obj);
@@ -64,12 +70,6 @@ namespace Framework
             {
                 CLog.Log("<color='yellow'>" + typeof(T) + " over capicity:" + _capicity + "</color>");
             }
-        }
-
-        public override void Dispose()
-        {
-            _inited = false;
-            base.Dispose();
         }
     }
 }
