@@ -7,7 +7,7 @@ namespace Game
 {
     public class BTAnimationMoveActionData
     {
-        //格式[time,x,y,z,time,x,y,z,...]
+        //格式[time,x,y,z,xr,yr,zr,time,x,y,z,xr,yr,zr,...]
         public float[] movePoints;
         [NEProperty("位移距离，<=0表示使用默认配置时间")]
         public float duration = -1;
@@ -44,7 +44,7 @@ namespace Game
 
             var cacheData = context.executeCache.GetCache<InnerBTAnimationMoveActionData>(btData.dataIndex, DefaultActionData);
             var points = data.runtimeMovePoints;
-            if (points == null || points.Length <= 4)
+            if (points == null || points.Length <= AnimationMoveUtility.DataSpace)
             {
                 this.Clear(context, btData);
                 return BTStatus.Success;
@@ -52,12 +52,15 @@ namespace Game
             float startTime = cacheData.time;
             cacheData.time = cacheData.time + context.deltaTime;
             float endTime = cacheData.time;
-            Vector3 worldOffset = AnimationMoveUtility.GetOffset(points, cacheData.startRotation, startTime, endTime);
-            Vector3 velocity = worldOffset / Time.deltaTime;
+            var offsetInfo = AnimationMoveUtility.GetOffset(points, cacheData.startRotation, startTime, endTime);
+            Vector3 velocity = offsetInfo.offsetPos / Time.deltaTime;
             var stepMoveSystem = context.world.GetExistingSystem<StepMoveSystem>();
-            stepMoveSystem.AppendSingleFrameVelocity(context.skillComponent.entity, velocity);
+            stepMoveSystem.AppendSingleFrameVelocity(context.skillComponent.entity, velocity, false);
+            var faceSystem = context.world.GetExistingSystem<FaceSystem>();
+            var transformComponent = context.world.GetComponent<TransformComponent>(context.skillComponent.entity);
+            faceSystem.FaceTo(context.skillComponent.entity, offsetInfo.offsetRot * transformComponent.rotation, true);
 
-            if (cacheData.time >= points[points.Length - 4])
+            if (cacheData.time >= points[points.Length - AnimationMoveUtility.DataSpace])
             {
                 this.Clear(context, btData);
                 return BTStatus.Success;

@@ -13,12 +13,12 @@ namespace NodeEditor
         private struct MoveInfo
         {
             public float time;
-            public float[] posInfo;
+            public float[] offsetInfo;
 
-            public MoveInfo(float time, float[] pos)
+            public MoveInfo(float time, float[] offset)
             {
                 this.time = time;
-                this.posInfo = pos;
+                this.offsetInfo = offset;
             }
         }
 
@@ -27,7 +27,7 @@ namespace NodeEditor
             return Playable.Create(graph);
         }
 
-        private static string[] PropertyNames = new[] { "m_LocalPosition.x", "m_LocalPosition.y", "m_LocalPosition.z" };
+        private static string[] PropertyNames = new[] { "m_LocalPosition.x", "m_LocalPosition.y", "m_LocalPosition.z", "localEulerAnglesRaw.x", "localEulerAnglesRaw.y", "localEulerAnglesRaw.z"};
         public NEData neData { get; set; }
 
         private void UpdateInfo(Dictionary<float, float[]> map, AnimationCurve animCurve, int index)
@@ -36,7 +36,7 @@ namespace NodeEditor
             {
                 var time = animCurve.keys[i].time;
                 var value = animCurve.keys[i].value;
-                if (!map.ContainsKey(time)) map.Add(time, new float[3]);
+                if (!map.ContainsKey(time)) map.Add(time, new float[] { 0, 0, 0, 0, 0, 0 });
                 map[time][index] = value;
             }
         }
@@ -89,26 +89,30 @@ namespace NodeEditor
                     //第一帧添加时间为0
                     if (infos[0].time > 0)
                     {
-                        infos.Insert(0, new MoveInfo(0, new float[] { 0, 0, 0 }));
+                        
+                        infos.Insert(0, new MoveInfo(0, new float[] { 0, 0, 0, 0, 0, 0 }));
                     }
                     //添加最后一帧
                     float lastTime = (float)relatedAnimationClip.duration;
                     if (!Mathf.Approximately(infos[infos.Count - 1].time, lastTime) && infos[infos.Count - 1].time < lastTime)
                     {
-                        var temp = infos[infos.Count - 1].posInfo;
-                        infos.Add(new MoveInfo(lastTime, new float[] { temp[0], temp[1], temp[2] }));
+                        var temp = infos[infos.Count - 1].offsetInfo;
+                        infos.Add(new MoveInfo(lastTime, new float[] { temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]}));
                     }
                 }
 
                 BTAnimationMoveActionData data = (BTAnimationMoveActionData)neData.data;
-                data.movePoints = new float[infos.Count * 4];
+                data.movePoints = new float[infos.Count * AnimationMoveUtility.DataSpace];
                 for (int i = 0; i < infos.Count; i++)
                 {
-                    int index = i * 4;
+                    int index = i * AnimationMoveUtility.DataSpace;
                     data.movePoints[index] = infos[i].time;
-                    data.movePoints[index + 1] = infos[i].posInfo[0];
-                    data.movePoints[index + 2] = infos[i].posInfo[1];
-                    data.movePoints[index + 3] = infos[i].posInfo[2];
+                    data.movePoints[index + 1] = infos[i].offsetInfo[0];
+                    data.movePoints[index + 2] = infos[i].offsetInfo[1];
+                    data.movePoints[index + 3] = infos[i].offsetInfo[2];
+                    data.movePoints[index + 4] = infos[i].offsetInfo[3];
+                    data.movePoints[index + 5] = infos[i].offsetInfo[4];
+                    data.movePoints[index + 6] = infos[i].offsetInfo[5];
                 }
             }
             return neData;

@@ -34,6 +34,15 @@ namespace Game
             faceComponent.rotation = rotation;
         }
 
+        public void FaceTo(Entity entity, Quaternion rotation, bool immediately = false)
+        {
+            var faceComponent = World.GetComponent<FaceComponent>(entity);
+            if (faceComponent != null)
+            {
+                FaceTo(faceComponent, rotation, immediately);
+            }
+        }
+
         public bool IsRotating(FaceComponent faceComponent)
         {
             if (faceComponent == null) return false;
