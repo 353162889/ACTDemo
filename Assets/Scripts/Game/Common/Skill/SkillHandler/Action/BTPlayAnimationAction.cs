@@ -46,12 +46,16 @@ namespace Game
 
         protected override void Clear(SkillBTContext context, BTData btData, BTPlayAnimationActionData data)
         {
-            //重置动画名称
-            var animationSystem = context.world.GetExistingSystem<AnimationSystem>();
-            animationSystem.ResetAnimatorParam(context.skillComponent.entity, data.animName);
-            if (context.isIsBreak)
+            if (!IsCleared(context, btData))
             {
-                animationSystem.SetAnimatorParam(context.skillComponent.entity, "BreakSkill");
+                //重置动画名称
+                var animationSystem = context.world.GetExistingSystem<AnimationSystem>();
+                animationSystem.ResetAnimatorParam(context.skillComponent.entity, data.animName);
+                if (context.isIsBreak)
+                {
+                    animationSystem.SetAnimatorParam(context.skillComponent.entity, "BreakSkill");
+                }
+                CLog.LogArgs("BTPlayAnimationAction", "Clear", context.isIsBreak);
             }
             base.Clear(context, btData, data);
         }

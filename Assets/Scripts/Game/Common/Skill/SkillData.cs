@@ -10,11 +10,18 @@ namespace Game
         public static string ListHitInfo = "ListHitInfo";
     }
 
+    public enum SkillPhaseType
+    {
+        Normal = 1,
+        Backswing = 2,//后摇
+    }
+
     public class SkillData : IPoolable
     {
         public int skillId;
         public float skillTime;
         public float skillTimeScale;
+        public SkillPhaseType phase;
         public BTBlackBoard blackBoard = new BTBlackBoard();
         public BTExecuteCache executeCache = new BTExecuteCache();
         public Forbiddance forbidance;

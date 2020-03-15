@@ -10,11 +10,13 @@ namespace Game
         private StepMoveSystem stepMoveSystem;
         private FaceSystem faceSystem;
         private ForbidSystem forbidSystem;
+        private SkillSystem skillSystem;
         protected override void OnCreate()
         {
             stepMoveSystem = World.GetOrCreateSystem<StepMoveSystem>();
             faceSystem = World.GetOrCreateSystem<FaceSystem>();
             forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
+            skillSystem = World.GetOrCreateSystem<SkillSystem>();
         }
         public void Move(Entity entity, Vector3 direction)
         {
@@ -30,6 +32,7 @@ namespace Game
             direction.y = 0;
             direction.Normalize();
             directMoveComponent.inputDirection = direction;
+            skillSystem.OnDirectionMove(entity);
         }
 
         public void StopMove(Entity entity)

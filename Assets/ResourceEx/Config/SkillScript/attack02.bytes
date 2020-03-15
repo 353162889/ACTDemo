@@ -312,9 +312,8 @@
           </data>
           <lstChild>
             <NEData>
-              <data xsi:type="BTInputDirectionBreakActionData">
-                <breakDuration>0.5999999</breakDuration>
-                <duration>0.5999999</duration>
+              <data xsi:type="BTSetSkillPhaseActionData">
+                <phaseType>Backswing</phaseType>
               </data>
             </NEData>
           </lstChild>

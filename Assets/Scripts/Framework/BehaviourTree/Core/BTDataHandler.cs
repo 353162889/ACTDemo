@@ -46,5 +46,10 @@
             context.executeCache.SetExecuteStatus(btData.dataIndex, BTExecuteStatus.Ready);
         }
 
+        protected bool IsCleared(IBTContext context, BTData btData)
+        {
+            return context.executeCache.GetExecuteStatus(btData.dataIndex) == BTExecuteStatus.Ready;
+        }
+
     }
 }

@@ -16,11 +16,37 @@ namespace Game
             forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
         }
 
+        private void UpdateSkillBreak(Entity entity)
+        {
+            var skillComponent = World.GetComponent<SkillComponent>(entity);
+            if (skillComponent != null)
+            {
+                if (IsCastingSkill(skillComponent))
+                {
+                    if (skillComponent.skillData.phase == SkillPhaseType.Backswing)
+                    {
+                        CancelSkill(entity, true);
+                    }
+                }
+            }
+        }
+
+        public void OnDirectionMove(Entity entity)
+        {
+            UpdateSkillBreak(entity);
+        }
+
+        public void OnJump(Entity entity)
+        {
+            UpdateSkillBreak(entity);
+        }
+
         public void CastSkill(Entity entity, int skillId)
         {
             var skillComponent = World.GetComponent<SkillComponent>(entity);
             if (null == skillComponent) return;
             if (!CanCastSkill(skillComponent, skillId)) return;
+            UpdateSkillBreak(entity);
             var skilldata = CreateSkillData(entity, skillId);
             skillComponent.skillData = skilldata;
             CLog.LogArgs("CastSkill", skillId);
@@ -36,7 +62,12 @@ namespace Game
         public bool CanCastSkill(SkillComponent skillComponent, int skillId)
         {
             if (forbidSystem.IsForbid(skillComponent.entity, ForbidType.Ability)) return false;
-            return skillComponent.skillData == null;
+            return !IsCastingSkill(skillComponent) || skillComponent.skillData.phase == SkillPhaseType.Backswing;
+        }
+
+        public bool IsCastingSkill(SkillComponent skillComponent)
+        {
+            return skillComponent.skillData != null;
         }
 
         public void CancelSkill(Entity entity, bool isBreak)
@@ -45,6 +76,9 @@ namespace Game
             if (null == skillComponent) return;
             if (skillComponent.skillData == null) return;
             CLog.LogArgs("CancelSkill","skillId",skillComponent.skillData.skillId, "isBreak", isBreak);
+            if(isBreak)
+                skillContext.SetBreak();
+            Clear(skillContext);
             var skillData = skillComponent.skillData;
             forbidSystem.RemoveForbiddance(entity, skillData.forbidance);
             skillComponent.skillData = null;
@@ -52,6 +86,7 @@ namespace Game
             {
                 ObjectPool<SkillData>.Instance.SaveObject(skillData);
             }
+            skillContext.Reset();
         }
 
         private SkillData CreateSkillData(Entity entity, int skillId)
@@ -60,6 +95,7 @@ namespace Game
             skillData.skillId = skillId;
             skillData.skillTime = -1;
             skillData.skillTimeScale = 1;
+            skillData.phase = SkillPhaseType.Normal;
             skillData.forbidance = forbidSystem.AddForbiddance(entity, "ability:"+skillId);
 
             return skillData;
@@ -86,8 +122,8 @@ namespace Game
                         CancelSkill(entity, false);
                         return;
                     }
-
                     float deltaTime = Time.deltaTime * skillData.skillTimeScale;
+                    skillContext.Reset();
                     skillContext.Init(World, skillComponent,skillComponent.skillData, btTreeData, this, deltaTime);
                     if (firstRun)
                     {
@@ -99,17 +135,15 @@ namespace Game
                     {
                         if (!skillContext.isIsBreak && btState == BTStatus.Fail)
                         {
-                            skillContext.SetDestroy();
+                            skillContext.SetBreak();
                         }
-
-                        Clear(skillContext);
                         CancelSkill(entity, skillContext.isIsBreak);
                     }
                     else
                     {
                         skillData.skillTime += deltaTime;
                     }
-                    skillContext.Reset();
+                   
                 }
             });
         }
@@ -128,7 +162,7 @@ namespace Game
         public void Clear(IBTContext context)
         {
             var treeData = context.treeData;
-            if (treeData != null && treeData.rootData.children.Count > 0)
+            if (treeData != null && treeData.rootData != null && treeData.rootData.children.Count > 0)
             {
                 var childBtData = treeData.rootData.children[0];
                 BTDataHandlerInitialize.GetHandler(childBtData.keyIndex).Clear(context, childBtData);

@@ -14056,12 +14056,6 @@ MonoBehaviour:
     UseGUIDs:
     - 3547037cc25bc8d49818b9867f6bf056
     - 82b29bdca2badbf41aa531181d87ea34
-  - guid: ba80ed604d6bd66438096769d797a6ea
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 0
-    type: 9
-    UseGUIDs: []
   - guid: b7d8c214c35038a42b1cc53aca9520e8
     ScriptSymbols:
     - NETreeWindowBtnExtension
@@ -14073,13 +14067,6 @@ MonoBehaviour:
     stamp: 1582982361
     type: 2
     UseGUIDs: []
-  - guid: 92a32e5b5e0e3ea46a8441d28c551267
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 1583554107
-    type: 1
-    UseGUIDs:
-    - ba80ed604d6bd66438096769d797a6ea
   - guid: e0fd3212272e8cf4295debe5883e6ac2
     ScriptSymbols:
     - Game.StepMoveSystem
@@ -15819,6 +15806,12 @@ MonoBehaviour:
     - SkillBTContext
     - BTData
     stamp: 1584269444
+    type: 2
+    UseGUIDs: []
+  - guid: 35c74787471a27b4c8b682a430d0da3f
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
     type: 2
     UseGUIDs: []
   timeStamp: 1584201034

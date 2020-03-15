@@ -25,7 +25,7 @@ namespace Game
             var directionMoveComponent = context.world.GetComponent<DirectionMoveComponent>(context.skillComponent.entity);
             if (directionMoveComponent != null && !directionMoveComponent.inputDirection.AlmostZero())
             {
-                context.SetDestroy();
+                context.SetBreak();
             }
 
             BTStatus result;

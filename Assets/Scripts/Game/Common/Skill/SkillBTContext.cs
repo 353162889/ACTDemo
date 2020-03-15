@@ -73,7 +73,7 @@ namespace Game
             this.m_fDeltaTime = deltaTime;
         }
 
-        public void SetDestroy()
+        public void SetBreak()
         {
             m_bIsBreak = true;
         }

@@ -333,27 +333,26 @@
                 <NEData>
                   <data xsi:type="BTForbidActionData">
                     <finishResume>true</finishResume>
-                    <forbidDuration>1.15</forbidDuration>
+                    <forbidDuration>1</forbidDuration>
                     <forbidArray>
                       <ForbidType>Face</ForbidType>
                       <ForbidType>Jump</ForbidType>
                       <ForbidType>InputMove</ForbidType>
                     </forbidArray>
-                    <duration>1.15</duration>
+                    <duration>1</duration>
                   </data>
                 </NEData>
               </lstChild>
             </NEData>
             <NEData>
               <data xsi:type="BTTimeDecoratorData">
-                <exeTime>1.15</exeTime>
-                <time>1.15</time>
+                <exeTime>1</exeTime>
+                <time>1</time>
               </data>
               <lstChild>
                 <NEData>
-                  <data xsi:type="BTInputDirectionBreakActionData">
-                    <breakDuration>0.350000143</breakDuration>
-                    <duration>0.350000143</duration>
+                  <data xsi:type="BTSetSkillPhaseActionData">
+                    <phaseType>Backswing</phaseType>
                   </data>
                 </NEData>
               </lstChild>

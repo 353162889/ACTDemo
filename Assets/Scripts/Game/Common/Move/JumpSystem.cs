@@ -9,11 +9,13 @@ namespace Game
         private StepMoveSystem stepMoveSystem;
         private ForbidSystem forbidSystem;
         private FaceSystem faceSystem;
+        private SkillSystem skillSystem;
         protected override void OnCreate()
         {
             stepMoveSystem = World.GetOrCreateSystem<StepMoveSystem>();
             forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
             faceSystem = World.GetOrCreateSystem<FaceSystem>();
+            skillSystem = World.GetOrCreateSystem<SkillSystem>();
         }
         public void Jump(Entity entity, Vector3 horizonalVelcolity)
         {
@@ -23,6 +25,10 @@ namespace Game
             var gravityComponent = World.GetComponent<GravityComponent>(entity);
             if (null == jumpComponent || null == groundComponent || null == gravityComponent) return;
             if (!groundComponent.isGround || jumpComponent.isJump) return;
+
+            //技能跳跃触发技能更新
+            skillSystem.OnJump(entity);
+
             jumpComponent.isJump = true;
             jumpComponent.startJumpGroundTime = Time.time + jumpComponent.startJumpWaitTime;
 
