@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Game
 {
@@ -181,14 +186,134 @@ namespace Game
 
             //局部位移
             Vector3 localOffset = endPoint - startPoint;
-            //            Quaternion startQuat = Quaternion.Euler(startRot);
-            //            Quaternion endQuat = Quaternion.Euler(endRot);
-            //            Quaternion localRotOffset = Quaternion.Inverse(startQuat) * endQuat;
             Quaternion localRotOffset = Quaternion.Euler(endRot - startRot);
             //计算出世界位移
             Vector3 worldOffset = baseRotation * localOffset;
             return new OffsetMoveInfo() { offsetPos = worldOffset, offsetRot = localRotOffset};
         }
+
+#if UNITY_EDITOR
+        private static string[] PropertyNames = new[] { "m_LocalPosition.x", "m_LocalPosition.y", "m_LocalPosition.z", "localEulerAnglesRaw.x", "localEulerAnglesRaw.y", "localEulerAnglesRaw.z" };
+        private static void UpdateInfo(Dictionary<float, float[]> map, AnimationCurve animCurve, int index)
+        {
+            for (int i = 0; i < animCurve.length; i++)
+            {
+                var time = animCurve.keys[i].time;
+                var value = animCurve.keys[i].value;
+                if (!map.ContainsKey(time)) map.Add(time, new float[] { 0, 0, 0, 0, 0, 0 });
+                map[time][index] = value;
+            }
+        }
+        private struct MoveInfo
+        {
+            public float time;
+            public float[] offsetInfo;
+
+            public MoveInfo(float time, float[] offset)
+            {
+                this.time = time;
+                this.offsetInfo = offset;
+            }
+        }
+        public static float[] ConvertClipToPoints(AnimationClip clip, float duration = -1, string path = "")
+        {
+            var binds = AnimationUtility.GetCurveBindings(clip);
+            Dictionary<float, float[]> map = new Dictionary<float, float[]>();
+            foreach (var bind in binds)
+            {
+                if (bind.path == path)
+                {
+                    int index = Array.IndexOf(PropertyNames, bind.propertyName);
+                    if (index < 0) continue;
+                    var animCurve = AnimationUtility.GetEditorCurve(clip, bind);
+                    UpdateInfo(map, animCurve, index);
+                }
+            }
+
+            List<MoveInfo> infos = new List<MoveInfo>();
+            foreach (var info in map)
+            {
+                infos.Add(new MoveInfo(info.Key, info.Value));
+            }
+            infos.Sort((MoveInfo a, MoveInfo b) =>
+            {
+                if (a.time < b.time)
+                {
+                    return -1;
+                }
+                else if (a.time > b.time)
+                {
+                    return 1;
+                }
+                return 0;
+            });
+            if (infos.Count > 0)
+            {
+                //第一帧添加时间为0
+                if (infos[0].time > 0)
+                {
+
+                    infos.Insert(0, new MoveInfo(0, new float[] { 0, 0, 0, 0, 0, 0 }));
+
+                }
+                float lastTime = clip.length;
+                //添加最后一帧
+                if (duration > 0)
+                    lastTime = duration;
+                
+                if (!Mathf.Approximately(infos[infos.Count - 1].time, lastTime) && infos[infos.Count - 1].time < lastTime)
+                {
+                    var temp = infos[infos.Count - 1].offsetInfo;
+                    infos.Add(new MoveInfo(lastTime, new float[] { temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6] }));
+                }
+            }
+
+            float[] points = new float[infos.Count * AnimationMoveUtility.DataSpace];
+            for (int i = 0; i < infos.Count; i++)
+            {
+                int index = i * AnimationMoveUtility.DataSpace;
+                points[index] = infos[i].time;
+                points[index + 1] = infos[i].offsetInfo[0];
+                points[index + 2] = infos[i].offsetInfo[1];
+                points[index + 3] = infos[i].offsetInfo[2];
+                points[index + 4] = infos[i].offsetInfo[3];
+                points[index + 5] = infos[i].offsetInfo[4];
+                points[index + 6] = infos[i].offsetInfo[5];
+            }
+
+            return points;
+        }
+
+        public static void ConvertPointsToTimelineClip(float[] points, ref TimelineClip timelineClip)
+        {
+            if (points != null && points.Length > 0)
+            {
+                int len = points.Length / AnimationMoveUtility.DataSpace;
+                AnimationCurve[] curves = new AnimationCurve[PropertyNames.Length];
+                for (int i = 0; i < curves.Length; i++)
+                {
+                    curves[i] = new AnimationCurve();
+                }
+                for (int i = 0; i < len; i++)
+                {
+                    int startIndex = i * AnimationMoveUtility.DataSpace;
+                    float time = points[startIndex];
+                    for (int j = 0; j < curves.Length; j++)
+                    {
+                        curves[j].AddKey(time, points[startIndex + j + 1]);
+                    }
+                }
+
+                var moveClip = timelineClip.animationClip;
+                for (int i = 0; i < curves.Length; i++)
+                {
+                    moveClip.SetCurve("", typeof(Transform), PropertyNames[i], curves[i]);
+                }
+
+                timelineClip.duration = moveClip.length;
+            }
+        }
+#endif
 
     }
 }

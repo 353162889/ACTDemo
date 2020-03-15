@@ -293,7 +293,7 @@ namespace NodeEditor
             if (arr.Length > 0)
             {
                 NEPropertyAttribute propertyAttr= (NEPropertyAttribute)arr[0];
-                m_sName = propertyAttr.name;
+                m_sName = string.Format("{0}({1})", m_Info.Name, propertyAttr.name);
                 m_bShowOnNode = propertyAttr.showOnNode;
             }
             if (propertyType == NEDatapRropertyType.Array)

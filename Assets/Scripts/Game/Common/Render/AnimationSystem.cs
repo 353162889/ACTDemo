@@ -166,8 +166,8 @@ namespace Game
                 this.SetAnimatorParam(animationComponent, AnimatorParamDefine.Jump, isJump);
                 if (isJump)
                 {
-                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.JumpDown,
-                        jumpState == JumpStateType.JumpDown);
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.JumpBeforeGround,
+                        jumpState == JumpStateType.JumpBeforeGround);
                     this.SetAnimatorParam(animationComponent, AnimatorParamDefine.Jumping,
                         jumpState == JumpStateType.Jumping);
                 }

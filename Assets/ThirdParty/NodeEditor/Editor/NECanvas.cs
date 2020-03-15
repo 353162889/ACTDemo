@@ -33,10 +33,10 @@ namespace NodeEditor
             get { return m_dicNodeDataType; }
         }
         private Func<Type, object> m_fCreateNodeDataFunc;
-        private object m_cCopyObj;
-        private Func<object, object> m_cCopyFunc;
+        private NEData m_cCopyObj;
+        private Func<NENode, NEData> m_cCopyFunc;
 
-        public NECanvas(List<Type> lstNodeDataType, Dictionary<string, List<Type>> extCategoryType, Func<Type,object> createNodeDataDataFunc, Func<object,object> copyFunc = null)
+        public NECanvas(List<Type> lstNodeDataType, Dictionary<string, List<Type>> extCategoryType, Func<Type,object> createNodeDataDataFunc, Func<NENode, NEData> copyFunc = null)
         {
             m_fCreateNodeDataFunc = createNodeDataDataFunc;
             m_dicNodeDataType = new Dictionary<string, List<Type>>();
@@ -191,6 +191,19 @@ namespace NodeEditor
             DrawNodePoint(Event.current);
             HandleEvent(Event.current);
             GUI.EndScrollView();
+        }
+
+        public NENode CreateNENode(NEData neData, NENode parent)
+        {
+            NENode parentNode = CreateNode(parent, neData.data);
+            if (neData.lstChild != null)
+            {
+                for (int i = 0; i < neData.lstChild.Count; i++)
+                {
+                    CreateNENode(neData.lstChild[i], parentNode);
+                }
+            }
+            return parentNode;
         }
 
         public NENode CreateNode(NENode parent, object data)
@@ -556,7 +569,7 @@ namespace NodeEditor
             menu.AddItem(new GUIContent("拷贝节点"), false, () => {
                 if (m_cCopyFunc != null)
                 {
-                    m_cCopyObj = m_cCopyFunc.Invoke(node.node);
+                    m_cCopyObj = m_cCopyFunc.Invoke(node);
                 }
             });
             int count = m_dicNodeDataType.Count;
@@ -593,7 +606,7 @@ namespace NodeEditor
             {
                 menu.AddItem(new GUIContent("粘贴"), false, () =>
                 {
-                    CreateNode(node, m_cCopyObj);
+                    CreateNENode(m_cCopyObj, node);
                     RefreshPosition();
                 });
             }

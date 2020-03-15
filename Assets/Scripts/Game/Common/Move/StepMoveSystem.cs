@@ -1,4 +1,5 @@
 ﻿using Cinemachine.Utility;
+using Framework;
 using Unity.Entities;
 using UnityEngine;
 
@@ -78,7 +79,7 @@ namespace Game
                     var velocity = moveComponent.innerFrameVelocity + moveComponent.innerVelocity;
                     moveComponent.desiredVelocity = velocity;
                     groundComponent.moveFlag = 0;
-                    //碰撞阻碍
+                    //物理碰撞更新速度
                     var physicComponent = World.GetComponent<PhysicComponent>(entity);
                     if (physicComponent != null)
                     {
@@ -129,31 +130,41 @@ namespace Game
                             }
                         }
                     }
-
+                    //地面移动更新速度
                     var prePos = transformComponent.position;
                     var moveOffset = velocity * Time.deltaTime;
                     var newPos = prePos + moveOffset;
-                    float moveHeightOffset = prePos.y - newPos.y;
-                    //防止跳跃速度很小，第一次运行没有离地
                     var groundInfo = mapSystem.GetGroundInfo(newPos);
                     groundComponent.groundPointInfo = groundInfo;
                     float newPosHeight = groundInfo.point.y;
-                    var oldIsGround = groundComponent.isGround;
                     //精细判断当前是否已经在地面上
                     bool isGround = CheckGroundByPositionAndHeight(newPos, newPosHeight, 0.1f);
-                    //在地面上最大误差范围
-                    bool isRealGround = CheckGroundByPositionAndHeight(newPos, newPosHeight, 0.5f);
-                    //遇到斜坡的时候通过斜率大小判定是否isground
-                    if (oldIsGround && !isGround && isRealGround)
+                    //如果原始Y轴的速度大于0
+                    if (moveComponent.desiredVelocity.y <= 0)
                     {
-                        if (Vector3.Dot(groundInfo.normal, Vector3.up) > slopeAngleRate)
+                        //检测走到凹槽之后，角色默认不实用重力，直接设置当前高度
+                        var oldIsGround = groundComponent.isGround;
+                        //在地面上最大误差范围
+                        bool isRealGround = CheckGroundByPositionAndHeight(newPos, newPosHeight, 0.5f);
+                        //遇到斜坡的时候通过斜率大小判定是否isground
+                        if (oldIsGround && !isGround && isRealGround)
                         {
-                            isGround = true;
+                            if (Vector3.Dot(groundInfo.normal, Vector3.up) > slopeAngleRate)
+                            {
+                                isGround = true;
+                            }
+                        }
+
+                        if (isGround)
+                        {
+                            newPos.y = newPosHeight;
                         }
                     }
-                    if (isGround && newPos.y < newPosHeight)
+
+                    if (isGround)
                     {
-                        newPos.y = newPosHeight;
+                        if (velocity.y < 0) velocity.y = 0;
+                        if (moveComponent.innerVelocity.y < 0) moveComponent.innerVelocity.y = 0;
                     }
 
                     //更新最新位置
@@ -178,6 +189,7 @@ namespace Game
                         StopMove(moveComponent);
                     }
                 }
+               
                 moveComponent.innerFrameVelocity = Vector3.zero;
             });
         }

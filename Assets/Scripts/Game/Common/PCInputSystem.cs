@@ -32,6 +32,7 @@ namespace Game
         private static Dictionary<KeyCode, int> dicSkillCode = new Dictionary<KeyCode, int>()
         {
             {KeyCode.J, 1},
+            {KeyCode.K, 2},
         };
 
         protected override void OnUpdate()

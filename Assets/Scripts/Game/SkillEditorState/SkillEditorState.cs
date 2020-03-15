@@ -81,16 +81,24 @@ namespace Game
 
             //位置
             var transformComponent = transformSystem.AddTransformComponent(entity);
-            bornPos.y = mapSystem.GetGroundInfo(bornPos).point.y;
+            float y = mapSystem.GetGroundInfo(bornPos).point.y;
+            if (transformComponent.position.y < y)
+            {
+                bornPos.y = y;
+            }
             transformComponent.position = bornPos;
+
             //移动
             var stepMoveComponent = world.AddComponentOnce<StepMoveComponent>(entity);
             var directionMoveComponent = world.AddComponentOnce<DirectionMoveComponent>(entity);
             directionMoveComponent.desiredSpeed = 5;
             var gravityComponent = world.AddComponentOnce<GravityComponent>(entity);
             var jumpComponent = world.AddComponentOnce<JumpComponent>(entity);
-            jumpComponent.desiredJumpSpeed = 8;
-            jumpComponent.startJumpHeight = 1;
+            jumpComponent.forbidance = forbidSystem.AddForbiddance(forbidComponent, "JumpSystem");
+            jumpComponent.desiredHeight = 3;
+            jumpComponent.endJumpGroundHeight = 0.5f;
+            //跳跃动画需要3帧蓄力
+            jumpComponent.startJumpWaitTime = 3 / 30f;
             var groundComponent = world.AddComponentOnce<GroundComponent>(entity);
             //面向
             var faceComponent = world.AddComponentOnce<FaceComponent>(entity);
@@ -140,7 +148,11 @@ namespace Game
 
             //位置
             var transformComponent = transformSystem.AddTransformComponent(entity);
-            bornPos.y = mapSystem.GetGroundInfo(bornPos).point.y;
+            float y = mapSystem.GetGroundInfo(bornPos).point.y;
+            if (transformComponent.position.y < y)
+            {
+                bornPos.y = y;
+            }
             transformComponent.position = bornPos;
             //移动
             var stepMoveComponent = world.AddComponentOnce<StepMoveComponent>(entity);

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <editorPos>
+    <x>5000</x>
+    <y>5000</y>
+  </editorPos>
+  <enable>true</enable>
+  <lstChild>
+    <NEData>
+      <editorPos>
+        <x>5017</x>
+        <y>5122</y>
+      </editorPos>
+      <enable>true</enable>
+      <data xsi:type="BTTimeLineData" />
+      <lstChild>
+        <NEData>
+          <editorPos>
+            <x>5008</x>
+            <y>5262</y>
+          </editorPos>
+          <enable>true</enable>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+          </data>
+          <lstChild>
+            <NEData>
+              <editorPos>
+                <x>4992</x>
+                <y>5420</y>
+              </editorPos>
+              <enable>true</enable>
+              <data xsi:type="BTPlayAnimationActionData">
+                <duration>1.367</duration>
+                <animName>Chan_Slide</animName>
+              </data>
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <editorPos>
+            <x>5242</x>
+            <y>5272</y>
+          </editorPos>
+          <enable>true</enable>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+          </data>
+          <lstChild>
+            <NEData>
+              <editorPos>
+                <x>5262</x>
+                <y>5450</y>
+              </editorPos>
+              <enable>true</enable>
+              <data xsi:type="BTAnimationMoveActionData">
+                <movePoints>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0.5</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>5</float>
+                  <float>1.367</float>
+                  <float>5</float>
+                  <float>0</float>
+                  <float>5</float>
+                </movePoints>
+                <duration>0.2</duration>
+                <distance>2</distance>
+              </data>
+            </NEData>
+          </lstChild>
+        </NEData>
+      </lstChild>
+    </NEData>
+  </lstChild>
+</NEData>

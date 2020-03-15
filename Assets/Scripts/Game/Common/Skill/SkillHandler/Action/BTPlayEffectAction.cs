@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class BTPlayEffectActionData
+    public class BTPlayEffectActionData : IBTTimelineDurationData
     {
         //特效名称
         public string effectName;
@@ -15,10 +15,16 @@ namespace Game
         //局部旋转
         public Quaternion localRot;
         //是否自动销毁
+        [NEProperty("是否自动销毁,为false时,effectDuration生效")]
         public bool autoDestroy;
         //播放特效时间,autoDestroy为false时生效
-        [NEProperty("播放特效时间,autoDestroy为false时生效")]
-        public float duration;
+        public float effectDuration;
+
+        public float duration
+        {
+            get { return effectDuration;}
+            set { effectDuration = value; }
+        }
     }
     public class BTPlayEffectAction : BTAction<SkillBTContext, BTPlayEffectActionData>
     {

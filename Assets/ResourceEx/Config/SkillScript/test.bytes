@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <editorPos>
+    <x>5000</x>
+    <y>5000</y>
+  </editorPos>
+  <enable>true</enable>
+  <lstChild>
+    <NEData>
+      <editorPos>
+        <x>5000</x>
+        <y>5151</y>
+      </editorPos>
+      <enable>true</enable>
+      <data xsi:type="BTSequenceData" />
+      <lstChild>
+        <NEData>
+          <editorPos>
+            <x>4929</x>
+            <y>5306</y>
+          </editorPos>
+          <enable>true</enable>
+          <data xsi:type="TestSkillData">
+            <index>0</index>
+          </data>
+        </NEData>
+        <NEData>
+          <editorPos>
+            <x>5079</x>
+            <y>5302</y>
+          </editorPos>
+          <enable>true</enable>
+          <data xsi:type="TestSkillData">
+            <index>1</index>
+          </data>
+        </NEData>
+        <NEData>
+          <editorPos>
+            <x>5219</x>
+            <y>5311</y>
+          </editorPos>
+          <enable>true</enable>
+          <data xsi:type="TestSkillData">
+            <index>2</index>
+          </data>
+        </NEData>
+        <NEData>
+          <editorPos>
+            <x>5382</x>
+            <y>5323</y>
+          </editorPos>
+          <enable>true</enable>
+          <data xsi:type="BTSelectorData" />
+          <lstChild>
+            <NEData>
+              <editorPos>
+                <x>5275</x>
+                <y>5452</y>
+              </editorPos>
+              <enable>true</enable>
+              <data xsi:type="TestSkillData">
+                <index>3</index>
+              </data>
+            </NEData>
+            <NEData>
+              <editorPos>
+                <x>5421</x>
+                <y>5463</y>
+              </editorPos>
+              <enable>true</enable>
+              <data xsi:type="TestSkillData">
+                <index>4</index>
+              </data>
+            </NEData>
+          </lstChild>
+        </NEData>
+      </lstChild>
+    </NEData>
+  </lstChild>
+</NEData>

@@ -7,7 +7,6 @@ namespace Game
 {
     public class DirectionMoveSystem : ComponentSystem
     {
-
         private StepMoveSystem stepMoveSystem;
         private FaceSystem faceSystem;
         private ForbidSystem forbidSystem;
@@ -46,29 +45,33 @@ namespace Game
             {
                 if (directionMoveComponent.desiredSpeed > 0 && directionMoveComponent.inputDirection != Vector3.zero)
                 {
-                    Vector3 velocity = Vector3.zero;
-                    if (groundComponent.isGround && directionMoveComponent.desiredSpeed > 0)
-                    {
-//                        velocity = directionMoveComponent.inputDirection * directionMoveComponent.desiredSpeed;
-                        //根据地面斜率，计算速度
-                        var cos = Vector3.Dot(groundComponent.groundPointInfo.normal, Vector3.up);
-                        if (cos == 0) cos = 1;
-                        velocity = directionMoveComponent.desiredSpeed * directionMoveComponent.inputDirection * cos;
-                    }
-                    else
-                    {
-                        velocity = directionMoveComponent.inputDirection * directionMoveComponent.desiredSpeed;
-                    }
-                    stepMoveSystem.AppendSingleFrameVelocity(entity, velocity);
-                    var faceComponent = World.GetComponent<FaceComponent>(entity);
-                    if (faceComponent != null)
-                    {
-                        faceSystem.FaceTo(faceComponent, directionMoveComponent.inputDirection);
-                    }
-
                     if (forbidSystem.IsForbid(entity, ForbidType.InputMove))
                     {
                         StopMove(entity);
+                    }
+                    else
+                    {
+                        Vector3 velocity = Vector3.zero;
+                        if (groundComponent.isGround && directionMoveComponent.desiredSpeed > 0)
+                        {
+//                        velocity = directionMoveComponent.inputDirection * directionMoveComponent.desiredSpeed;
+                            //根据地面斜率，计算速度
+                            var cos = Vector3.Dot(groundComponent.groundPointInfo.normal, Vector3.up);
+                            if (cos == 0) cos = 1;
+                            velocity = directionMoveComponent.desiredSpeed * directionMoveComponent.inputDirection *
+                                       cos;
+                        }
+                        else
+                        {
+                            velocity = directionMoveComponent.inputDirection * directionMoveComponent.desiredSpeed;
+                        }
+
+                        stepMoveSystem.AppendSingleFrameVelocity(entity, velocity);
+                        var faceComponent = World.GetComponent<FaceComponent>(entity);
+                        if (faceComponent != null)
+                        {
+                            faceSystem.FaceTo(faceComponent, directionMoveComponent.inputDirection);
+                        }
                     }
                 }
             });

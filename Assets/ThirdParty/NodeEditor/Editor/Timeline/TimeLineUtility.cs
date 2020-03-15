@@ -83,12 +83,12 @@ namespace NodeEditor
             //添加一个AnimationTrack用于放置动画
             var animTrack = timelineAsset.CreateTrack<AnimationTrack>(viewGroupTrack,"ModelAnimationTrack");
             timelineAsset.modelAnimTrack = animTrack;
-            string playerPath = "Assets/ResourceEx/Prefab/Player.prefab";
+            string playerPath = "Assets/ResourceEx/Prefab/MainPlayer.prefab";
             var playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(playerPath);
             if (playerPrefab != null)
             {
                 var player = GameObject.Instantiate(playerPrefab);
-                goModelMove.AddChildToParent(player.gameObject, "Player");
+                goModelMove.AddChildToParent(player.gameObject, "MainPlayer");
                 var animator = player.transform.GetComponentInChildren<Animator>();
                 if (animator != null)
                 {
@@ -137,6 +137,11 @@ namespace NodeEditor
                         var clip = track.CreateDefaultClip();
                         var asset = (INEPlayableAsset) clip.asset;
                         clip.start = ((IBTTimeLineData) (childNEData.data)).time;
+                        if (curNEData.data is IBTTimelineDurationData)
+                        {
+                            float duration = ((IBTTimelineDurationData)(curNEData.data)).duration;
+                            if (duration > 0) clip.duration = duration;
+                        }
                         asset.neData = curNEData;
                         clip.displayName = GetNEPlayableAssetName(asset);
                         asset.InitInspector();
@@ -154,6 +159,11 @@ namespace NodeEditor
                     var clip = track.CreateDefaultClip();
                     var asset = (INEPlayableAsset)clip.asset;
                     clip.start = ((IBTTimeLineData)(childNEData.data)).time;
+                    if (curNEData.data is IBTTimelineDurationData)
+                    {
+                        float duration = ((IBTTimelineDurationData)(curNEData.data)).duration;
+                        if (duration > 0) clip.duration = duration;
+                    }
                     asset.neData = childNEData;
                     clip.displayName = GetNEPlayableAssetName(asset);
                     asset.InitInspector();
@@ -199,6 +209,10 @@ namespace NodeEditor
                 }
                 if (convertNEData != null && convertNEData.data != null)
                 {
+                    if (convertNEData.data is IBTTimelineDurationData)
+                    {
+                        ((IBTTimelineDurationData)convertNEData.data).duration = (float)clip.duration;
+                    }
                     if (convertNEData.data is IBTTimeLineData)
                     {
                         ((IBTTimeLineData)convertNEData.data).time = (float)clip.start;

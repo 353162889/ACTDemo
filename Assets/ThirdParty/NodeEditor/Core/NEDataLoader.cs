@@ -96,6 +96,8 @@ namespace NodeEditor
                 m_resObjectLoader.Clear();
                 m_resObjectLoader = null;
             }
+
+            m_progressAction = null;
             m_arrParseTypes = null;
             m_bFinish = true;
             if (null != m_finishAction)
@@ -113,7 +115,6 @@ namespace NodeEditor
             if (null != m_progressAction)
             {
                 var action = m_progressAction;
-                m_progressAction = null;
                 action(path, neData);
             }
         }

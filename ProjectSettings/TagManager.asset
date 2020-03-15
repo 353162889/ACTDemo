@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Node
+  - MountPoint
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - 
   - Player
   - Terrain
-  - 
-  - 
+  - BehitCollider
+  - AttackCollider
   - 
   - 
   - 

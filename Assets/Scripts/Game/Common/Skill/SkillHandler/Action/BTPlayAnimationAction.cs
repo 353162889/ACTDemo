@@ -3,10 +3,14 @@ using Framework;
 
 namespace Game
 {
-    public class BTPlayAnimationActionData
+    public class BTPlayAnimationActionData : IBTTimelineDurationData
     {
-        public float duration;
+        public float animDuration;
         public string animName;
+        public float duration
+        {
+            get { return animDuration; }
+            set { animDuration = value; } }
     }
     public class BTPlayAnimationAction : BTAction<SkillBTContext, BTPlayAnimationActionData>
     {
@@ -23,6 +27,7 @@ namespace Game
             if (context.executeCache.GetExecuteStatus(btData.dataIndex) == BTExecuteStatus.Ready)
             {
                 var animationSystem = context.world.GetExistingSystem<AnimationSystem>();
+                animationSystem.ResetAnimatorParam(context.skillComponent.entity, "BreakSkill");
                 animationSystem.SetAnimatorParam(context.skillComponent.entity, data.animName);
             }
 
@@ -37,6 +42,18 @@ namespace Game
                 this.Clear(context, btData);
                 return BTStatus.Success;
             }
+        }
+
+        protected override void Clear(SkillBTContext context, BTData btData, BTPlayAnimationActionData data)
+        {
+            //重置动画名称
+            var animationSystem = context.world.GetExistingSystem<AnimationSystem>();
+            animationSystem.ResetAnimatorParam(context.skillComponent.entity, data.animName);
+            if (context.isIsBreak)
+            {
+                animationSystem.SetAnimatorParam(context.skillComponent.entity, "BreakSkill");
+            }
+            base.Clear(context, btData, data);
         }
     }
 }

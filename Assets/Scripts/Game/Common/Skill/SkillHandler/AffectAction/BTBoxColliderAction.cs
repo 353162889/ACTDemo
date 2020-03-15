@@ -5,12 +5,17 @@ using UnityEngine;
 
 namespace Game
 {
-    public class BTBoxColliderActionData
+    public class BTBoxColliderActionData : IBTTimelineDurationData
     {
         public Vector3 localPos;
         public Quaternion localRot;
         public Vector3 size;
-        public float duration;
+        public float colliderDuration;
+        public float duration
+        {
+            get { return colliderDuration;}
+            set { colliderDuration = value; }
+        }
     }
 
 

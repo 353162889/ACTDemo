@@ -284,48 +284,11 @@ namespace NodeEditor
                 var timelineClip = timelineAsset.modelMoveTrack.CreateRecordableClip("AnimationMove");
                 timelineClip.start = asset.curTimelineClip.start;
                 float duration = 1;
-                if (data.movePoints != null && data.movePoints.Length > 0)
+                AnimationMoveUtility.ConvertPointsToTimelineClip(data.movePoints, ref timelineClip);
+                if (data.movePoints != null)
                 {
-                    int len = data.movePoints.Length / AnimationMoveUtility.DataSpace;
-                    if (len > 0)
-                    {
-                        int index = (len - 1) * AnimationMoveUtility.DataSpace;
-                        duration = data.movePoints[index];
-                    }
-
-                    AnimationCurve curveX = new AnimationCurve();
-                    AnimationCurve curveY = new AnimationCurve();
-                    AnimationCurve curveZ = new AnimationCurve();
-                    AnimationCurve curveRX = new AnimationCurve();
-                    AnimationCurve curveRY = new AnimationCurve();
-                    AnimationCurve curveRZ = new AnimationCurve();
-                    for (int i = 0; i < len; i++)
-                    {
-                        int startIndex = i * AnimationMoveUtility.DataSpace;
-                        float time = data.movePoints[startIndex];
-                        float x = data.movePoints[startIndex + 1];
-                        float y = data.movePoints[startIndex + 2];
-                        float z = data.movePoints[startIndex + 3];
-                        float rx = data.movePoints[startIndex + 4];
-                        float ry = data.movePoints[startIndex + 5];
-                        float rz = data.movePoints[startIndex + 6];
-                        curveX.AddKey(time, x);
-                        curveY.AddKey(time, y);
-                        curveZ.AddKey(time, z);
-                        curveRX.AddKey(time, rx);
-                        curveRY.AddKey(time, ry);
-                        curveRZ.AddKey(time, rz);
-                    }
-
-                    var moveClip = timelineClip.animationClip;
-                    moveClip.SetCurve("", typeof(Transform), "m_LocalPosition.x", curveX);
-                    moveClip.SetCurve("", typeof(Transform), "m_LocalPosition.y", curveY);
-                    moveClip.SetCurve("", typeof(Transform), "m_LocalPosition.z", curveZ);
-                    moveClip.SetCurve("", typeof(Transform), "localEulerAnglesRaw.x", curveRX);
-                    moveClip.SetCurve("", typeof(Transform), "localEulerAnglesRaw.y", curveRY);
-                    moveClip.SetCurve("", typeof(Transform), "localEulerAnglesRaw.z", curveRZ);
+                    duration = timelineClip.animationClip.length;
                 }
-
                 timelineClip.duration = duration;
 
                 asset.curTimelineClip.start = timelineClip.start;

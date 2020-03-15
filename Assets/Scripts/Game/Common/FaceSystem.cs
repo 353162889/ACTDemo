@@ -22,6 +22,7 @@ namespace Game
 
             if (!direction.AlmostZero())
             {
+                direction.Normalize();
                 FaceTo(faceComponent, Quaternion.LookRotation(direction), immediately);
             }
         }
@@ -29,9 +30,20 @@ namespace Game
         public void FaceTo(FaceComponent faceComponent, Quaternion rotation, bool immediately = false)
         {
             if (forbidSystem.IsForbid(faceComponent.entity, ForbidType.Face)) return;
+            var transformComponent = World.GetComponent<TransformComponent>(faceComponent.entity);
+            if (transformComponent.rotation == rotation) return;
             faceComponent.isRotating = true;
             faceComponent.immediately = immediately;
             faceComponent.rotation = rotation;
+        }
+
+        public void SetFace(Entity entity, Quaternion rotation)
+        {
+            var faceComponent = World.GetComponent<FaceComponent>(entity);
+            if (faceComponent == null) return;
+            if (forbidSystem.IsForbid(faceComponent.entity, ForbidType.Face)) return;
+            var transformComponent = World.GetComponent<TransformComponent>(faceComponent.entity);
+            transformComponent.rotation = rotation;
         }
 
         public void FaceTo(Entity entity, Quaternion rotation, bool immediately = false)
@@ -43,10 +55,17 @@ namespace Game
             }
         }
 
+        public void StopFace(FaceComponent faceComponent)
+        {
+            faceComponent.isRotating = false;
+            faceComponent.immediately = false;
+            faceComponent.rotation = Quaternion.identity;
+        }
+
         public bool IsRotating(FaceComponent faceComponent)
         {
             if (faceComponent == null) return false;
-            return faceComponent.isRotating && !faceComponent.immediately;
+            return faceComponent.isRotating;
         }
 
         protected override void OnUpdate()
@@ -58,7 +77,7 @@ namespace Game
                     if (faceComponent.immediately)
                     {
                         transformComponent.rotation = faceComponent.rotation;
-                        faceComponent.isRotating = false;
+                        StopFace(faceComponent);
                     }
                     else
                     {
@@ -68,7 +87,7 @@ namespace Game
                             faceComponent.desiredDegreeSpeed * Time.deltaTime);
                         if (transformComponent.rotation == targetQuatenion)
                         {
-                            faceComponent.isRotating = false;
+                              StopFace(faceComponent);
                         }
                     }
                 }

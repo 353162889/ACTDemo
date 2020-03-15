@@ -94,15 +94,22 @@ namespace Game
                         Clear(skillContext);
                     }
                     BTStatus btState = Execute(skillContext);
-                    skillContext.Reset();
-                    if (btState != BTStatus.Running)
+                    bool finish = skillContext.isIsBreak || btState != BTStatus.Running;
+                    if (finish)
                     {
-                        CancelSkill(entity, btState == BTStatus.Fail);
-                        return;
+                        if (!skillContext.isIsBreak && btState == BTStatus.Fail)
+                        {
+                            skillContext.SetDestroy();
+                        }
+
+                        Clear(skillContext);
+                        CancelSkill(entity, skillContext.isIsBreak);
                     }
-
-                    skillData.skillTime += deltaTime;
-
+                    else
+                    {
+                        skillData.skillTime += deltaTime;
+                    }
+                    skillContext.Reset();
                 }
             });
         }
@@ -121,7 +128,7 @@ namespace Game
         public void Clear(IBTContext context)
         {
             var treeData = context.treeData;
-            if (treeData.rootData.children.Count > 0)
+            if (treeData != null && treeData.rootData.children.Count > 0)
             {
                 var childBtData = treeData.rootData.children[0];
                 BTDataHandlerInitialize.GetHandler(childBtData.keyIndex).Clear(context, childBtData);

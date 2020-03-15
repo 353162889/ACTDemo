@@ -58,6 +58,7 @@ namespace Game
                 {
                     var moveDirectionCmd = cmd as InputMoveDirectionCmd;
                     inputComponent.inputMoveDirection = moveDirectionCmd.moveDirection;
+                    inputComponent.inputMoveDirection.Normalize();
                     ObjectPool<InputMoveDirectionCmd>.Instance.SaveObject(moveDirectionCmd);
                 }
                 else if (cmd.cmdType == InputCommandType.StopMoveDirection)
@@ -70,7 +71,16 @@ namespace Game
                 else if(cmd.cmdType == InputCommandType.Jump)
                 {
                     var jumpCmd = cmd as InputJumpCmd;
-                    jumpSystem.Jump(inputComponent.entity);
+                    Vector3 horizonalVelocity = Vector3.zero;
+                    if (inputComponent.inputMoveDirection != Vector3.zero)
+                    {
+                        var directionMoveComponent = World.GetComponent<DirectionMoveComponent>(inputComponent.entity);
+                        if (directionMoveComponent != null)
+                        {
+                            horizonalVelocity = inputComponent.inputMoveDirection * directionMoveComponent.desiredSpeed;
+                        }
+                    }
+                    jumpSystem.Jump(inputComponent.entity, horizonalVelocity);
                     ObjectPool<InputJumpCmd>.Instance.SaveObject(jumpCmd);
                 }
                 else if(cmd.cmdType == InputCommandType.Skill)

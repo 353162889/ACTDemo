@@ -206,7 +206,7 @@ namespace NodeEditor
             {
                 float canvasWidth = position.width - leftAreaWidth - rightAreaWidth;
                 float canvasHeight = position.height - titleHeight;
-                Vector2 firstScrollPos = new Vector2((m_cCanvas.scrollViewRect.width - canvasWidth) / 2, (m_cCanvas.scrollViewRect.height - canvasHeight) / 2);
+                Vector2 firstScrollPos = new Vector2((m_cCanvas.scrollViewRect.width - canvasWidth) / 2, (m_cCanvas.scrollViewRect.height - 100) / 2);
                 m_cCanvas.scrollPos = firstScrollPos;
             }
         }
@@ -234,7 +234,7 @@ namespace NodeEditor
             }
             else
             {
-                node = CreateNENode(neData, null);
+                node = m_cCanvas.CreateNENode(neData, null);
             }
             m_cRoot = node;
             SetCanvasCenter();
@@ -243,33 +243,19 @@ namespace NodeEditor
             return node;
         }
 
-        private NENode CreateNENode(NEData neData, NENode parent)
-        {
-            NENode parentNode = m_cCanvas.CreateNode(parent, neData.data);
-            if (neData.lstChild != null)
-            {
-                for (int i = 0; i < neData.lstChild.Count; i++)
-                {
-                    CreateNENode(neData.lstChild[i], parentNode);
-                }
-            }
-            return parentNode;
-        }
-
         private object CreateNENodeDataByDataType(Type neNodeDataType)
         {
             return Activator.CreateInstance(neNodeDataType);
         }
        
-        private object CopyNENodeData(object data)
+        private NEData CopyNENodeData(NENode neNode)
         {
-            NEData neData = new NEData();
-            neData.data = data;
+            NEData neData = GetNEDataByNENode(neNode);
             byte[] buff = NEUtil.SerializerObjectToBuff(neData, arrTreeComposeData[m_nTreeComposeIndex].lstNodeDataType.ToArray());
             if (buff != null)
             {
                 neData = NEUtil.DeSerializerObjectFromBuff(buff, typeof(NEData), arrTreeComposeData[m_nTreeComposeIndex].lstNodeDataType.ToArray()) as NEData;
-                return neData.data;
+                return neData;
             }
             return null;
         }
@@ -342,7 +328,7 @@ namespace NodeEditor
                         {
                             var parent = m_cTimeLineEditorNode.parent;
                             m_cCanvas.RemoveNode(m_cTimeLineEditorNode);
-                            m_cTimeLineEditorNode = CreateNENode(neData, parent);
+                            m_cTimeLineEditorNode = m_cCanvas.CreateNENode(neData, parent);
                             m_cCanvas.RefreshPosition();
                         }
                         Debug.Log("保存");
@@ -354,7 +340,7 @@ namespace NodeEditor
                         {
                             var parent = m_cTimeLineEditorNode.parent;
                             m_cCanvas.RemoveNode(m_cTimeLineEditorNode);
-                            m_cTimeLineEditorNode = CreateNENode(neData, parent);
+                            m_cTimeLineEditorNode = m_cCanvas.CreateNENode(neData, parent);
                             m_cCanvas.RefreshPosition();
                         }
                         GameObject.DestroyImmediate(m_cDirector.gameObject);

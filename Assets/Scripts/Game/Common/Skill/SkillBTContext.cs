@@ -1,6 +1,7 @@
 ﻿using BTCore;
 using Framework;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Game
 {
@@ -56,6 +57,11 @@ namespace Game
             get { return m_fDeltaTime; }
         }
 
+        private bool m_bIsBreak;
+        public bool isIsBreak
+        {
+            get { return m_bIsBreak; }
+        }
 
         public void Init(World world, SkillComponent skillComponent,SkillData skillData, BTTreeData btTreeData, IBTExecutor executor, float deltaTime)
         {
@@ -67,6 +73,12 @@ namespace Game
             this.m_fDeltaTime = deltaTime;
         }
 
+        public void SetDestroy()
+        {
+            m_bIsBreak = true;
+        }
+        
+
         public void Reset()
         {
             this.m_world = null;
@@ -75,6 +87,7 @@ namespace Game
             this.m_executor = null;
             this.m_skillData = null;
             this.m_fDeltaTime = 0;
+            this.m_bIsBreak = false;
         }
     }
 }

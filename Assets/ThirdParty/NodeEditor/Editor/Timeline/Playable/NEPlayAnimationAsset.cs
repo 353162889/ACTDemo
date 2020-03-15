@@ -32,16 +32,15 @@ namespace NodeEditor
             {
                 neData.data = new BTPlayAnimationActionData();
             }
-            if (relatedAnimationClip != null)
+            if (relatedAnimationClip != null && curTimelineClip != null)
             {
-                BTPlayAnimationActionData data = (BTPlayAnimationActionData)neData.data;
                 if (relatedAnimationClip.timeScale == 0)
                 {
-                    data.duration = (float)relatedAnimationClip.duration;
+                    curTimelineClip.duration = (float)relatedAnimationClip.duration;
                 }
                 else
                 {
-                    data.duration = (float)(relatedAnimationClip.duration / relatedAnimationClip.timeScale);
+                    curTimelineClip.duration = (float)(relatedAnimationClip.duration / relatedAnimationClip.timeScale);
                 }
             }
 

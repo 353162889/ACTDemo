@@ -4,9 +4,19 @@ using UnityEngine;
 
 namespace Framework
 {
+    /// <summary>
+    /// 时间轴上的数据
+    /// </summary>
     public interface IBTTimeLineData
     {
         float time { get; set; }
+    }
+    /// <summary>
+    /// 时间轴有运行期间时间的数据
+    /// </summary>
+    public interface IBTTimelineDurationData
+    {
+        float duration { get; set; }
     }
     [NENodeBtn("编辑TimeLine", "NETreeWindowBtnExtension", "OnEditorBTTimeLine")]
     public class BTTimeLineData { }

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resskill id="1" name="攻击02" script="attack02"/>
+	<resskill id="2" name="翻滚01" script="dash01"/>
+</root>
