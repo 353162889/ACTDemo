@@ -1,4 +1,5 @@
-﻿using Framework;
+﻿using System;
+using Framework;
 using Unity.Entities;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace Game
     {
         private ForbidSystem forbidSystem;
         private SkillBTContext skillContext;
+        public event Action<Entity, SkillData> OnSkillStart;
+        public event Action<Entity, SkillData, bool> OnSkillEnd; 
 
         protected override void OnCreate()
         {
@@ -70,6 +73,31 @@ namespace Game
             return skillComponent.skillData != null;
         }
 
+        public SkillData GetRunningSkill(Entity entity)
+        {
+            var skillComponent = World.GetComponent<SkillComponent>(entity);
+            if (null == skillComponent) return null;
+            return GetRunningSkill(skillComponent);
+        }
+
+        public SkillData GetRunningSkill(SkillComponent skillComponent)
+        {
+            return skillComponent.skillData;
+        }
+
+        public bool EnableCacheInputSkill(Entity entity)
+        {
+            var skillComponent = World.GetComponent<SkillComponent>(entity);
+            if (null == skillComponent) return false;
+            if (!IsCastingSkill(skillComponent) || skillComponent.skillData.enableInputSkill ||
+                skillComponent.skillData.phase == SkillPhaseType.Backswing)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public void CancelSkill(Entity entity, bool isBreak)
         {
             var skillComponent = World.GetComponent<SkillComponent>(entity);
@@ -81,6 +109,8 @@ namespace Game
             Clear(skillContext);
             var skillData = skillComponent.skillData;
             forbidSystem.RemoveForbiddance(entity, skillData.forbidance);
+            skillData.forbidance = null;
+            OnSkillEnd?.Invoke(entity, skillData, isBreak);
             skillComponent.skillData = null;
             if (skillData != null)
             {
@@ -111,8 +141,10 @@ namespace Game
                     bool firstRun = false;
                     if (skillData.skillTime < 0)
                     {
+                        OnSkillStart?.Invoke(entity, skillData);
                         //开始运行第一帧
                         skillData.skillTime = 0;
+                        skillData.phase = SkillPhaseType.Normal;
                         firstRun = true;
                     }
                     var btTreeData = SkillManager.Instance.GetSkillBTTreeData(skillData.skillId);
@@ -167,6 +199,13 @@ namespace Game
                 var childBtData = treeData.rootData.children[0];
                 BTDataHandlerInitialize.GetHandler(childBtData.keyIndex).Clear(context, childBtData);
             }
+        }
+
+        protected override void OnDestroy()
+        {
+            OnSkillStart = null;
+            OnSkillEnd = null;
+            base.OnDestroy();
         }
     }
 }

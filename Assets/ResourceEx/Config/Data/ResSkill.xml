@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resskill id="1" name="攻击02" script="attack02"/>
-	<resskill id="2" name="翻滚01" script="dash01"/>
+	<resskill combo="1" id="1" name="攻击02" script="attack02"/>
+	<resskill combo="0" id="2" name="攻击03" script="attack03"/>
+	<resskill combo="0" id="3" name="攻击04" script="attack04"/>
+	<resskill combo="0" id="1001" name="翻滚01" script="dash01"/>
 </root>

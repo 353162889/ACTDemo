@@ -20,6 +20,8 @@ namespace Game
         private PhysicSystem physicSystem;
         private MapSystem mapSystem;
         private AnimationSystem animationSystem;
+        private ComboSystem comboSystem;
+        private CacheSkillSystem cacheSkillSystem;
         private SkillSystem skillSystem;
         private FaceSystem faceSystem;
         private DirectionMoveSystem directionMoveSystem;
@@ -40,6 +42,8 @@ namespace Game
             physicSystem = world.GetOrCreateSystem<PhysicSystem>();
             mapSystem = world.GetOrCreateSystem<MapSystem>();
             animationSystem = world.GetOrCreateSystem<AnimationSystem>();
+            comboSystem = world.GetOrCreateSystem<ComboSystem>();
+            cacheSkillSystem = world.GetOrCreateSystem<CacheSkillSystem>();
             skillSystem = world.GetOrCreateSystem<SkillSystem>();
             directionMoveSystem = world.GetOrCreateSystem<DirectionMoveSystem>();
             gravitySystem = world.GetOrCreateSystem<GravitySystem>();
@@ -121,6 +125,8 @@ namespace Game
             var animationComponent = world.AddComponentOnce<AnimationComponent>(entity);
             animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
 
+            var comboComponent = world.AddComponentOnce<ComboComponent>(entity);
+            var cacheSkillComponent = world.AddComponentOnce<CacheSkillComponent>(entity);
             var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
 
             return entity;
@@ -186,6 +192,8 @@ namespace Game
             inputSystem.Update();
             
             mapSystem.Update();
+            comboSystem.Update();
+            cacheSkillSystem.Update();
             skillSystem.Update();
 
             directionMoveSystem.Update();

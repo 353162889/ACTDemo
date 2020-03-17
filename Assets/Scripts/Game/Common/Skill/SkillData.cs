@@ -21,6 +21,7 @@ namespace Game
         public int skillId;
         public float skillTime;
         public float skillTimeScale;
+        public bool enableInputSkill;
         public SkillPhaseType phase;
         public BTBlackBoard blackBoard = new BTBlackBoard();
         public BTExecuteCache executeCache = new BTExecuteCache();
@@ -59,6 +60,11 @@ namespace Game
             this.m_cTarget = Entity.Null;
             this.m_cTargetPosition = Vector3.zero;
             this.m_cTargetDirection = Vector3.forward;
+            enableInputSkill = false;
+//            if (this.forbidance != null)
+//            {
+//                this.forbidance.Reset();
+//            }
         }
     }
 }

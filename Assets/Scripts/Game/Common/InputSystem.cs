@@ -7,12 +7,16 @@ namespace Game
     public class InputSystem : ComponentSystem
     {
         private InputComponent inputComponent;
+        private ComboSystem comboSystem;
+        private CacheSkillSystem cacheSkillSystem;
         private SkillSystem skillSystem;
         private DirectionMoveSystem directionMoveSystem;
         private JumpSystem jumpSystem;
         protected override void OnCreate()
         {
             inputComponent = World.AddSingletonComponent<InputComponent>();
+            comboSystem = World.GetOrCreateSystem<ComboSystem>();
+            cacheSkillSystem = World.GetOrCreateSystem<CacheSkillSystem>();
             skillSystem = World.GetOrCreateSystem<SkillSystem>();
             directionMoveSystem = World.GetOrCreateSystem<DirectionMoveSystem>();
             jumpSystem = World.GetOrCreateSystem<JumpSystem>();
@@ -86,7 +90,14 @@ namespace Game
                 else if(cmd.cmdType == InputCommandType.Skill)
                 {
                     var skillCmd = cmd as InputSkillCmd;
-                    skillSystem.CastSkill(inputComponent.entity, skillCmd.skillId);
+                    if (!comboSystem.CasterSkill(inputComponent.entity, skillCmd.skillId))
+                    {
+                        if (!cacheSkillSystem.CastSkill(inputComponent.entity, skillCmd.skillId))
+                        {
+                            skillSystem.CastSkill(inputComponent.entity, skillCmd.skillId);
+                        }
+                    }
+
                     ObjectPool<InputSkillCmd>.Instance.SaveObject(skillCmd);
                 }
             }

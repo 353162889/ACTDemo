@@ -346,13 +346,31 @@
             </NEData>
             <NEData>
               <data xsi:type="BTTimeDecoratorData">
+                <exeTime>0.6333333</exeTime>
+                <time>0.6333333</time>
+              </data>
+              <lstChild>
+                <NEData>
+                  <data xsi:type="BTEnableCacheInputSkillActionData">
+                    <finishResume>false</finishResume>
+                    <comboDuration>0.3666667</comboDuration>
+                    <duration>0.3666667</duration>
+                  </data>
+                </NEData>
+              </lstChild>
+            </NEData>
+            <NEData>
+              <data xsi:type="BTTimeDecoratorData">
                 <exeTime>1</exeTime>
                 <time>1</time>
               </data>
               <lstChild>
                 <NEData>
                   <data xsi:type="BTSetSkillPhaseActionData">
+                    <finishResume>false</finishResume>
+                    <phaseDuration>0.5</phaseDuration>
                     <phaseType>Backswing</phaseType>
+                    <duration>0.5</duration>
                   </data>
                 </NEData>
               </lstChild>
