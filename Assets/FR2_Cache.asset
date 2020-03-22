@@ -299,7 +299,7 @@ MonoBehaviour:
     - JumpKeyCode
     - OnUpdate
     - Input
-    stamp: 1584261270
+    stamp: 1584457865
     type: 2
     UseGUIDs: []
   - guid: 787dbee08835f7144b8104a8bd2badd0
@@ -1173,7 +1173,7 @@ MonoBehaviour:
   - guid: 7758b834619294d4e81a1a6edef6ae1c
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584456448
+    stamp: 1584716893
     type: 1
     UseGUIDs:
     - 0cc6b23b2de76194aad9ee4c2bb173d5
@@ -1188,12 +1188,12 @@ MonoBehaviour:
     - d4effa1f55b84e748aaa9f635451c81d
     - 5be97124156a6a24eb7ed39fe2b3564c
     - 7f202bc6e676eac409a21acda518172f
+    - c4833b7e89cd82c49a821f3fedbba90e
     - 530e9507aa70a5343b08c6bf6e37ef45
     - 7aabf58eb9d3b2d4bbc5db1daa404776
     - bb52039379070bb4b8bf8d6f8c218ec4
     - 7a916e237cb70974c9fb0e9d35503cbc
     - 35b96abaa33036448a66e4ef5615d706
-    - c4833b7e89cd82c49a821f3fedbba90e
   - guid: 25c27b34d045be841ac16e204b4a8d97
     ScriptSymbols: []
     ScriptTokens: []
@@ -3704,7 +3704,7 @@ MonoBehaviour:
   - guid: 2f2ba16d9fa0e4948a7e8498c8f9d00a
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584278017
+    stamp: 1584624536
     type: 1
     UseGUIDs:
     - 3aeee76ff145bae4fb3dd37bb1b93e17
@@ -4106,7 +4106,7 @@ MonoBehaviour:
   - guid: fae6c85f0132bae4abcf05ea9c8d0d36
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584255126
+    stamp: 1584719298
     type: 1
     UseGUIDs:
     - 50fc97349ec78a5409f8752e1812ffac
@@ -12784,7 +12784,7 @@ MonoBehaviour:
     - Vector3
     - SetTargetInfo
     - Reset
-    stamp: 1584456214
+    stamp: 1584533449
     type: 2
     UseGUIDs: []
   - guid: da6b7952aad936a4082624b574379c12
@@ -12798,17 +12798,19 @@ MonoBehaviour:
   - guid: 11946703e62e9044984bf795d70033b2
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584365839
+    stamp: 1584717375
     type: 1
     UseGUIDs:
+    - e4b9902c9d5330f48902d89b89ebb89e
     - 2e90c2508ff56ed4d98c3632317a14f6
     - a25fd16d794c069408e79328ece9da17
   - guid: 8b0f55574a1776a4a9ba0036ce0f6aeb
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584365845
+    stamp: 1584717388
     type: 1
     UseGUIDs:
+    - dda6ce5c40e140840b2dff86f2d63445
     - 6f53548860551d34fbc3a27a531b8078
     - 1b4c137ed18822b4db2ece22d02a2cbb
   - guid: 1f22a679bc0b843459847f37f9d7a5c7
@@ -12820,7 +12822,7 @@ MonoBehaviour:
   - guid: 35b96abaa33036448a66e4ef5615d706
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584456656
+    stamp: 1584533449
     type: 1
     UseGUIDs:
     - 3813a1f07399b0e489fe9235a266110a
@@ -12840,7 +12842,7 @@ MonoBehaviour:
     - ResCfg
     - ResCfgKey
     - SecurityElement
-    stamp: 1584365835
+    stamp: 1584717367
     type: 2
     UseGUIDs: []
   - guid: 1b4c137ed18822b4db2ece22d02a2cbb
@@ -13602,10 +13604,12 @@ MonoBehaviour:
   - guid: 36d86cce449d6c54a82a5fee5e2b19f5
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584456757
+    stamp: 1584459511
     type: 1
     UseGUIDs:
     - d29c559dfbf5de142915bb5f670f42d7
+    - 15f0ea2c8851f80438167d95d6807d90
+    - feec44fbd50bc26418070e809d5dab61
     - fc125a3a37d87a044890b89152a1cd46
     - 2228d196112cadf45a8dab361d8fb3ca
     - b1be1fd63b4c7224fbf74cf043319a2b
@@ -14035,9 +14039,17 @@ MonoBehaviour:
   - guid: c4833b7e89cd82c49a821f3fedbba90e
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1581326684
+    stamp: 1584802480
     type: 1
-    UseGUIDs: []
+    UseGUIDs:
+    - 21e290ebe044b6d4790e216860b5bbfc
+    - 4fc9160733e4df14487ca65dd66c447b
+    - 13db0031c60ad2f42be1ba3c188d74b5
+    - f32d7d5d40be07142aa4f6ab848fcf05
+    - 59bd7820fdf638d4bb2fdd67066e421c
+    - b4011aca015e83b4d80224e01677c99b
+    - 1c06302418f010f4ca6a40b2b98844e4
+    - ef856485b90b08644b1f6154b1bc662b
   - guid: c968b94d9fbc840469666aed6b27a396
     ScriptSymbols:
     - Game.FaceSystem
@@ -14372,7 +14384,7 @@ MonoBehaviour:
   - guid: fc321a9adcbdf964f90a624f0baa06f9
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584456727
+    stamp: 1584459505
     type: 1
     UseGUIDs:
     - 6ab2fc52405e5b44884d270596d4b3c3
@@ -14615,7 +14627,7 @@ MonoBehaviour:
   - guid: 530e9507aa70a5343b08c6bf6e37ef45
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584456236
+    stamp: 1584534288
     type: 1
     UseGUIDs:
     - 1aad745fd174fb143b1a947bdbd08da7
@@ -14635,12 +14647,13 @@ MonoBehaviour:
     - IsForbid
     - Forbid
     - ResumeForbid
+    - ReferenceEquals
     - Equals
     - GetHashCode
     - Null
     - ToString
     - Reset
-    stamp: 1584456236
+    stamp: 1584534288
     type: 2
     UseGUIDs: []
   - guid: 1aad745fd174fb143b1a947bdbd08da7
@@ -15118,7 +15131,7 @@ MonoBehaviour:
   - guid: 136e9d1c6db9dff47832967abdd3fd26
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584260167
+    stamp: 1584457427
     type: 1
     UseGUIDs:
     - cde57df392ded26429a4579e860f7a94
@@ -15599,7 +15612,7 @@ MonoBehaviour:
   - guid: 82b29bdca2badbf41aa531181d87ea34
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584271560
+    stamp: 1584459245
     type: 1
     UseGUIDs:
     - 4192d4a70bb3d9d448221066a6cd7ed0
@@ -15662,7 +15675,7 @@ MonoBehaviour:
   - guid: 4192d4a70bb3d9d448221066a6cd7ed0
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584271560
+    stamp: 1584459245
     type: 5
     UseGUIDs:
     - 1d3716d2da240d54597d49d849998454
@@ -15670,12 +15683,14 @@ MonoBehaviour:
     - 2519746ecd3214e4ca21241455f65883
     - cde57df392ded26429a4579e860f7a94
     - 5293bd3a06ba9304fa485201ee34ddbd
+    - 93fbd5f53d669ec4a999d0f577b5a08e
     - 31979e0aaa753d54bbcd97c41ff48429
     - eee4baebf29a5614cbd58813f20ac7ae
+    - 17ccce7a3790f9f4a92ce89c0e8c8d59
   - guid: 3aeee76ff145bae4fb3dd37bb1b93e17
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584278017
+    stamp: 1584624536
     type: 3
     UseGUIDs:
     - 4c5f98a9add420045869700a512a59bd
@@ -15811,7 +15826,7 @@ MonoBehaviour:
     - Entities
     - SkillComponent
     - Time
-    stamp: 1584456575
+    stamp: 1584458730
     type: 2
     UseGUIDs: []
   - guid: 3d046e9be12499241b836919281a2b6f
@@ -15873,7 +15888,7 @@ MonoBehaviour:
     - ResCfgKey
     - List
     - SecurityElement
-    stamp: 1584365836
+    stamp: 1584717367
     type: 2
     UseGUIDs: []
   - guid: 6f53548860551d34fbc3a27a531b8078
@@ -15926,7 +15941,7 @@ MonoBehaviour:
     - OnUpdate
     - Entities
     - SkillComponent
-    stamp: 1584456656
+    stamp: 1584457083
     type: 2
     UseGUIDs: []
   - guid: 15f0ea2c8851f80438167d95d6807d90
@@ -15941,5 +15956,186 @@ MonoBehaviour:
     stamp: 0
     type: 9
     UseGUIDs: []
-  timeStamp: 1584456774
+  - guid: 13db0031c60ad2f42be1ba3c188d74b5
+    ScriptSymbols:
+    - Game.BuffStateType
+    - Game.BuffStateConfig
+    - Game.BuffStateConfig.BuffStateComponent
+    - Game.BuffStateConfig.BuffStateComponent.BuffStateComponentInspector
+    ScriptTokens:
+    - STIFFNESS
+    - STUNNED
+    - FROZEN
+    - INVULNERABLE
+    - FLOAT
+    - FLY
+    - GROUND
+    - BuffStateHandler
+    - List
+    - ForbidType
+    - IBuffStateHandler
+    - Dictionary
+    - GetConfig
+    - DataComponent
+    - BuffStateData
+    - UNITY_EDITOR
+    - UnityEditor
+    - UnityEditor.Editor
+    - OnEnable
+    - UnityEngine
+    - OnInspectorGUI
+    stamp: 1584802343
+    type: 2
+    UseGUIDs: []
+  - guid: 59bd7820fdf638d4bb2fdd67066e421c
+    ScriptSymbols:
+    - Game.BuffStateExeStatus
+    - Game.BuffStateData
+    ScriptTokens:
+    - Init
+    - Running
+    - Destroy
+    - Serializable
+    - IPoolable, IEquatable<BuffStateData>
+    - BuffStateType
+    - Forbiddance
+    - Reset
+    - ReferenceEquals
+    - Equals
+    - GetHashCode
+    stamp: 1584801130
+    type: 2
+    UseGUIDs: []
+  - guid: b4011aca015e83b4d80224e01677c99b
+    ScriptSymbols:
+    - Game.BuffStateSystem
+    ScriptTokens:
+    - ComponentSystem
+    - Action
+    - Entity
+    - OnRemoveBuff
+    - ForbidSystem
+    - BuffStateContext
+    - List
+    - BuffStateData
+    - OnCreate
+    - ObjectPool
+    - World
+    - OnDestroy
+    - AddState
+    - BuffStateType
+    - BuffStateExeStatus
+    - RemoveState
+    - BuffStateComponent
+    - OnUpdate
+    - Entities
+    - BuffStateConfig
+    stamp: 1584800454
+    type: 2
+    UseGUIDs: []
+  - guid: 21e290ebe044b6d4790e216860b5bbfc
+    ScriptSymbols:
+    - Game.BuffComponent
+    ScriptTokens:
+    - DataComponent
+    - Dictionary
+    - List
+    - BuffData
+    stamp: 1584800429
+    type: 2
+    UseGUIDs: []
+  - guid: e4b9902c9d5330f48902d89b89ebb89e
+    ScriptSymbols:
+    - GameData.ResBuff
+    ScriptTokens:
+    - ResCfg
+    - ResCfgKey
+    - SecurityElement
+    stamp: 1584717367
+    type: 2
+    UseGUIDs: []
+  - guid: 1c06302418f010f4ca6a40b2b98844e4
+    ScriptSymbols:
+    - Game.BuffSystem
+    ScriptTokens:
+    - ComponentSystem
+    - BuffStateSystem
+    - OnCreate
+    - World
+    - BuffStateSystemOnOnRemoveBuff
+    - OnDestroy
+    - Entity
+    - AddBuff
+    - RemoveBuffByIndex
+    - RemoveBuffById
+    - OnUpdate
+    - Entities
+    - BuffComponent
+    - UpdateBuff
+    - BuffData
+    stamp: 1584802480
+    type: 2
+    UseGUIDs: []
+  - guid: dda6ce5c40e140840b2dff86f2d63445
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 542c95ed08aca074d9875e6591978cf1
+    ScriptSymbols:
+    - Game.IBuffStateHandler
+    ScriptTokens:
+    - OnStart
+    - BuffStateContext
+    - OnUpdate
+    - OnEnd
+    stamp: 1584796112
+    type: 2
+    UseGUIDs: []
+  - guid: 4fc9160733e4df14487ca65dd66c447b
+    ScriptSymbols:
+    - Game.BuffData
+    ScriptTokens:
+    - Serializable
+    - IPoolable
+    - Reset
+    stamp: 1584801146
+    type: 2
+    UseGUIDs: []
+  - guid: ef856485b90b08644b1f6154b1bc662b
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1584798214
+    type: 1
+    UseGUIDs:
+    - 6a5b78b9636c9174c8288c12a62084f3
+    - 542c95ed08aca074d9875e6591978cf1
+  - guid: 6a5b78b9636c9174c8288c12a62084f3
+    ScriptSymbols:
+    - Game.BuffStateHandler
+    ScriptTokens:
+    - IBuffStateHandler
+    - OnStart
+    - BuffStateContext
+    - OnUpdate
+    - OnEnd
+    stamp: 1584798214
+    type: 2
+    UseGUIDs: []
+  - guid: f32d7d5d40be07142aa4f6ab848fcf05
+    ScriptSymbols:
+    - Game.BuffStateContext
+    ScriptTokens:
+    - IPoolable
+    - World
+    - BuffStateComponent
+    - BuffStateData
+    - BuffStateConfig
+    - Init
+    - Reset
+    stamp: 1584795752
+    type: 2
+    UseGUIDs: []
+  timeStamp: 1584802493
   priority: 3

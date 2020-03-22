@@ -51,11 +51,10 @@ namespace Game
                 //重置动画名称
                 var animationSystem = context.world.GetExistingSystem<AnimationSystem>();
                 animationSystem.ResetAnimatorParam(context.skillComponent.entity, data.animName);
-                if (context.isIsBreak)
+                if (context.skillData.isBreak)
                 {
                     animationSystem.SetAnimatorParam(context.skillComponent.entity, "BreakSkill");
                 }
-                CLog.LogArgs("BTPlayAnimationAction", "Clear", context.isIsBreak);
             }
             base.Clear(context, btData, data);
         }

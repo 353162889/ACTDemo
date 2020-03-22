@@ -15,17 +15,17 @@ namespace Framework
     }
     public class EventDispatcher
     {
-        public delegate void EventHandler(object args);
+        public delegate void EventHandler(int key, object args);
         public struct DispatcherCallback : IDynamicDispatcherObj
         {
             public bool once;
             public EventHandler callback;
 
-            public bool OnDispatcher(object args)
+            public bool OnDispatcher(int key, object args)
             {
                 if (callback != null)
                 {
-                    callback(args);
+                    callback(key, args);
                     return !once;
                 }
                 return false;

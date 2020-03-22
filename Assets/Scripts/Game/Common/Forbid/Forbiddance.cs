@@ -44,7 +44,11 @@ namespace Game
 
         public static bool operator ==(Forbiddance lhs, Forbiddance rhs)
         {
-            return lhs.Index == rhs.Index;
+            bool lRef = ReferenceEquals(null, lhs);
+            bool rRef = ReferenceEquals(null, rhs);
+            if (lRef && rRef) return true;
+            if (lRef || rRef) return false;
+            return rhs.Index == rhs.Index;
         }
 
         public static bool operator !=(Forbiddance lhs, Forbiddance rhs)
@@ -59,7 +63,7 @@ namespace Game
 
         public override bool Equals(object other)
         {
-            return this == (Forbiddance)other;
+            return this == (Forbiddance) other;
         }
 
         public override int GetHashCode()

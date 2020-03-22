@@ -26,6 +26,7 @@ namespace Game
         public BTBlackBoard blackBoard = new BTBlackBoard();
         public BTExecuteCache executeCache = new BTExecuteCache();
         public Forbiddance forbidance;
+        public bool isBreak;
 
         private Entity m_cTarget = Entity.Null;
         public Entity target
@@ -61,10 +62,11 @@ namespace Game
             this.m_cTargetPosition = Vector3.zero;
             this.m_cTargetDirection = Vector3.forward;
             enableInputSkill = false;
-//            if (this.forbidance != null)
-//            {
-//                this.forbidance.Reset();
-//            }
+            isBreak = false;
+            if (this.forbidance != null)
+            {
+                this.forbidance.Reset();
+            }
         }
     }
 }

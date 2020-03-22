@@ -104,8 +104,8 @@ namespace Game
             if (null == skillComponent) return;
             if (skillComponent.skillData == null) return;
             CLog.LogArgs("CancelSkill","skillId",skillComponent.skillData.skillId, "isBreak", isBreak);
-            if(isBreak)
-                skillContext.SetBreak();
+            if (isBreak)
+                skillComponent.skillData.isBreak = true;
             Clear(skillContext);
             var skillData = skillComponent.skillData;
             forbidSystem.RemoveForbiddance(entity, skillData.forbidance);
@@ -162,14 +162,14 @@ namespace Game
                         Clear(skillContext);
                     }
                     BTStatus btState = Execute(skillContext);
-                    bool finish = skillContext.isIsBreak || btState != BTStatus.Running;
+                    bool finish = skillComponent.skillData.isBreak || btState != BTStatus.Running;
                     if (finish)
                     {
-                        if (!skillContext.isIsBreak && btState == BTStatus.Fail)
+                        if (!skillComponent.skillData.isBreak && btState == BTStatus.Fail)
                         {
-                            skillContext.SetBreak();
+                            skillComponent.skillData.isBreak = true;
                         }
-                        CancelSkill(entity, skillContext.isIsBreak);
+                        CancelSkill(entity, skillComponent.skillData.isBreak);
                     }
                     else
                     {

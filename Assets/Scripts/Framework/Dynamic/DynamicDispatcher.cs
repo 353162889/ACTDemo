@@ -12,7 +12,7 @@ namespace Framework
         /// </summary>
         /// <param name="obj"></param>
         /// <returns>返回false移除该对象</returns>
-        bool OnDispatcher(object obj);
+        bool OnDispatcher(int key, object obj);
         bool EqualOther(IDynamicDispatcherObj dispatcherObj);
     }
 
@@ -339,7 +339,7 @@ namespace Framework
                         {
                             p = ((DynamicDispatcherParam)args).Arg;
                         }
-                        if (!dispatcherObj.OnDispatcher(p))
+                        if (!dispatcherObj.OnDispatcher(key, p))
                         {
                             //移除
                             _lstRemoveId.Add(j);
