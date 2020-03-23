@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resbuff anim="" duration="0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="1" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="0" name="测试buff" parts="" script="" states=""/>
+	<resbuff anim="" duration="1.0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="1" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试buff1" parts="101,102" script="" states=""/>
+	<resbuff anim="" duration="1.0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="2" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试buff2" parts="" script="" states=""/>
 </root>

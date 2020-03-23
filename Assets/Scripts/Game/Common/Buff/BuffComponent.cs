@@ -8,8 +8,8 @@ namespace Game
     public enum BuffEventType
     {
         NONE = 0,
-        ON_BUFF_ATTACH = 1,
-        ON_BUFF_DETACH = 2,
+        HOST_BUFF_ATTACH = 1,
+        HOST_BUFF_DETACH = 2,
     }
 
     public class BuffConfig

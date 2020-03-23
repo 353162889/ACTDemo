@@ -18,6 +18,7 @@
             }
             else
             {
+                this.Clear(context, btData);
                 context.executeCache.SetExecuteStatus(btData.dataIndex, BTExecuteStatus.Ready);
             }
             return result;

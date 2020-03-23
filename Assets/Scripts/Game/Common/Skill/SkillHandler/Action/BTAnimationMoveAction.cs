@@ -62,7 +62,6 @@ namespace Game
 
             if (cacheData.time >= points[points.Length - AnimationMoveUtility.DataSpace])
             {
-                this.Clear(context, btData);
                 return BTStatus.Success;
             }
 

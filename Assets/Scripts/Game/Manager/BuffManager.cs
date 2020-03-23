@@ -32,7 +32,7 @@ namespace Game
                 foreach (var partId in resBuff.parts)
                 {
                     var resPart = ResCfgSys.Instance.GetCfg<ResBuffPartLogic>(partId);
-                    if (resPart != null)
+                    if (resPart != null && !string.IsNullOrEmpty(resPart.script))
                     {
                         loadBuffPartInfo.Add(resPart.id, "Config/BuffScript/BuffPartScript/" + resPart.script + ".bytes");
                     }

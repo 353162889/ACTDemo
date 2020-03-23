@@ -57,10 +57,13 @@ namespace Game
 
         private IEnumerator CoroutineLoadCfg(Action callback)
         {
+            ResCfgSys.Instance.Dispose();
             ResCfgSys.Instance.LoadResCfgs("Config/Data", null);
             while (!ResCfgSys.Instance.IsFinish()) yield return null;
             SkillManager.Instance.LoadCfgs(null);
             while (!SkillManager.Instance.IsFinish()) yield return null;
+            BuffManager.Instance.LoadCfgs(null);
+            while (!BuffManager.Instance.IsFinish()) yield return null;
             callback.Invoke();
             yield return null;
         }
@@ -115,6 +118,8 @@ namespace Game
             BehaviourPool<EntityBoxHit>.Instance.Init(30, goEntityHit.transform);
 
             ResetObjectPool<List<Entity>>.Instance.Init(20, list => list.Clear());
+
+            ResetObjectPool<List<int>>.Instance.Init(50, lst => lst.Clear());
 
             gameObject.AddComponentOnce<FPSMono>();
         }

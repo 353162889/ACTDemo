@@ -11,6 +11,16 @@
           </data>
         </NEData>
         <NEData>
+          <data xsi:type="BTAddBuffActionData">
+            <finishResume>false</finishResume>
+            <addBuffDuration>0</addBuffDuration>
+            <lstBuffId>
+              <int>1</int>
+            </lstBuffId>
+            <duration>0</duration>
+          </data>
+        </NEData>
+        <NEData>
           <data xsi:type="BTTimeLineData" />
           <lstChild>
             <NEData>

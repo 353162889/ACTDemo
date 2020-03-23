@@ -62,7 +62,6 @@ namespace Game
             {
                 return BTStatus.Running;
             }
-            this.Clear(context, btData);
             return BTStatus.Success;
         }
     }

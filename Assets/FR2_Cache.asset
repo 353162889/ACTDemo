@@ -15519,23 +15519,6 @@ MonoBehaviour:
     stamp: 1583929317
     type: 2
     UseGUIDs: []
-  - guid: d2cda99c6afc5e54d82b3a4ca98816a9
-    ScriptSymbols:
-    - Game.SharedListHitInfo
-    ScriptTokens:
-    - BTSharedVariable<List<EntityHitInfo>>
-    - List
-    - EntityHitInfo
-    stamp: 1583853358
-    type: 2
-    UseGUIDs: []
-  - guid: 18da1cf0256d47a49a886e4668565935
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 1583853358
-    type: 1
-    UseGUIDs:
-    - d2cda99c6afc5e54d82b3a4ca98816a9
   - guid: b4c9b955b2681b44689852c9f158f102
     ScriptSymbols:
     - NodeEditor.BoxColliderBehaviour
@@ -16135,6 +16118,36 @@ MonoBehaviour:
     - Init
     - Reset
     stamp: 1584795752
+    type: 2
+    UseGUIDs: []
+  - guid: 7bb7181f23cf98a48ad57def5092f484
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 2
+    UseGUIDs: []
+  - guid: cbd2b69789efd334cb07d0243095dc98
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 676335769dda0834c8a5c7a42ba8637e
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 2
+    UseGUIDs: []
+  - guid: 7184bb92096cdb74fa4ab69d63fd4c71
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 2
+    UseGUIDs: []
+  - guid: f8d284dfcfdee8542b8d72a04e1f12a9
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
     type: 2
     UseGUIDs: []
   timeStamp: 1584802493

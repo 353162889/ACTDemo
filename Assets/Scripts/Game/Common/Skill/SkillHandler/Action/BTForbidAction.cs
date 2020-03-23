@@ -55,26 +55,25 @@ namespace Game
                 result = BTStatus.Running;
             }
 
-            if (result != BTStatus.Running)
-            {
-                this.Clear(context, btData);
-            }
-
             return result;
         }
 
         protected override void Clear(SkillBTContext context, BTData btData, BTForbidActionData data)
         {
-            if (data.finishResume)
+            if (!IsCleared(context, btData))
             {
-                if (data.forbidArray != null)
+                if (data.finishResume)
                 {
-                    for (int i = 0; i < data.forbidArray.Length; i++)
+                    if (data.forbidArray != null)
                     {
-                        context.skillData.forbidance.ResumeForbid(data.forbidArray[i]);
+                        for (int i = 0; i < data.forbidArray.Length; i++)
+                        {
+                            context.skillData.forbidance.ResumeForbid(data.forbidArray[i]);
+                        }
                     }
                 }
             }
+
             base.Clear(context, btData, data);
         }
     }

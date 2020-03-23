@@ -13,6 +13,7 @@ namespace GameData
 		public int eventTriggerCount { get; private set; }
 		public float duration { get; private set; }
 		public float interval { get; private set; }
+		public List<int> buffIds { get; private set; }
 		public List<string> properties { get; private set; }
 		public string script { get; private set; }
 		public ResBuffPartLogic(SecurityElement node)
@@ -22,6 +23,19 @@ namespace GameData
 			eventTriggerCount = int.Parse(node.Attribute("eventTriggerCount"));
 			duration = float.Parse(node.Attribute("duration"));
 			interval = float.Parse(node.Attribute("interval"));
+			buffIds = new List<int>();
+			string str_buffIds = node.Attribute("buffIds");
+			if(!string.IsNullOrEmpty(str_buffIds))
+			{
+				string[] buffIdsArr = str_buffIds.Split(',');
+				if (buffIdsArr != null || buffIdsArr.Length > 0)
+				{
+					for (int i = 0; i < buffIdsArr.Length; i++)
+					{
+						buffIds.Add(int.Parse(buffIdsArr[i]));
+					}
+				}
+			}
 			properties = new List<string>();
 			string str_properties = node.Attribute("properties");
 			if(!string.IsNullOrEmpty(str_properties))

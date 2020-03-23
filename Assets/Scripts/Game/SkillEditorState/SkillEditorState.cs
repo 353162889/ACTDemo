@@ -30,6 +30,8 @@ namespace Game
         private StepMoveSystem stepMoveSystem;
         private ForbidSystem forbidSystem;
         private AvatarSystem avatarSystem;
+        private BuffSystem buffSystem;
+        private BuffStateSystem buffStateSystem;
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
@@ -51,6 +53,8 @@ namespace Game
             stepMoveSystem = world.GetOrCreateSystem<StepMoveSystem>();
             forbidSystem = world.GetOrCreateSystem<ForbidSystem>();
             avatarSystem = world.GetOrCreateSystem<AvatarSystem>();
+            buffStateSystem = world.GetOrCreateSystem<BuffStateSystem>();
+            buffSystem = world.GetOrCreateSystem<BuffSystem>();
 
             var playerEntity = CreatePlayer();
             cameraSystem.SetFollow(playerEntity, GameStarter.Instance.virtualCamera);
@@ -128,6 +132,8 @@ namespace Game
             var comboComponent = world.AddComponentOnce<ComboComponent>(entity);
             var cacheSkillComponent = world.AddComponentOnce<CacheSkillComponent>(entity);
             var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
+            var buffStateComponent = world.AddComponentOnce<BuffStateComponent>(entity);
+            var buffComponent = world.AddComponentOnce<BuffComponent>(entity);
 
             return entity;
         }
@@ -180,6 +186,8 @@ namespace Game
             animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
 
             var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
+            var buffStateComponent = world.AddComponentOnce<BuffStateComponent>(entity);
+            var buffComponent = world.AddComponentOnce<BuffComponent>(entity);
 
             return entity;
         }
@@ -195,6 +203,8 @@ namespace Game
             comboSystem.Update();
             cacheSkillSystem.Update();
             skillSystem.Update();
+            buffSystem.Update();
+            buffStateSystem.Update();
 
             directionMoveSystem.Update();
             jumpSystem.Update();

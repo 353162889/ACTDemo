@@ -42,10 +42,6 @@ namespace Game
             {
                 result = BTStatus.Running;
             }
-            if (result != BTStatus.Running)
-            {
-                this.Clear(context, btData);
-            }
             return result;
         }
     }

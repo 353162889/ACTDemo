@@ -39,7 +39,6 @@ namespace Game
             }
             else
             {
-                this.Clear(context, btData);
                 return BTStatus.Success;
             }
         }

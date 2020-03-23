@@ -84,10 +84,6 @@ namespace Game
                 }
             }
 
-            if (result != BTStatus.Running)
-            {
-                this.Clear(context, btData);
-            }
             return result;
         }
 

@@ -5,7 +5,7 @@ namespace Game
 {
     public class BTEnableCacheInputSkillActionData : IBTTimelineDurationData
     {
-        [NEProperty("是否完成当前行为还原禁止")]
+        [NEProperty("是否完成当前行为还原该行为")]
         public bool finishResume;
         public float comboDuration;
         public float duration

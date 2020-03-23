@@ -17,7 +17,7 @@ namespace Framework
                 return;
             }
 
-            if (index > lstData.Count)
+            if (index >= lstData.Count)
             {
                 for (int i = lstData.Count; i <= index; i++)
                 {
@@ -43,7 +43,7 @@ namespace Framework
                 return;
             }
 
-            if (index > lstExecuteStatus.Count)
+            if (index >= lstExecuteStatus.Count)
             {
                 for (int i = lstExecuteStatus.Count; i <= index; i++)
                 {
