@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using Framework;
 using NodeEditor;
+using Unity.Entities;
 
 namespace Game
 {
     public class BTAddBuffActionData : IBTTimelineDurationData
     {
+        public int filterId;
         [NEProperty("是否完成当前行为还原该行为（移除添加的buff）")]
         public bool finishResume;
         public float addBuffDuration;
@@ -38,11 +40,36 @@ namespace Game
                     {
                         cacheData.lstBuffIndex = ResetObjectPool<List<int>>.Instance.GetObject();
                     }
-                    for (int i = 0; i < data.lstBuffId.Length; i++)
+
+                    var lst = context.blackBoard.GetData<List<EntityHitInfo>>(SkillBlackBoardKeys.ListHitInfo);
+                    if (lst != null)
                     {
-                        int index = buffSystem.AddBuff(context.skillComponent.entity, data.lstBuffId[i]);
-                        if(index > 0)
-                            cacheData.lstBuffIndex.Add(index);
+                        var tempTargets = ResetObjectPool<List<Entity>>.Instance.GetObject();
+                        var tempResults = ResetObjectPool<List<Entity>>.Instance.GetObject();
+                        foreach (var entityHitInfo in lst)
+                        {
+                            tempTargets.Add(entityHitInfo.entity);
+                        }
+                        TargetFilter.Filter(data.filterId, context.world, context.skillComponent.entity, tempTargets, ref tempResults);
+                        foreach (var entity in tempResults)
+                        {
+                            foreach (var entityHitInfo in lst)
+                            {
+                                if (entityHitInfo.entity == entity)
+                                {
+                                    for (int i = 0; i < data.lstBuffId.Length; i++)
+                                    {
+                                        int index = buffSystem.AddBuff(entityHitInfo.entity, data.lstBuffId[i]);
+                                        if (index > 0)
+                                            cacheData.lstBuffIndex.Add(index);
+                                    }
+                                }
+                            }
+                        }
+
+                        ResetObjectPool<List<Entity>>.Instance.SaveObject(tempTargets);
+                        ResetObjectPool<List<Entity>>.Instance.SaveObject(tempResults);
+
                     }
                 }
             }

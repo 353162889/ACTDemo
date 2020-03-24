@@ -71,7 +71,6 @@ namespace Game
                     context.blackBoard.SetData(SkillBlackBoardKeys.ListHitInfo, lst);
                     //触发子节点
                     this.TriggerChildren(context, btData);
-                    CLog.LogArgs("攻击", lst.Count);
                     context.blackBoard.ClearData(SkillBlackBoardKeys.ListHitInfo);
                 }
                

@@ -10,6 +10,7 @@ namespace Game
     public class BuffSystem : ComponentSystem,IBTExecutor
     {
         private BuffStateSystem buffStateSystem;
+        private AnimationSystem animationSystem;
         protected override void OnCreate()
         {
             ObjectPool<BuffData>.Instance.Init(50);
@@ -17,6 +18,7 @@ namespace Game
             ResetObjectPool<List<BuffData>>.Instance.Init(3, (List<BuffData> lst) => { lst.Clear(); });
             buffStateSystem = World.GetOrCreateSystem<BuffStateSystem>();
             buffStateSystem.OnRemoveBuff += BuffStateSystemOnOnRemoveBuff;
+            animationSystem = World.GetOrCreateSystem<AnimationSystem>();
         }
 
         protected override void OnDestroy()
@@ -49,7 +51,6 @@ namespace Game
             if (buffCfg == null) return -1;
             var multiCount = buffCfg.multiCount;
             if (multiCount <= 0) return -1;
-            CLog.LogArgs("添加buff", buffId);
             List<BuffData> lst;
             if (buffComponent.dicIdToBuffLst.TryGetValue(buffId, out lst))
             {
@@ -111,7 +112,6 @@ namespace Game
             BuffData buffData;
             if (buffComponent.dicIndexToBuffData.TryGetValue(index, out buffData))
             {
-                CLog.LogArgs("移除buff", buffData.buffId);
                 buffData.Detach();
                 return true;
             }
@@ -120,7 +120,6 @@ namespace Game
             {
                 if (buffComponent.lstAdd[i].index == index)
                 {
-                    CLog.LogArgs("移除buff", buffComponent.lstAdd[i].buffId);
                     buffComponent.lstAdd[i].Detach();
                     return true;
                 }
@@ -158,6 +157,8 @@ namespace Game
         {
             Entities.ForEach((Entity entity, BuffComponent buffComponent) =>
             {
+                //第一次移除，保证buff移除后添加另一buff的逻辑
+                CheckRemoveBuff(buffComponent);
                 //检测添加buff
                 CheckAddBuff(buffComponent);
                 foreach (var pair in buffComponent.dicIndexToBuffData)
@@ -173,7 +174,7 @@ namespace Game
                         UpdateBuff(buffComponent, pair.Value, true);
                     }
                 }
-                //检测移除buff
+                //检测移除buff，update时检测buff需要移除
                 CheckRemoveBuff(buffComponent);
             });
         }
@@ -185,6 +186,7 @@ namespace Game
                 var buffData = buffComponent.lstAdd[i];
                 if (buffData.status == BuffExeStatus.Init)
                 {
+                    CLog.LogArgs("添加buff", buffData.buffId, Time.time);
                     List<BuffData> lst;
                     if (!buffComponent.dicIdToBuffLst.TryGetValue(buffData.buffId, out lst))
                     {
@@ -202,6 +204,30 @@ namespace Game
                         {
                             int buffStateIndex = buffStateSystem.AddState(buffComponent.entity, stateType);
                             buffData.lstBuffStateIndex.Add(buffStateIndex);
+                        }
+                    }
+
+                    buffData.status = BuffExeStatus.Running;
+
+                    //播放buff动画
+                    if (!string.IsNullOrEmpty(buffCfg.anim))
+                    {
+                        var paramType = animationSystem.GetAnimationParamType(buffComponent.entity, buffCfg.anim);
+                        if (paramType != null)
+                        {
+                            if (paramType.type == AnimatorControllerParameterType.Trigger)
+                            {
+                                animationSystem.ResetAnimatorParam(buffComponent.entity, buffCfg.anim);
+                                animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim);
+                                if (animationSystem.HasAnimatorParam(buffComponent.entity, buffCfg.anim + "_Bool"))
+                                {
+                                    animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim + "_Bool", true);
+                                }
+                            }
+                            else if (paramType.type == AnimatorControllerParameterType.Bool)
+                            {
+                                animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim, true);
+                            }
                         }
                     }
                 }
@@ -231,6 +257,30 @@ namespace Game
             for (int i = 0; i < temp.Count; i++)
             {
                 var buffData = temp[i];
+                CLog.LogArgs("移除buff", buffData.buffId, Time.time);
+                var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffData.buffId);
+                //重置buff动画
+                if (!string.IsNullOrEmpty(buffCfg.anim))
+                {
+                    var paramType = animationSystem.GetAnimationParamType(buffComponent.entity, buffCfg.anim);
+                    if (paramType != null)
+                    {
+                        if (paramType.type == AnimatorControllerParameterType.Trigger)
+                        {
+                            animationSystem.ResetAnimatorParam(buffComponent.entity, buffCfg.anim);
+                            if (animationSystem.HasAnimatorParam(buffComponent.entity, buffCfg.anim + "_Bool"))
+                            {
+                                animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim + "_Bool", false);
+                            }
+                            
+                        }
+                        else if (paramType.type == AnimatorControllerParameterType.Bool)
+                        {
+                            animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim, false);
+                        }
+                    }
+                }
+
                 foreach (var buffPartData in buffData.lstPart)
                 {
                     DisableBuffPart(buffComponent, buffData, buffPartData);
@@ -269,7 +319,7 @@ namespace Game
 
         }
 
-        private void UpdateBuff(BuffComponent buffComponent, BuffData buffData, bool destroy)
+        private void UpdateBuff(BuffComponent buffComponent, BuffData buffData, bool buffDestroyed)
         {
             var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffData.buffId);
 
@@ -282,7 +332,7 @@ namespace Game
                 }
             }
 
-            if (!destroy)
+            if (!buffDestroyed)
             {
                 if (!string.IsNullOrEmpty(buffCfg.script))
                 {

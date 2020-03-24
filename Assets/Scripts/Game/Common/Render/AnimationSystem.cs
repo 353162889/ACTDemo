@@ -118,6 +118,26 @@ namespace Game
             }
         }
 
+        public AnimatorControllerParameter GetAnimationParamType(Entity entity, string animationParam)
+        {
+            var animationComponent = World.GetComponent<AnimationComponent>(entity);
+            if (null == animationComponent) return null;
+            return GetAnimationParamType(animationComponent, animationParam);
+        }
+
+        public AnimatorControllerParameter GetAnimationParamType(AnimationComponent animationComponent, string animationParam)
+        {
+            if (!ValidAnimator(animationComponent)) return null;
+            var count = animationComponent.animator.parameterCount;
+            for (int i = 0; i < count; i++)
+            {
+                var param = animationComponent.animator.GetParameter(i);
+                if (param.name == animationParam) return param;
+            }
+
+            return null;
+        }
+
         public float GetAnimationTime(Entity entity, string animationClipName)
         {
             var animationComponent = World.GetComponent<AnimationComponent>(entity);

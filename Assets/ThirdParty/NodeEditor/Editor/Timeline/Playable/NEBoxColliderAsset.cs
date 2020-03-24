@@ -40,7 +40,9 @@ namespace NodeEditor
                 BTBoxColliderActionData data = (BTBoxColliderActionData)neData.data;
                 data.localPos = boxCollider.transform.localPosition;
                 data.localRot = boxCollider.transform.localRotation;
-                data.size = boxCollider.size;
+                var scale = boxCollider.transform.localScale;
+                var size = boxCollider.size;
+                data.size = new Vector3(scale.x * size.x, scale.y * size.y, scale.z * size.z);
                 data.duration = (float)curTimelineClip.duration;
             }
             return neData;

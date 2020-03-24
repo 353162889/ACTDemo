@@ -257,7 +257,7 @@ MonoBehaviour:
     - HasEvent
     - HasKey
     - Clear
-    stamp: 1534770769
+    stamp: 1584859681
     type: 2
     UseGUIDs: []
   - guid: 0d182ed042f96b8418700403334de597
@@ -1173,7 +1173,7 @@ MonoBehaviour:
   - guid: 7758b834619294d4e81a1a6edef6ae1c
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584716893
+    stamp: 1584876384
     type: 1
     UseGUIDs:
     - 0cc6b23b2de76194aad9ee4c2bb173d5
@@ -1197,7 +1197,7 @@ MonoBehaviour:
   - guid: 25c27b34d045be841ac16e204b4a8d97
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584199232
+    stamp: 1584968500
     type: 1
     UseGUIDs:
     - 71f8f0381e4a9a0419508e3b46e1b365
@@ -1206,7 +1206,6 @@ MonoBehaviour:
     - 7758b834619294d4e81a1a6edef6ae1c
     - 6fbe50da6789aea4baf24afb088d7341
     - fae6c85f0132bae4abcf05ea9c8d0d36
-    - 18da1cf0256d47a49a886e4668565935
     - 50300c040bb58594fa422ea7decf00a2
     - 385b8ee78f997ee4096e76e49ca3cd62
     - 12ac13817c1a6694ca5393e7fc0c12f1
@@ -2000,7 +1999,7 @@ MonoBehaviour:
     - Exception
     - CLog
     - HasKey
-    stamp: 1520058699
+    stamp: 1584859678
     type: 2
     UseGUIDs: []
   - guid: 2cdabb6774b00054d818f93e87ba72cb
@@ -2082,7 +2081,7 @@ MonoBehaviour:
   - guid: 254aea97dee6c3043bbf87f39cf9e43b
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1583554117
+    stamp: 1584859678
     type: 1
     UseGUIDs:
     - 9bf32e9b039c7524ea15063025d4642e
@@ -2272,6 +2271,7 @@ MonoBehaviour:
     - CoroutineLoadCfg
     - ResCfgSys
     - SkillManager
+    - BuffManager
     - CreateState
     - GameStateCfg
     - StateBase
@@ -2291,13 +2291,13 @@ MonoBehaviour:
     - LateUpdate
     - OnDestroy
     - OnApplicationQuit
-    stamp: 1584199232
+    stamp: 1584968500
     type: 2
     UseGUIDs: []
   - guid: d2858b3802e4511409b1dfe553619c6d
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1583554117
+    stamp: 1584859681
     type: 1
     UseGUIDs:
     - a633f8d086dfcab42b3173fc75f682d3
@@ -3567,7 +3567,7 @@ MonoBehaviour:
   - guid: 649f59cc4da2f004c940e1e06eb10162
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584456426
+    stamp: 1584968141
     type: 1
     UseGUIDs:
     - 6307603c504b0a24f939fc773ffa1441
@@ -4079,6 +4079,8 @@ MonoBehaviour:
     - StepMoveSystem
     - ForbidSystem
     - AvatarSystem
+    - BuffSystem
+    - BuffStateSystem
     - OnEnter
     - GameObjectWorld
     - CreatePlayer
@@ -4091,7 +4093,7 @@ MonoBehaviour:
     - OnUpdate
     - OnExit
     - SceneEffectPool
-    stamp: 1584456426
+    stamp: 1584968141
     type: 2
     UseGUIDs: []
   - guid: d4effa1f55b84e748aaa9f635451c81d
@@ -12784,7 +12786,7 @@ MonoBehaviour:
     - Vector3
     - SetTargetInfo
     - Reset
-    stamp: 1584533449
+    stamp: 1584878942
     type: 2
     UseGUIDs: []
   - guid: da6b7952aad936a4082624b574379c12
@@ -12798,19 +12800,21 @@ MonoBehaviour:
   - guid: 11946703e62e9044984bf795d70033b2
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584717375
+    stamp: 1584858648
     type: 1
     UseGUIDs:
     - e4b9902c9d5330f48902d89b89ebb89e
+    - 7bb7181f23cf98a48ad57def5092f484
     - 2e90c2508ff56ed4d98c3632317a14f6
     - a25fd16d794c069408e79328ece9da17
   - guid: 8b0f55574a1776a4a9ba0036ce0f6aeb
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584717388
+    stamp: 1584858655
     type: 1
     UseGUIDs:
     - dda6ce5c40e140840b2dff86f2d63445
+    - cbd2b69789efd334cb07d0243095dc98
     - 6f53548860551d34fbc3a27a531b8078
     - 1b4c137ed18822b4db2ece22d02a2cbb
   - guid: 1f22a679bc0b843459847f37f9d7a5c7
@@ -12822,7 +12826,7 @@ MonoBehaviour:
   - guid: 35b96abaa33036448a66e4ef5615d706
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584533449
+    stamp: 1584879115
     type: 1
     UseGUIDs:
     - 3813a1f07399b0e489fe9235a266110a
@@ -12842,7 +12846,7 @@ MonoBehaviour:
     - ResCfg
     - ResCfgKey
     - SecurityElement
-    stamp: 1584717367
+    stamp: 1584968254
     type: 2
     UseGUIDs: []
   - guid: 1b4c137ed18822b4db2ece22d02a2cbb
@@ -12881,9 +12885,8 @@ MonoBehaviour:
     - GetHandler
     - BTDataHandlerInitialize
     - Init
-    - SetBreak
     - Reset
-    stamp: 1584274096
+    stamp: 1584879114
     type: 2
     UseGUIDs: []
   - guid: 3ff8b2f003c929d45abea920166153bd
@@ -12900,7 +12903,7 @@ MonoBehaviour:
     - T2
     - BTExecuteStatus
     - IsCleared
-    stamp: 1584277238
+    stamp: 1584967318
     type: 2
     UseGUIDs: []
   - guid: 20b03d311d6435c4b8445ba6c831597d
@@ -13300,7 +13303,7 @@ MonoBehaviour:
   - guid: ab2fed4d56bf65343b82722ba22defa4
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584277238
+    stamp: 1584967916
     type: 1
     UseGUIDs:
     - 0801248c2ee3fc142b1fc45d022a52e2
@@ -13510,10 +13513,11 @@ MonoBehaviour:
   - guid: 50300c040bb58594fa422ea7decf00a2
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1583554118
+    stamp: 1584967755
     type: 1
     UseGUIDs:
     - d941ac4cdba645f4894c224749cc83de
+    - 7184bb92096cdb74fa4ab69d63fd4c71
     - 50a9ecfafd43b31498bb35e6ceafdaba
   - guid: 3d8a49355a5c7114b914f903ddef7fc8
     ScriptSymbols:
@@ -13604,7 +13608,7 @@ MonoBehaviour:
   - guid: 36d86cce449d6c54a82a5fee5e2b19f5
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584459511
+    stamp: 1584967561
     type: 1
     UseGUIDs:
     - d29c559dfbf5de142915bb5f670f42d7
@@ -13627,7 +13631,7 @@ MonoBehaviour:
     - SetExecuteStatus
     - GetExecuteStatus
     - Clear
-    stamp: 1569599321
+    stamp: 1584967916
     type: 2
     UseGUIDs: []
   - guid: 543d38b354eacef409d79af780a87af6
@@ -13883,9 +13887,10 @@ MonoBehaviour:
   - guid: 45e3cf06b120abd47906ffc1925590aa
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584453102
+    stamp: 1584967514
     type: 1
     UseGUIDs:
+    - 18b2d6cf7bfa4ed41a3f58e18cd58455
     - f60df977455f5c64e863e33652ba36b7
     - 852017c6e89e995478f12e5b579cdd02
     - 4319a761162160d479b86f47f440e2d9
@@ -13917,8 +13922,7 @@ MonoBehaviour:
     - BTExecuteStatus
     - Clear
     - IsCleared
-    - CLog
-    stamp: 1584277280
+    stamp: 1584967290
     type: 2
     UseGUIDs: []
   - guid: 0801248c2ee3fc142b1fc45d022a52e2
@@ -13950,7 +13954,7 @@ MonoBehaviour:
     - AnimationMoveUtility
     - Vector3
     - Time
-    stamp: 1584266500
+    stamp: 1584967262
     type: 2
     UseGUIDs: []
   - guid: 577a6ab74baaa1249bbe67a8d653f3ce
@@ -14039,16 +14043,19 @@ MonoBehaviour:
   - guid: c4833b7e89cd82c49a821f3fedbba90e
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584802480
+    stamp: 1584972299
     type: 1
     UseGUIDs:
+    - f8d284dfcfdee8542b8d72a04e1f12a9
     - 21e290ebe044b6d4790e216860b5bbfc
     - 4fc9160733e4df14487ca65dd66c447b
+    - 676335769dda0834c8a5c7a42ba8637e
     - 13db0031c60ad2f42be1ba3c188d74b5
     - f32d7d5d40be07142aa4f6ab848fcf05
     - 59bd7820fdf638d4bb2fdd67066e421c
     - b4011aca015e83b4d80224e01677c99b
     - 1c06302418f010f4ca6a40b2b98844e4
+    - 4f05c38276c6a41449a86627a29785b5
     - ef856485b90b08644b1f6154b1bc662b
   - guid: c968b94d9fbc840469666aed6b27a396
     ScriptSymbols:
@@ -14621,7 +14628,8 @@ MonoBehaviour:
     - BTData
     - BTExecuteStatus
     - Clear
-    stamp: 1584269202
+    - IsCleared
+    stamp: 1584967279
     type: 2
     UseGUIDs: []
   - guid: 530e9507aa70a5343b08c6bf6e37ef45
@@ -14714,7 +14722,7 @@ MonoBehaviour:
     - Transform
     - SceneEffectPool
     - Clear
-    stamp: 1584267448
+    stamp: 1584967295
     type: 2
     UseGUIDs: []
   - guid: 12ac13817c1a6694ca5393e7fc0c12f1
@@ -15742,7 +15750,7 @@ MonoBehaviour:
     - SkillBTContext
     - BTData
     - BTExecuteStatus
-    stamp: 1584265661
+    stamp: 1584967274
     type: 2
     UseGUIDs: []
   - guid: 9db88fc42eb35484baec34c40e83fa5d
@@ -15758,7 +15766,7 @@ MonoBehaviour:
     - Handler
     - SkillBTContext
     - BTData
-    stamp: 1584274096
+    stamp: 1584967284
     type: 2
     UseGUIDs: []
   - guid: 35c74787471a27b4c8b682a430d0da3f
@@ -15779,7 +15787,7 @@ MonoBehaviour:
     - BTExecuteStatus
     - Clear
     - IsCleared
-    stamp: 1584364580
+    stamp: 1584967304
     type: 2
     UseGUIDs: []
   - guid: 3635114026a7ee64fa187435101859ed
@@ -15860,7 +15868,7 @@ MonoBehaviour:
     - IBTContext
     - BTDataHandlerInitialize
     - OnDestroy
-    stamp: 1584456275
+    stamp: 1584879074
     type: 2
     UseGUIDs: []
   - guid: 2e90c2508ff56ed4d98c3632317a14f6
@@ -15871,7 +15879,7 @@ MonoBehaviour:
     - ResCfgKey
     - List
     - SecurityElement
-    stamp: 1584717367
+    stamp: 1584968254
     type: 2
     UseGUIDs: []
   - guid: 6f53548860551d34fbc3a27a531b8078
@@ -15897,7 +15905,7 @@ MonoBehaviour:
     - BTExecuteStatus
     - Clear
     - IsCleared
-    stamp: 1584453102
+    stamp: 1584967269
     type: 2
     UseGUIDs: []
   - guid: 3813a1f07399b0e489fe9235a266110a
@@ -15946,6 +15954,7 @@ MonoBehaviour:
     - Game.BuffStateConfig.BuffStateComponent
     - Game.BuffStateConfig.BuffStateComponent.BuffStateComponentInspector
     ScriptTokens:
+    - NONE
     - STIFFNESS
     - STUNNED
     - FROZEN
@@ -15958,7 +15967,12 @@ MonoBehaviour:
     - ForbidType
     - IBuffStateHandler
     - Dictionary
+    - InitStateTypes
+    - Array
+    - Enum
     - GetConfig
+    - GetStateTypeByString
+    - CLog
     - DataComponent
     - BuffStateData
     - UNITY_EDITOR
@@ -15967,7 +15981,7 @@ MonoBehaviour:
     - OnEnable
     - UnityEngine
     - OnInspectorGUI
-    stamp: 1584802343
+    stamp: 1584868912
     type: 2
     UseGUIDs: []
   - guid: 59bd7820fdf638d4bb2fdd67066e421c
@@ -15986,7 +16000,7 @@ MonoBehaviour:
     - ReferenceEquals
     - Equals
     - GetHashCode
-    stamp: 1584801130
+    stamp: 1584870980
     type: 2
     UseGUIDs: []
   - guid: b4011aca015e83b4d80224e01677c99b
@@ -16013,18 +16027,28 @@ MonoBehaviour:
     - OnUpdate
     - Entities
     - BuffStateConfig
-    stamp: 1584800454
+    stamp: 1584870988
     type: 2
     UseGUIDs: []
   - guid: 21e290ebe044b6d4790e216860b5bbfc
     ScriptSymbols:
+    - Game.BuffEventType
+    - Game.BuffConfig
     - Game.BuffComponent
     ScriptTokens:
-    - DataComponent
+    - NONE
+    - HOST_BUFF_ATTACH
+    - HOST_BUFF_DETACH
     - Dictionary
+    - InitEventTypes
+    - Array
+    - Enum
+    - GetEventTypeByString
+    - CLog
+    - DataComponent
     - List
     - BuffData
-    stamp: 1584800429
+    stamp: 1584965045
     type: 2
     UseGUIDs: []
   - guid: e4b9902c9d5330f48902d89b89ebb89e
@@ -16033,30 +16057,59 @@ MonoBehaviour:
     ScriptTokens:
     - ResCfg
     - ResCfgKey
+    - List
     - SecurityElement
-    stamp: 1584717367
+    stamp: 1584968254
     type: 2
     UseGUIDs: []
   - guid: 1c06302418f010f4ca6a40b2b98844e4
     ScriptSymbols:
     - Game.BuffSystem
     ScriptTokens:
-    - ComponentSystem
+    - ComponentSystem,IBTExecutor
     - BuffStateSystem
     - OnCreate
+    - ObjectPool
+    - BuffData
+    - BuffPartData
+    - ResetObjectPool
+    - List
     - World
     - BuffStateSystemOnOnRemoveBuff
     - OnDestroy
     - Entity
-    - AddBuff
     - RemoveBuffByIndex
+    - TriggerBuffEvent
+    - BuffComponent
+    - BuffEventType
+    - ResCfgSys
+    - BuffConfig
+    - EnableBuffPart
+    - AddBuff
+    - CLog
+    - BuffExeStatus
     - RemoveBuffById
     - OnUpdate
     - Entities
-    - BuffComponent
+    - CheckAddBuff
     - UpdateBuff
-    - BuffData
-    stamp: 1584802480
+    - CheckRemoveBuff
+    - BuffStateConfig
+    - BuffStateType
+    - DisableBuffPart
+    - Clear
+    - UpdateBuffPart
+    - BuffManager
+    - Time
+    - BTStatus
+    - Execute
+    - RemoveProperty
+    - ExecuteBuffPart
+    - ResBuffPartLogic
+    - AddProperty
+    - IBTContext
+    - BTDataHandlerInitialize
+    stamp: 1584969800
     type: 2
     UseGUIDs: []
   - guid: dda6ce5c40e140840b2dff86f2d63445
@@ -16078,12 +16131,22 @@ MonoBehaviour:
     UseGUIDs: []
   - guid: 4fc9160733e4df14487ca65dd66c447b
     ScriptSymbols:
+    - Game.BuffExeStatus
     - Game.BuffData
     ScriptTokens:
+    - Init
+    - Running
+    - Destroy
     - Serializable
     - IPoolable
+    - List
+    - BuffPartData
+    - BTBlackBoard
+    - BTExecuteCache
+    - BuffBTContext
     - Reset
-    stamp: 1584801146
+    - Detach
+    stamp: 1584881231
     type: 2
     UseGUIDs: []
   - guid: ef856485b90b08644b1f6154b1bc662b
@@ -16121,9 +16184,14 @@ MonoBehaviour:
     type: 2
     UseGUIDs: []
   - guid: 7bb7181f23cf98a48ad57def5092f484
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 0
+    ScriptSymbols:
+    - GameData.ResBuffPartLogic
+    ScriptTokens:
+    - ResCfg
+    - ResCfgKey
+    - List
+    - SecurityElement
+    stamp: 1584968254
     type: 2
     UseGUIDs: []
   - guid: cbd2b69789efd334cb07d0243095dc98
@@ -16133,22 +16201,90 @@ MonoBehaviour:
     type: 9
     UseGUIDs: []
   - guid: 676335769dda0834c8a5c7a42ba8637e
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 0
+    ScriptSymbols:
+    - Game.BuffPartData
+    ScriptTokens:
+    - IPoolable
+    - BuffBTContext
+    - Reset
+    - ResetEnabled
+    stamp: 1584887502
     type: 2
     UseGUIDs: []
   - guid: 7184bb92096cdb74fa4ab69d63fd4c71
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 0
+    ScriptSymbols:
+    - Game.BuffManager
+    ScriptTokens:
+    - BaseManager<BuffManager>
+    - BTDataLoader
+    - LoadCfgs
+    - Action
+    - Dictionary
+    - ResCfgSys
+    - IsFinish
+    - BTTreeData
+    - GetBuffBTTreeData
+    - GetBuffPartBTTreeData
+    stamp: 1584967755
     type: 2
     UseGUIDs: []
   - guid: f8d284dfcfdee8542b8d72a04e1f12a9
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 0
+    ScriptSymbols:
+    - Game.BuffBTContext
+    ScriptTokens:
+    - IBTContext, IPoolable
+    - World
+    - BTTreeData
+    - IBTExecutor
+    - BuffComponent
+    - BuffData
+    - BTBlackBoard
+    - BTExecuteCache
+    - IBTDataHandler
+    - GetHandler
+    - BTDataHandlerInitialize
+    - Init
+    - BuffPartData
+    - SetPartData
+    - GetPartData
+    - Reset
+    stamp: 1584882624
     type: 2
     UseGUIDs: []
-  timeStamp: 1584802493
+  - guid: b69898bdcd6a0514993dfe692cae471e
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1584972348
+    type: 1
+    UseGUIDs: []
+  - guid: 18b2d6cf7bfa4ed41a3f58e18cd58455
+    ScriptSymbols:
+    - Game.BTAddBuffActionData
+    - Game.BTAddBuffAction
+    - Game.BTAddBuffAction.InnerBTAddBuffActionData
+    ScriptTokens:
+    - IBTTimelineDurationData
+    - NEProperty
+    - BTAction<SkillBTContext, BTAddBuffActionData>
+    - List
+    - DefaultActionData
+    - BTStatus
+    - Handler
+    - SkillBTContext
+    - BTData
+    - BTExecuteStatus
+    - ResetObjectPool
+    - Clear
+    - IsCleared
+    stamp: 1584967514
+    type: 2
+    UseGUIDs: []
+  - guid: 4f05c38276c6a41449a86627a29785b5
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1584972299
+    type: 1
+    UseGUIDs:
+    - b69898bdcd6a0514993dfe692cae471e
+  timeStamp: 1584972952
   priority: 3

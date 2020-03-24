@@ -433,22 +433,26 @@ namespace NodeEditor
                 var go = new GameObject();
                 timelineAsset.colliderParent.gameObject.AddChildToParent(go, "BoxCollider");
                 asset.boxCollider = go.AddComponent<BoxCollider>();
-               
+                var data = (BTBoxColliderActionData)asset.neData.data;
+                var trans = asset.boxCollider.transform;
+                trans.localPosition = data.localPos;
+                trans.localRotation = data.localRot;
+                trans.localScale = data.size;
+                asset.boxCollider.size = Vector3.one;
+                if (data.size == Vector3.zero)
+                {
+                    trans.localScale = Vector3.one;
+                }
+
+                asset.boxCollider.center = Vector3.zero;
+                if (data.duration > 0)
+                    asset.curTimelineClip.duration = data.duration;
             }
 
             if (asset.playableBehaviour.GetBehaviour() != null && asset.playableBehaviour.GetBehaviour().gameObject == null)
             {
                 asset.playableBehaviour.GetBehaviour().gameObject = asset.boxCollider.gameObject;
             }
-
-            var data = (BTBoxColliderActionData)asset.neData.data;
-            var trans = asset.boxCollider.transform;
-            trans.localPosition = data.localPos;
-            trans.localRotation = data.localRot;
-            asset.boxCollider.size = data.size;
-            asset.boxCollider.center = Vector3.zero;
-            asset.curTimelineClip.duration = data.duration;
-
         }
     }
 }

@@ -195,6 +195,54 @@
         </NEData>
         <NEData>
           <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0.4</exeTime>
+            <time>0.4</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTBoxColliderActionData">
+                <localPos>
+                  <x>0</x>
+                  <y>1.059</y>
+                  <z>1.06</z>
+                </localPos>
+                <localRot>
+                  <x>0</x>
+                  <y>0</y>
+                  <z>0</z>
+                  <w>1</w>
+                  <eulerAngles>
+                    <x>-0</x>
+                    <y>0</y>
+                    <z>0</z>
+                  </eulerAngles>
+                </localRot>
+                <size>
+                  <x>1</x>
+                  <y>0.7</y>
+                  <z>1.7</z>
+                </size>
+                <colliderDuration>0.06666667</colliderDuration>
+                <duration>0.06666667</duration>
+              </data>
+              <lstChild>
+                <NEData>
+                  <data xsi:type="BTAddBuffActionData">
+                    <filterId>1</filterId>
+                    <finishResume>false</finishResume>
+                    <addBuffDuration>0</addBuffDuration>
+                    <lstBuffId>
+                      <int>1</int>
+                    </lstBuffId>
+                    <duration>0</duration>
+                  </data>
+                </NEData>
+              </lstChild>
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
             <exeTime>0.599999964</exeTime>
             <time>0.599999964</time>
           </data>
