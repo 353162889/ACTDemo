@@ -79,7 +79,8 @@ public static class CustomMenuItem
         BTDataHandlerInitialize.InitializeInEditor(true);
         NETreeComposeType[] staticConfig = new NETreeComposeType[]
         {
-            CreateNETreeComposeType(typeof(SkillBTContext),"Skill", "Assets/ResourceEx/Config/SkillScript", "skill", "bytes", "测试"),
+            CreateNETreeComposeType(typeof(SkillBTContext),"Skill", "Assets/ResourceEx/Config/SkillScript", "skill", "bytes", "技能脚本"),
+            CreateNETreeComposeType(typeof(BuffBTContext),"Buff", "Assets/ResourceEx/Config/BuffScript", "buff", "bytes", "Buff脚本"),
         };
         NETreeWindow.OpenWindow(staticConfig, 0);
     }

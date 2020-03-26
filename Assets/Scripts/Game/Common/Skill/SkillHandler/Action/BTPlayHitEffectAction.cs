@@ -11,16 +11,16 @@ namespace Game
     {
         protected override BTStatus Handler(SkillBTContext context, BTData btData, BTPlayHitEffectActionData data)
         {
-            var lst = context.blackBoard.GetData<List<EntityHitInfo>>(SkillBlackBoardKeys.ListHitInfo);
+            var lst = context.blackBoard.GetData<List<DamageInfo>>(SkillBlackBoardKeys.ListDamageInfo);
             if (lst == null) return BTStatus.Fail;
             for (int i = 0; i < lst.Count; i++)
             {
-                var hitInfo = lst[i];
+                var damageInfo = lst[i];
                 var go = SceneEffectPool.Instance.CreateEffect(data.effectName, true, null);
                 if (go != null)
                 {
-                    go.transform.position = hitInfo.point;
-                    go.transform.forward = hitInfo.normal;
+                    go.transform.position = damageInfo.hitInfo.point;
+                    go.transform.forward = damageInfo.hitInfo.normal;
                 }
             }
             return BTStatus.Success;

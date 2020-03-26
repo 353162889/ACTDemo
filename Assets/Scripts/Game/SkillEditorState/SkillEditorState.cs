@@ -32,6 +32,7 @@ namespace Game
         private AvatarSystem avatarSystem;
         private BuffSystem buffSystem;
         private BuffStateSystem buffStateSystem;
+        private DamageSystem damageSystem;
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
@@ -55,9 +56,12 @@ namespace Game
             avatarSystem = world.GetOrCreateSystem<AvatarSystem>();
             buffStateSystem = world.GetOrCreateSystem<BuffStateSystem>();
             buffSystem = world.GetOrCreateSystem<BuffSystem>();
+            damageSystem = world.GetOrCreateSystem<DamageSystem>();
 
             var playerEntity = CreatePlayer();
             cameraSystem.SetFollow(playerEntity, GameStarter.Instance.virtualCamera);
+//            Cursor.visible = false;
+//            Cursor.lockState = CursorLockMode.Locked;
 
             CreateEnemy();
         }

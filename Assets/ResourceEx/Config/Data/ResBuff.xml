@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resbuff anim="Twinblades_Hit_Front" duration="3.0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="1" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试buff1" parts="" script="" states=""/>
+	<resbuff anim="" duration="0.3" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="1" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试buff1" parts="" script="behitback" states=""/>
 </root>

@@ -103,6 +103,7 @@ namespace Game
                     info.normal = hit.normal;
                     info.collider = hit.collider;
                     info.direct = transform.forward;
+                    info.colliderCenter = center;
                     info.rayDirect = direction;
                     lstInfo.Add(info);
                 }

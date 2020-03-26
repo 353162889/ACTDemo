@@ -348,6 +348,7 @@
           <lstChild>
             <NEData>
               <data xsi:type="BTBoxColliderActionData">
+                <filterId>1</filterId>
                 <localPos>
                   <x>0</x>
                   <y>1.05</y>

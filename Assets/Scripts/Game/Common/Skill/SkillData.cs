@@ -7,7 +7,7 @@ namespace Game
 {
     public static class SkillBlackBoardKeys
     {
-        public static string ListHitInfo = "ListHitInfo";
+        public static string ListDamageInfo = "ListDamageInfo";
     }
 
     public enum SkillPhaseType

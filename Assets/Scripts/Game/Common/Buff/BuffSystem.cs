@@ -31,26 +31,55 @@ namespace Game
             RemoveBuffByIndex(entity, buffIndex);
         }
 
-        public void TriggerBuffEvent(BuffComponent buffComponent, BuffData buffData, BuffEventType eventType)
+        public void TriggerBuffEvent(BuffComponent buffComponent, BuffData buffData, BuffEventType eventType, bool executeImmediately = true)
         {
             foreach (var buffPartData in buffData.lstPart)
             {
                 var buffPartCfg = ResCfgSys.Instance.GetCfg<ResBuffPartLogic>(buffPartData.buffPartId);
                 if (BuffConfig.GetEventTypeByString(buffPartCfg.eventTriggerType) == eventType)
                 {
-                    EnableBuffPart(buffComponent, buffData, buffPartData);
+                    EnableBuffPart(buffComponent, buffData, buffPartData, executeImmediately);
                 }
             }
         }
 
+        public int AddBuffByDamageInfo(Entity entity, int buffId, DamageInfo damgeInfo)
+        {
+            BuffData buffData = AddBuffInner(entity, buffId);
+            if (buffData != null)
+            {
+                buffData.damageInfo = damgeInfo;
+                return buffData.index;
+            }
+
+            return -1;
+        }
+
         public int AddBuff(Entity entity, int buffId)
         {
+            var buffData = AddBuffInner(entity, buffId);
+            if (buffData != null) return buffData.index;
+            return -1;
+        }
+
+        private DamageInfo GetDefaultDamageInfo(Entity entity)
+        {
+            var damageInfo = new DamageInfo();
+            damageInfo.caster = entity;
+            damageInfo.target = entity;
+            damageInfo.damage = 0;
+            damageInfo.hitInfo = EntityHitInfo.Null;
+            return damageInfo;
+        }
+
+        private BuffData AddBuffInner(Entity entity, int buffId)
+        {
             var buffComponent = World.GetComponent<BuffComponent>(entity);
-            if (buffComponent == null) return -1;
+            if (buffComponent == null) return null;
             var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffId);
-            if (buffCfg == null) return -1;
+            if (buffCfg == null) return null;
             var multiCount = buffCfg.multiCount;
-            if (multiCount <= 0) return -1;
+            if (multiCount <= 0) return null;
             List<BuffData> lst;
             if (buffComponent.dicIdToBuffLst.TryGetValue(buffId, out lst))
             {
@@ -63,7 +92,7 @@ namespace Game
                     {
                         if (!RemoveBuffByIndex(entity, lst[i].index))
                         {
-                            return -1;
+                            return null;
                         }
 
                         exist = true;
@@ -80,7 +109,7 @@ namespace Game
                         {
                             if (!RemoveBuffByIndex(entity, lst[i].index))
                             {
-                                return -1;
+                                return null;
                             }
                             break;
                         }
@@ -92,6 +121,8 @@ namespace Game
             buffData.index = buffComponent.startIndex++;
             buffData.buffId = buffId;
             buffData.status = BuffExeStatus.Init;
+            buffData.damageInfo = GetDefaultDamageInfo(entity);
+
             for (int i = 0; i < buffCfg.parts.Count; i++)
             {
                 var partId = buffCfg.parts[i];
@@ -102,7 +133,7 @@ namespace Game
             }
 
             buffComponent.lstAdd.Add(buffData);
-            return buffData.index;
+            return buffData;
         }
 
         public bool RemoveBuffByIndex(Entity entity, int index)
@@ -166,12 +197,7 @@ namespace Game
                     if (pair.Value.status != BuffExeStatus.Destroy)
                     {
                         //更新buff
-                        UpdateBuff(buffComponent, pair.Value, false);
-                    }
-                    if(pair.Value.status == BuffExeStatus.Destroy)
-                    {
-                        TriggerBuffEvent(buffComponent, pair.Value, BuffEventType.HOST_BUFF_DETACH);
-                        UpdateBuff(buffComponent, pair.Value, true);
+                        UpdateBuff(buffComponent, pair.Value);
                     }
                 }
                 //检测移除buff，update时检测buff需要移除
@@ -187,6 +213,7 @@ namespace Game
                 if (buffData.status == BuffExeStatus.Init)
                 {
                     CLog.LogArgs("添加buff", buffData.buffId, Time.time);
+                    buffData.status = BuffExeStatus.Running;
                     List<BuffData> lst;
                     if (!buffComponent.dicIdToBuffLst.TryGetValue(buffData.buffId, out lst))
                     {
@@ -195,7 +222,7 @@ namespace Game
                     }
                     lst.Add(buffData);
                     buffComponent.dicIndexToBuffData.Add(buffData.index, buffData);
-                    TriggerBuffEvent(buffComponent, buffData, BuffEventType.HOST_BUFF_ATTACH);
+                    
                     var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffData.buffId);
                     for (int j = 0; j < buffCfg.states.Count; i++)
                     {
@@ -206,8 +233,6 @@ namespace Game
                             buffData.lstBuffStateIndex.Add(buffStateIndex);
                         }
                     }
-
-                    buffData.status = BuffExeStatus.Running;
 
                     //播放buff动画
                     if (!string.IsNullOrEmpty(buffCfg.anim))
@@ -230,6 +255,8 @@ namespace Game
                             }
                         }
                     }
+
+                    TriggerBuffEvent(buffComponent, buffData, BuffEventType.HOST_BUFF_ATTACH, false);
                 }
             }
             buffComponent.lstAdd.Clear();
@@ -281,6 +308,8 @@ namespace Game
                     }
                 }
 
+                TriggerBuffEvent(buffComponent, buffData, BuffEventType.HOST_BUFF_DETACH);
+
                 foreach (var buffPartData in buffData.lstPart)
                 {
                     DisableBuffPart(buffComponent, buffData, buffPartData);
@@ -319,7 +348,7 @@ namespace Game
 
         }
 
-        private void UpdateBuff(BuffComponent buffComponent, BuffData buffData, bool buffDestroyed)
+        private void UpdateBuff(BuffComponent buffComponent, BuffData buffData)
         {
             var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffData.buffId);
 
@@ -332,40 +361,38 @@ namespace Game
                 }
             }
 
-            if (!buffDestroyed)
+            if (!string.IsNullOrEmpty(buffCfg.script))
             {
-                if (!string.IsNullOrEmpty(buffCfg.script))
+                //执行脚本
+                var btTreeData = BuffManager.Instance.GetBuffBTTreeData(buffData.buffId);
+                if (btTreeData == null)
                 {
-                    //执行脚本
-                    var btTreeData = BuffManager.Instance.GetBuffBTTreeData(buffData.buffId);
-                    if (btTreeData == null)
-                    {
-                        buffData.Detach();
-                        //如果没有逻辑，直接结束运行
-                        return;
-                    }
-
-                    float deltaTime = Time.deltaTime;
-                    buffData.buffBTContext.Reset();
-                    buffData.buffBTContext.Init(World, buffComponent, buffData, btTreeData, this, deltaTime);
-                    BTStatus btState = Execute(buffData.buffBTContext);
-                    if (btState != BTStatus.Running)
-                    {
-                        buffData.Detach();
-                    }
+                    buffData.Detach();
+                    //如果没有逻辑，直接结束运行
+                    return;
                 }
 
-                buffData.buffTime += Time.deltaTime;
-                if (buffData.buffTime >= buffCfg.duration)
+                float deltaTime = Time.deltaTime;
+                buffData.buffBTContext.Reset();
+                buffData.buffBTContext.Init(World, buffComponent, buffData, btTreeData, this, deltaTime);
+                BTStatus btState = Execute(buffData.buffBTContext);
+                if (btState != BTStatus.Running)
                 {
                     buffData.Detach();
                 }
             }
+
+            buffData.buffTime += Time.deltaTime;
+            if (buffData.buffTime >= buffCfg.duration)
+            {
+                buffData.Detach();
+            }
         }
 
-        private void EnableBuffPart(BuffComponent buffComponent, BuffData buffData, BuffPartData buffPartData)
+        private void EnableBuffPart(BuffComponent buffComponent, BuffData buffData, BuffPartData buffPartData, bool executeImmediately = true)
         {
             buffPartData.ResetEnabled(true);
+            UpdateBuffPart(buffComponent, buffData, buffPartData);
             CLog.LogArgs("触发buff部位,buffId=", buffData.buffId, "partId=", buffPartData.buffPartId);
         }
 

@@ -18,6 +18,7 @@ namespace Game
         public int buffId;
         public float buffTime;
         public BuffExeStatus status;
+        public DamageInfo damageInfo;
         public List<BuffPartData> lstPart = new List<BuffPartData>();
         public List<int> lstBuffStateIndex = new List<int>();
         public BTBlackBoard blackBoard = new BTBlackBoard();

@@ -41,35 +41,32 @@ namespace Game
                         cacheData.lstBuffIndex = ResetObjectPool<List<int>>.Instance.GetObject();
                     }
 
-                    var lst = context.blackBoard.GetData<List<EntityHitInfo>>(SkillBlackBoardKeys.ListHitInfo);
+                    var lst = context.blackBoard.GetData<List<DamageInfo>>(SkillBlackBoardKeys.ListDamageInfo);
                     if (lst != null)
                     {
                         var tempTargets = ResetObjectPool<List<Entity>>.Instance.GetObject();
                         var tempResults = ResetObjectPool<List<Entity>>.Instance.GetObject();
-                        foreach (var entityHitInfo in lst)
+                        foreach (var damageInfo in lst)
                         {
-                            tempTargets.Add(entityHitInfo.entity);
+                            tempTargets.Add(damageInfo.target);
                         }
                         TargetFilter.Filter(data.filterId, context.world, context.skillComponent.entity, tempTargets, ref tempResults);
-                        foreach (var entity in tempResults)
+                        for (int i = lst.Count - 1; i > -1; i--)
                         {
-                            foreach (var entityHitInfo in lst)
+                            var damageInfo = lst[i];
+                            if (tempResults.Contains(damageInfo.target))
                             {
-                                if (entityHitInfo.entity == entity)
+                                for (int j = 0; j < data.lstBuffId.Length; j++)
                                 {
-                                    for (int i = 0; i < data.lstBuffId.Length; i++)
-                                    {
-                                        int index = buffSystem.AddBuff(entityHitInfo.entity, data.lstBuffId[i]);
-                                        if (index > 0)
-                                            cacheData.lstBuffIndex.Add(index);
-                                    }
+                                    int index = buffSystem.AddBuffByDamageInfo(damageInfo.target, data.lstBuffId[j], damageInfo);
+                                    if (index > 0)
+                                        cacheData.lstBuffIndex.Add(index);
                                 }
                             }
                         }
 
                         ResetObjectPool<List<Entity>>.Instance.SaveObject(tempTargets);
                         ResetObjectPool<List<Entity>>.Instance.SaveObject(tempResults);
-
                     }
                 }
             }

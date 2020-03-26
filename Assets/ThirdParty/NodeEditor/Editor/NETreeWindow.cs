@@ -435,6 +435,16 @@ namespace NodeEditor
             string path = EditorUtility.OpenFilePanel("加载数据", Application.dataPath + dir, composeData.fileExt);
             if (path.Length != 0)
             {
+                path = path.Replace("\\", "/");
+                for (int i = 0; i < arrTreeComposeData.Length; i++)
+                {
+                    if (path.Contains(arrTreeComposeData[i].fileDir))
+                    {
+                        m_nTreeComposeIndex = i;
+                        composeData = arrTreeComposeData[m_nTreeComposeIndex];
+                        break;
+                    }
+                }
                 //通过前后缀确定当前数据是哪种类型,需要先切换到当前类型，在加载数据，否则数据有可能不对
                 NEData neData = NEUtil.DeSerializerObject(path, typeof(NEData), composeData.lstNodeDataType.ToArray()) as NEData;
                 m_sLoadPath = path;

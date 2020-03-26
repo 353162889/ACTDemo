@@ -112,7 +112,8 @@ namespace Game
             goSceneEffectPool.AddComponentOnce<SceneEffectPool>();
             GameObject.DontDestroyOnLoad(goSceneEffectPool);
 
-            ResetObjectPool<List<EntityHitInfo>>.Instance.Init(20, list => list.Clear());
+            ResetObjectPool<List<EntityHitInfo>>.Instance.Init(30, list => list.Clear());
+            ResetObjectPool<List<DamageInfo>>.Instance.Init(30, lst => lst.Clear());
             var goEntityHit = new GameObject("EntityHitPool");
             GameObject.DontDestroyOnLoad(goEntityHit);
             BehaviourPool<EntityBoxHit>.Instance.Init(30, goEntityHit.transform);

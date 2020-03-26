@@ -7,6 +7,7 @@ namespace Game
 {
     public class BTBoxColliderActionData : IBTTimelineDurationData
     {
+        public int filterId;
         public Vector3 localPos;
         public Quaternion localRot;
         public Vector3 size;
@@ -65,13 +66,40 @@ namespace Game
                     }
                 }
 
+                var tempTargets = ResetObjectPool<List<Entity>>.Instance.GetObject();
+                var tempResults = ResetObjectPool<List<Entity>>.Instance.GetObject();
+                foreach (var entityHitInfo in lst)
+                {
+                    tempTargets.Add(entityHitInfo.entity);
+                }
+                TargetFilter.Filter(data.filterId, context.world, context.skillComponent.entity, tempTargets, ref tempResults);
+                for (int i = lst.Count - 1; i > -1 ; i--)
+                {
+                    if (!tempResults.Contains(lst[i].entity))
+                    {
+                        lst.RemoveAt(i);
+                    }
+                }
+                ResetObjectPool<List<Entity>>.Instance.SaveObject(tempTargets);
+                ResetObjectPool<List<Entity>>.Instance.SaveObject(tempResults);
+
                 if (lst.Count > 0)
                 {
+                    var damageSystem = context.world.GetExistingSystem<DamageSystem>();
+                    var lstDamage = ResetObjectPool<List<DamageInfo>>.Instance.GetObject();
+                    for (int i = 0; i < lst.Count; i++)
+                    {
+                        var hitInfo = lst[i];
+                        var damageInfo = damageSystem.CalDamageBySkill(context.skillComponent.entity, hitInfo.entity, context.skillData,
+                            hitInfo);
+                        lstDamage.Add(damageInfo);
+                    }
                     //设置黑盒数据
-                    context.blackBoard.SetData(SkillBlackBoardKeys.ListHitInfo, lst);
+                    context.blackBoard.SetData(SkillBlackBoardKeys.ListDamageInfo, lstDamage);
                     //触发子节点
                     this.TriggerChildren(context, btData);
-                    context.blackBoard.ClearData(SkillBlackBoardKeys.ListHitInfo);
+                    context.blackBoard.ClearData(SkillBlackBoardKeys.ListDamageInfo);
+                    ResetObjectPool<List<DamageInfo>>.Instance.SaveObject(lstDamage);
                 }
                
                 ResetObjectPool<List<EntityHitInfo>>.Instance.SaveObject(lst);
