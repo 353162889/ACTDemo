@@ -12,6 +12,7 @@ namespace Game
         private SkillSystem skillSystem;
         private DirectionMoveSystem directionMoveSystem;
         private JumpSystem jumpSystem;
+        private CameraSystem cameraSystem;
         protected override void OnCreate()
         {
             inputComponent = World.AddSingletonComponent<InputComponent>();
@@ -20,6 +21,7 @@ namespace Game
             skillSystem = World.GetOrCreateSystem<SkillSystem>();
             directionMoveSystem = World.GetOrCreateSystem<DirectionMoveSystem>();
             jumpSystem = World.GetOrCreateSystem<JumpSystem>();
+            cameraSystem = World.GetOrCreateSystem<CameraSystem>();
             ObjectPool<InputMoveDirectionCmd>.Instance.Init(5);
             ObjectPool<InputStopMoveDirectionCmd>.Instance.Init(5);
             ObjectPool<InputJumpCmd>.Instance.Init(2);
@@ -28,9 +30,10 @@ namespace Game
 
         public void InputMoveDirection(Vector2 moveDirection)
         {
-            moveDirection.Normalize();
             var cmd = ObjectPool<InputMoveDirectionCmd>.Instance.GetObject();
-            cmd.moveDirection = new Vector3(moveDirection.x, 0, moveDirection.y);
+            Vector3 direction = cameraSystem.TransformDirection(new Vector3(moveDirection.x, 0, moveDirection.y));
+            direction.Normalize();
+            cmd.moveDirection = direction;
             inputComponent.queueCmd.Enqueue(cmd);
         }
 

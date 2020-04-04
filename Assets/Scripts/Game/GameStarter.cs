@@ -13,7 +13,7 @@ namespace Game
     {
         public GameObject mainPlayer;
         public GameObject enemy;
-        public CinemachineVirtualCamera virtualCamera;
+        public GameObject cameraRoot;
 
         public StateContainerBase GameGlobalState { get; private set; }
 

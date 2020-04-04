@@ -59,7 +59,11 @@ namespace Game
             damageSystem = world.GetOrCreateSystem<DamageSystem>();
 
             var playerEntity = CreatePlayer();
-            cameraSystem.SetFollow(playerEntity, GameStarter.Instance.virtualCamera);
+            cameraSystem.SetMainCamera(Camera.main);
+            cameraSystem.ResetCameraStrategy(GameStarter.Instance.cameraRoot);
+            cameraSystem.SetFollow(playerEntity, CameraStrategy.NormalWalkCamera);
+
+
 //            Cursor.visible = false;
 //            Cursor.lockState = CursorLockMode.Locked;
 
