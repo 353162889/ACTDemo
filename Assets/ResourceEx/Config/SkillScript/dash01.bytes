@@ -12,6 +12,7 @@
         </NEData>
         <NEData>
           <data xsi:type="BTAddBuffActionData">
+            <filterId>0</filterId>
             <finishResume>false</finishResume>
             <addBuffDuration>0</addBuffDuration>
             <lstBuffId>
@@ -345,7 +346,7 @@
                     <finishResume>true</finishResume>
                     <forbidDuration>1</forbidDuration>
                     <forbidArray>
-                      <ForbidType>Face</ForbidType>
+                      <ForbidType>InputFace</ForbidType>
                       <ForbidType>Jump</ForbidType>
                       <ForbidType>InputMove</ForbidType>
                     </forbidArray>

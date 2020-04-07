@@ -22,7 +22,7 @@ namespace Game
         private static InnerBTInputDirectionBreakActionData DefaultActionData = new InnerBTInputDirectionBreakActionData() { time = 0 };
         protected override BTStatus Handler(SkillBTContext context, BTData btData, BTInputDirectionBreakActionData data)
         {
-            var directionMoveComponent = context.world.GetComponent<DirectionMoveComponent>(context.skillComponent.entity);
+            var directionMoveComponent = context.world.GetComponent<DirectionMoveComponent>(context.skillComponent.componentEntity);
             if (directionMoveComponent != null && !directionMoveComponent.inputDirection.AlmostZero())
             {
                 context.skillComponent.skillData.isBreak = true;

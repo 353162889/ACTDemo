@@ -5,10 +5,10 @@ namespace Game
 {
     public enum ForbidType
     {
-        Face = 1 << 0,
         Ability = 1 << 1,
         Jump = 1 << 2,
         InputMove = 1 << 3,
+        InputFace = 1 << 4,
     }
 
     public class Forbiddance : IEquatable<Forbiddance>, IPoolable

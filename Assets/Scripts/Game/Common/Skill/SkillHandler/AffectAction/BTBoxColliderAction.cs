@@ -38,7 +38,7 @@ namespace Game
             var cacheData = context.executeCache.GetCache<InnerBTBoxColliderActionData>(btData.dataIndex, DefaultActionData);
             if (exeStatus == BTExecuteStatus.Ready)
             {
-                var physicComponent = context.world.GetComponent<PhysicComponent>(context.skillComponent.entity);
+                var physicComponent = context.world.GetComponent<PhysicComponent>(context.skillComponent.componentEntity);
                 if (physicComponent == null) return BTStatus.Fail;
                 var attackBoxParent = physicComponent.attackBoxParent;
                 var entityBoxHit = BehaviourPool<EntityBoxHit>.Instance.GetObject(attackBoxParent);
@@ -72,7 +72,7 @@ namespace Game
                 {
                     tempTargets.Add(entityHitInfo.entity);
                 }
-                TargetFilter.Filter(data.filterId, context.world, context.skillComponent.entity, tempTargets, ref tempResults);
+                TargetFilter.Filter(data.filterId, context.world, context.skillComponent.componentEntity, tempTargets, ref tempResults);
                 for (int i = lst.Count - 1; i > -1 ; i--)
                 {
                     if (!tempResults.Contains(lst[i].entity))
@@ -90,7 +90,7 @@ namespace Game
                     for (int i = 0; i < lst.Count; i++)
                     {
                         var hitInfo = lst[i];
-                        var damageInfo = damageSystem.CalDamageBySkill(context.skillComponent.entity, hitInfo.entity, context.skillData,
+                        var damageInfo = damageSystem.CalDamageBySkill(context.skillComponent.componentEntity, hitInfo.entity, context.skillData,
                             hitInfo);
                         lstDamage.Add(damageInfo);
                     }

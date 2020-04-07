@@ -106,34 +106,34 @@ namespace Game
     }
 
 #if UNITY_EDITOR
-    [UnityEditor.CustomEditor(typeof(BuffStateComponent))]
-    public class BuffStateComponentInspector : UnityEditor.Editor
-    {
-        private UnityEditor.Editor cacheEditor = null;
-        private static List<BuffStateData> m_lstTemp = new List<BuffStateData>();
-
-        void OnEnable()
-        {
-            cacheEditor = UnityEditor.Editor.CreateEditor((UnityEngine.Object)(object)m_lstTemp);
-        }
-
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-            var component = target as BuffStateComponent;
-            if (component != null)
-            {
-                foreach (var pair in component.dicStates)
-                {
-                    m_lstTemp.Add(pair.Value);
-                }
-            }
-            if(cacheEditor != null)
-                cacheEditor.OnInspectorGUI();
-            m_lstTemp.Clear();
-
-        }
-    }
+//    [UnityEditor.CustomEditor(typeof(BuffStateComponent))]
+//    public class BuffStateComponentInspector : UnityEditor.Editor
+//    {
+//        private UnityEditor.Editor cacheEditor = null;
+//        private static List<BuffStateData> m_lstTemp = new List<BuffStateData>();
+//
+//        void OnEnable()
+//        {
+//            cacheEditor = UnityEditor.Editor.CreateEditor((UnityEngine.Object)(object)m_lstTemp);
+//        }
+//
+//        public override void OnInspectorGUI()
+//        {
+//            base.OnInspectorGUI();
+//            var component = target as BuffStateComponent;
+//            if (component != null)
+//            {
+//                foreach (var pair in component.dicStates)
+//                {
+//                    m_lstTemp.Add(pair.Value);
+//                }
+//            }
+//            if(cacheEditor != null)
+//                cacheEditor.OnInspectorGUI();
+//            m_lstTemp.Clear();
+//
+//        }
+//    }
 #endif
 }
 

@@ -61,7 +61,7 @@ namespace Game
             float duration = cfg.duration;
             if (exeStatus == BTExecuteStatus.Ready)
             {
-                var entityTransformComponent = context.world.GetComponent<TransformComponent>(context.buffComponent.entity);
+                var entityTransformComponent = context.world.GetComponent<TransformComponent>(context.buffComponent.componentEntity);
                
                 context.executeCache.SetCache(btData.dataIndex, cacheData);
 
@@ -95,7 +95,7 @@ namespace Game
                         startRotation = Quaternion.LookRotation(direct);
                 }
               
-                var hostTransform = context.world.GetComponent<TransformComponent>(context.buffComponent.entity);
+                var hostTransform = context.world.GetComponent<TransformComponent>(context.buffComponent.componentEntity);
                 float angle = Quaternion.Angle(hostTransform.rotation, startRotation);
                 angle = Mathf.Repeat(angle, 360f);
                 string behitAnim = defaultBehit;
@@ -120,21 +120,21 @@ namespace Game
                 if (!string.IsNullOrEmpty(behitAnim))
                 {
                     var animationSystem = context.world.GetExistingSystem<AnimationSystem>();
-                    var paramType = animationSystem.GetAnimationParamType(context.buffComponent.entity, behitAnim);
+                    var paramType = animationSystem.GetAnimationParamType(context.buffComponent.componentEntity, behitAnim);
                     if (paramType != null)
                     {
                         if (paramType.type == AnimatorControllerParameterType.Trigger)
                         {
-                            animationSystem.ResetAnimatorParam(context.buffComponent.entity, behitAnim);
-                            animationSystem.SetAnimatorParam(context.buffComponent.entity, behitAnim);
-                            if (animationSystem.HasAnimatorParam(context.buffComponent.entity, behitAnim + "_Bool"))
+                            animationSystem.ResetAnimatorParam(context.buffComponent.componentEntity, behitAnim);
+                            animationSystem.SetAnimatorParam(context.buffComponent.componentEntity, behitAnim);
+                            if (animationSystem.HasAnimatorParam(context.buffComponent.componentEntity, behitAnim + "_Bool"))
                             {
-                                animationSystem.SetAnimatorParam(context.buffComponent.entity, behitAnim + "_Bool", true);
+                                animationSystem.SetAnimatorParam(context.buffComponent.componentEntity, behitAnim + "_Bool", true);
                             }
                         }
                         else if (paramType.type == AnimatorControllerParameterType.Bool)
                         {
-                            animationSystem.SetAnimatorParam(context.buffComponent.entity, behitAnim, true);
+                            animationSystem.SetAnimatorParam(context.buffComponent.componentEntity, behitAnim, true);
                         }
                     }
                 }
@@ -151,7 +151,7 @@ namespace Game
                 {
                     var velocity = cacheData.direct * data.distance / duration;
                     var stepMoveSystem = context.world.GetExistingSystem<StepMoveSystem>();
-                    stepMoveSystem.AppendSingleFrameVelocity(context.buffComponent.entity, velocity, false);
+                    stepMoveSystem.AppendSingleFrameVelocity(context.buffComponent.componentEntity, velocity, false);
                 }
             }
             else
@@ -159,10 +159,10 @@ namespace Game
                 var offsetInfo = AnimationMoveUtility.GetOffset(points, cacheData.startRotation, startTime, endTime);
                 Vector3 velocity = offsetInfo.offsetPos / Time.deltaTime;
                 var stepMoveSystem = context.world.GetExistingSystem<StepMoveSystem>();
-                stepMoveSystem.AppendSingleFrameVelocity(context.buffComponent.entity, velocity, false);
+                stepMoveSystem.AppendSingleFrameVelocity(context.buffComponent.componentEntity, velocity, false);
                 var faceSystem = context.world.GetExistingSystem<FaceSystem>();
-                var transformComponent = context.world.GetComponent<TransformComponent>(context.buffComponent.entity);
-                faceSystem.FaceTo(context.buffComponent.entity, offsetInfo.offsetRot * transformComponent.rotation, true);
+                var transformComponent = context.world.GetComponent<TransformComponent>(context.buffComponent.componentEntity);
+                faceSystem.FaceTo(context.buffComponent.componentEntity, offsetInfo.offsetRot * transformComponent.rotation, true);
             }
             context.executeCache.SetCache(btData.dataIndex, cacheData);
             if (cacheData.time >= duration)
@@ -181,21 +181,21 @@ namespace Game
                 if (!string.IsNullOrEmpty(anim))
                 {
                     var animationSystem = context.world.GetExistingSystem<AnimationSystem>();
-                    var paramType = animationSystem.GetAnimationParamType(context.buffComponent.entity, anim);
+                    var paramType = animationSystem.GetAnimationParamType(context.buffComponent.componentEntity, anim);
                     if (paramType != null)
                     {
                         if (paramType.type == AnimatorControllerParameterType.Trigger)
                         {
-                            animationSystem.ResetAnimatorParam(context.buffComponent.entity, anim);
-                            if (animationSystem.HasAnimatorParam(context.buffComponent.entity, anim + "_Bool"))
+                            animationSystem.ResetAnimatorParam(context.buffComponent.componentEntity, anim);
+                            if (animationSystem.HasAnimatorParam(context.buffComponent.componentEntity, anim + "_Bool"))
                             {
-                                animationSystem.SetAnimatorParam(context.buffComponent.entity, anim + "_Bool", false);
+                                animationSystem.SetAnimatorParam(context.buffComponent.componentEntity, anim + "_Bool", false);
                             }
 
                         }
                         else if (paramType.type == AnimatorControllerParameterType.Bool)
                         {
-                            animationSystem.SetAnimatorParam(context.buffComponent.entity, anim, false);
+                            animationSystem.SetAnimatorParam(context.buffComponent.componentEntity, anim, false);
                         }
                     }
                 }

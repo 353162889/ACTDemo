@@ -19,31 +19,30 @@ namespace Game
     {
         protected override BTStatus Handler(SkillBTContext context, BTData btData, BTFaceData data)
         {
-            var entity = context.skillComponent.entity;
+            var entity = context.skillComponent.componentEntity;
             var faceSystem = context.world.GetExistingSystem<FaceSystem>();
-            var faceComponent = context.world.GetComponent<FaceComponent>(entity);
             BTExecuteStatus exeStatus = context.executeCache.GetExecuteStatus(btData.dataIndex);
             if (exeStatus == BTExecuteStatus.Ready)
             {
-                if (faceSystem != null && faceComponent != null)
+                if (faceSystem != null)
                 {
                     if (data.faceType == FaceType.InputDirection)
                     {
                         var directionMoveComonent = context.world.GetComponent<DirectionMoveComponent>(entity);
                         if (directionMoveComonent != null)
                         {
-                            faceSystem.FaceTo(faceComponent, directionMoveComonent.inputDirection, data.immediately);
+                            faceSystem.FaceTo(entity, directionMoveComonent.inputDirection, data.immediately);
                         }
                     }
                     else if (data.faceType == FaceType.TargetDirection)
                     {
-                        faceSystem.FaceTo(faceComponent, context.skillData.targetDirection, data.immediately);
+                        faceSystem.FaceTo(entity, context.skillData.targetDirection, data.immediately);
                     }
                     else if (data.faceType == FaceType.TargetPosition)
                     {
                         var transformComponent = context.world.GetComponent<TransformComponent>(entity);
                         var direction = context.skillData.targetPosition - transformComponent.position;
-                        faceSystem.FaceTo(faceComponent, direction, data.immediately);
+                        faceSystem.FaceTo(entity, direction, data.immediately);
                     }
                     else if (data.faceType == FaceType.Target)
                     {
@@ -53,12 +52,12 @@ namespace Game
                         if (targetTransformComponent != null)
                         {
                             var direction = targetTransformComponent.position - transformComponent.position;
-                            faceSystem.FaceTo(faceComponent, direction, data.immediately);
+                            faceSystem.FaceTo(entity, direction, data.immediately);
                         }
                     }
                 }
             }
-            if (faceSystem != null && faceSystem.IsRotating(faceComponent))
+            if (faceSystem != null && faceSystem.IsRotating(entity))
             {
                 return BTStatus.Running;
             }

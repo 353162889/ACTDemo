@@ -1,6 +1,7 @@
 ﻿using Framework;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 namespace Game
 {
@@ -13,6 +14,7 @@ namespace Game
         private DirectionMoveSystem directionMoveSystem;
         private JumpSystem jumpSystem;
         private CameraSystem cameraSystem;
+        private FaceSystem faceSystem;
         protected override void OnCreate()
         {
             inputComponent = World.AddSingletonComponent<InputComponent>();
@@ -22,18 +24,45 @@ namespace Game
             directionMoveSystem = World.GetOrCreateSystem<DirectionMoveSystem>();
             jumpSystem = World.GetOrCreateSystem<JumpSystem>();
             cameraSystem = World.GetOrCreateSystem<CameraSystem>();
+            faceSystem = World.GetOrCreateSystem<FaceSystem>();
             ObjectPool<InputMoveDirectionCmd>.Instance.Init(5);
             ObjectPool<InputStopMoveDirectionCmd>.Instance.Init(5);
             ObjectPool<InputJumpCmd>.Instance.Init(2);
             ObjectPool<InputSkillCmd>.Instance.Init(10);
+            ObjectPool<InputFaceCmd>.Instance.Init(5);
         }
 
-        public void InputMoveDirection(Vector2 moveDirection)
+        public void SetInputEntity(Entity entity)
+        {
+            inputComponent.inputEntity = entity;
+        }
+
+        public void InputMoveDirection(Vector2 moveDirection, bool changeFace)
         {
             var cmd = ObjectPool<InputMoveDirectionCmd>.Instance.GetObject();
-            Vector3 direction = cameraSystem.TransformDirection(new Vector3(moveDirection.x, 0, moveDirection.y));
+            Vector3 direction = new Vector3(moveDirection.x, 0, moveDirection.y);
             direction.Normalize();
             cmd.moveDirection = direction;
+            cmd.changeFace = changeFace;
+            inputComponent.queueCmd.Enqueue(cmd);
+        }
+
+        public void OnScreenAxisUpdate(float xAxis, float yAxis)
+        {
+            cameraSystem.OnScreenAxisUpdate(xAxis, yAxis);
+        }
+
+
+        public void OnScreenSroll(float scroll)
+        {
+            cameraSystem.OnScreenScroll(scroll);
+        }
+
+        public void ChangeFace(Vector3 faceDirection, bool immediately)
+        {
+            var cmd = ObjectPool<InputFaceCmd>.Instance.GetObject();
+            cmd.faceDirection = faceDirection;
+            cmd.immediately = immediately;
             inputComponent.queueCmd.Enqueue(cmd);
         }
 
@@ -56,23 +85,39 @@ namespace Game
             inputComponent.queueCmd.Enqueue(cmd);
         }
 
+        private Vector3 GetTransformInputDirection(Vector3 inputMoveDirection)
+        {
+            var worldDirection = cameraSystem.TransformDirection(inputMoveDirection);
+            worldDirection.y = 0;
+            worldDirection.Normalize();
+            return worldDirection;
+        }
+
         protected override void OnUpdate()
         {
             while (inputComponent.queueCmd.Count > 0)
             {
                 var cmd = inputComponent.queueCmd.Dequeue();
-                if (cmd.cmdType == InputCommandType.MoveDirection)
+                if (cmd.cmdType == InputCommandType.Face)
+                {
+                    var faceCmd = cmd as InputFaceCmd;
+                    faceSystem.InputFace(inputComponent.inputEntity, faceCmd.faceDirection, faceCmd.immediately);
+                    ObjectPool<InputFaceCmd>.Instance.SaveObject(faceCmd);
+                }
+                else if (cmd.cmdType == InputCommandType.MoveDirection)
                 {
                     var moveDirectionCmd = cmd as InputMoveDirectionCmd;
                     inputComponent.inputMoveDirection = moveDirectionCmd.moveDirection;
                     inputComponent.inputMoveDirection.Normalize();
+                    inputComponent.inputMoveChangeFace = moveDirectionCmd.changeFace;
                     ObjectPool<InputMoveDirectionCmd>.Instance.SaveObject(moveDirectionCmd);
                 }
                 else if (cmd.cmdType == InputCommandType.StopMoveDirection)
                 {
                     var stopMoveDirectionCmd = cmd as InputStopMoveDirectionCmd;
                     inputComponent.inputMoveDirection = Vector3.zero;
-                    directionMoveSystem.StopMove(inputComponent.entity);
+                    inputComponent.inputMoveChangeFace = false;
+                    directionMoveSystem.StopMove(inputComponent.inputEntity);
                     ObjectPool<InputStopMoveDirectionCmd>.Instance.SaveObject(stopMoveDirectionCmd);
                 }
                 else if(cmd.cmdType == InputCommandType.Jump)
@@ -81,23 +126,23 @@ namespace Game
                     Vector3 horizonalVelocity = Vector3.zero;
                     if (inputComponent.inputMoveDirection != Vector3.zero)
                     {
-                        var directionMoveComponent = World.GetComponent<DirectionMoveComponent>(inputComponent.entity);
+                        var directionMoveComponent = World.GetComponent<DirectionMoveComponent>(inputComponent.inputEntity);
                         if (directionMoveComponent != null)
                         {
-                            horizonalVelocity = inputComponent.inputMoveDirection * directionMoveComponent.desiredSpeed;
+                            horizonalVelocity = GetTransformInputDirection(inputComponent.inputMoveDirection) * directionMoveComponent.desiredSpeed;
                         }
                     }
-                    jumpSystem.Jump(inputComponent.entity, horizonalVelocity);
+                    jumpSystem.Jump(inputComponent.inputEntity, horizonalVelocity);
                     ObjectPool<InputJumpCmd>.Instance.SaveObject(jumpCmd);
                 }
                 else if(cmd.cmdType == InputCommandType.Skill)
                 {
                     var skillCmd = cmd as InputSkillCmd;
-                    if (!comboSystem.CasterSkill(inputComponent.entity, skillCmd.skillId))
+                    if (!comboSystem.CasterSkill(inputComponent.inputEntity, skillCmd.skillId))
                     {
-                        if (!cacheSkillSystem.CastSkill(inputComponent.entity, skillCmd.skillId))
+                        if (!cacheSkillSystem.CastSkill(inputComponent.inputEntity, skillCmd.skillId))
                         {
-                            skillSystem.CastSkill(inputComponent.entity, skillCmd.skillId);
+                            skillSystem.CastSkill(inputComponent.inputEntity, skillCmd.skillId);
                         }
                     }
 
@@ -107,7 +152,7 @@ namespace Game
 
             if (inputComponent.inputMoveDirection != Vector3.zero)
             {
-                directionMoveSystem.Move(inputComponent.entity, inputComponent.inputMoveDirection);
+                directionMoveSystem.Move(inputComponent.inputEntity, GetTransformInputDirection(inputComponent.inputMoveDirection), inputComponent.inputMoveChangeFace);
             }
         }
     }

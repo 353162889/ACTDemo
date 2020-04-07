@@ -229,7 +229,7 @@ namespace Game
                         var stateType = BuffStateConfig.GetStateTypeByString(buffCfg.states[i]);
                         if (stateType != BuffStateType.NONE)
                         {
-                            int buffStateIndex = buffStateSystem.AddState(buffComponent.entity, stateType);
+                            int buffStateIndex = buffStateSystem.AddState(buffComponent.componentEntity, stateType);
                             buffData.lstBuffStateIndex.Add(buffStateIndex);
                         }
                     }
@@ -237,21 +237,21 @@ namespace Game
                     //播放buff动画
                     if (!string.IsNullOrEmpty(buffCfg.anim))
                     {
-                        var paramType = animationSystem.GetAnimationParamType(buffComponent.entity, buffCfg.anim);
+                        var paramType = animationSystem.GetAnimationParamType(buffComponent.componentEntity, buffCfg.anim);
                         if (paramType != null)
                         {
                             if (paramType.type == AnimatorControllerParameterType.Trigger)
                             {
-                                animationSystem.ResetAnimatorParam(buffComponent.entity, buffCfg.anim);
-                                animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim);
-                                if (animationSystem.HasAnimatorParam(buffComponent.entity, buffCfg.anim + "_Bool"))
+                                animationSystem.ResetAnimatorParam(buffComponent.componentEntity, buffCfg.anim);
+                                animationSystem.SetAnimatorParam(buffComponent.componentEntity, buffCfg.anim);
+                                if (animationSystem.HasAnimatorParam(buffComponent.componentEntity, buffCfg.anim + "_Bool"))
                                 {
-                                    animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim + "_Bool", true);
+                                    animationSystem.SetAnimatorParam(buffComponent.componentEntity, buffCfg.anim + "_Bool", true);
                                 }
                             }
                             else if (paramType.type == AnimatorControllerParameterType.Bool)
                             {
-                                animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim, true);
+                                animationSystem.SetAnimatorParam(buffComponent.componentEntity, buffCfg.anim, true);
                             }
                         }
                     }
@@ -289,21 +289,21 @@ namespace Game
                 //重置buff动画
                 if (!string.IsNullOrEmpty(buffCfg.anim))
                 {
-                    var paramType = animationSystem.GetAnimationParamType(buffComponent.entity, buffCfg.anim);
+                    var paramType = animationSystem.GetAnimationParamType(buffComponent.componentEntity, buffCfg.anim);
                     if (paramType != null)
                     {
                         if (paramType.type == AnimatorControllerParameterType.Trigger)
                         {
-                            animationSystem.ResetAnimatorParam(buffComponent.entity, buffCfg.anim);
-                            if (animationSystem.HasAnimatorParam(buffComponent.entity, buffCfg.anim + "_Bool"))
+                            animationSystem.ResetAnimatorParam(buffComponent.componentEntity, buffCfg.anim);
+                            if (animationSystem.HasAnimatorParam(buffComponent.componentEntity, buffCfg.anim + "_Bool"))
                             {
-                                animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim + "_Bool", false);
+                                animationSystem.SetAnimatorParam(buffComponent.componentEntity, buffCfg.anim + "_Bool", false);
                             }
                             
                         }
                         else if (paramType.type == AnimatorControllerParameterType.Bool)
                         {
-                            animationSystem.SetAnimatorParam(buffComponent.entity, buffCfg.anim, false);
+                            animationSystem.SetAnimatorParam(buffComponent.componentEntity, buffCfg.anim, false);
                         }
                     }
                 }
@@ -317,7 +317,7 @@ namespace Game
 
                 foreach (var index in buffData.lstBuffStateIndex)
                 {
-                    buffStateSystem.RemoveState(buffComponent.entity, index);
+                    buffStateSystem.RemoveState(buffComponent.componentEntity, index);
                 }
 
                 Clear(buffData.buffBTContext);
@@ -435,7 +435,7 @@ namespace Game
                 //添加buff
                 for (int i = 0; i < buffPartCfg.buffIds.Count; i++)
                 {
-                    AddBuff(buffComponent.entity, buffPartCfg.buffIds[i]);
+                    AddBuff(buffComponent.componentEntity, buffPartCfg.buffIds[i]);
                 }
                 
                 //执行逻辑

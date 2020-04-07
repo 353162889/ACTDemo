@@ -27,8 +27,8 @@ namespace Game
             if (context.executeCache.GetExecuteStatus(btData.dataIndex) == BTExecuteStatus.Ready)
             {
                 var animationSystem = context.world.GetExistingSystem<AnimationSystem>();
-                animationSystem.ResetAnimatorParam(context.skillComponent.entity, "BreakSkill");
-                animationSystem.SetAnimatorParam(context.skillComponent.entity, data.animName);
+                animationSystem.ResetAnimatorParam(context.skillComponent.componentEntity, "BreakSkill");
+                animationSystem.SetAnimatorParam(context.skillComponent.componentEntity, data.animName);
             }
 
             cacheData.time = cacheData.time + context.deltaTime;
@@ -49,10 +49,10 @@ namespace Game
             {
                 //重置动画名称
                 var animationSystem = context.world.GetExistingSystem<AnimationSystem>();
-                animationSystem.ResetAnimatorParam(context.skillComponent.entity, data.animName);
+                animationSystem.ResetAnimatorParam(context.skillComponent.componentEntity, data.animName);
                 if (context.skillData.isBreak)
                 {
-                    animationSystem.SetAnimatorParam(context.skillComponent.entity, "BreakSkill");
+                    animationSystem.SetAnimatorParam(context.skillComponent.componentEntity, "BreakSkill");
                 }
             }
             base.Clear(context, btData, data);

@@ -62,9 +62,9 @@ namespace Game
             cameraSystem.SetMainCamera(Camera.main);
             cameraSystem.ResetCameraStrategy(GameStarter.Instance.cameraRoot);
             cameraSystem.SetFollow(playerEntity, CameraStrategy.NormalWalkCamera);
+            inputSystem.SetInputEntity(playerEntity);
 
-
-//            Cursor.visible = false;
+            //            Cursor.visible = false;
 //            Cursor.lockState = CursorLockMode.Locked;
 
             CreateEnemy();
@@ -77,10 +77,6 @@ namespace Game
             var gameObjectComponent = world.GetComponent<GameObjectComponent>(entity);
             var entityMono = gameObjectComponent.gameObject.AddComponentOnce<EntityMonoBehaviour>();
             entityMono.entity = entity;
-
-            //输入
-            var inputComponent = world.GetSingletonComponent<InputComponent>();
-            inputComponent.entity = entity;
 
             //禁止组件
             var forbidComponent = world.AddComponentOnce<ForbidComponent>(entity);
@@ -227,6 +223,11 @@ namespace Game
             prefabSystem.Update();
             animationSystem.Update();
             cameraSystem.Update();
+        }
+
+        protected override void OnLateUpdate()
+        {
+            base.OnLateUpdate();
         }
 
         protected override void OnExit()

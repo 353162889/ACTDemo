@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
@@ -13,11 +14,23 @@ namespace Game
     {
         private CameraComponent cameraComponent;
         private AvatarSystem avatarSystem;
+        private InputSystem inputSystem;
+        private Dictionary<string, Action> dicCameraUpdate;
+        private Dictionary<string, Action<float,float>> dicCameraScreenAxisUpdate;
+        private Dictionary<string, Action<float>> dicCameraScreenScroll;
 
         protected override void OnCreate()
         {
             cameraComponent = World.AddSingletonComponent<CameraComponent>();
             avatarSystem = World.GetOrCreateSystem<AvatarSystem>();
+            inputSystem = World.GetOrCreateSystem<InputSystem>();
+            dicCameraUpdate = new Dictionary<string, Action>();
+
+            dicCameraScreenAxisUpdate = new Dictionary<string, Action<float, float>>();
+            dicCameraScreenAxisUpdate.Add(CameraStrategy.NormalWalkCamera, OnUpdateNormalWalkCameraScreenAxis);
+
+            dicCameraScreenScroll= new Dictionary<string, Action<float>>();
+            dicCameraScreenScroll.Add(CameraStrategy.NormalWalkCamera, OnUpdateNormalWalkCameraScreenScroll);
         }
 
         public void ResetCameraStrategy(GameObject cameraRoot)
@@ -58,6 +71,23 @@ namespace Game
             cameraComponent.followEntity = entity;
             cameraComponent.defaultCamera = camera;
             UpdateCamera();
+        }
+
+        public void OnScreenAxisUpdate(float xAxis, float yAxis)
+        {
+            if (cameraComponent != null && dicCameraScreenAxisUpdate.ContainsKey(cameraComponent.curCamera))
+            {
+                dicCameraScreenAxisUpdate[cameraComponent.curCamera].Invoke(xAxis, yAxis);
+            }
+        }
+
+        public void OnScreenScroll(float scroll)
+        {
+            
+            if (cameraComponent != null && dicCameraScreenScroll.ContainsKey(cameraComponent.curCamera))
+            {
+                dicCameraScreenScroll[cameraComponent.curCamera].Invoke(scroll);
+            }
         }
 
         public void PushCamera(string camera)
@@ -106,13 +136,13 @@ namespace Game
                 if (prefabComponent != null)
                 {
                     targetTrans = prefabComponent.transform;
-                    targetTrans = prefabComponent.transform;
                 }
             }
             cinemachineCamera.LookAt = targetTrans;
             cinemachineCamera.Follow = targetTrans;
 
             cinemachineCamera.gameObject.SetActive(true);
+            cameraComponent.curCamera = camera;
         }
 
         private string GetHighestPriorityCamera()
@@ -143,6 +173,43 @@ namespace Game
 
         protected override void OnUpdate()
         {
+            if (cameraComponent != null && dicCameraUpdate.ContainsKey(cameraComponent.curCamera))
+            {
+                dicCameraUpdate[cameraComponent.curCamera].Invoke();
+            }
+            
+        }
+        //镜头永远瞄准角色背后
+        private void OnUpdateNormalWalkCameraScreenAxis(float xAxis, float yAxis)
+        {
+            var cinemachineCamera = cameraComponent.dicCamera[cameraComponent.curCamera];
+            var freeLookCamera = cinemachineCamera as CinemachineFreeLook;
+            if (freeLookCamera != null && cameraComponent.followEntity != Entity.Null)
+            {
+                var angle = xAxis * freeLookCamera.m_XAxis.m_MaxSpeed * Time.deltaTime;
+                var transformComponent = World.GetComponent<TransformComponent>(cameraComponent.followEntity);
+                var forward = Quaternion.AngleAxis(angle, Vector3.up) * (transformComponent.rotation * Vector3.forward);
+                inputSystem.ChangeFace(forward, true);
+
+                freeLookCamera.m_YAxis.Value =
+                    Mathf.Clamp01(freeLookCamera.m_YAxis.Value +
+                                  (-yAxis) * freeLookCamera.m_YAxis.m_MaxSpeed * Time.deltaTime);
+            }
+        }
+
+        private void OnUpdateNormalWalkCameraScreenScroll(float scroll)
+        {
+            var cinemachineCamera = cameraComponent.dicCamera[cameraComponent.curCamera];
+            var freeLookCamera = cinemachineCamera as CinemachineFreeLook;
+            if (freeLookCamera != null && cameraComponent.followEntity != Entity.Null)
+            {
+                var freeLookExtension = freeLookCamera.GetComponent<FreeLookCameraScrollExtension>();
+                if (freeLookExtension != null)
+                {
+                    freeLookExtension.scrollState.m_InputAxisValue = scroll;
+                    CLog.LogArgs("OnUpdateNormalWalkCameraScreenScroll", scroll);
+                }
+            }
         }
 
         protected override void OnDestroy()

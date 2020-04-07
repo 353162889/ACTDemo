@@ -12,11 +12,11 @@ namespace Game
 
     public class DataComponent : MonoBehaviour
     {
-        public Entity entity { get; private set; }
+        public Entity componentEntity { get; private set; }
 
         public void SetEntity(Entity entity)
         {
-            this.entity = entity;
+            this.componentEntity = entity;
         }
         public virtual void OnDestroy()
         {

@@ -32,7 +32,7 @@ namespace Game
             if (exeStatus == BTExecuteStatus.Ready)
             {
                 var curCacheData = context.executeCache.GetCache<InnerBTAnimationMoveActionData>(btData.dataIndex, DefaultActionData);
-                var entityTransformComponent = context.world.GetComponent<TransformComponent>(context.skillComponent.entity);
+                var entityTransformComponent = context.world.GetComponent<TransformComponent>(context.skillComponent.componentEntity);
                 curCacheData.startRotation = entityTransformComponent.rotation;
                 context.executeCache.SetCache(btData.dataIndex, curCacheData);
 
@@ -55,10 +55,10 @@ namespace Game
             var offsetInfo = AnimationMoveUtility.GetOffset(points, cacheData.startRotation, startTime, endTime);
             Vector3 velocity = offsetInfo.offsetPos / Time.deltaTime;
             var stepMoveSystem = context.world.GetExistingSystem<StepMoveSystem>();
-            stepMoveSystem.AppendSingleFrameVelocity(context.skillComponent.entity, velocity, false);
+            stepMoveSystem.AppendSingleFrameVelocity(context.skillComponent.componentEntity, velocity, false);
             var faceSystem = context.world.GetExistingSystem<FaceSystem>();
-            var transformComponent = context.world.GetComponent<TransformComponent>(context.skillComponent.entity);
-            faceSystem.FaceTo(context.skillComponent.entity, offsetInfo.offsetRot * transformComponent.rotation, true);
+            var transformComponent = context.world.GetComponent<TransformComponent>(context.skillComponent.componentEntity);
+            faceSystem.FaceTo(context.skillComponent.componentEntity, offsetInfo.offsetRot * transformComponent.rotation, true);
 
             if (cacheData.time >= points[points.Length - AnimationMoveUtility.DataSpace])
             {

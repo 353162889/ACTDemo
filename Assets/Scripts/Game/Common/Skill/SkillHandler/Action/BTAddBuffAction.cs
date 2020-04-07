@@ -50,7 +50,7 @@ namespace Game
                         {
                             tempTargets.Add(damageInfo.target);
                         }
-                        TargetFilter.Filter(data.filterId, context.world, context.skillComponent.entity, tempTargets, ref tempResults);
+                        TargetFilter.Filter(data.filterId, context.world, context.skillComponent.componentEntity, tempTargets, ref tempResults);
                         for (int i = lst.Count - 1; i > -1; i--)
                         {
                             var damageInfo = lst[i];
@@ -100,7 +100,7 @@ namespace Game
                         var buffSystem = context.world.GetExistingSystem<BuffSystem>();
                         for (int i = 0; i < cacheData.lstBuffIndex.Count; i++)
                         {
-                            buffSystem.RemoveBuffByIndex(context.skillComponent.entity, cacheData.lstBuffIndex[i]);
+                            buffSystem.RemoveBuffByIndex(context.skillComponent.componentEntity, cacheData.lstBuffIndex[i]);
                         }
                         ResetObjectPool<List<int>>.Instance.SaveObject(cacheData.lstBuffIndex);
                         cacheData.lstBuffIndex = null;

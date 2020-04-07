@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
@@ -56,7 +57,7 @@ namespace Game
                 }
                 else
                 {
-                    inputSystem.InputMoveDirection(keyDirection);
+                    inputSystem.InputMoveDirection(keyDirection, false);
                 }
             }
 
@@ -72,6 +73,19 @@ namespace Game
                     inputSystem.InputSkill(pairValue.Value);
                     break;
                 }
+            }
+
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+            if (Mathf.Abs(mouseX) > Single.Epsilon || Mathf.Abs(mouseY) > Single.Epsilon)
+            {
+                inputSystem.OnScreenAxisUpdate(mouseX,mouseY);
+            }
+
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (Mathf.Abs(scroll) > Single.Epsilon)
+            {
+                inputSystem.OnScreenSroll(scroll);
             }
         }
     }

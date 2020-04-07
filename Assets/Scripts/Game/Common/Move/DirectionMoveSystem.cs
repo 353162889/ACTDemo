@@ -18,7 +18,7 @@ namespace Game
             forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
             skillSystem = World.GetOrCreateSystem<SkillSystem>();
         }
-        public void Move(Entity entity, Vector3 direction)
+        public void Move(Entity entity, Vector3 direction, bool changeFace = false)
         {
             if (forbidSystem.IsForbid(entity, ForbidType.InputMove))
             {
@@ -32,6 +32,7 @@ namespace Game
             direction.y = 0;
             direction.Normalize();
             directMoveComponent.inputDirection = direction;
+            directMoveComponent.changeFace = changeFace;
             skillSystem.OnDirectionMove(entity);
         }
 
@@ -70,10 +71,9 @@ namespace Game
                         }
 
                         stepMoveSystem.AppendSingleFrameVelocity(entity, velocity);
-                        var faceComponent = World.GetComponent<FaceComponent>(entity);
-                        if (faceComponent != null)
+                        if (directionMoveComponent.changeFace)
                         {
-                            faceSystem.FaceTo(faceComponent, directionMoveComponent.inputDirection);
+                            faceSystem.InputFace(entity, directionMoveComponent.inputDirection);
                         }
                     }
                 }

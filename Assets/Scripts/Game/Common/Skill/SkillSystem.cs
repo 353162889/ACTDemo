@@ -64,7 +64,7 @@ namespace Game
 
         public bool CanCastSkill(SkillComponent skillComponent, int skillId)
         {
-            if (forbidSystem.IsForbid(skillComponent.entity, ForbidType.Ability)) return false;
+            if (forbidSystem.IsForbid(skillComponent.componentEntity, ForbidType.Ability)) return false;
             return !IsCastingSkill(skillComponent) || skillComponent.skillData.phase == SkillPhaseType.Backswing;
         }
 

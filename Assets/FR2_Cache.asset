@@ -89,6 +89,7 @@ MonoBehaviour:
     - DirectionMoveSystem
     - JumpSystem
     - CameraSystem
+    - FaceSystem
     - OnCreate
     - World
     - ObjectPool
@@ -96,15 +97,23 @@ MonoBehaviour:
     - InputStopMoveDirectionCmd
     - InputJumpCmd
     - InputSkillCmd
+    - InputFaceCmd
+    - SetInputEntity
+    - Entity
     - InputMoveDirection
     - Vector2
     - Vector3
+    - OnScreenAxisX
+    - Time
+    - Quaternion
+    - ChangeFace
     - InputStopMoveDirection
     - InputJump
     - InputSkill
+    - GetTransformInputDirection
     - OnUpdate
     - InputCommandType
-    stamp: 1585924064
+    stamp: 1586176667
     type: 2
     UseGUIDs: []
   - guid: 48d3d4204c191ab46a7d0052d7f8b30f
@@ -300,7 +309,9 @@ MonoBehaviour:
     - JumpKeyCode
     - OnUpdate
     - Input
-    stamp: 1585925240
+    - Mathf
+    - Single
+    stamp: 1586176658
     type: 2
     UseGUIDs: []
   - guid: 787dbee08835f7144b8104a8bd2badd0
@@ -914,7 +925,7 @@ MonoBehaviour:
   - guid: 7a916e237cb70974c9fb0e9d35503cbc
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1586010628
+    stamp: 1586175883
     type: 1
     UseGUIDs:
     - a7b5b44611c424e41953252ad3274a2c
@@ -1168,13 +1179,14 @@ MonoBehaviour:
     - StopMoveDirection
     - Jump
     - Skill
-    stamp: 1569145268
+    - Face
+    stamp: 1586076784
     type: 2
     UseGUIDs: []
   - guid: 7758b834619294d4e81a1a6edef6ae1c
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1585925240
+    stamp: 1586176667
     type: 1
     UseGUIDs:
     - 0cc6b23b2de76194aad9ee4c2bb173d5
@@ -1200,7 +1212,7 @@ MonoBehaviour:
   - guid: 25c27b34d045be841ac16e204b4a8d97
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1586010696
+    stamp: 1586098051
     type: 1
     UseGUIDs:
     - 71f8f0381e4a9a0419508e3b46e1b365
@@ -1844,7 +1856,7 @@ MonoBehaviour:
     - DestroyEntity
     - ResetObjectPool
     - List
-    stamp: 1569598022
+    stamp: 1586098051
     type: 2
     UseGUIDs: []
   - guid: ae29d4e6a4681e64c9d920ef0e4927ce
@@ -2858,7 +2870,7 @@ MonoBehaviour:
     - List
     - Dictionary
     - CinemachineVirtualCameraBase
-    stamp: 1586010423
+    stamp: 1586094718
     type: 2
     UseGUIDs: []
   - guid: 5b38016ab8fa63642adcc03586dba8de
@@ -2868,8 +2880,13 @@ MonoBehaviour:
     - ComponentSystem
     - CameraComponent
     - AvatarSystem
+    - InputSystem
+    - Dictionary
+    - Action
     - OnCreate
     - World
+    - CameraStrategy
+    - OnUpdateNormalWalkCamera
     - ResetCameraStrategy
     - GameObject
     - RegisterCinemachineCamera
@@ -2885,10 +2902,12 @@ MonoBehaviour:
     - GetHighestPriorityCamera
     - Vector3
     - TransformDirection
+    - UpdateInput
     - OnUpdate
+    - CinemachineFreeLook
     - OnDestroy
     - CinemachineBrain
-    stamp: 1586010628
+    stamp: 1586175883
     type: 2
     UseGUIDs: []
   - guid: 66cec86ac63ba6340bb40395b939bf72
@@ -3197,7 +3216,7 @@ MonoBehaviour:
     - Queue
     - IInputCommand
     - Vector3
-    stamp: 1567168666
+    stamp: 1586099026
     type: 2
     UseGUIDs: []
   - guid: 9bf32e9b039c7524ea15063025d4642e
@@ -3587,7 +3606,7 @@ MonoBehaviour:
   - guid: 649f59cc4da2f004c940e1e06eb10162
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1586010710
+    stamp: 1586157584
     type: 1
     UseGUIDs:
     - 6307603c504b0a24f939fc773ffa1441
@@ -3724,7 +3743,7 @@ MonoBehaviour:
   - guid: 2f2ba16d9fa0e4948a7e8498c8f9d00a
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1585988467
+    stamp: 1586177106
     type: 1
     UseGUIDs:
     - 3aeee76ff145bae4fb3dd37bb1b93e17
@@ -3955,10 +3974,11 @@ MonoBehaviour:
   - guid: 7aabf58eb9d3b2d4bbc5db1daa404776
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1583554118
+    stamp: 1586078462
     type: 1
     UseGUIDs:
     - b60ac0ccf867ea442b4267d8de346ea8
+    - 49fb16cd4dbd2074087edae76ddd88b1
     - c48122fee84b8dc48832df22e6189869
     - 6db1b89e42ec9084cbefb03808a7841d
     - 15977399be015d746a26f3d5dbbadd7f
@@ -3971,7 +3991,7 @@ MonoBehaviour:
     - Vector3
     - InputCommandType
     - Reset
-    stamp: 1566823534
+    stamp: 1586075189
     type: 2
     UseGUIDs: []
   - guid: 8822ddae65a028e41a4691063472af3d
@@ -4114,9 +4134,10 @@ MonoBehaviour:
     - CollisionDetectionMode
     - GameObject
     - OnUpdate
+    - OnLateUpdate
     - OnExit
     - SceneEffectPool
-    stamp: 1586010710
+    stamp: 1586157584
     type: 2
     UseGUIDs: []
   - guid: d4effa1f55b84e748aaa9f635451c81d
@@ -4131,7 +4152,7 @@ MonoBehaviour:
   - guid: fae6c85f0132bae4abcf05ea9c8d0d36
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1586009011
+    stamp: 1586076784
     type: 1
     UseGUIDs:
     - 738384a24f7bec547aa791a97db9a33e
@@ -12767,10 +12788,11 @@ MonoBehaviour:
   - guid: 06623c8890bd5f7469a416ddb12bde7d
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1585985424
+    stamp: 1586176899
     type: 1
     UseGUIDs:
     - b422e820e8b3e614d91d6e4fd2f69f88
+    - aa4af8e291bf54a4cbabdbb58dbfe724
     - afac9a74a48664349af769f8bc4251dc
   - guid: a35cc72b45636494188091894449c8ce
     ScriptSymbols:
@@ -13638,7 +13660,7 @@ MonoBehaviour:
   - guid: 36d86cce449d6c54a82a5fee5e2b19f5
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1585233573
+    stamp: 1586078697
     type: 1
     UseGUIDs:
     - d29c559dfbf5de142915bb5f670f42d7
@@ -13917,7 +13939,7 @@ MonoBehaviour:
   - guid: 45e3cf06b120abd47906ffc1925590aa
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1585148157
+    stamp: 1586077958
     type: 1
     UseGUIDs:
     - 18b2d6cf7bfa4ed41a3f58e18cd58455
@@ -13952,7 +13974,7 @@ MonoBehaviour:
     - BTExecuteStatus
     - Clear
     - IsCleared
-    stamp: 1584967290
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: 0801248c2ee3fc142b1fc45d022a52e2
@@ -13984,7 +14006,7 @@ MonoBehaviour:
     - AnimationMoveUtility
     - Vector3
     - Time
-    stamp: 1584967262
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: 577a6ab74baaa1249bbe67a8d653f3ce
@@ -14067,13 +14089,13 @@ MonoBehaviour:
     - GroundComponent
     - CollisionFlags
     - Time
-    stamp: 1584252674
+    stamp: 1586078010
     type: 2
     UseGUIDs: []
   - guid: c4833b7e89cd82c49a821f3fedbba90e
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1585148065
+    stamp: 1586154433
     type: 1
     UseGUIDs:
     - f8d284dfcfdee8542b8d72a04e1f12a9
@@ -14095,26 +14117,27 @@ MonoBehaviour:
     - ForbidSystem
     - OnCreate
     - World
-    - FaceTo
-    - FaceComponent
-    - Vector3
-    - Quaternion
-    - ForbidType
-    - SetFace
+    - InputFace
     - Entity
+    - Vector3
+    - ForbidType
+    - FaceTo
+    - SetFace
+    - Quaternion
     - StopFace
+    - FaceComponent
     - IsRotating
     - OnUpdate
     - Entities
     - TransformComponent
     - Time
-    stamp: 1584266083
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: bb52039379070bb4b8bf8d6f8c218ec4
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584273325
+    stamp: 1586157181
     type: 1
     UseGUIDs:
     - bbb487e0ac83e7a4a879c835f71ad114
@@ -14132,7 +14155,7 @@ MonoBehaviour:
     ScriptTokens:
     - DataComponent
     - Vector3
-    stamp: 1581324830
+    stamp: 1586075035
     type: 2
     UseGUIDs: []
   - guid: 0cc6b23b2de76194aad9ee4c2bb173d5
@@ -14174,7 +14197,7 @@ MonoBehaviour:
     - Entities
     - DirectionMoveComponent
     - GroundComponent
-    stamp: 1584273244
+    stamp: 1586077680
     type: 2
     UseGUIDs: []
   - guid: 1360d50c02f2faf498ce04abad67e584
@@ -14224,7 +14247,7 @@ MonoBehaviour:
     - TransformComponent
     - GroundComponent
     - StepMoveComponent
-    stamp: 1584273325
+    stamp: 1586157181
     type: 2
     UseGUIDs: []
   - guid: 3b0fe1a2fe739b54bbe7cd4a97b3f12f
@@ -14665,7 +14688,7 @@ MonoBehaviour:
   - guid: 530e9507aa70a5343b08c6bf6e37ef45
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584534288
+    stamp: 1586078718
     type: 1
     UseGUIDs:
     - 1aad745fd174fb143b1a947bdbd08da7
@@ -14676,10 +14699,10 @@ MonoBehaviour:
     - Game.ForbidType
     - Game.Forbiddance
     ScriptTokens:
-    - Face
     - Ability
     - Jump
     - InputMove
+    - InputFace
     - IEquatable<Forbiddance>, IPoolable
     - Index
     - IsForbid
@@ -14691,7 +14714,7 @@ MonoBehaviour:
     - Null
     - ToString
     - Reset
-    stamp: 1584534288
+    stamp: 1586078718
     type: 2
     UseGUIDs: []
   - guid: 1aad745fd174fb143b1a947bdbd08da7
@@ -14752,7 +14775,7 @@ MonoBehaviour:
     - Transform
     - SceneEffectPool
     - Clear
-    stamp: 1584967295
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: 12ac13817c1a6694ca5393e7fc0c12f1
@@ -14984,7 +15007,7 @@ MonoBehaviour:
     - DamageInfo
     - SkillBlackBoardKeys
     - Clear
-    stamp: 1585146784
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: e1f78c8f9330be34b89249c1b3a45ebb
@@ -15719,11 +15742,12 @@ MonoBehaviour:
   - guid: 3aeee76ff145bae4fb3dd37bb1b93e17
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1585988467
+    stamp: 1586177106
     type: 3
     UseGUIDs:
     - 4c5f98a9add420045869700a512a59bd
     - cc1fa98898bb09d4c94ada504c38c73b
+    - aa4af8e291bf54a4cbabdbb58dbfe724
     - b422e820e8b3e614d91d6e4fd2f69f88
     - 71f8f0381e4a9a0419508e3b46e1b365
   - guid: 01993dfaafbf783429d7c74f8ea99336
@@ -15788,7 +15812,7 @@ MonoBehaviour:
     - SkillBTContext
     - BTData
     - BTExecuteStatus
-    stamp: 1584967274
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: 9db88fc42eb35484baec34c40e83fa5d
@@ -15804,7 +15828,7 @@ MonoBehaviour:
     - Handler
     - SkillBTContext
     - BTData
-    stamp: 1584967284
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: 35c74787471a27b4c8b682a430d0da3f
@@ -15906,7 +15930,7 @@ MonoBehaviour:
     - IBTContext
     - BTDataHandlerInitialize
     - OnDestroy
-    stamp: 1584879074
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: 2e90c2508ff56ed4d98c3632317a14f6
@@ -15990,7 +16014,6 @@ MonoBehaviour:
     - Game.BuffStateType
     - Game.BuffStateConfig
     - Game.BuffStateConfig.BuffStateComponent
-    - Game.BuffStateConfig.BuffStateComponent.BuffStateComponentInspector
     ScriptTokens:
     - NONE
     - STIFFNESS
@@ -16014,12 +16037,7 @@ MonoBehaviour:
     - DataComponent
     - BuffStateData
     - UNITY_EDITOR
-    - UnityEditor
-    - UnityEditor.Editor
-    - OnEnable
-    - UnityEngine
-    - OnInspectorGUI
-    stamp: 1584868912
+    stamp: 1586154433
     type: 2
     UseGUIDs: []
   - guid: 59bd7820fdf638d4bb2fdd67066e421c
@@ -16065,7 +16083,7 @@ MonoBehaviour:
     - OnUpdate
     - Entities
     - BuffStateConfig
-    stamp: 1584870988
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: 21e290ebe044b6d4790e216860b5bbfc
@@ -16154,7 +16172,7 @@ MonoBehaviour:
     - AddProperty
     - IBTContext
     - BTDataHandlerInitialize
-    stamp: 1585148065
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: dda6ce5c40e140840b2dff86f2d63445
@@ -16327,7 +16345,7 @@ MonoBehaviour:
     - TargetFilter
     - Clear
     - IsCleared
-    stamp: 1585148157
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: 4f05c38276c6a41449a86627a29785b5
@@ -16405,7 +16423,7 @@ MonoBehaviour:
     - Time
     - Clear
     - IsCleared
-    stamp: 1585234918
+    stamp: 1586098050
     type: 2
     UseGUIDs: []
   - guid: 25b6941b10f910f428b13250cb96d9cf
@@ -16455,8 +16473,19 @@ MonoBehaviour:
   - guid: aa4af8e291bf54a4cbabdbb58dbfe724
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 0
+    stamp: 1586176899
     type: 5
     UseGUIDs: []
-  timeStamp: 1586010734
+  - guid: 49fb16cd4dbd2074087edae76ddd88b1
+    ScriptSymbols:
+    - Game.InputFaceCmd
+    ScriptTokens:
+    - IInputCommand
+    - Vector3
+    - Reset
+    - InputCommandType
+    stamp: 1586076941
+    type: 2
+    UseGUIDs: []
+  timeStamp: 1586260684
   priority: 3

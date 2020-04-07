@@ -58,7 +58,7 @@ namespace Game
             //buff系统移除buff
             if (buffStateData.bindBuffIndex > 0 && OnRemoveBuff != null)
             {
-                OnRemoveBuff.Invoke(buffStateComponent.entity, buffStateData.bindBuffIndex);
+                OnRemoveBuff.Invoke(buffStateComponent.componentEntity, buffStateData.bindBuffIndex);
             }
             ObjectPool<BuffStateData>.Instance.SaveObject(buffStateData);
         }

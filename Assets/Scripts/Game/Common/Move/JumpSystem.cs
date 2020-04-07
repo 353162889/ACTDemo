@@ -36,13 +36,9 @@ namespace Game
             jumpComponent.jumpVerticalVelocity = new Vector3(0, y, 0);
             horizonalVelcolity.y = 0;
             jumpComponent.jumpHorizonalVelocity = horizonalVelcolity;
-            var faceComponent = World.GetComponent<FaceComponent>(entity);
-            if (faceComponent != null)
-            {
-                faceSystem.FaceTo(faceComponent, jumpComponent.jumpHorizonalVelocity);
-            }
+//            faceSystem.FaceTo(entity, jumpComponent.jumpHorizonalVelocity);
             jumpComponent.forbidance.Forbid(ForbidType.InputMove);
-            jumpComponent.forbidance.Forbid(ForbidType.Face);
+            jumpComponent.forbidance.Forbid(ForbidType.InputFace);
         }
 
         public void ResetJump(JumpComponent jumpComponent)

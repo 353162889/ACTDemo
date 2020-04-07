@@ -46,7 +46,7 @@ namespace Game
                 Transform parent = null;
                 if (!string.IsNullOrEmpty(data.mountPoint))
                 {
-                    parent = avatarSystem.GetMountPoint(context.skillComponent.entity, data.mountPoint);
+                    parent = avatarSystem.GetMountPoint(context.skillComponent.componentEntity, data.mountPoint);
                 }
 
                 var go = SceneEffectPool.Instance.CreateEffect(data.effectName, data.autoDestroy, parent);
@@ -55,7 +55,7 @@ namespace Game
                     cacheData.effectGO = go;
                     if (parent == null)
                     {
-                        var transformComponent = context.world.GetComponent<TransformComponent>(context.skillComponent.entity);
+                        var transformComponent = context.world.GetComponent<TransformComponent>(context.skillComponent.componentEntity);
                         go.transform.position =
                             transformComponent.position + transformComponent.rotation * data.localPos;
                         go.transform.rotation = data.localRot;

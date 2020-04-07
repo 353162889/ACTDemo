@@ -176,11 +176,7 @@ namespace Game
                     if (moveComponent.changeFace)
                     {
                         var targetDirection = newPos - prePos;
-                        var faceComponent = World.GetComponent<FaceComponent>(entity);
-                        if (faceComponent != null)
-                        {
-                            faceSystem.FaceTo(faceComponent, targetDirection, false);
-                        }
+                        faceSystem.FaceTo(entity, targetDirection, false);
                     }
 
                     moveComponent.velocity = velocity;
