@@ -107,7 +107,7 @@ namespace Framework
         private void OnUpdate(IDynamicObj obj, object param)
         {
             BaseViewController controller = obj as BaseViewController;
-            if (controller.isActive)
+            if (controller.isOpened)
             {
                 controller.OnUpdate();
             }

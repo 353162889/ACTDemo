@@ -82,6 +82,19 @@ namespace Framework
 
         }
 
+        public void _OnDrawGizmos()
+        {
+            if (mStateEnabled)
+            {
+                OnDrawGizmos();
+            }
+        }
+
+        protected virtual void OnDrawGizmos()
+        {
+
+        }
+
         public void _OnExit()
         {
             if(null != OnBeforeExit)

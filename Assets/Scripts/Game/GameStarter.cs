@@ -14,9 +14,9 @@ namespace Game
         public GameObject mainPlayer;
         public GameObject enemy;
         public GameObject cameraRoot;
+        public GameObject uiRoot;
 
         public StateContainerBase GameGlobalState { get; private set; }
-
 
         public static void Exit()
         {
@@ -43,6 +43,7 @@ namespace Game
         void Start()
         {
             InitSingleton();
+            SetCursorVisiable(false);
             ReloadCfg(() =>
             {
                 InitState();
@@ -92,6 +93,9 @@ namespace Game
 
         void InitSingleton()
         {
+            uiRoot.AddComponentOnce<ViewSys>();
+            ViewSys.Instance.RegistUIPath("CameraLockView", "Prefab/Views/CameraLockView.prefab");
+
             gameObject.AddComponentOnce<ConsoleLogger>();
             gameObject.AddComponentOnce<ResourceSys>();
             bool directLoadMode = true;
@@ -136,6 +140,24 @@ namespace Game
             {
                 ReloadCfg(() => { CLog.Log("重新加载配置完成");});
             }
+
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
+            {
+                SetCursorVisiable(!Cursor.visible);
+            }
+        }
+
+        public void SetCursorVisiable(bool visiable)
+        {
+            Cursor.visible = visiable;
+            if (!visiable)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
 
 
@@ -144,6 +166,14 @@ namespace Game
             if(null != GameGlobalState)
             {
                 GameGlobalState._OnLateUpdate();
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            if (null != GameGlobalState)
+            {
+                GameGlobalState._OnDrawGizmos();
             }
         }
 

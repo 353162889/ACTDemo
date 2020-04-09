@@ -10,7 +10,13 @@ namespace Game
         {
             var avatarComponent = World.GetComponent<AvatarComponent>(entity);
             if (avatarComponent == null || avatarComponent.mountPoint == null) return null;
-            return avatarComponent.mountPoint.GetMountpoint(name);
+            var result = avatarComponent.mountPoint.GetMountpoint(name);
+            if (result == null)
+            {
+                result = World.GetComponent<GameObjectComponent>(entity).transform;
+            }
+
+            return result;
         }
 
         protected override void OnUpdate()

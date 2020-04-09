@@ -92,18 +92,11 @@ namespace Framework
             }
         }
 
-        public bool isActive
+        public bool isOpened
         {
             get
             {
-                if (m_eStatus == ViewStatus.Open || m_eStatus == ViewStatus.Openning || m_eStatus == ViewStatus.Closing)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return m_eStatus == ViewStatus.Open;
             }
         }
 

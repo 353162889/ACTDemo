@@ -31,6 +31,36 @@ Transform:
   m_Father: {fileID: 7991930294574716704}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &282082948256301404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 158773429360468438}
+  m_Layer: 0
+  m_Name: Locked
+  m_TagString: MountPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &158773429360468438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282082948256301404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5854954086185769276}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &310441130986094181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,6 +1791,7 @@ Transform:
   - {fileID: 4383794688778650369}
   - {fileID: 5882229757199785798}
   - {fileID: 6148567639845852436}
+  - {fileID: 158773429360468438}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1798,6 +1829,8 @@ MonoBehaviour:
   infos:
   - name: CameraMount
     trans: {fileID: 6148567639845852436}
+  - name: Locked
+    trans: {fileID: 158773429360468438}
 --- !u!1 &7779881444071027906
 GameObject:
   m_ObjectHideFlags: 0

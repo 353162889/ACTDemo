@@ -12,6 +12,7 @@ namespace Game
 {
     public class CameraSystem : ComponentSystem
     {
+        public event Action<string> OnCameraChange; 
         private CameraComponent cameraComponent;
         private AvatarSystem avatarSystem;
         private InputSystem inputSystem;
@@ -75,6 +76,7 @@ namespace Game
 
         public void OnScreenAxisUpdate(float xAxis, float yAxis)
         {
+            if (Cursor.visible) return;
             if (cameraComponent != null && dicCameraScreenAxisUpdate.ContainsKey(cameraComponent.curCamera))
             {
                 dicCameraScreenAxisUpdate[cameraComponent.curCamera].Invoke(xAxis, yAxis);
@@ -83,7 +85,7 @@ namespace Game
 
         public void OnScreenScroll(float scroll)
         {
-            
+            if (Cursor.visible) return;
             if (cameraComponent != null && dicCameraScreenScroll.ContainsKey(cameraComponent.curCamera))
             {
                 dicCameraScreenScroll[cameraComponent.curCamera].Invoke(scroll);
@@ -115,6 +117,21 @@ namespace Game
             }
         }
 
+        public string CurCamera()
+        {
+            return cameraComponent.curCamera;
+        }
+
+        public Camera GetMainCamera()
+        {
+            return cameraComponent.camera;
+        }
+
+        public Entity FollowEntity()
+        {
+            return cameraComponent.followEntity;
+        }
+
         private void UpdateCamera()
         {
             var camera = GetHighestPriorityCamera();
@@ -143,6 +160,10 @@ namespace Game
 
             cinemachineCamera.gameObject.SetActive(true);
             cameraComponent.curCamera = camera;
+            if (OnCameraChange != null)
+            {
+                OnCameraChange.Invoke(cameraComponent.curCamera);
+            }
         }
 
         private string GetHighestPriorityCamera()
@@ -207,7 +228,6 @@ namespace Game
                 if (freeLookExtension != null)
                 {
                     freeLookExtension.scrollState.m_InputAxisValue = scroll;
-                    CLog.LogArgs("OnUpdateNormalWalkCameraScreenScroll", scroll);
                 }
             }
         }
@@ -215,6 +235,7 @@ namespace Game
         protected override void OnDestroy()
         {
             CinemachineBrain.SoloCamera = null;
+            OnCameraChange = null;
         }
     }
 }

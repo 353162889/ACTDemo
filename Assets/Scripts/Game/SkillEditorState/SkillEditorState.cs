@@ -17,6 +17,7 @@ namespace Game
         private TransformSystem transformSystem;
         private PrefabSystem prefabSystem;
         private CameraSystem cameraSystem;
+        private CameraLockSystem cameraLockSystem;
         private PhysicSystem physicSystem;
         private MapSystem mapSystem;
         private AnimationSystem animationSystem;
@@ -36,12 +37,14 @@ namespace Game
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
+            World.Active = world;
             inputSystem = world.GetOrCreateSystem<InputSystem>();
             pcInputSystem = world.GetOrCreateSystem<PCInputSystem>();
             transformSystem = world.GetOrCreateSystem<TransformSystem>();
             faceSystem = world.GetOrCreateSystem<FaceSystem>();
             prefabSystem = world.GetOrCreateSystem<PrefabSystem>();
             cameraSystem = world.GetOrCreateSystem<CameraSystem>();
+            cameraLockSystem = world.GetOrCreateSystem<CameraLockSystem>();
             physicSystem = world.GetOrCreateSystem<PhysicSystem>();
             mapSystem = world.GetOrCreateSystem<MapSystem>();
             animationSystem = world.GetOrCreateSystem<AnimationSystem>();
@@ -58,6 +61,7 @@ namespace Game
             buffSystem = world.GetOrCreateSystem<BuffSystem>();
             damageSystem = world.GetOrCreateSystem<DamageSystem>();
 
+
             var playerEntity = CreatePlayer();
             cameraSystem.SetMainCamera(Camera.main);
             cameraSystem.ResetCameraStrategy(GameStarter.Instance.cameraRoot);
@@ -68,6 +72,8 @@ namespace Game
 //            Cursor.lockState = CursorLockMode.Locked;
 
             CreateEnemy();
+
+            ViewSys.Instance.Open("CameraLockView");
         }
 
         private Entity CreatePlayer()
@@ -223,11 +229,17 @@ namespace Game
             prefabSystem.Update();
             animationSystem.Update();
             cameraSystem.Update();
+            cameraLockSystem.Update();
         }
 
         protected override void OnLateUpdate()
         {
             base.OnLateUpdate();
+        }
+
+        protected override void OnDrawGizmos()
+        {
+            cameraLockSystem.OnDrawGizmos();
         }
 
         protected override void OnExit()

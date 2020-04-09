@@ -111,6 +111,14 @@ namespace Framework
             }
         }
 
+        protected override void OnDrawGizmos()
+        {
+            if (m_cCurState != null)
+            {
+                m_cCurState._OnDrawGizmos();
+            }
+        }
+
         protected override void OnDispose()
         {
             foreach (var item in m_dicState)
