@@ -23,6 +23,12 @@ namespace Game
             set => transform.rotation = value;
         }
 
+        public Vector3 forward
+        {
+            get => transform.forward;
+            set => transform.forward = value;
+        }
+
         public void SetTransform(Transform transform)
         {
             this.transform = transform;

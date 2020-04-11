@@ -96,7 +96,8 @@ namespace Game
                 }
               
                 var hostTransform = context.world.GetComponent<TransformComponent>(context.buffComponent.componentEntity);
-                float angle = Quaternion.Angle(hostTransform.rotation, startRotation);
+                var quat = Quaternion.Inverse(hostTransform.rotation) * startRotation;
+                float angle = quat.eulerAngles.y;
                 angle = Mathf.Repeat(angle, 360f);
                 string behitAnim = defaultBehit;
                 foreach (var pair in dicCfg)

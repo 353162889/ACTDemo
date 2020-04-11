@@ -184,11 +184,11 @@
             <NEData>
               <data xsi:type="BTForbidActionData">
                 <finishResume>true</finishResume>
-                <forbidDuration>1.68333328</forbidDuration>
+                <forbidDuration>0.933333337</forbidDuration>
                 <forbidArray>
                   <ForbidType>InputMove</ForbidType>
                 </forbidArray>
-                <duration>1.68333328</duration>
+                <duration>0.933333337</duration>
               </data>
             </NEData>
           </lstChild>

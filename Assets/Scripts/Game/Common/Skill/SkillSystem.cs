@@ -1,5 +1,6 @@
 ﻿using System;
 using Framework;
+using GameData;
 using Unity.Entities;
 using UnityEngine;
 
@@ -48,9 +49,10 @@ namespace Game
         {
             var skillComponent = World.GetComponent<SkillComponent>(entity);
             if (null == skillComponent) return;
-            if (!CanCastSkill(skillComponent, skillId)) return;
+            SkillTargetInfo targetInfo;
+            if (!CanCastSkill(skillComponent, skillId, out targetInfo)) return;
             UpdateSkillBreak(entity);
-            var skilldata = CreateSkillData(entity, skillId);
+            var skilldata = CreateSkillData(entity, skillId, targetInfo);
             skillComponent.skillData = skilldata;
             CLog.LogArgs("CastSkill", skillId);
         }
@@ -64,8 +66,20 @@ namespace Game
 
         public bool CanCastSkill(SkillComponent skillComponent, int skillId)
         {
+            SkillTargetInfo targetInfo;
+            return CanCastSkill(skillComponent, skillId, out targetInfo);
+        }
+
+        private bool CanCastSkill(SkillComponent skillComponent, int skillId, out SkillTargetInfo targetInfo)
+        {
+            targetInfo = default(SkillTargetInfo);
             if (forbidSystem.IsForbid(skillComponent.componentEntity, ForbidType.Ability)) return false;
-            return !IsCastingSkill(skillComponent) || skillComponent.skillData.phase == SkillPhaseType.Backswing;
+            if (IsCastingSkill(skillComponent) && skillComponent.skillData.phase != SkillPhaseType.Backswing) return false;
+            if (!SkillTargetSelector.GetSkillTargetInfo(World, skillComponent, skillId, out targetInfo))
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool IsCastingSkill(SkillComponent skillComponent)
@@ -119,7 +133,7 @@ namespace Game
             skillContext.Reset();
         }
 
-        private SkillData CreateSkillData(Entity entity, int skillId)
+        private SkillData CreateSkillData(Entity entity, int skillId, SkillTargetInfo targetInfo)
         {
             var skillData = ObjectPool<SkillData>.Instance.GetObject();
             skillData.skillId = skillId;
@@ -127,7 +141,7 @@ namespace Game
             skillData.skillTimeScale = 1;
             skillData.phase = SkillPhaseType.Normal;
             skillData.forbidance = forbidSystem.AddForbiddance(entity, "ability:"+skillId);
-
+            skillData.targetInfo = targetInfo;
             return skillData;
         }
 

@@ -209,7 +209,7 @@ namespace Game
             {
                 var angle = xAxis * freeLookCamera.m_XAxis.m_MaxSpeed * Time.deltaTime;
                 var transformComponent = World.GetComponent<TransformComponent>(cameraComponent.followEntity);
-                var forward = Quaternion.AngleAxis(angle, Vector3.up) * (transformComponent.rotation * Vector3.forward);
+                var forward = Quaternion.AngleAxis(angle, Vector3.up) * (transformComponent.forward);
                 inputSystem.ChangeFace(forward, true);
 
                 freeLookCamera.m_YAxis.Value =

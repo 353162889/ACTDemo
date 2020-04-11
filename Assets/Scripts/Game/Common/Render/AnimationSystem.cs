@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using Framework;
+using Unity.Entities;
 using UnityEngine;
 
 namespace Game
@@ -161,18 +162,29 @@ namespace Game
 
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, AnimationComponent animationComponent, StepMoveComponent stepMoveComponent) =>
+            Entities.ForEach((Entity entity, AnimationComponent animationComponent, StepMoveComponent stepMoveComponent, TransformComponent transformComponent) =>
             {
                 var directionMoveComponent = World.GetComponent<DirectionMoveComponent>(entity);
                 if (directionMoveComponent != null && directionMoveComponent.inputDirection != Vector3.zero)
                 {
                     var velocity = stepMoveComponent.desiredVelocity;
                     velocity.y = 0;
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.IsMoving, true);
                     this.SetAnimatorParam(animationComponent, AnimatorParamDefine.MoveSpeed, velocity.magnitude);
+                    //设置移动方向
+                    var direction = Quaternion.Inverse(transformComponent.rotation) * velocity;
+                    direction.Normalize();
+                    animationComponent.lastMoveDirectionPosition = Vector3.MoveTowards(animationComponent.lastMoveDirectionPosition, direction,
+                        animationComponent.moveDirectionSpeed * Time.deltaTime);
+
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.MoveDirectionX, animationComponent.lastMoveDirectionPosition.x);
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.MoveDirectionZ, animationComponent.lastMoveDirectionPosition.z);
                 }
                 else
                 {
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.IsMoving, false);
                     this.SetAnimatorParam(animationComponent, AnimatorParamDefine.MoveSpeed, 0.0f);
+                    animationComponent.lastMoveDirectionPosition = Vector3.zero;
                 }
 
                 var jumpComponent = World.GetComponent<JumpComponent>(entity);

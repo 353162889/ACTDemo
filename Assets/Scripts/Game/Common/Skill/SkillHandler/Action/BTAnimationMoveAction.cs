@@ -13,6 +13,8 @@ namespace Game
         public float duration = -1;
         [NEProperty("位移距离，<=0表示使用默认配置距离，主要用于动画编辑完成之后，又需要调整动画距离但不调整动画曲线，一般情况下填-1")]
         public float distance = -1;
+        //是否忽略旋转
+        public bool ignoreRotation = false;
         [NonSerialized]
         public float[] runtimeMovePoints = null;
     }
@@ -56,9 +58,14 @@ namespace Game
             Vector3 velocity = offsetInfo.offsetPos / Time.deltaTime;
             var stepMoveSystem = context.world.GetExistingSystem<StepMoveSystem>();
             stepMoveSystem.AppendSingleFrameVelocity(context.skillComponent.componentEntity, velocity, false);
-            var faceSystem = context.world.GetExistingSystem<FaceSystem>();
-            var transformComponent = context.world.GetComponent<TransformComponent>(context.skillComponent.componentEntity);
-            faceSystem.FaceTo(context.skillComponent.componentEntity, offsetInfo.offsetRot * transformComponent.rotation, true);
+            if (!data.ignoreRotation)
+            {
+                var faceSystem = context.world.GetExistingSystem<FaceSystem>();
+                var transformComponent =
+                    context.world.GetComponent<TransformComponent>(context.skillComponent.componentEntity);
+                faceSystem.FaceTo(context.skillComponent.componentEntity,
+                    offsetInfo.offsetRot * transformComponent.rotation, true);
+            }
 
             if (cacheData.time >= points[points.Length - AnimationMoveUtility.DataSpace])
             {

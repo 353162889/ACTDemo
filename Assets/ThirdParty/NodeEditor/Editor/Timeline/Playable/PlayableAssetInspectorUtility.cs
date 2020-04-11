@@ -168,12 +168,19 @@ namespace NodeEditor
 
                 if (!contain)
                 {
+                    timelineAsset.DeleteClip(asset.relatedAnimationClip);
                     asset.relatedAnimationClip = null;
                 }
             }
 
-            if (asset.relatedAnimationClip == null)
+            if (asset.relatedAnimationClip == null || asset.clip == null)
             {
+                if (asset.relatedAnimationClip != null)
+                {
+                    timelineAsset.DeleteClip(asset.relatedAnimationClip);
+                    asset.relatedAnimationClip = null;
+                }
+
                 if (asset.clip == null && string.IsNullOrEmpty(data.animName))
                 {
                     Display("需要输入animName或clip", showDialog);

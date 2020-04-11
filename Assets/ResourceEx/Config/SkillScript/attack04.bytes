@@ -331,11 +331,11 @@
             <NEData>
               <data xsi:type="BTForbidActionData">
                 <finishResume>true</finishResume>
-                <forbidDuration>1.88333333</forbidDuration>
+                <forbidDuration>1.43333328</forbidDuration>
                 <forbidArray>
                   <ForbidType>InputMove</ForbidType>
                 </forbidArray>
-                <duration>1.88333333</duration>
+                <duration>1.43333328</duration>
               </data>
             </NEData>
           </lstChild>
@@ -391,15 +391,15 @@
         </NEData>
         <NEData>
           <data xsi:type="BTTimeDecoratorData">
-            <exeTime>1.08333337</exeTime>
-            <time>1.08333337</time>
+            <exeTime>1</exeTime>
+            <time>1</time>
           </data>
           <lstChild>
             <NEData>
               <data xsi:type="BTEnableCacheInputSkillActionData">
                 <finishResume>false</finishResume>
-                <comboDuration>0.366666675</comboDuration>
-                <duration>0.366666675</duration>
+                <comboDuration>0.450000048</comboDuration>
+                <duration>0.450000048</duration>
               </data>
             </NEData>
           </lstChild>

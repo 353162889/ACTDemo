@@ -59,7 +59,7 @@ namespace Game
                 var followEntity = cameraSystem.FollowEntity();
                 var transformComponent = World.GetComponent<TransformComponent>(followEntity);
                 var origin = GetStartRay(ray.origin, ray.direction, transformComponent.position,
-                    transformComponent.rotation * Vector3.forward);
+                    transformComponent.forward);
                 ray.origin = origin;
                 int count = Physics.RaycastNonAlloc(ray, cacheRaycasthits, lockComponent.maxDistance, LayerDefine.BehitColliderMask);
                 if (count > 0)
@@ -111,7 +111,7 @@ namespace Game
                 var followEntity = cameraSystem.FollowEntity();
                 var transformComponent = World.GetComponent<TransformComponent>(followEntity);
                 var origin = GetStartRay(ray.origin, ray.direction, transformComponent.position,
-                    transformComponent.rotation * Vector3.forward);
+                    transformComponent.forward);
                 ray.origin = origin;
                 Gizmos.DrawLine(ray.origin, ray.origin + ray.direction * lockComponent.maxDistance);
                 Gizmos.color = oldColor;

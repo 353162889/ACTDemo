@@ -10,6 +10,20 @@ namespace Game
         public static string ListDamageInfo = "ListDamageInfo";
     }
 
+    public struct SkillTargetInfo
+    {
+        public Entity target;
+        public Vector3 targetDirection;
+        public Vector3 targetPosition;
+
+        public void Reset()
+        {
+            target = Entity.Null;
+            targetDirection = Vector3.forward;
+            targetPosition = Vector3.zero;
+        }
+    }
+
     public enum SkillPhaseType
     {
         Normal = 1,
@@ -23,6 +37,7 @@ namespace Game
         public float skillTimeScale;
         public bool enableInputSkill;
         public SkillPhaseType phase;
+        public SkillTargetInfo targetInfo;
         public BTBlackBoard blackBoard = new BTBlackBoard();
         public BTExecuteCache executeCache = new BTExecuteCache();
         public Forbiddance forbidance;
@@ -67,6 +82,7 @@ namespace Game
             {
                 this.forbidance.Reset();
             }
+            targetInfo.Reset();
         }
     }
 }
