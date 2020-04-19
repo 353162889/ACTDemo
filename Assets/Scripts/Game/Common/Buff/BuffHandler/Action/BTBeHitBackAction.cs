@@ -21,8 +21,6 @@ namespace Game
         public float[] movePoints;
         [NEProperty("位移距离，<=0表示使用默认配置距离，主要用于动画编辑完成之后，又需要调整动画距离但不调整动画曲线，一般情况下填-1")]
         public float distance = -1;
-
-        public bool chageFace = false;
         [NonSerialized]
         public float[] runtimeMovePoints = null;
     }

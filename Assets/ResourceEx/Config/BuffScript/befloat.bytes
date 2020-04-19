@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <lstChild>
+    <NEData>
+      <data xsi:type="BTFloatActionData">
+        <directionType>HitDireciton</directionType>
+        <height>2</height>
+        <horizontalSpeed>1</horizontalSpeed>
+        <anim>Twinblades_Float</anim>
+      </data>
+    </NEData>
+  </lstChild>
+</NEData>

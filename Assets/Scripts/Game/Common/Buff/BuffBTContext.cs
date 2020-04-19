@@ -81,6 +81,11 @@ namespace Game
             this.m_cBuffPartData = partData;
         }
 
+        public bool IsPartScript()
+        {
+            return m_cBuffPartData != null;
+        }
+
         public BuffPartData GetPartData()
         {
             return m_cBuffPartData;

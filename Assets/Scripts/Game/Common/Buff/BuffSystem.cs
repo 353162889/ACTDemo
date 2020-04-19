@@ -224,9 +224,9 @@ namespace Game
                     buffComponent.dicIndexToBuffData.Add(buffData.index, buffData);
                     
                     var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffData.buffId);
-                    for (int j = 0; j < buffCfg.states.Count; i++)
+                    for (int j = 0; j < buffCfg.states.Count; j++)
                     {
-                        var stateType = BuffStateConfig.GetStateTypeByString(buffCfg.states[i]);
+                        var stateType = BuffStateConfig.GetStateTypeByString(buffCfg.states[j]);
                         if (stateType != BuffStateType.NONE)
                         {
                             int buffStateIndex = buffStateSystem.AddState(buffComponent.componentEntity, stateType);
@@ -435,7 +435,8 @@ namespace Game
                 //添加buff
                 for (int i = 0; i < buffPartCfg.buffIds.Count; i++)
                 {
-                    AddBuff(buffComponent.componentEntity, buffPartCfg.buffIds[i]);
+                    AddBuffByDamageInfo(buffComponent.componentEntity, buffPartCfg.buffIds[i], buffData.damageInfo);
+//                    AddBuff(buffComponent.componentEntity, buffPartCfg.buffIds[i]);
                 }
                 
                 //执行逻辑

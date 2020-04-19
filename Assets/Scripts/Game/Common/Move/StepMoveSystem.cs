@@ -16,6 +16,22 @@ namespace Game
             faceSystem = World.GetOrCreateSystem<FaceSystem>();
         }
 
+        public void AnimationMove(Entity entity, float[] points, float time, float deltaTime, Quaternion startRotation, bool ignoreRotation)
+        {
+            float startTime = time;
+            float endTime = time + deltaTime;
+            var offsetInfo = AnimationMoveUtility.GetOffset(points, startRotation, startTime, endTime);
+            Vector3 velocity = offsetInfo.offsetPos / Time.deltaTime;
+            AppendSingleFrameVelocity(entity, velocity, false);
+            if (!ignoreRotation)
+            {
+                var faceSystem = World.GetExistingSystem<FaceSystem>();
+                var transformComponent =
+                    World.GetComponent<TransformComponent>(entity);
+                faceSystem.FaceTo(entity, offsetInfo.offsetRot * transformComponent.rotation, true);
+            }
+        }
+
         public void AppendSingleFrameVelocity(Entity entity, Vector3 velocity, bool changeFace = false)
         {
             var moveComponent = World.GetComponent<StepMoveComponent>(entity);

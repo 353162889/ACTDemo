@@ -26,6 +26,8 @@ namespace Game
         FLY = 6,
         //倒地
         GROUND = 7,
+        //起身
+        GETUP = 8,
     }
 
     public class BuffStateConfig
@@ -57,12 +59,14 @@ namespace Game
                 forbids = new List<ForbidType>(){},
                 handler = baseBuffStateHandler}},
             { BuffStateType.FLOAT, new BuffStateConfig(){
-                forbids = new List<ForbidType>(){},
+                forbids = new List<ForbidType>(){ForbidType.Jump,ForbidType.InputMove, ForbidType.Ability},
                 handler = baseBuffStateHandler}},
-            { BuffStateType.FLY, new BuffStateConfig(){
-                forbids = new List<ForbidType>(){},
+            { BuffStateType.GROUND, new BuffStateConfig(){
+                forbids = new List<ForbidType>(){ForbidType.Jump,ForbidType.InputMove, ForbidType.Ability},
                 handler = baseBuffStateHandler}},
-            
+            { BuffStateType.GETUP, new BuffStateConfig(){
+                forbids = new List<ForbidType>(){ForbidType.Jump,ForbidType.InputMove, ForbidType.Ability},
+                handler = baseBuffStateHandler}},
         };
 
         private static Dictionary<string, BuffStateType> InitStateTypes()

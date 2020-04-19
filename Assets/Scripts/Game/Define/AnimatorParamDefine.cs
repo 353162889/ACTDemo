@@ -11,5 +11,6 @@
         public static string JumpBeforeGround = "JumpBeforeGround";
         public static string Jumping = "Jumping";
         public static string Jump = "Jump";
+        public static string IsFloat = "IsFloat";
     }
 }

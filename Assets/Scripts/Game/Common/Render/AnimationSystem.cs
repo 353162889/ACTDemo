@@ -203,6 +203,12 @@ namespace Game
                     this.SetAnimatorParam(animationComponent, AnimatorParamDefine.Jumping,
                         jumpState == JumpStateType.Jumping);
                 }
+
+                var floatComponent = World.GetComponent<BuffFloatComponent>(entity);
+                if (floatComponent != null)
+                {
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.IsFloat, floatComponent.isFloat);
+                }
             });
         }
     }

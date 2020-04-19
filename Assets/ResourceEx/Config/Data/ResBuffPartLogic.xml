@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resbuffpartlogic buffIds="" duration="0.0" eventTriggerCount="1" eventTriggerType="HOST_BUFF_ATTACH" id="101" interval="0.0" properties="" script=""/>
-	<resbuffpartlogic buffIds="2" duration="0.0" eventTriggerCount="1" eventTriggerType="HOST_BUFF_DETACH" id="102" interval="0.0" properties="" script=""/>
+	<resbuffpartlogic buffIds="3" duration="0.0" eventTriggerCount="1" eventTriggerType="HOST_BUFF_DETACH" id="201" interval="0.0" properties="" script=""/>
+	<resbuffpartlogic buffIds="4" duration="0.0" eventTriggerCount="1" eventTriggerType="HOST_BUFF_DETACH" id="301" interval="0.0" properties="" script=""/>
 </root>

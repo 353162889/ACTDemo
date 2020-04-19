@@ -283,6 +283,7 @@
                 </movePoints>
                 <duration>-1</duration>
                 <distance>-1</distance>
+                <ignoreRotation>false</ignoreRotation>
               </data>
             </NEData>
           </lstChild>
@@ -345,7 +346,7 @@
                     <finishResume>false</finishResume>
                     <addBuffDuration>0</addBuffDuration>
                     <lstBuffId>
-                      <int>1</int>
+                      <int>2</int>
                     </lstBuffId>
                     <duration>0</duration>
                   </data>
