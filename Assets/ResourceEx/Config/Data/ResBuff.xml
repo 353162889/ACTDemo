@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resbuff anim="" duration="0.3" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="1" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试击退" parts="" script="behitback" states="STIFFNESS"/>
-	<resbuff anim="" duration="99999.0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="2" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试击飞" parts="201" script="befloat" states="FLOAT"/>
-	<resbuff anim="Anim_CS_KD_F_01" duration="3.0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="3" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试倒地" parts="301" script="" states="GROUND"/>
-	<resbuff anim="Anim_KD_get_up" duration="3.0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="4" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试起身" parts="" script="" states="GETUP"/>
+	<resbuff anim="" duration="0.3" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="1" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试受击硬直" parts="" script="behit" states="STIFFNESS"/>
+	<resbuff anim="" duration="0.3" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="2" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试击退近" parts="" script="behitback_near" states="STIFFNESS"/>
+	<resbuff anim="" duration="0.3" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="3" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试击退中" parts="" script="behitback_middle" states="STIFFNESS"/>
+	<resbuff anim="" duration="0.3" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="4" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试击退远" parts="" script="behitback_far" states="STIFFNESS"/>
+	<resbuff anim="" duration="99999.0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="101" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试击飞" parts="10101" script="befloat" states="FLOAT"/>
+	<resbuff anim="Anim_CS_KD_F_01" duration="3.0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="102" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试倒地" parts="10201" script="" states="GROUND"/>
+	<resbuff anim="Anim_KD_get_up" duration="3.0" effect1Mount="" effect2Mount="" effectName1="" effectName2="" id="103" isBuff="FALSE" isDeBuff="FALSE" isHidden="FALSE" isPurgable="FALSE" multiCount="1" name="测试起身" parts="" script="" states="GETUP"/>
 </root>

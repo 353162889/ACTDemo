@@ -7,6 +7,6 @@ namespace Game
     {
         public Rigidbody rigidbody;
         public CollisionListener collisionListener;
-        public Transform attackBoxParent;
+        public Transform attackColliderParent;
     }
 }

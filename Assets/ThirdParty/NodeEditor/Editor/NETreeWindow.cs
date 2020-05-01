@@ -550,6 +550,8 @@ namespace NodeEditor
                 neData.lstChild.Add(childNEData);
             }
 
+            if (neData.lstChild == null) neData.lstChild = new List<NEData>();
+
             if (neData.data is BTTimeLineData)
             {
                 neData.lstChild.Sort(TimeLineNodeSort);

@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 8993902097722301239
-    second: Unreal Take
+    second: Twinblades_Idle_general
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Unreal Take
+      name: Twinblades_Idle_general
       takeName: Unreal Take
       internalID: 0
       firstFrame: 0

@@ -45,6 +45,7 @@ namespace Framework
         {
             public ResourceObjectPoolHandler callback;
             public bool isPrefab;
+            public bool defaultActive;
         }
 
         private Dictionary<string, ResourceObjectQueue> m_dicGO;
@@ -139,7 +140,7 @@ namespace Framework
             }
         }
 
-        public UnityEngine.Object GetObject(string path, bool isPrefab,ResourceObjectPoolHandler callback)
+        public UnityEngine.Object GetObject(string path, bool isPrefab,ResourceObjectPoolHandler callback, bool defaultActive = true)
         {
             ResourceObjectQueue resQueue;
             if(m_dicGO.TryGetValue(path,out resQueue))
@@ -161,7 +162,10 @@ namespace Framework
                         {
                             go = GetGameObject(resQueue.prefab, path);
                         }
-                        ((GameObject)go).SetActive(true);
+
+                        var resultGameObject = ((GameObject) go);
+                        if(resultGameObject.activeSelf != defaultActive)
+                            resultGameObject.SetActive(defaultActive);
                     }
 
                     if (null != callback)
@@ -195,6 +199,7 @@ namespace Framework
                     GameObjectPoolCallbackStruct callbackStruct = new GameObjectPoolCallbackStruct();
                     callbackStruct.callback = callback;
                     callbackStruct.isPrefab = isPrefab;
+                    callbackStruct.defaultActive = defaultActive;
                     lst.Add(callbackStruct);
                 }
             }
@@ -367,7 +372,9 @@ namespace Framework
                         {
                             go = GetGameObject(resQueue.prefab, path);
                         }
-                        ((GameObject)go).SetActive(true);
+                        var resultGameObject = ((GameObject)go);
+                        if(resultGameObject.activeSelf != callback.defaultActive)
+                            resultGameObject.SetActive(callback.defaultActive);
                     }
                     callback.callback.Invoke(path,go);
                 }

@@ -62,11 +62,7 @@ namespace Framework
         protected GameObject _CreateEffect(string path,bool autoDestory, Transform parent = null)
         {
             if (!m_lstPath.Contains(path)) m_lstPath.Add(path);
-            EffectCtrl effectCtrl = GetEffectCtrl();
-            if(parent != null)
-            {
-                parent.gameObject.AddChildToParent(effectCtrl.gameObject);
-            }
+            EffectCtrl effectCtrl = GetEffectCtrl(parent);
             m_lstEffect.Add(effectCtrl);
             effectCtrl.Begin(path, autoDestory);
             return effectCtrl.gameObject;
@@ -139,18 +135,25 @@ namespace Framework
             }
         }
 
-        private EffectCtrl GetEffectCtrl()
+        private EffectCtrl GetEffectCtrl(Transform parent = null)
         {
             EffectCtrl effectCtrl = null;
             while (effectCtrl == (UnityEngine.Object)null && m_queuePool.Count > 0)
             {
                 effectCtrl = m_queuePool.Dequeue();
             }
+
+            var curParent = parent;
+            if (curParent == null) curParent = this.gameObject.transform;
             if(effectCtrl == (UnityEngine.Object)null)
             {
                 GameObject go = new GameObject("effect");
-                this.gameObject.AddChildToParent(go);
+                curParent.gameObject.AddChildToParent(go);
                 effectCtrl = go.AddComponentOnce<EffectCtrl>();
+            }
+            else
+            {
+                curParent.gameObject.AddChildToParent(effectCtrl.gameObject);
             }
             effectCtrl.gameObject.SetActive(true);
             return effectCtrl;

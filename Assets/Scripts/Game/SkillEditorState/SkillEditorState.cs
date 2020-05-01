@@ -133,8 +133,8 @@ namespace Game
             physicComponent.rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
             var goAttackBoxParent = new GameObject();
             prefabComponent.gameObject.AddChildToParent(goAttackBoxParent, "AttackBoxParent");
-            physicComponent.attackBoxParent = goAttackBoxParent.transform;
-            var rigidBody = physicComponent.attackBoxParent.gameObject.AddComponent<Rigidbody>();
+            physicComponent.attackColliderParent = goAttackBoxParent.transform;
+            var rigidBody = physicComponent.attackColliderParent.gameObject.AddComponent<Rigidbody>();
             rigidBody.isKinematic = true;
             rigidBody.useGravity = false;
 

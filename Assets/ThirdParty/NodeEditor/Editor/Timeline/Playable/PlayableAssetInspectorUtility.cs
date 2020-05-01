@@ -6,6 +6,7 @@ using Game;
 using Unity.Transforms;
 using UnityEditor;
 using UnityEditor.Animations;
+using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Timeline;
 
@@ -166,11 +167,18 @@ namespace NodeEditor
                     }
                 }
 
+                if (asset.clip != null && asset.clip != asset.relatedAnimationClip.animationClip)
+                {
+                    contain = false;
+                }
+
                 if (!contain)
                 {
                     timelineAsset.DeleteClip(asset.relatedAnimationClip);
+                    TimelineEditor.Refresh(RefreshReason.ContentsAddedOrRemoved);
                     asset.relatedAnimationClip = null;
                 }
+
             }
 
             if (asset.relatedAnimationClip == null || asset.clip == null)
@@ -178,6 +186,7 @@ namespace NodeEditor
                 if (asset.relatedAnimationClip != null)
                 {
                     timelineAsset.DeleteClip(asset.relatedAnimationClip);
+                    TimelineEditor.Refresh(RefreshReason.ContentsAddedOrRemoved);
                     asset.relatedAnimationClip = null;
                 }
 
@@ -239,6 +248,11 @@ namespace NodeEditor
                         asset.curTimelineClip.duration = timelineClip.duration;
 
                         asset.relatedAnimationClip = timelineClip;
+                    }
+                    else
+                    {
+                        Display("在AnimatorController找不到动画资源为:" + data.animName + "的AnimationClip", showDialog);
+                        return;
                     }
                 }
 
@@ -459,6 +473,44 @@ namespace NodeEditor
             if (asset.playableBehaviour.GetBehaviour() != null && asset.playableBehaviour.GetBehaviour().gameObject == null)
             {
                 asset.playableBehaviour.GetBehaviour().gameObject = asset.boxCollider.gameObject;
+            }
+        }
+
+        public static void InitSphereColliderInspector(NESphereColliderAsset asset, bool showDialog = false)
+        {
+            if (asset == null) return;
+            NETimelineAsset timelineAsset = (NETimelineAsset)(asset.curTimelineClip.parentTrack.timelineAsset);
+            if (timelineAsset.colliderParent == null || timelineAsset.director == null)
+            {
+                Display("需要碰撞父节点与director", showDialog);
+                return;
+            }
+
+            if (asset.sphereCollider == null)
+            {
+                var go = new GameObject();
+                timelineAsset.colliderParent.gameObject.AddChildToParent(go, "SphereCollider");
+                asset.sphereCollider = go.AddComponent<SphereCollider>();
+                var data = (BTSphereColliderActionData)asset.neData.data;
+                var trans = asset.sphereCollider.transform;
+                trans.localPosition = data.localPos;
+                trans.localRotation = data.localRot;
+                float radius = data.radius;
+                if (radius <= 0)
+                {
+                    radius = 1;
+                }
+                trans.localScale = new Vector3(radius, radius, radius);
+                asset.sphereCollider.radius = 1;
+
+                asset.sphereCollider.center = Vector3.zero;
+                if (data.duration > 0)
+                    asset.curTimelineClip.duration = data.duration;
+            }
+
+            if (asset.playableBehaviour.GetBehaviour() != null && asset.playableBehaviour.GetBehaviour().gameObject == null)
+            {
+                asset.playableBehaviour.GetBehaviour().gameObject = asset.sphereCollider.gameObject;
             }
         }
     }

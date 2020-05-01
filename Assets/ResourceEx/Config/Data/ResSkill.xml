@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resskill combo="1" id="1" name="攻击02" script="attack02" targetSelector="1"/>
-	<resskill combo="0" id="2" name="攻击03" script="attack03" targetSelector="1"/>
-	<resskill combo="0" id="3" name="攻击04" script="attack04" targetSelector="1"/>
+	<resskill combo="1" id="1" name="主角连击1" script="normal_attack01" targetSelector="1"/>
+	<resskill combo="0" id="2" name="主角连击2" script="normal_attack02" targetSelector="1"/>
+	<resskill combo="0" id="3" name="主角连击3" script="normal_attack03" targetSelector="1"/>
+	<resskill combo="0" id="10" name="主角技能1" script="skill1" targetSelector="1"/>
+	<resskill combo="0" id="11" name="主角技能2" script="skill2" targetSelector="1"/>
 	<resskill combo="0" id="1001" name="翻滚01" script="dodge01" targetSelector="2"/>
+	<resskill combo="1001" id="1002" name="攻击02" script="attack02" targetSelector="1"/>
+	<resskill combo="0" id="1003" name="攻击03" script="attack03" targetSelector="1"/>
+	<resskill combo="0" id="1004" name="攻击04" script="attack04" targetSelector="1"/>
 </root>

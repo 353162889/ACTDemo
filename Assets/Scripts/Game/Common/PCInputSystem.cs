@@ -35,6 +35,8 @@ namespace Game
             {KeyCode.J, 1},
             {KeyCode.Mouse0, 1},
             {KeyCode.LeftShift, 1001},
+            {KeyCode.Q, 10},
+            {KeyCode.E, 11},
         };
 
         protected override void OnUpdate()

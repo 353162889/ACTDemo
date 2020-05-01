@@ -10,13 +10,13 @@ namespace NodeEditor
 {
     public class NEBoxColliderAsset : PlayableAsset, INEPlayableAsset
     {
-        public ScriptPlayable<BoxColliderBehaviour> playableBehaviour { get; private set; }
+        public ScriptPlayable<ColliderBehaviour> playableBehaviour { get; private set; }
         public BoxCollider boxCollider { get; set; }
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
             InitInspector();
-            playableBehaviour = BoxColliderBehaviour.Create(graph, boxCollider == null ?null :boxCollider.gameObject);
+            playableBehaviour = ColliderBehaviour.Create(graph, boxCollider == null ?null :boxCollider.gameObject);
             return playableBehaviour;
         }
 

@@ -12,6 +12,7 @@
                 <startAngle>315</startAngle>
                 <endAngle>45</endAngle>
               </data>
+              <lstChild />
             </NEData>
             <NEData>
               <data xsi:type="BTTimeLineData" />
@@ -24,10 +25,11 @@
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTPlayAnimationActionData">
-                        <animDuration>2.33333349</animDuration>
-                        <animName>Anim_CS_DODGE_F</animName>
-                        <duration>2.33333349</duration>
+                        <animDuration>0.6666667</animDuration>
+                        <animName>Twinblades_Slide_F</animName>
+                        <duration>0.6666667</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -47,52 +49,108 @@
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.06666666</float>
-                          <float>-0</float>
+                          <float>0.0166666675</float>
+                          <float>0.009972503</float>
                           <float>0</float>
-                          <float>0.4361291</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0.299999982</float>
-                          <float>-0</float>
-                          <float>0</float>
-                          <float>1.868561</float>
+                          <float>0.1379823</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.5666666</float>
-                          <float>-0</float>
+                          <float>0.06666667</float>
+                          <float>0.042757526</float>
                           <float>0</float>
-                          <float>3.02048516</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0.799999952</float>
-                          <float>-0</float>
-                          <float>0</float>
-                          <float>4.009413</float>
+                          <float>0.556032538</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.99999994</float>
-                          <float>-0</float>
+                          <float>0.1</float>
+                          <float>0.0526662432</float>
                           <float>0</float>
-                          <float>4.502166</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>1.5666666</float>
-                          <float>-0</float>
-                          <float>0</float>
-                          <float>4.502166</float>
+                          <float>0.8176352</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>2.33333325</float>
-                          <float>-0</float>
+                          <float>0.183333337</float>
+                          <float>0.0131209474</float>
                           <float>0</float>
-                          <float>4.502166</float>
+                          <float>1.38090193</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.2</float>
+                          <float>0.00210209843</float>
+                          <float>0</float>
+                          <float>1.48754776</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.216666669</float>
+                          <float>-0.009801728</float>
+                          <float>0</float>
+                          <float>1.59352291</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.283333331</float>
+                          <float>-0.0641211</float>
+                          <float>0</float>
+                          <float>2.00159955</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.4</float>
+                          <float>-0.07379655</float>
+                          <float>0</float>
+                          <float>2.66848016</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.5</float>
+                          <float>-0.04266348</float>
+                          <float>0</float>
+                          <float>2.92098022</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.533333361</float>
+                          <float>-0.02414471</float>
+                          <float>0</float>
+                          <float>2.958611</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.566666663</float>
+                          <float>-0.00259442418</float>
+                          <float>0</float>
+                          <float>2.975666</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.6</float>
+                          <float>0.01575341</float>
+                          <float>0</float>
+                          <float>2.9882977</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.6166667</float>
+                          <float>0.02151148</float>
+                          <float>0</float>
+                          <float>2.99402237</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.65</float>
+                          <float>0.0276234485</float>
+                          <float>0</float>
+                          <float>2.99800754</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.6666667</float>
+                          <float>0.0306794327</float>
+                          <float>0</float>
+                          <float>3</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
@@ -100,7 +158,9 @@
                         <duration>-1</duration>
                         <distance>-1</distance>
                         <ignoreRotation>false</ignoreRotation>
+                        <useStartRotation>false</useStartRotation>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -113,44 +173,46 @@
                     <NEData>
                       <data xsi:type="BTForbidActionData">
                         <finishResume>true</finishResume>
-                        <forbidDuration>1.16666663</forbidDuration>
+                        <forbidDuration>0.433333337</forbidDuration>
                         <forbidArray>
                           <ForbidType>InputMove</ForbidType>
-                          <ForbidType>InputFace</ForbidType>
                         </forbidArray>
-                        <duration>1.16666663</duration>
+                        <duration>0.433333337</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
                 <NEData>
                   <data xsi:type="BTTimeDecoratorData">
-                    <exeTime>0.8833333</exeTime>
-                    <time>0.8833333</time>
+                    <exeTime>0.433333337</exeTime>
+                    <time>0.433333337</time>
                   </data>
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTEnableCacheInputSkillActionData">
                         <finishResume>false</finishResume>
-                        <comboDuration>0.283333331</comboDuration>
-                        <duration>0.283333331</duration>
+                        <comboDuration>0.233333349</comboDuration>
+                        <duration>0.233333349</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
                 <NEData>
                   <data xsi:type="BTTimeDecoratorData">
-                    <exeTime>1.16666663</exeTime>
-                    <time>1.16666663</time>
+                    <exeTime>0.5500001</exeTime>
+                    <time>0.5500001</time>
                   </data>
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTSetSkillPhaseActionData">
                         <finishResume>false</finishResume>
-                        <phaseDuration>1.16666651</phaseDuration>
+                        <phaseDuration>0.116666645</phaseDuration>
                         <phaseType>Backswing</phaseType>
-                        <duration>1.16666651</duration>
+                        <duration>0.116666645</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -166,6 +228,7 @@
                 <startAngle>45</startAngle>
                 <endAngle>135</endAngle>
               </data>
+              <lstChild />
             </NEData>
             <NEData>
               <data xsi:type="BTTimeLineData" />
@@ -178,10 +241,11 @@
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTPlayAnimationActionData">
-                        <animDuration>2.33333349</animDuration>
-                        <animName>Anim_CS_DODGE_R</animName>
-                        <duration>2.33333349</duration>
+                        <animDuration>0.6666667</animDuration>
+                        <animName>Twinblades_Slide_R</animName>
+                        <duration>0.6666667</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -196,57 +260,148 @@
                         <movePoints>
                           <float>0</float>
                           <float>-0</float>
-                          <float>-1.8034551E-25</float>
-                          <float>-1.8034551E-25</float>
+                          <float>0</float>
+                          <float>-2.14493823E-09</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.06666666</float>
-                          <float>0.436132431</float>
-                          <float>-1.8034551E-25</float>
-                          <float>-1.8034551E-25</float>
+                          <float>0.0166666675</float>
+                          <float>0.13049528</float>
+                          <float>0</float>
+                          <float>0.000147373416</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.299999982</float>
-                          <float>1.86857522</float>
-                          <float>-1.8034551E-25</float>
-                          <float>-1.8034551E-25</float>
+                          <float>0.0333333351</float>
+                          <float>0.260792315</float>
+                          <float>0</float>
+                          <float>0.000471599924</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.5666666</float>
-                          <float>3.020508</float>
-                          <float>-1.8034551E-25</float>
-                          <float>-1.8034551E-25</float>
+                          <float>0.05</float>
+                          <float>0.39108935</float>
+                          <float>0</float>
+                          <float>0.0007958263</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.799999952</float>
-                          <float>4.00944328</float>
-                          <float>-1.8034551E-25</float>
-                          <float>-1.8034551E-25</float>
+                          <float>0.06666667</float>
+                          <float>0.52158463</float>
+                          <float>0</float>
+                          <float>0.000943201769</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.99999994</float>
-                          <float>4.5022</float>
-                          <float>-1.8034551E-25</float>
-                          <float>-1.8034551E-25</float>
+                          <float>0.0833333358</float>
+                          <float>0.6524763</float>
+                          <float>0</float>
+                          <float>0.0007368757</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>1.5666666</float>
-                          <float>4.5022</float>
-                          <float>-1.8034551E-25</float>
-                          <float>-1.8034551E-25</float>
+                          <float>0.1</float>
+                          <float>0.783962846</float>
+                          <float>0</float>
+                          <float>-3.35146888E-09</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>2.33333325</float>
-                          <float>4.5022</float>
-                          <float>-1.8034551E-25</float>
-                          <float>-1.8034551E-25</float>
+                          <float>0.116666667</float>
+                          <float>0.9182911</float>
+                          <float>0</float>
+                          <float>-0.00178897625</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.13333334</float>
+                          <float>1.05575228</float>
+                          <float>0</float>
+                          <float>-0.004592873</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.183333337</float>
+                          <float>1.4595691</float>
+                          <float>0</float>
+                          <float>-0.0124818878</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.2</float>
+                          <float>1.58219862</float>
+                          <float>0</float>
+                          <float>-0.0127332686</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.25</float>
+                          <float>1.91137636</float>
+                          <float>0</float>
+                          <float>-0.004073271</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.266666681</float>
+                          <float>2.01115942</float>
+                          <float>0</float>
+                          <float>0.0004621875</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.283333331</float>
+                          <float>2.10649443</float>
+                          <float>0</float>
+                          <float>0.00510031451</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.316666663</float>
+                          <float>2.28525853</float>
+                          <float>0</float>
+                          <float>0.0136183342</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.383333325</float>
+                          <float>2.591032</float>
+                          <float>0</float>
+                          <float>0.03148605</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.433333337</float>
+                          <float>2.757122</float>
+                          <float>0</float>
+                          <float>0.042707786</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.516666651</float>
+                          <float>2.92474747</float>
+                          <float>0</float>
+                          <float>0.0490004867</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.6</float>
+                          <float>2.98392916</float>
+                          <float>0</float>
+                          <float>0.02632205</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.65</float>
+                          <float>2.99708867</float>
+                          <float>0</float>
+                          <float>0.020801425</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.6666667</float>
+                          <float>3</float>
+                          <float>0</float>
+                          <float>0.0193127859</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
@@ -254,7 +409,9 @@
                         <duration>-1</duration>
                         <distance>-1</distance>
                         <ignoreRotation>false</ignoreRotation>
+                        <useStartRotation>false</useStartRotation>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -267,44 +424,46 @@
                     <NEData>
                       <data xsi:type="BTForbidActionData">
                         <finishResume>true</finishResume>
-                        <forbidDuration>1.166667</forbidDuration>
+                        <forbidDuration>0.433333337</forbidDuration>
                         <forbidArray>
                           <ForbidType>InputMove</ForbidType>
-                          <ForbidType>InputFace</ForbidType>
                         </forbidArray>
-                        <duration>1.166667</duration>
+                        <duration>0.433333337</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
                 <NEData>
                   <data xsi:type="BTTimeDecoratorData">
-                    <exeTime>0.8833333</exeTime>
-                    <time>0.8833333</time>
+                    <exeTime>0.433333337</exeTime>
+                    <time>0.433333337</time>
                   </data>
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTEnableCacheInputSkillActionData">
                         <finishResume>false</finishResume>
-                        <comboDuration>0.283333331</comboDuration>
-                        <duration>0.283333331</duration>
+                        <comboDuration>0.233333349</comboDuration>
+                        <duration>0.233333349</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
                 <NEData>
                   <data xsi:type="BTTimeDecoratorData">
-                    <exeTime>1.166667</exeTime>
-                    <time>1.166667</time>
+                    <exeTime>0.5500001</exeTime>
+                    <time>0.5500001</time>
                   </data>
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTSetSkillPhaseActionData">
                         <finishResume>false</finishResume>
-                        <phaseDuration>1.166667</phaseDuration>
+                        <phaseDuration>0.116666645</phaseDuration>
                         <phaseType>Backswing</phaseType>
-                        <duration>1.166667</duration>
+                        <duration>0.116666645</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -320,6 +479,7 @@
                 <startAngle>135</startAngle>
                 <endAngle>225</endAngle>
               </data>
+              <lstChild />
             </NEData>
             <NEData>
               <data xsi:type="BTTimeLineData" />
@@ -332,10 +492,11 @@
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTPlayAnimationActionData">
-                        <animDuration>2.33333349</animDuration>
-                        <animName>Anim_CS_DODGE_B</animName>
-                        <duration>2.33333349</duration>
+                        <animDuration>1</animDuration>
+                        <animName>Twinblades_Slide_B</animName>
+                        <duration>1</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -351,56 +512,161 @@
                           <float>0</float>
                           <float>-0</float>
                           <float>0</float>
+                          <float>-4.2903987E-09</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
+                          <float>0.0166666675</float>
+                          <float>-0.00139618025</float>
                           <float>0</float>
-                          <float>0.06666666</float>
-                          <float>-0</float>
-                          <float>0</float>
-                          <float>-0.436132431</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0.299999982</float>
-                          <float>-0</float>
-                          <float>0</float>
-                          <float>-1.86857522</float>
+                          <float>-0.1153466</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.5666666</float>
-                          <float>-0</float>
+                          <float>0.05</float>
+                          <float>-0.00418854039</float>
                           <float>0</float>
-                          <float>-3.020508</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0.799999952</float>
-                          <float>-0</float>
-                          <float>0</float>
-                          <float>-4.00944328</float>
+                          <float>-0.3460398</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.99999994</float>
-                          <float>-0</float>
+                          <float>0.06666667</float>
+                          <float>-0.0057277414</float>
                           <float>0</float>
-                          <float>-4.5022</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>1.5666666</float>
-                          <float>-0</float>
-                          <float>0</float>
-                          <float>-4.5022</float>
+                          <float>-0.467402726</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>2.33333325</float>
-                          <float>-0</float>
+                          <float>0.1</float>
+                          <float>-0.009735778</float>
                           <float>0</float>
-                          <float>-4.5022</float>
+                          <float>-0.7492347</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.166666672</float>
+                          <float>-0.0174501035</float>
+                          <float>0</float>
+                          <float>-1.279975</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.2</float>
+                          <float>-0.0200332329</float>
+                          <float>0</float>
+                          <float>-1.53039062</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.233333334</float>
+                          <float>-0.0209629349</float>
+                          <float>0</float>
+                          <float>-1.762229</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.316666663</float>
+                          <float>-0.0216664169</float>
+                          <float>0</float>
+                          <float>-2.32774782</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.35</float>
+                          <float>-0.0183588453</float>
+                          <float>0</float>
+                          <float>-2.53484035</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.383333325</float>
+                          <float>-0.009736226</float>
+                          <float>0</float>
+                          <float>-2.71112585</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.4</float>
+                          <float>-0.00573772471</float>
+                          <float>0</float>
+                          <float>-2.78291059</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.416666657</float>
+                          <float>-0.002289729</float>
+                          <float>0</float>
+                          <float>-2.84668517</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.433333337</float>
+                          <float>0.00125591131</float>
+                          <float>0</float>
+                          <float>-2.90650868</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.483333319</float>
+                          <float>0.0105754314</float>
+                          <float>0</float>
+                          <float>-3.0533154</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.516666651</float>
+                          <float>0.0142736547</float>
+                          <float>0</float>
+                          <float>-3.11803675</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.683333337</float>
+                          <float>0.0244178474</float>
+                          <float>0</float>
+                          <float>-3.32335067</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.733333349</float>
+                          <float>0.0199912712</float>
+                          <float>0</float>
+                          <float>-3.37510037</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.816666663</float>
+                          <float>0.00174105726</float>
+                          <float>0</float>
+                          <float>-3.44721437</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.8333333</float>
+                          <float>-0.00188409747</float>
+                          <float>0</float>
+                          <float>-3.45884442</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.8666667</float>
+                          <float>-0.007563139</float>
+                          <float>0</float>
+                          <float>-3.47882986</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.983333349</float>
+                          <float>-0.0137387095</float>
+                          <float>0</float>
+                          <float>-3.49803114</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>1</float>
+                          <float>-0.0144634414</float>
+                          <float>0</float>
+                          <float>-3.5</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
@@ -408,7 +674,9 @@
                         <duration>-1</duration>
                         <distance>-1</distance>
                         <ignoreRotation>false</ignoreRotation>
+                        <useStartRotation>false</useStartRotation>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -421,44 +689,46 @@
                     <NEData>
                       <data xsi:type="BTForbidActionData">
                         <finishResume>true</finishResume>
-                        <forbidDuration>1.166667</forbidDuration>
+                        <forbidDuration>0.65</forbidDuration>
                         <forbidArray>
                           <ForbidType>InputMove</ForbidType>
-                          <ForbidType>InputFace</ForbidType>
                         </forbidArray>
-                        <duration>1.166667</duration>
+                        <duration>0.65</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
                 <NEData>
                   <data xsi:type="BTTimeDecoratorData">
-                    <exeTime>0.8833333</exeTime>
-                    <time>0.8833333</time>
+                    <exeTime>0.533333361</exeTime>
+                    <time>0.533333361</time>
                   </data>
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTEnableCacheInputSkillActionData">
                         <finishResume>false</finishResume>
-                        <comboDuration>0.283333331</comboDuration>
-                        <duration>0.283333331</duration>
+                        <comboDuration>0.2833333</comboDuration>
+                        <duration>0.2833333</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
                 <NEData>
                   <data xsi:type="BTTimeDecoratorData">
-                    <exeTime>1.166667</exeTime>
-                    <time>1.166667</time>
+                    <exeTime>0.783333361</exeTime>
+                    <time>0.783333361</time>
                   </data>
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTSetSkillPhaseActionData">
                         <finishResume>false</finishResume>
-                        <phaseDuration>1.166667</phaseDuration>
+                        <phaseDuration>0.216666669</phaseDuration>
                         <phaseType>Backswing</phaseType>
-                        <duration>1.166667</duration>
+                        <duration>0.216666669</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -474,6 +744,7 @@
                 <startAngle>225</startAngle>
                 <endAngle>315</endAngle>
               </data>
+              <lstChild />
             </NEData>
             <NEData>
               <data xsi:type="BTTimeLineData" />
@@ -486,10 +757,11 @@
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTPlayAnimationActionData">
-                        <animDuration>2.33333349</animDuration>
-                        <animName>Anim_CS_DODGE_L</animName>
-                        <duration>2.33333349</duration>
+                        <animDuration>0.6666667</animDuration>
+                        <animName>Twinblades_Slide_L</animName>
+                        <duration>0.6666667</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -509,52 +781,143 @@
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.06666666</float>
-                          <float>-0.4361291</float>
+                          <float>0.0166666675</float>
+                          <float>-0.1042411</float>
+                          <float>0</float>
+                          <float>0.000147373023</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.0333333351</float>
+                          <float>-0.204662248</float>
+                          <float>0</float>
+                          <float>0.000471593667</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.05</float>
+                          <float>-0.3050834</float>
+                          <float>0</float>
+                          <float>0.0007958143</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.06666667</float>
+                          <float>-0.409324527</float>
+                          <float>0</float>
+                          <float>0.000943187333</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.0833333358</float>
+                          <float>-0.5212055</float>
+                          <float>0</float>
+                          <float>0.000736865157</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.1</float>
+                          <float>-0.6445464</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>0.299999982</float>
-                          <float>-1.868561</float>
+                          <float>0.116666667</float>
+                          <float>-0.785664737</float>
+                          <float>0</float>
+                          <float>-0.00178894575</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
+                          <float>0.13333334</float>
+                          <float>-0.942768157</float>
                           <float>0</float>
-                          <float>0</float>
-                          <float>0.5666666</float>
-                          <float>-3.02048516</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0.799999952</float>
-                          <float>-4.009413</float>
+                          <float>-0.004592804</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
+                          <float>0.183333337</float>
+                          <float>-1.42653739</float>
                           <float>0</float>
-                          <float>0</float>
-                          <float>0.99999994</float>
-                          <float>-4.502166</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>0</float>
-                          <float>1.5666666</float>
-                          <float>-4.502166</float>
+                          <float>-0.0124816829</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
+                          <float>0.2</float>
+                          <float>-1.56413019</float>
+                          <float>0</float>
+                          <float>-0.0127330292</float>
                           <float>0</float>
                           <float>0</float>
-                          <float>2.33333325</float>
-                          <float>-4.502166</float>
+                          <float>0</float>
+                          <float>0.25</float>
+                          <float>-1.88993561</float>
+                          <float>0</float>
+                          <float>-0.00407297257</float>
                           <float>0</float>
                           <float>0</float>
+                          <float>0</float>
+                          <float>0.266666681</float>
+                          <float>-1.98218656</float>
+                          <float>0</float>
+                          <float>0.0004624988</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.283333331</float>
+                          <float>-2.07063532</float>
+                          <float>0</float>
+                          <float>0.00510063767</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.316666663</float>
+                          <float>-2.24419379</float>
+                          <float>0</float>
+                          <float>0.0136186834</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.383333325</float>
+                          <float>-2.551323</float>
+                          <float>0</float>
+                          <float>0.03148644</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.433333337</float>
+                          <float>-2.72365236</float>
+                          <float>0</float>
+                          <float>0.04270821</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.516666651</float>
+                          <float>-2.90720487</float>
+                          <float>0</float>
+                          <float>0.0490009449</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.6</float>
+                          <float>-2.97994685</float>
+                          <float>0</float>
+                          <float>0.02632251</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.65</float>
+                          <float>-2.99629</float>
+                          <float>0</float>
+                          <float>0.0208018832</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0</float>
+                          <float>0.6666667</float>
+                          <float>-3</float>
+                          <float>0</float>
+                          <float>0.0193132423</float>
                           <float>0</float>
                           <float>0</float>
                           <float>0</float>
@@ -562,7 +925,9 @@
                         <duration>-1</duration>
                         <distance>-1</distance>
                         <ignoreRotation>false</ignoreRotation>
+                        <useStartRotation>false</useStartRotation>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
@@ -575,44 +940,46 @@
                     <NEData>
                       <data xsi:type="BTForbidActionData">
                         <finishResume>true</finishResume>
-                        <forbidDuration>1.166667</forbidDuration>
+                        <forbidDuration>0.45</forbidDuration>
                         <forbidArray>
                           <ForbidType>InputMove</ForbidType>
-                          <ForbidType>InputFace</ForbidType>
                         </forbidArray>
-                        <duration>1.166667</duration>
+                        <duration>0.45</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
                 <NEData>
                   <data xsi:type="BTTimeDecoratorData">
-                    <exeTime>0.8833333</exeTime>
-                    <time>0.8833333</time>
+                    <exeTime>0.383333325</exeTime>
+                    <time>0.383333325</time>
                   </data>
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTEnableCacheInputSkillActionData">
                         <finishResume>false</finishResume>
-                        <comboDuration>0.283333331</comboDuration>
-                        <duration>0.283333331</duration>
+                        <comboDuration>0.233333334</comboDuration>
+                        <duration>0.233333334</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>
                 <NEData>
                   <data xsi:type="BTTimeDecoratorData">
-                    <exeTime>1.166667</exeTime>
-                    <time>1.166667</time>
+                    <exeTime>0.5500001</exeTime>
+                    <time>0.5500001</time>
                   </data>
                   <lstChild>
                     <NEData>
                       <data xsi:type="BTSetSkillPhaseActionData">
                         <finishResume>false</finishResume>
-                        <phaseDuration>1.166667</phaseDuration>
+                        <phaseDuration>0.116666615</phaseDuration>
                         <phaseType>Backswing</phaseType>
-                        <duration>1.166667</duration>
+                        <duration>0.116666615</duration>
                       </data>
+                      <lstChild />
                     </NEData>
                   </lstChild>
                 </NEData>

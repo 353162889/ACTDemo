@@ -26,6 +26,7 @@ namespace Framework
         {
             GameObject go = (GameObject)obj;
             this.gameObject.AddChildToParent(go);
+            go.SetActive(true);
             m_cEffectInfo = go.AddComponentOnce<EffectInfo>();
             m_fDuration = m_cEffectInfo.duration;
             if (m_bAutoDestory)
@@ -42,11 +43,11 @@ namespace Framework
         {
             m_bAutoDestory = autoDestory;
             m_sPath = path;
-            this.name = path;
+//            this.name = path;
             m_fDuration = 0;
             m_bDestory = false;
             m_cEffectInfo = null;
-            ResourceObjectPool.Instance.GetObject(m_sPath,false, OnLoadResource);
+            ResourceObjectPool.Instance.GetObject(m_sPath,false, OnLoadResource, false);
         }
 
         public void End()

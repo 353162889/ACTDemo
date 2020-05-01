@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using Framework;
+using Unity.Entities;
+using UnityEngine;
 
 namespace Game
 {
     public class BTPlayHitEffectActionData
     {
+        public bool followTarget;
         public string effectName;
     }
     public class BTPlayHitEffectAction : BTAction<SkillBTContext, BTPlayHitEffectActionData>
@@ -16,7 +19,16 @@ namespace Game
             for (int i = 0; i < lst.Count; i++)
             {
                 var damageInfo = lst[i];
-                var go = SceneEffectPool.Instance.CreateEffect(data.effectName, true, null);
+                Transform parent = null;
+                if (data.followTarget)
+                {
+                    if (damageInfo.target != Entity.Null)
+                    {
+                        var gameObjectComponent = context.world.GetComponent<GameObjectComponent>(damageInfo.target);
+                        parent = gameObjectComponent.transform;
+                    }
+                }
+                var go = SceneEffectPool.Instance.CreateEffect(data.effectName, true, parent);
                 if (go != null)
                 {
                     go.transform.position = damageInfo.hitInfo.point;

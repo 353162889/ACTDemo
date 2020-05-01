@@ -33,7 +33,7 @@ namespace NodeEditor
             get { return m_dicNodeDataType; }
         }
         private Func<Type, object> m_fCreateNodeDataFunc;
-        private NEData m_cCopyObj;
+        private NENode m_cCopyObj;
         private Func<NENode, NEData> m_cCopyFunc;
 
         public NECanvas(List<Type> lstNodeDataType, Dictionary<string, List<Type>> extCategoryType, Func<Type,object> createNodeDataDataFunc, Func<NENode, NEData> copyFunc = null)
@@ -569,7 +569,8 @@ namespace NodeEditor
             menu.AddItem(new GUIContent("拷贝节点"), false, () => {
                 if (m_cCopyFunc != null)
                 {
-                    m_cCopyObj = m_cCopyFunc.Invoke(node);
+                    m_cCopyObj = node;
+//                    m_cCopyObj = m_cCopyFunc.Invoke(node);
                 }
             });
             int count = m_dicNodeDataType.Count;
@@ -606,8 +607,11 @@ namespace NodeEditor
             {
                 menu.AddItem(new GUIContent("粘贴"), false, () =>
                 {
-                    CreateNENode(m_cCopyObj, node);
-                    RefreshPosition();
+                    if (m_cCopyFunc != null)
+                    {
+                        CreateNENode(m_cCopyFunc.Invoke(m_cCopyObj), node);
+                        RefreshPosition();
+                    }
                 });
             }
             menu.ShowAsContext();

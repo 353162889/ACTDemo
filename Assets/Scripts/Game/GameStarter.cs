@@ -121,6 +121,7 @@ namespace Game
             var goEntityHit = new GameObject("EntityHitPool");
             GameObject.DontDestroyOnLoad(goEntityHit);
             BehaviourPool<EntityBoxHit>.Instance.Init(30, goEntityHit.transform);
+            BehaviourPool<EntitySphereHit>.Instance.Init(30, goEntityHit.transform);
 
             ResetObjectPool<List<Entity>>.Instance.Init(20, list => list.Clear());
 

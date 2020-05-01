@@ -19,6 +19,7 @@ namespace NodeEditor
             {typeof(BTAnimationMoveActionData), typeof(NEAnimationMoveTrack)},
             {typeof(BTPlayEffectActionData), typeof(NEPlayEffectTrack)},
             {typeof(BTBoxColliderActionData), typeof(NEBoxColliderTrack)},
+            {typeof(BTSphereColliderActionData), typeof(NESphereColliderTrack)},
         };
 
         public static Type TryGetDefaultData(Type trackType)

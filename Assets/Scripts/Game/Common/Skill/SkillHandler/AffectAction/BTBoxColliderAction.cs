@@ -40,7 +40,7 @@ namespace Game
             {
                 var physicComponent = context.world.GetComponent<PhysicComponent>(context.skillComponent.componentEntity);
                 if (physicComponent == null) return BTStatus.Fail;
-                var attackBoxParent = physicComponent.attackBoxParent;
+                var attackBoxParent = physicComponent.attackColliderParent;
                 var entityBoxHit = BehaviourPool<EntityBoxHit>.Instance.GetObject(attackBoxParent);
                 entityBoxHit.Init(context.world, attackBoxParent, data.localPos, data.localRot, data.size);
                 cacheData.boxHit = entityBoxHit;
