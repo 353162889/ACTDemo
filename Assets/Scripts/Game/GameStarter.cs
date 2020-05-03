@@ -126,6 +126,7 @@ namespace Game
             ResetObjectPool<List<Entity>>.Instance.Init(20, list => list.Clear());
 
             ResetObjectPool<List<int>>.Instance.Init(50, lst => lst.Clear());
+            ResetObjectPool<List<BuffStateType>>.Instance.Init(2, lst => lst.Clear());
 
             gameObject.AddComponentOnce<FPSMono>();
         }

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <lstChild>
+    <NEData>
+      <data xsi:type="BTParallelAndData" />
+      <lstChild>
+        <NEData>
+          <data xsi:type="BTSelectorData" />
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTSequenceData" />
+              <lstChild>
+                <NEData>
+                  <data xsi:type="BTBuffDirectionInRangeData">
+                    <directionType>ColliderDirect</directionType>
+                    <startAngle>315</startAngle>
+                    <endAngle>45</endAngle>
+                  </data>
+                  <lstChild />
+                </NEData>
+                <NEData>
+                  <data xsi:type="BTBuffPlayAnimationActionData">
+                    <animName>Hit_Back</animName>
+                  </data>
+                  <lstChild />
+                </NEData>
+              </lstChild>
+            </NEData>
+            <NEData>
+              <data xsi:type="BTSequenceData" />
+              <lstChild>
+                <NEData>
+                  <data xsi:type="BTBuffDirectionInRangeData">
+                    <directionType>ColliderDirect</directionType>
+                    <startAngle>45</startAngle>
+                    <endAngle>135</endAngle>
+                  </data>
+                  <lstChild />
+                </NEData>
+                <NEData>
+                  <data xsi:type="BTBuffPlayAnimationActionData">
+                    <animName>Hit_Right</animName>
+                  </data>
+                  <lstChild />
+                </NEData>
+              </lstChild>
+            </NEData>
+            <NEData>
+              <data xsi:type="BTSequenceData" />
+              <lstChild>
+                <NEData>
+                  <data xsi:type="BTBuffDirectionInRangeData">
+                    <directionType>ColliderDirect</directionType>
+                    <startAngle>135</startAngle>
+                    <endAngle>225</endAngle>
+                  </data>
+                  <lstChild />
+                </NEData>
+                <NEData>
+                  <data xsi:type="BTBuffPlayAnimationActionData">
+                    <animName>Hit_Front</animName>
+                  </data>
+                  <lstChild />
+                </NEData>
+              </lstChild>
+            </NEData>
+            <NEData>
+              <data xsi:type="BTSequenceData" />
+              <lstChild>
+                <NEData>
+                  <data xsi:type="BTBuffDirectionInRangeData">
+                    <directionType>ColliderDirect</directionType>
+                    <startAngle>225</startAngle>
+                    <endAngle>315</endAngle>
+                  </data>
+                  <lstChild />
+                </NEData>
+                <NEData>
+                  <data xsi:type="BTBuffPlayAnimationActionData">
+                    <animName>Hit_Left</animName>
+                  </data>
+                  <lstChild />
+                </NEData>
+              </lstChild>
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTBuffMoveActionData">
+            <directionType>ColliderDirect</directionType>
+            <distance>-1</distance>
+            <ignoreRotation>false</ignoreRotation>
+            <useStartRotation>true</useStartRotation>
+          </data>
+          <lstChild />
+        </NEData>
+      </lstChild>
+    </NEData>
+  </lstChild>
+</NEData>

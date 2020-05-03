@@ -18,8 +18,7 @@ namespace Game
 
         //跳跃落地高度
         public float endJumpGroundHeight = 0;
-        //跳跃速度
-        public Vector3 jumpVerticalVelocity;
+
         public Vector3 jumpHorizonalVelocity;
 
         public Forbiddance forbidance;

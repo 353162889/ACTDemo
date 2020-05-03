@@ -24,6 +24,7 @@ namespace GameData
 		public string effectName2 { get; private set; }
 		public string effect2Mount { get; private set; }
 		public string script { get; private set; }
+		public float overrideDistance { get; private set; }
 		public ResBuff(SecurityElement node)
 		{
 			id = int.Parse(node.Attribute("id"));
@@ -66,6 +67,7 @@ namespace GameData
 			effectName2 = node.Attribute("effectName2");
 			effect2Mount = node.Attribute("effect2Mount");
 			script = node.Attribute("script");
+			overrideDistance = float.Parse(node.Attribute("overrideDistance"));
 		}
 	}
 }

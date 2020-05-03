@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<restargetfilter id="1" ownerType="2"/>
+	<restargetfilter excludeStates="GROUND" id="1" includeStates="" ownerType="2"/>
+	<restargetfilter excludeStates="" id="2" includeStates="" ownerType="2"/>
 </root>

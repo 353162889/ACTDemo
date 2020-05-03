@@ -7,7 +7,7 @@
         public static string MoveDirectionX = "MoveDirectionX";
         public static string MoveDirectionZ = "MoveDirectionZ";
         public static string MoveDirection = "MoveDirection";
-        public static string JumpUp = "JumpUp";
+        public static string JumpBeforeAir = "JumpBeforeAir";
         public static string JumpBeforeGround = "JumpBeforeGround";
         public static string Jumping = "Jumping";
         public static string Jump = "Jump";

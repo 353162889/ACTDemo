@@ -16,6 +16,7 @@ namespace GameData
 		public List<int> buffIds { get; private set; }
 		public List<string> properties { get; private set; }
 		public string script { get; private set; }
+		public float overrideDistance { get; private set; }
 		public ResBuffPartLogic(SecurityElement node)
 		{
 			id = int.Parse(node.Attribute("id"));
@@ -50,6 +51,7 @@ namespace GameData
 				}
 			}
 			script = node.Attribute("script");
+			overrideDistance = float.Parse(node.Attribute("overrideDistance"));
 		}
 	}
 }

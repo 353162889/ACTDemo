@@ -22,7 +22,7 @@ namespace Game
         }
         public Forbiddance AddForbiddance(ForbidComponent forbidComponent, string desc = "")
         {
-            if (forbidComponent == null) return Forbiddance.Null;
+            if (forbidComponent == null) return null;
             Forbiddance forbid = ObjectPool<Forbiddance>.Instance.GetObject();
             forbid.Index = forbidComponent.forbidIndex++;
             forbid.desc = desc;

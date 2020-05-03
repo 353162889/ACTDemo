@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <lstChild>
+    <NEData>
+      <data xsi:type="BTSequenceData" />
+      <lstChild>
+        <NEData>
+          <data xsi:type="BTBuffFaceData">
+            <directionType>CasterToHost</directionType>
+            <opposite>true</opposite>
+            <immediately>true</immediately>
+          </data>
+          <lstChild />
+        </NEData>
+        <NEData>
+          <data xsi:type="BTFloatActionData">
+            <directionType>CasterToHost</directionType>
+            <height>3</height>
+            <horizontalSpeed>5</horizontalSpeed>
+            <endGroundHeight>0.5</endGroundHeight>
+          </data>
+          <lstChild />
+        </NEData>
+      </lstChild>
+    </NEData>
+  </lstChild>
+</NEData>

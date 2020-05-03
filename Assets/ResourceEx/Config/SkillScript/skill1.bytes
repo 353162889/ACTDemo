@@ -299,7 +299,7 @@
                 <duration>-1</duration>
                 <distance>15</distance>
                 <ignoreRotation>true</ignoreRotation>
-                <useStartRotation>true</useStartRotation>
+                <useStartRotation>false</useStartRotation>
               </data>
               <lstChild />
             </NEData>
@@ -346,63 +346,6 @@
           </data>
           <lstChild>
             <NEData>
-              <data xsi:type="BTBoxColliderActionData">
-                <filterId>1</filterId>
-                <localPos>
-                  <x>0</x>
-                  <y>0.68</y>
-                  <z>0</z>
-                </localPos>
-                <localRot>
-                  <x>0</x>
-                  <y>0</y>
-                  <z>0</z>
-                  <w>1</w>
-                  <eulerAngles>
-                    <x>-0</x>
-                    <y>0</y>
-                    <z>0</z>
-                  </eulerAngles>
-                </localRot>
-                <size>
-                  <x>3</x>
-                  <y>2</y>
-                  <z>2</z>
-                </size>
-                <colliderDuration>1.5333333</colliderDuration>
-                <duration>1.5333333</duration>
-              </data>
-              <lstChild>
-                <NEData>
-                  <data xsi:type="BTAddBuffActionData">
-                    <filterId>1</filterId>
-                    <finishResume>false</finishResume>
-                    <addBuffDuration>0</addBuffDuration>
-                    <lstBuffId>
-                      <int>1</int>
-                    </lstBuffId>
-                    <duration>0</duration>
-                  </data>
-                  <lstChild />
-                </NEData>
-                <NEData>
-                  <data xsi:type="BTPlayHitEffectActionData">
-                    <followTarget>false</followTarget>
-                    <effectName>HitEffect</effectName>
-                  </data>
-                  <lstChild />
-                </NEData>
-              </lstChild>
-            </NEData>
-          </lstChild>
-        </NEData>
-        <NEData>
-          <data xsi:type="BTTimeDecoratorData">
-            <exeTime>0</exeTime>
-            <time>0</time>
-          </data>
-          <lstChild>
-            <NEData>
               <data xsi:type="BTForbidActionData">
                 <finishResume>true</finishResume>
                 <forbidDuration>1.25</forbidDuration>
@@ -417,20 +360,73 @@
         </NEData>
         <NEData>
           <data xsi:type="BTTimeDecoratorData">
-            <exeTime>0</exeTime>
-            <time>0</time>
+            <exeTime>0.416666657</exeTime>
+            <time>0.416666657</time>
           </data>
           <lstChild>
             <NEData>
               <data xsi:type="BTForbidActionData">
                 <finishResume>true</finishResume>
-                <forbidDuration>1.01666665</forbidDuration>
+                <forbidDuration>0.599999964</forbidDuration>
                 <forbidArray>
                   <ForbidType>InputFace</ForbidType>
                 </forbidArray>
-                <duration>1.01666665</duration>
+                <duration>0.599999964</duration>
               </data>
               <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0.45</exeTime>
+            <time>0.45</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTSphereColliderActionData">
+                <filterId>2</filterId>
+                <localPos>
+                  <x>0</x>
+                  <y>0.83</y>
+                  <z>0</z>
+                </localPos>
+                <localRot>
+                  <x>0</x>
+                  <y>0</y>
+                  <z>0</z>
+                  <w>1</w>
+                  <eulerAngles>
+                    <x>-0</x>
+                    <y>0</y>
+                    <z>0</z>
+                  </eulerAngles>
+                </localRot>
+                <radius>2.5</radius>
+                <colliderDuration>0.8</colliderDuration>
+                <duration>0.8</duration>
+              </data>
+              <lstChild>
+                <NEData>
+                  <data xsi:type="BTAddBuffActionData">
+                    <filterId>2</filterId>
+                    <finishResume>false</finishResume>
+                    <addBuffDuration>0</addBuffDuration>
+                    <lstBuffId>
+                      <int>10</int>
+                    </lstBuffId>
+                    <duration>0</duration>
+                  </data>
+                  <lstChild />
+                </NEData>
+                <NEData>
+                  <data xsi:type="BTPlayHitEffectActionData">
+                    <followTarget>false</followTarget>
+                    <effectName>HitEffect</effectName>
+                  </data>
+                  <lstChild />
+                </NEData>
+              </lstChild>
             </NEData>
           </lstChild>
         </NEData>

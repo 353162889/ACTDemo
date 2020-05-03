@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using Framework;
+using Unity.Entities;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 
@@ -10,12 +11,14 @@ namespace Game
         private ForbidSystem forbidSystem;
         private FaceSystem faceSystem;
         private SkillSystem skillSystem;
+        private InAirSystem inAirSystem;
         protected override void OnCreate()
         {
             stepMoveSystem = World.GetOrCreateSystem<StepMoveSystem>();
             forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
             faceSystem = World.GetOrCreateSystem<FaceSystem>();
             skillSystem = World.GetOrCreateSystem<SkillSystem>();
+            inAirSystem = World.GetOrCreateSystem<InAirSystem>();
         }
         public void Jump(Entity entity, Vector3 horizonalVelcolity)
         {
@@ -31,20 +34,19 @@ namespace Game
 
             jumpComponent.isJump = true;
             jumpComponent.startJumpGroundTime = Time.time + jumpComponent.startJumpWaitTime;
-
-            var y = Mathf.Sqrt(2 * jumpComponent.desiredHeight * Mathf.Abs(gravityComponent.gravity));
-            jumpComponent.jumpVerticalVelocity = new Vector3(0, y, 0);
             horizonalVelcolity.y = 0;
             jumpComponent.jumpHorizonalVelocity = horizonalVelcolity;
 //            faceSystem.FaceTo(entity, jumpComponent.jumpHorizonalVelocity);
             jumpComponent.forbidance.Forbid(ForbidType.InputMove);
             jumpComponent.forbidance.Forbid(ForbidType.InputFace);
+            //起跳的前摇不能释放技能
+            jumpComponent.forbidance.Forbid(ForbidType.Ability);
         }
 
         public void ResetJump(JumpComponent jumpComponent)
         {
+            inAirSystem.ResetAirSpeed(jumpComponent.componentEntity);
             jumpComponent.isJump = false;
-            jumpComponent.jumpVerticalVelocity = Vector3.zero;
             jumpComponent.jumpHorizonalVelocity = Vector3.zero;
             jumpComponent.forbidance.Reset();
             jumpComponent.jumpStateType = JumpStateType.None;
@@ -53,15 +55,15 @@ namespace Game
 
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, JumpComponent jumpComponent, GravityComponent gravityComponent) =>
+            Entities.ForEach((Entity entity, JumpComponent jumpComponent, GravityComponent gravityComponent, InAirComponent inAirComponent) =>
             {
                 if (jumpComponent.isJump && jumpComponent.desiredHeight > 0)
                 {
-                    if (Time.time >= jumpComponent.startJumpGroundTime)
+                    if (Time.time >= jumpComponent.startJumpGroundTime && !inAirComponent.isInAir)
                     {
-                        stepMoveSystem.AppendSingleFrameVelocity(entity, jumpComponent.jumpHorizonalVelocity);
-                        stepMoveSystem.AppendVelocity(entity, jumpComponent.jumpVerticalVelocity);
-                        jumpComponent.jumpVerticalVelocity = Vector3.zero;
+                        inAirSystem.MoveToAir(entity, jumpComponent.jumpHorizonalVelocity, jumpComponent.desiredHeight);
+                        //跳起来之后才可以释放技能
+                        jumpComponent.forbidance.ResumeForbid(ForbidType.Ability);
                     }
                 }
             });
@@ -75,7 +77,11 @@ namespace Game
                 if (jumpComponent.isJump && jumpComponent.desiredHeight > 0)
                 {
                     //更新跳跃状态
-                    if (stepMoveComponent.velocity.y > 0 || Time.time < jumpComponent.startJumpGroundTime)
+                    if (Time.time < jumpComponent.startJumpGroundTime)
+                    {
+                        jumpComponent.jumpStateType = JumpStateType.JumpBeforeAir;
+                    }
+                    else if (stepMoveComponent.velocity.y > 0)
                     {
                         jumpComponent.jumpStateType = JumpStateType.Jumping;
                     }

@@ -57,7 +57,7 @@ namespace Game
                     }
                 }
             }
-            if (faceSystem != null && faceSystem.IsRotating(entity))
+            if (!data.immediately && faceSystem != null && faceSystem.IsRotating(entity))
             {
                 return BTStatus.Running;
             }

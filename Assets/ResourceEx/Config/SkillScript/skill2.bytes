@@ -367,7 +367,7 @@
                   <float>0</float>
                 </movePoints>
                 <duration>-1</duration>
-                <distance>13</distance>
+                <distance>10</distance>
                 <ignoreRotation>true</ignoreRotation>
                 <useStartRotation>true</useStartRotation>
               </data>

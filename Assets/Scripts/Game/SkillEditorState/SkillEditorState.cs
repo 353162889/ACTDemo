@@ -34,7 +34,7 @@ namespace Game
         private BuffSystem buffSystem;
         private BuffStateSystem buffStateSystem;
         private DamageSystem damageSystem;
-        private BuffFloatSystem buffFloatSystem;
+        private InAirSystem inAirSystem;
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
@@ -61,7 +61,7 @@ namespace Game
             buffStateSystem = world.GetOrCreateSystem<BuffStateSystem>();
             buffSystem = world.GetOrCreateSystem<BuffSystem>();
             damageSystem = world.GetOrCreateSystem<DamageSystem>();
-            buffFloatSystem = world.GetOrCreateSystem<BuffFloatSystem>();
+            inAirSystem = world.GetOrCreateSystem<InAirSystem>();
 
 
             var playerEntity = CreatePlayer();
@@ -146,7 +146,7 @@ namespace Game
             var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
             var buffStateComponent = world.AddComponentOnce<BuffStateComponent>(entity);
             var buffComponent = world.AddComponentOnce<BuffComponent>(entity);
-            var buffFloatComponent = world.AddComponentOnce<BuffFloatComponent>(entity);
+            var buffFloatComponent = world.AddComponentOnce<InAirComponent>(entity);
 
             return entity;
         }
@@ -201,7 +201,7 @@ namespace Game
             var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
             var buffStateComponent = world.AddComponentOnce<BuffStateComponent>(entity);
             var buffComponent = world.AddComponentOnce<BuffComponent>(entity);
-            var buffFloatComponent = world.AddComponentOnce<BuffFloatComponent>(entity);
+            var buffFloatComponent = world.AddComponentOnce<InAirComponent>(entity);
 
             return entity;
         }
@@ -222,12 +222,12 @@ namespace Game
 
             directionMoveSystem.Update();
             jumpSystem.Update();
-            buffFloatSystem.Update();
+            inAirSystem.Update();
             gravitySystem.Update();
             stepMoveSystem.Update();
             faceSystem.Update();
+            inAirSystem.UpdateState();
             jumpSystem.UpdateState();
-            buffFloatSystem.UpdateState();
             transformSystem.Update();
 
             forbidSystem.Update();

@@ -74,7 +74,7 @@ public static class CustomMenuItem
     }
 
     [MenuItem("Tools/OpenTestNETreeWindow &F1")]
-    public static void OpenTestNETreeWindow()
+    public static void OpenSkillNETreeWindow()
     {
         BTDataHandlerInitialize.InitializeInEditor(true);
         NETreeComposeType[] staticConfig = new NETreeComposeType[]
@@ -83,6 +83,18 @@ public static class CustomMenuItem
             CreateNETreeComposeType(typeof(BuffBTContext),"Buff", "Assets/ResourceEx/Config/BuffScript", "buff", "bytes", "Buff脚本"),
         };
         NETreeWindow.OpenWindow(staticConfig, 0);
+    }
+
+    [MenuItem("Tools/OpenTestNETreeWindow &F2")]
+    public static void OpenBuffNETreeWindow()
+    {
+        BTDataHandlerInitialize.InitializeInEditor(true);
+        NETreeComposeType[] staticConfig = new NETreeComposeType[]
+        {
+            CreateNETreeComposeType(typeof(SkillBTContext),"Skill", "Assets/ResourceEx/Config/SkillScript", "skill", "bytes", "技能脚本"),
+            CreateNETreeComposeType(typeof(BuffBTContext),"Buff", "Assets/ResourceEx/Config/BuffScript", "buff", "bytes", "Buff脚本"),
+        };
+        NETreeWindow.OpenWindow(staticConfig, 1);
     }
 }
 

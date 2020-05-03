@@ -48,7 +48,7 @@ namespace Game
             bool rRef = ReferenceEquals(null, rhs);
             if (lRef && rRef) return true;
             if (lRef || rRef) return false;
-            return rhs.Index == rhs.Index;
+            return lhs.Index == rhs.Index;
         }
 
         public static bool operator !=(Forbiddance lhs, Forbiddance rhs)

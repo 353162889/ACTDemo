@@ -46,8 +46,11 @@ namespace Game
     public class BuffComponent : DataComponent
     {
         public int startIndex = 1;
+        //buffId对于buff数据列表
         public Dictionary<int, List<BuffData>> dicIdToBuffLst = new Dictionary<int, List<BuffData>>();
+        //buff的index对于buff数据
         public Dictionary<int, BuffData> dicIndexToBuffData = new Dictionary<int, BuffData>();
+        //当前帧添加的buff数据（buff的真正附加时机是在update中）
         public List<BuffData> lstAdd = new List<BuffData>();
     }
 }

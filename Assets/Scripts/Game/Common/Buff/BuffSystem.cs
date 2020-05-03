@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cinemachine;
 using Framework;
 using GameData;
 using Unity.Entities;
@@ -72,12 +73,92 @@ namespace Game
             return damageInfo;
         }
 
+        private bool CheckBuffIsRefuse(BuffComponent buffComponent, ResBuff buffCfg)
+        {
+            Entity entity = buffComponent.componentEntity;
+            var buffStateComponent = World.GetComponent<BuffStateComponent>(entity);
+            foreach (string strBuffCfgState in buffCfg.states)
+            {
+                var state = BuffStateConfig.GetStateTypeByString(strBuffCfgState);
+                var lst = BuffStateConfig.GetRefuseStateList(state);
+                if (lst != null)
+                {
+                    foreach (var buffStateType in lst)
+                    {
+                        if (buffStateSystem.HasState(buffStateComponent, buffStateType))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void AddBuffRemoveOther(BuffComponent buffComponent, BuffData addBuffData, ResBuff addBuffCfg)
+        {
+            Entity entity = buffComponent.componentEntity;
+            foreach (string strBuffCfgState in addBuffCfg.states)
+            {
+                var state = BuffStateConfig.GetStateTypeByString(strBuffCfgState);
+                var buffStateCfg = BuffStateConfig.GetConfig(state);
+                foreach (var refuseState in buffStateCfg.refuseStates)
+                {
+                    var strRefuseState = BuffStateConfig.GetStringByStateType(refuseState);
+                    foreach (var pair in buffComponent.dicIdToBuffLst)
+                    {
+                        int buffId = pair.Key;
+                        var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffId);
+                        if (buffCfg.states.Contains(strRefuseState))
+                        {
+                            RemoveBuffById(entity, buffId);
+                        }
+                    }
+
+                    foreach (var buffData in buffComponent.lstAdd)
+                    {
+                        int buffId = buffData.buffId;
+                        var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffId);
+                        if (buffCfg.states.Contains(strRefuseState))
+                        {
+                            RemoveBuffById(entity, buffId);
+                        }
+                    }
+                   
+                }
+                foreach (var removeState in buffStateCfg.removeStates)
+                {
+                    var strRemoveState = BuffStateConfig.GetStringByStateType(removeState);
+                    foreach (var pair in buffComponent.dicIdToBuffLst)
+                    {
+                        int buffId = pair.Key;
+                        var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffId);
+                        if (buffCfg.states.Contains(strRemoveState))
+                        {
+                            RemoveBuffById(entity, buffId);
+                        }
+                    }
+
+                    foreach (var buffData in buffComponent.lstAdd)
+                    {
+                        int buffId = buffData.buffId;
+                        var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffId);
+                        if (buffCfg.states.Contains(strRemoveState))
+                        {
+                            RemoveBuffById(entity, buffId);
+                        }
+                    }
+                }
+            }
+        }
+
         private BuffData AddBuffInner(Entity entity, int buffId)
         {
             var buffComponent = World.GetComponent<BuffComponent>(entity);
             if (buffComponent == null) return null;
             var buffCfg = ResCfgSys.Instance.GetCfg<ResBuff>(buffId);
             if (buffCfg == null) return null;
+            if (CheckBuffIsRefuse(buffComponent, buffCfg)) return null;
             var multiCount = buffCfg.multiCount;
             if (multiCount <= 0) return null;
             List<BuffData> lst;
@@ -131,7 +212,7 @@ namespace Game
                 buffPartData.enabled = false;
                 buffData.lstPart.Add(buffPartData);
             }
-
+            AddBuffRemoveOther(buffComponent, buffData, buffCfg);
             buffComponent.lstAdd.Add(buffData);
             return buffData;
         }
@@ -375,6 +456,7 @@ namespace Game
                 float deltaTime = Time.deltaTime;
                 buffData.buffBTContext.Reset();
                 buffData.buffBTContext.Init(World, buffComponent, buffData, btTreeData, this, deltaTime);
+                InitBuffOverrideParam(buffData.buffBTContext, buffCfg);
                 BTStatus btState = Execute(buffData.buffBTContext);
                 if (btState != BTStatus.Running)
                 {
@@ -387,6 +469,11 @@ namespace Game
             {
                 buffData.Detach();
             }
+        }
+
+        private void InitBuffOverrideParam(BuffBTContext context, ResBuff buffCfg)
+        {
+            context.blackBoard.SetData(BuffBlackBoardKeys.OverrideDistance, buffCfg.overrideDistance);
         }
 
         private void EnableBuffPart(BuffComponent buffComponent, BuffData buffData, BuffPartData buffPartData, bool executeImmediately = true)
@@ -423,6 +510,7 @@ namespace Game
             }
         }
 
+       
         private void ExecuteBuffPart(BuffComponent buffComponent, BuffData buffData, BuffPartData buffPartData,
             ResBuffPartLogic buffPartCfg)
         {
@@ -449,6 +537,7 @@ namespace Game
                         buffPartData.buffBTContext.Reset();
                         buffPartData.buffBTContext.Init(World, buffComponent, buffData, btTreeData, this, 0);
                         buffPartData.buffBTContext.SetPartData(buffPartData);
+                        InitBuffPartOverrideParam(buffPartData.buffBTContext, buffPartCfg);
                         Execute(buffPartData.buffBTContext);
                         Clear(buffPartData.buffBTContext);
                     }
@@ -456,6 +545,12 @@ namespace Game
                 }
             }
         }
+
+        private void InitBuffPartOverrideParam(BuffBTContext context, ResBuffPartLogic buffPartCfg)
+        {
+            context.blackBoard.SetData(BuffBlackBoardKeys.OverrideDistance, buffPartCfg.overrideDistance);
+        }
+
 
         private void AddProperty(BuffComponent buffComponent, BuffData buffData, BuffPartData buffPartData, ResBuffPartLogic buffPartCfg)
         {

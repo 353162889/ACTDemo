@@ -5,6 +5,12 @@ using Framework;
 
 namespace Game
 {
+
+    public static class BuffBlackBoardKeys
+    {
+        public static string OverrideDistance = "OverrideDistance";
+    }
+
     public enum BuffExeStatus
     {
         Init,

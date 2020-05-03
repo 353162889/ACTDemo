@@ -15,7 +15,8 @@ namespace Game
         public float distance = -1;
         //是否忽略旋转
         public bool ignoreRotation = false;
-        public bool useStartRotation = false;
+        //是否使用初始方向（即在移动过程中如果面向改变了，移动路径是否已当前面向作为参考）
+        public bool useStartRotation = true;
         [NonSerialized]
         public float[] runtimeMovePoints = null;
     }
@@ -46,29 +47,36 @@ namespace Game
             }
 
             var cacheData = context.executeCache.GetCache<InnerBTAnimationMoveActionData>(btData.dataIndex, DefaultActionData);
+            float startTime = cacheData.time;
+            cacheData.time = cacheData.time + context.deltaTime;
+            float endTime = cacheData.time;
+           
             var points = data.runtimeMovePoints;
             if (points == null || points.Length <= AnimationMoveUtility.DataSpace)
             {
                 return BTStatus.Success;
             }
-
-            float time = cacheData.time;
-            cacheData.time = cacheData.time + context.deltaTime;
-            var stepMoveSystem = context.world.GetExistingSystem<StepMoveSystem>();
-            Quaternion startRotation;
-            if (data.useStartRotation)
-            {
-                startRotation = cacheData.startRotation;
-            }
             else
             {
-                var transformComponent = context.world.GetComponent<TransformComponent>(context.skillComponent.componentEntity);
-                startRotation = transformComponent.rotation;
-            }
-            stepMoveSystem.AnimationMove(context.skillComponent.componentEntity, points, time, context.deltaTime, startRotation, data.ignoreRotation);
-            if (cacheData.time >= points[points.Length - AnimationMoveUtility.DataSpace])
-            {
-                return BTStatus.Success;
+                var stepMoveSystem = context.world.GetExistingSystem<StepMoveSystem>();
+                Quaternion startRotation;
+                if (data.useStartRotation)
+                {
+                    startRotation = cacheData.startRotation;
+                }
+                else
+                {
+                    var transformComponent =
+                        context.world.GetComponent<TransformComponent>(context.skillComponent.componentEntity);
+                    startRotation = transformComponent.rotation;
+                }
+
+                stepMoveSystem.AnimationMove(context.skillComponent.componentEntity, points, startTime,
+                    context.deltaTime, startRotation, data.ignoreRotation);
+                if (endTime >= points[points.Length - AnimationMoveUtility.DataSpace])
+                {
+                    return BTStatus.Success;
+                }
             }
 
             context.executeCache.SetCache(btData.dataIndex, cacheData);

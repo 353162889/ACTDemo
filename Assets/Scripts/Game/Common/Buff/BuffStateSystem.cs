@@ -35,6 +35,12 @@ namespace Game
             buffStateData.bindBuffIndex = bindBuffId;
             buffStateData.status = BuffStateExeStatus.Init;
             buffStateData.forbiddance = forbidSystem.AddForbiddance(entity, "Buff_State_" + stateType.ToString());
+            buffStateComponent.dicStates.Add(buffStateData.index, buffStateData);
+            if (!buffStateComponent.stateSet.Contains(buffStateData.stateType))
+            {
+                buffStateComponent.stateSet.Add(buffStateData.stateType);
+            }
+
             return buffStateData.index;
         }
 
@@ -52,15 +58,47 @@ namespace Game
             return false;
         }
 
+        public bool HasState(BuffStateComponent buffStateComponent, BuffStateType stateType)
+        {
+            if (buffStateComponent == null) return false;
+            return buffStateComponent.stateSet.Contains(stateType);
+        }
+
+        public bool HasState(Entity entity, BuffStateType stateType)
+        {
+            var buffStateComponent = World.GetComponent<BuffStateComponent>(entity);
+            if (buffStateComponent == null) return false;
+            return buffStateComponent.stateSet.Contains(stateType);
+        }
+
         private void RemoveState(BuffStateComponent buffStateComponent, BuffStateData buffStateData)
         {
-            buffStateComponent.dicStates.Remove(buffStateData.index);
-            //buff系统移除buff
-            if (buffStateData.bindBuffIndex > 0 && OnRemoveBuff != null)
+            bool removeResult = buffStateComponent.dicStates.Remove(buffStateData.index);
+            if (removeResult)
             {
-                OnRemoveBuff.Invoke(buffStateComponent.componentEntity, buffStateData.bindBuffIndex);
+                var stateType = buffStateData.stateType;
+                bool contain = false;
+                foreach (var pair in buffStateComponent.dicStates)
+                {
+                    if (pair.Value.stateType == stateType)
+                    {
+                        contain = true;
+                        break;
+                    }
+                }
+
+                if (!contain)
+                {
+                    buffStateComponent.stateSet.Remove(stateType);
+                }
+
+                //buff系统移除buff
+                if (buffStateData.bindBuffIndex > 0 && OnRemoveBuff != null)
+                {
+                    OnRemoveBuff.Invoke(buffStateComponent.componentEntity, buffStateData.bindBuffIndex);
+                }
+                ObjectPool<BuffStateData>.Instance.SaveObject(buffStateData);
             }
-            ObjectPool<BuffStateData>.Instance.SaveObject(buffStateData);
         }
 
         protected override void OnUpdate()

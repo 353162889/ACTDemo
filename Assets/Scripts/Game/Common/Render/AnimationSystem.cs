@@ -198,16 +198,18 @@ namespace Game
                 this.SetAnimatorParam(animationComponent, AnimatorParamDefine.Jump, isJump);
                 if (isJump)
                 {
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.JumpBeforeAir,
+                        jumpState == JumpStateType.JumpBeforeAir);
                     this.SetAnimatorParam(animationComponent, AnimatorParamDefine.JumpBeforeGround,
                         jumpState == JumpStateType.JumpBeforeGround);
                     this.SetAnimatorParam(animationComponent, AnimatorParamDefine.Jumping,
                         jumpState == JumpStateType.Jumping);
                 }
 
-                var floatComponent = World.GetComponent<BuffFloatComponent>(entity);
+                var floatComponent = World.GetComponent<InAirComponent>(entity);
                 if (floatComponent != null)
                 {
-                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.IsFloat, floatComponent.isFloat);
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.IsFloat, floatComponent.isInAir);
                 }
             });
         }
