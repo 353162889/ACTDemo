@@ -188,28 +188,27 @@ namespace Game
                 }
 
                 var jumpComponent = World.GetComponent<JumpComponent>(entity);
-                bool isJump = false;
                 JumpStateType jumpState = JumpStateType.None;
                 if (jumpComponent != null)
                 {
-                    isJump = jumpComponent.isJump;
                     jumpState = jumpComponent.jumpStateType;
                 }
-                this.SetAnimatorParam(animationComponent, AnimatorParamDefine.Jump, isJump);
-                if (isJump)
-                {
-                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.JumpBeforeAir,
-                        jumpState == JumpStateType.JumpBeforeAir);
-                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.JumpBeforeGround,
-                        jumpState == JumpStateType.JumpBeforeGround);
-                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.Jumping,
-                        jumpState == JumpStateType.Jumping);
-                }
+                this.SetAnimatorParam(animationComponent, AnimatorParamDefine.JumpBeforeAir,
+                    jumpState == JumpStateType.JumpBeforeAir);
 
-                var floatComponent = World.GetComponent<InAirComponent>(entity);
-                if (floatComponent != null)
+                var inAirComponent = World.GetComponent<InAirComponent>(entity);
+                bool isInAir = false;
+                InAirStateType inAirState = InAirStateType.None;
+                if (inAirComponent != null)
                 {
-                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.IsFloat, floatComponent.isInAir);
+                    isInAir = inAirComponent.isInAir;
+                    inAirState = inAirComponent.inAirStateType;
+                }
+                this.SetAnimatorParam(animationComponent, AnimatorParamDefine.InAir, isInAir);
+                if (isInAir)
+                {
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.InAirBeforeGround,
+                        inAirState == InAirStateType.InAirBeforeGround);
                 }
             });
         }

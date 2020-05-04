@@ -22,7 +22,7 @@ namespace Game
                 horizontalVelocity.Normalize();
                 horizontalVelocity *= data.horizontalSpeed;
                 var inAirSystem = context.world.GetExistingSystem<InAirSystem>();
-                inAirSystem.MoveToAir(context.buffComponent.componentEntity, horizontalVelocity, data.height);
+                inAirSystem.StartMoveToAir(context.buffComponent.componentEntity, horizontalVelocity, data.height);
             }
 
             var floatCompoent = context.world.GetComponent<InAirComponent>(context.buffComponent.componentEntity);

@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <lstChild>
+    <NEData>
+      <data xsi:type="BTTimeLineData" />
+      <lstChild>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+            <time>0</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTForbidActionData">
+                <finishResume>false</finishResume>
+                <forbidDuration>1</forbidDuration>
+                <forbidArray>
+                  <ForbidType>Gravity</ForbidType>
+                  <ForbidType>InputMove</ForbidType>
+                </forbidArray>
+                <duration>1</duration>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+            <time>0</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTPlayAnimationActionData">
+                <animDuration>1</animDuration>
+                <animName>Twinblades_Air_Attack</animName>
+                <duration>1</duration>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+            <time>0</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTAnimationMoveActionData">
+                <movePoints>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0.216666669</float>
+                  <float>0</float>
+                  <float>0.5</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0.533333361</float>
+                  <float>0</float>
+                  <float>4</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>1</float>
+                  <float>0</float>
+                  <float>4</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                  <float>0</float>
+                </movePoints>
+                <duration>-1</duration>
+                <distance>-1</distance>
+                <ignoreRotation>false</ignoreRotation>
+                <useStartRotation>true</useStartRotation>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+            <time>0</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTPlayEffectActionData">
+                <effectName>AttackTrail</effectName>
+                <mountPoint>Right_TwinSword</mountPoint>
+                <localPos>
+                  <x>0</x>
+                  <y>0</y>
+                  <z>0</z>
+                </localPos>
+                <localRot>
+                  <x>0</x>
+                  <y>0</y>
+                  <z>0</z>
+                  <w>1</w>
+                  <eulerAngles>
+                    <x>-0</x>
+                    <y>0</y>
+                    <z>0</z>
+                  </eulerAngles>
+                </localRot>
+                <autoDestroy>false</autoDestroy>
+                <effectDuration>1</effectDuration>
+                <duration>1</duration>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0.216666669</exeTime>
+            <time>0.216666669</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTBoxColliderActionData">
+                <filterId>1</filterId>
+                <localPos>
+                  <x>0</x>
+                  <y>1.07</y>
+                  <z>1.67</z>
+                </localPos>
+                <localRot>
+                  <x>0.7071068</x>
+                  <y>0</y>
+                  <z>0</z>
+                  <w>-0.7071068</w>
+                  <eulerAngles>
+                    <x>270</x>
+                    <y>-0</y>
+                    <z>0</z>
+                  </eulerAngles>
+                </localRot>
+                <size>
+                  <x>3</x>
+                  <y>3.5</y>
+                  <z>2</z>
+                </size>
+                <colliderDuration>0.0833333358</colliderDuration>
+                <duration>0.0833333358</duration>
+              </data>
+              <lstChild>
+                <NEData>
+                  <data xsi:type="BTPlayHitEffectActionData">
+                    <followTarget>false</followTarget>
+                    <effectName>HitEffect</effectName>
+                  </data>
+                  <lstChild />
+                </NEData>
+                <NEData>
+                  <data xsi:type="BTAddBuffActionData">
+                    <filterId>1</filterId>
+                    <finishResume>false</finishResume>
+                    <addBuffDuration>0</addBuffDuration>
+                    <lstBuffId>
+                      <int>15</int>
+                    </lstBuffId>
+                    <duration>0</duration>
+                  </data>
+                  <lstChild />
+                </NEData>
+              </lstChild>
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0.366666675</exeTime>
+            <time>0.366666675</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTSetSkillPhaseActionData">
+                <finishResume>false</finishResume>
+                <phaseDuration>0.6333333</phaseDuration>
+                <phaseType>Backswing</phaseType>
+                <duration>0.6333333</duration>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+      </lstChild>
+    </NEData>
+  </lstChild>
+</NEData>

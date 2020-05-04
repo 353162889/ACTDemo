@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <lstChild>
+    <NEData>
+      <data xsi:type="BTSequenceData" />
+      <lstChild>
+        <NEData>
+          <data xsi:type="BTBuffFaceData">
+            <directionType>CasterToHost</directionType>
+            <opposite>true</opposite>
+            <immediately>true</immediately>
+          </data>
+          <lstChild />
+        </NEData>
+        <NEData>
+          <data xsi:type="BTBuffAirSpeedAdjustActionData">
+            <horizontalX>0</horizontalX>
+            <horizontalZ>0</horizontalZ>
+            <height>1</height>
+          </data>
+          <lstChild />
+        </NEData>
+      </lstChild>
+    </NEData>
+  </lstChild>
+</NEData>

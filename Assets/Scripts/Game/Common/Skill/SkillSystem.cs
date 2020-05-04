@@ -9,6 +9,7 @@ namespace Game
     public class SkillSystem : ComponentSystem, IBTExecutor
     {
         private ForbidSystem forbidSystem;
+        private InAirSystem inAirSystem;
         private SkillBTContext skillContext;
         public event Action<Entity, SkillData> OnSkillStart;
         public event Action<Entity, SkillData, bool> OnSkillEnd; 
@@ -18,6 +19,7 @@ namespace Game
             ObjectPool<SkillData>.Instance.Init(2);
             skillContext = new SkillBTContext();
             forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
+            inAirSystem = World.GetOrCreateSystem<InAirSystem>();
         }
 
         private void UpdateSkillBreak(Entity entity)
@@ -43,6 +45,22 @@ namespace Game
         public void OnJump(Entity entity)
         {
             UpdateSkillBreak(entity);
+        }
+
+        public int GetReplaceSkill(Entity entity, int skillId)
+        {
+            var resSkill = ResCfgSys.Instance.GetCfg<ResSkill>(skillId);
+            if (resSkill == null) return skillId;
+            if (inAirSystem.IsInAir(entity))
+            {
+                if (resSkill.inAirReplace > 0) return resSkill.inAirReplace;
+            }
+            else
+            {
+                if (resSkill.inGroundReplace > 0) return resSkill.inGroundReplace;
+            }
+
+            return skillId;
         }
 
         public void CastSkill(Entity entity, int skillId)
@@ -75,10 +93,36 @@ namespace Game
             targetInfo = default(SkillTargetInfo);
             if (forbidSystem.IsForbid(skillComponent.componentEntity, ForbidType.Ability)) return false;
             if (IsCastingSkill(skillComponent) && skillComponent.skillData.phase != SkillPhaseType.Backswing) return false;
+            if (!CheckSkillCasterState(skillComponent, skillId)) return false;
+            if (!CheckSkillCD(skillComponent, skillId)) return false;
             if (!SkillTargetSelector.GetSkillTargetInfo(World, skillComponent, skillId, out targetInfo))
             {
                 return false;
             }
+            return true;
+        }
+
+        private bool CheckSkillCasterState(SkillComponent skillComponent, int skillId)
+        {
+            var resSkill = ResCfgSys.Instance.GetCfg<ResSkill>(skillId);
+            if (inAirSystem.IsInAir(skillComponent.componentEntity))
+            {
+                return (resSkill.casterState & (byte)SkillCasterStateType.Air) != 0;
+            }
+            else
+            {
+                return (resSkill.casterState & (byte)SkillCasterStateType.Ground) != 0;
+            }
+        }
+
+        private bool CheckSkillCD(SkillComponent skillComponent, int skillId)
+        {
+            float canCastTime;
+            if (skillComponent.dicCdInfo.TryGetValue(skillId, out canCastTime))
+            {
+                return Time.time >= canCastTime;
+            }
+
             return true;
         }
 
@@ -140,7 +184,7 @@ namespace Game
             skillData.skillTime = -1;
             skillData.skillTimeScale = 1;
             skillData.phase = SkillPhaseType.Normal;
-            skillData.forbidance = forbidSystem.AddForbiddance(entity, "ability:"+skillId);
+            skillData.forbidance = forbidSystem.AddForbiddance(entity, "skill:"+skillId);
             skillData.targetInfo = targetInfo;
             return skillData;
         }
@@ -155,6 +199,17 @@ namespace Game
                     bool firstRun = false;
                     if (skillData.skillTime < 0)
                     {
+                        var resSkill = ResCfgSys.Instance.GetCfg<ResSkill>(skillData.skillId);
+                        float canCastTime = Time.time + resSkill.cd;
+                        //技能进入cd
+                        if (!skillComponent.dicCdInfo.ContainsKey(skillData.skillId))
+                        {
+                            skillComponent.dicCdInfo.Add(skillData.skillId, canCastTime);
+                        }
+                        else
+                        {
+                            skillComponent.dicCdInfo[skillData.skillId] = canCastTime;
+                        }
                         OnSkillStart?.Invoke(entity, skillData);
                         //开始运行第一帧
                         skillData.skillTime = 0;

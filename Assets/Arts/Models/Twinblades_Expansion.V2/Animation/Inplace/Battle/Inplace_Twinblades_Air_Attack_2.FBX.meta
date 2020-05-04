@@ -461,7 +461,7 @@ ModelImporter:
     second: root
   - first:
       74: 7400000
-    second: Take 001
+    second: Twinblades_Air_Attack_2
   - first:
       95: 9500000
     second: //RootNode
@@ -483,10 +483,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'spine_01' has translation animation that
-      will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -500,7 +497,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Twinblades_Air_Attack_2
       takeName: Take 001
       internalID: 0
       firstFrame: 276

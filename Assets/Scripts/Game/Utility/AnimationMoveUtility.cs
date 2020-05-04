@@ -200,7 +200,7 @@ namespace Game
             {
                 var time = animCurve.keys[i].time;
                 var value = animCurve.keys[i].value;
-                if (!map.ContainsKey(time)) map.Add(time, new float[] { 0, 0, 0, 0, 0, 0 });
+                if (!map.ContainsKey(time)) map.Add(time, new float[] { 0, 0, 0, 0, 0, 0, 0 });
                 map[time][index] = value;
             }
         }
@@ -253,7 +253,7 @@ namespace Game
                 if (infos[0].time > 0)
                 {
 
-                    infos.Insert(0, new MoveInfo(0, new float[] { 0, 0, 0, 0, 0, 0 }));
+                    infos.Insert(0, new MoveInfo(0, new float[] { 0, 0, 0, 0, 0, 0, 0 }));
 
                 }
                 float lastTime = clip.length;

@@ -9,6 +9,7 @@ namespace Game
         Jump = 1 << 2,
         InputMove = 1 << 3,
         InputFace = 1 << 4,
+        Gravity = 1 << 5,
     }
 
     public class Forbiddance : IEquatable<Forbiddance>, IPoolable

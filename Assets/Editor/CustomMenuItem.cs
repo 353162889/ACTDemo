@@ -73,7 +73,7 @@ public static class CustomMenuItem
         return new NETreeComposeType(lst,dicCategory, fileDir, filePre, fileExt, desc);
     }
 
-    [MenuItem("Tools/OpenTestNETreeWindow &F1")]
+    [MenuItem("Tools/OpenSkillNETreeWindow &F1")]
     public static void OpenSkillNETreeWindow()
     {
         BTDataHandlerInitialize.InitializeInEditor(true);
@@ -85,7 +85,7 @@ public static class CustomMenuItem
         NETreeWindow.OpenWindow(staticConfig, 0);
     }
 
-    [MenuItem("Tools/OpenTestNETreeWindow &F2")]
+    [MenuItem("Tools/OpenBuffNETreeWindow &F2")]
     public static void OpenBuffNETreeWindow()
     {
         BTDataHandlerInitialize.InitializeInEditor(true);
@@ -96,5 +96,6 @@ public static class CustomMenuItem
         };
         NETreeWindow.OpenWindow(staticConfig, 1);
     }
+
 }
 

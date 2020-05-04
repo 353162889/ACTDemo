@@ -34,13 +34,14 @@ namespace NodeEditor
             }
             if (relatedAnimationClip != null && curTimelineClip != null)
             {
+                BTPlayAnimationActionData data = neData.data as BTPlayAnimationActionData;
                 if (relatedAnimationClip.timeScale == 0)
                 {
-                    curTimelineClip.duration = (float)relatedAnimationClip.duration;
+                    data.duration = (float)relatedAnimationClip.duration;
                 }
                 else
                 {
-                    curTimelineClip.duration = (float)(relatedAnimationClip.duration / relatedAnimationClip.timeScale);
+                    data.duration = (float)(relatedAnimationClip.duration / relatedAnimationClip.timeScale);
                 }
             }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
+    //陆地上的直线移动
     public class DirectionMoveSystem : ComponentSystem
     {
         private StepMoveSystem stepMoveSystem;
@@ -25,6 +26,8 @@ namespace Game
                 return;
             }
             if (direction.AlmostZero()) return;
+            var inAirComponent = World.GetComponent<InAirComponent>(entity);
+            if (inAirComponent && inAirComponent.isInAir) return;
             var directMoveComponent = World.GetComponent<DirectionMoveComponent>(entity);
             if (null == directMoveComponent) return;
             var groundComponent = World.GetComponent<GroundComponent>(entity);
@@ -45,11 +48,11 @@ namespace Game
 
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, DirectionMoveComponent directionMoveComponent, GroundComponent groundComponent) =>
+            Entities.ForEach((Entity entity, DirectionMoveComponent directionMoveComponent, GroundComponent groundComponent, InAirComponent inAirComponent) =>
             {
                 if (directionMoveComponent.desiredSpeed > 0 && directionMoveComponent.inputDirection != Vector3.zero)
                 {
-                    if (forbidSystem.IsForbid(entity, ForbidType.InputMove))
+                    if (inAirComponent.isInAir || forbidSystem.IsForbid(entity, ForbidType.InputMove))
                     {
                         StopMove(entity);
                     }

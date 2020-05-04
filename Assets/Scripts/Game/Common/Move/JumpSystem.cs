@@ -37,15 +37,15 @@ namespace Game
             horizonalVelcolity.y = 0;
             jumpComponent.jumpHorizonalVelocity = horizonalVelcolity;
 //            faceSystem.FaceTo(entity, jumpComponent.jumpHorizonalVelocity);
-            jumpComponent.forbidance.Forbid(ForbidType.InputMove);
-            jumpComponent.forbidance.Forbid(ForbidType.InputFace);
+//            jumpComponent.forbidance.Forbid(ForbidType.InputMove);
+//            jumpComponent.forbidance.Forbid(ForbidType.InputFace);
             //起跳的前摇不能释放技能
             jumpComponent.forbidance.Forbid(ForbidType.Ability);
         }
 
         public void ResetJump(JumpComponent jumpComponent)
         {
-            inAirSystem.ResetAirSpeed(jumpComponent.componentEntity);
+            inAirSystem.StopMove(jumpComponent.componentEntity);
             jumpComponent.isJump = false;
             jumpComponent.jumpHorizonalVelocity = Vector3.zero;
             jumpComponent.forbidance.Reset();
@@ -61,7 +61,7 @@ namespace Game
                 {
                     if (Time.time >= jumpComponent.startJumpGroundTime && !inAirComponent.isInAir)
                     {
-                        inAirSystem.MoveToAir(entity, jumpComponent.jumpHorizonalVelocity, jumpComponent.desiredHeight);
+                        inAirSystem.StartMoveToAir(entity, jumpComponent.jumpHorizonalVelocity, jumpComponent.desiredHeight, jumpComponent.endJumpGroundHeight);
                         //跳起来之后才可以释放技能
                         jumpComponent.forbidance.ResumeForbid(ForbidType.Ability);
                     }
@@ -71,8 +71,7 @@ namespace Game
 
         public void UpdateState()
         {
-            Entities.ForEach((Entity entity, TransformComponent transformComponent, JumpComponent jumpComponent,
-                GroundComponent groundComponent, StepMoveComponent stepMoveComponent) =>
+            Entities.ForEach((Entity entity, JumpComponent jumpComponent, InAirComponent inAirComponent) =>
             {
                 if (jumpComponent.isJump && jumpComponent.desiredHeight > 0)
                 {
@@ -81,14 +80,9 @@ namespace Game
                     {
                         jumpComponent.jumpStateType = JumpStateType.JumpBeforeAir;
                     }
-                    else if (stepMoveComponent.velocity.y > 0)
-                    {
-                        jumpComponent.jumpStateType = JumpStateType.Jumping;
-                    }
                     else
                     {
-                        if (transformComponent.position.y - groundComponent.groundPointInfo.point.y <
-                            jumpComponent.endJumpGroundHeight)
+                        if (inAirComponent.inAirStateType == InAirStateType.InAirBeforeGround)
                         {
                             jumpComponent.jumpStateType = JumpStateType.JumpBeforeGround;
                         }
@@ -96,11 +90,10 @@ namespace Game
                         {
                             jumpComponent.jumpStateType = JumpStateType.Jumping;
                         }
-
-                        if (groundComponent.isGround)
-                        {
-                            ResetJump(jumpComponent);
-                        }
+                    }
+                    if (jumpComponent.jumpStateType != JumpStateType.JumpBeforeAir && !inAirComponent.isInAir)
+                    {
+                        ResetJump(jumpComponent);
                     }
                 }
             });

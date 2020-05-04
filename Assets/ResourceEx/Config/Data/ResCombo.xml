@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
 	<rescombo id="1" lstSkillId="1,2,3"/>
+	<rescombo id="2" lstSkillId="6,7"/>
 	<rescombo id="1001" lstSkillId="1002,1003,1004"/>
 </root>

@@ -58,6 +58,10 @@ namespace Game
                             {
                                 for (int j = 0; j < data.lstBuffId.Length; j++)
                                 {
+                                    if (data.lstBuffId[j] == 16)
+                                    {
+                                        CLog.LogArgs("aaaa");
+                                    }
                                     int index = buffSystem.AddBuffByDamageInfo(damageInfo.target, data.lstBuffId[j], damageInfo);
                                     if (index > 0)
                                         cacheData.lstBuffIndex.Add(index);

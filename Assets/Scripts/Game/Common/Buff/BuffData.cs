@@ -30,6 +30,7 @@ namespace Game
         public BTBlackBoard blackBoard = new BTBlackBoard();
         public BTExecuteCache executeCache = new BTExecuteCache();
         public BuffBTContext buffBTContext = new BuffBTContext();
+        public Forbiddance forbidance;
 
         public void Reset()
         {
@@ -42,6 +43,12 @@ namespace Game
             blackBoard.Clear();
             executeCache.Clear();
             buffBTContext.Reset();
+            if (this.forbidance != null)
+            {
+                this.forbidance.Reset();
+            }
+
+            this.forbidance = null;
         }
 
         public void Detach()

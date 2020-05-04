@@ -84,8 +84,8 @@ namespace Game
             { BuffStateType.FLOAT, new BuffStateConfig(){
                 forbids = new List<ForbidType>(){ForbidType.Jump,ForbidType.InputMove, ForbidType.Ability},
                 handler = baseBuffStateHandler,
-                refuseStates = new List<BuffStateType>(){BuffStateType.STIFFNESS, BuffStateType.FLOAT, BuffStateType.GETUP},
-                removeStates = new List<BuffStateType>(){BuffStateType.GROUND, BuffStateType.GETUP},
+                refuseStates = new List<BuffStateType>(){BuffStateType.STIFFNESS, BuffStateType.GETUP},
+                removeStates = new List<BuffStateType>(){BuffStateType.GROUND, BuffStateType.GETUP, BuffStateType.FLOAT},
             }},
             { BuffStateType.GROUND, new BuffStateConfig(){
                 forbids = new List<ForbidType>(){ForbidType.Jump,ForbidType.InputMove, ForbidType.Ability},

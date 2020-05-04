@@ -12,6 +12,7 @@ namespace Game
         private CacheSkillSystem cacheSkillSystem;
         private SkillSystem skillSystem;
         private DirectionMoveSystem directionMoveSystem;
+        private InAirSystem inAirSystem;
         private JumpSystem jumpSystem;
         private CameraSystem cameraSystem;
         private FaceSystem faceSystem;
@@ -22,6 +23,7 @@ namespace Game
             cacheSkillSystem = World.GetOrCreateSystem<CacheSkillSystem>();
             skillSystem = World.GetOrCreateSystem<SkillSystem>();
             directionMoveSystem = World.GetOrCreateSystem<DirectionMoveSystem>();
+            inAirSystem = World.GetOrCreateSystem<InAirSystem>();
             jumpSystem = World.GetOrCreateSystem<JumpSystem>();
             cameraSystem = World.GetOrCreateSystem<CameraSystem>();
             faceSystem = World.GetOrCreateSystem<FaceSystem>();
@@ -118,6 +120,7 @@ namespace Game
                     inputComponent.inputMoveDirection = Vector3.zero;
                     inputComponent.inputMoveChangeFace = false;
                     directionMoveSystem.StopMove(inputComponent.inputEntity);
+                    inAirSystem.StopInputMove(inputComponent.inputEntity);
                     ObjectPool<InputStopMoveDirectionCmd>.Instance.SaveObject(stopMoveDirectionCmd);
                 }
                 else if(cmd.cmdType == InputCommandType.Jump)
@@ -138,11 +141,13 @@ namespace Game
                 else if(cmd.cmdType == InputCommandType.Skill)
                 {
                     var skillCmd = cmd as InputSkillCmd;
-                    if (!comboSystem.CasterSkill(inputComponent.inputEntity, skillCmd.skillId))
+                    var skillId = skillCmd.skillId;
+                    skillId = skillSystem.GetReplaceSkill(inputComponent.inputEntity, skillId);
+                    if (!comboSystem.CasterSkill(inputComponent.inputEntity, skillId))
                     {
-                        if (!cacheSkillSystem.CastSkill(inputComponent.inputEntity, skillCmd.skillId))
+                        if (!cacheSkillSystem.CastSkill(inputComponent.inputEntity, skillId))
                         {
-                            skillSystem.CastSkill(inputComponent.inputEntity, skillCmd.skillId);
+                            skillSystem.CastSkill(inputComponent.inputEntity, skillId);
                         }
                     }
 
@@ -152,7 +157,9 @@ namespace Game
 
             if (inputComponent.inputMoveDirection != Vector3.zero)
             {
-                directionMoveSystem.Move(inputComponent.inputEntity, GetTransformInputDirection(inputComponent.inputMoveDirection), inputComponent.inputMoveChangeFace);
+                var transformInputDirection = GetTransformInputDirection(inputComponent.inputMoveDirection);
+                directionMoveSystem.Move(inputComponent.inputEntity, transformInputDirection, inputComponent.inputMoveChangeFace);
+                inAirSystem.InputMove(inputComponent.inputEntity, transformInputDirection);
             }
         }
     }

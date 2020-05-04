@@ -37,6 +37,7 @@ namespace Game
         }
         public bool RemoveForbiddance(ForbidComponent forbidComponent, Forbiddance forbid)
         {
+            if (forbid == null) return false;
             if (forbidComponent == null) return false;
             if (forbidComponent.lstForbids.Remove(forbid))
             {

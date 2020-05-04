@@ -82,6 +82,8 @@ namespace Game
             {
                 this.forbidance.Reset();
             }
+
+            this.forbidance = null;
             targetInfo.Reset();
         }
     }

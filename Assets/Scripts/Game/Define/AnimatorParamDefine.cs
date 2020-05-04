@@ -7,10 +7,10 @@
         public static string MoveDirectionX = "MoveDirectionX";
         public static string MoveDirectionZ = "MoveDirectionZ";
         public static string MoveDirection = "MoveDirection";
+
         public static string JumpBeforeAir = "JumpBeforeAir";
-        public static string JumpBeforeGround = "JumpBeforeGround";
-        public static string Jumping = "Jumping";
-        public static string Jump = "Jump";
-        public static string IsFloat = "IsFloat";
+
+        public static string InAir = "InAir";
+        public static string InAirBeforeGround = "InAirBeforeGround";
     }
 }

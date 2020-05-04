@@ -206,11 +206,8 @@ namespace NodeEditor
                         timelineClip.start = asset.curTimelineClip.start;
                         float speed = state.speed;
                         if (state.speedParameterActive) speed *= animator.GetFloat(state.speedParameter);
-                        float duration = speed != 0 ? asset.clip.length / speed : asset.clip.length;
 
-                        data.duration = duration;
-
-                        timelineClip.duration = asset.clip.length;
+                        timelineClip.duration = data.duration > 0 ? data.duration : asset.clip.length;
                         timelineClip.timeScale = speed;
                         timelineClip.displayName = data.animName;
 
@@ -235,12 +232,10 @@ namespace NodeEditor
                         timelineClip.start = asset.curTimelineClip.start;
                         float speed = state.speed;
                         if (state.speedParameterActive) speed *= animator.GetFloat(state.speedParameter);
-                        float duration = speed != 0 ? asset.clip.length / speed : asset.clip.length;
 
                         data.animName = state.name;
-                        data.duration = duration;
 
-                        timelineClip.duration = asset.clip.length;
+                        timelineClip.duration = data.duration > 0 ? data.duration : asset.clip.length;
                         timelineClip.timeScale = speed;
                         timelineClip.displayName = data.animName;
 

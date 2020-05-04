@@ -9,6 +9,7 @@ namespace Game
         public float curTriggerTime;
         public int curTriggerCount;
         public bool enabled;
+        public Forbiddance forbidance;
 
         public BuffBTContext buffBTContext = new BuffBTContext();
         public void Reset()
@@ -19,6 +20,12 @@ namespace Game
             curTriggerCount = 0;
             enabled = false;
             buffBTContext.Reset();
+            if (this.forbidance != null)
+            {
+                this.forbidance.Reset();
+            }
+
+            this.forbidance = null;
         }
 
         public void ResetEnabled(bool enabled)
@@ -27,6 +34,13 @@ namespace Game
             curDurationTime = 0;
             curTriggerTime = 0;
             curTriggerCount = 0;
+            if (!enabled)
+            {
+                if (this.forbidance != null)
+                {
+                    this.forbidance.Reset();
+                }
+            }
         }
     }
 }

@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <lstChild>
+    <NEData>
+      <data xsi:type="BTTimeLineData" />
+      <lstChild>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+            <time>0</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTPlayAnimationActionData">
+                <animDuration>0.933333635</animDuration>
+                <animName>Twinblades_Air_Attack_2</animName>
+                <duration>0.933333635</duration>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+            <time>0</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTForbidActionData">
+                <finishResume>true</finishResume>
+                <forbidDuration>0.933333635</forbidDuration>
+                <forbidArray>
+                  <ForbidType>InputMove</ForbidType>
+                </forbidArray>
+                <duration>0.933333635</duration>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+            <time>0</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTPlayEffectActionData">
+                <effectName>AttackTrail</effectName>
+                <mountPoint>Right_TwinSword</mountPoint>
+                <localPos>
+                  <x>0</x>
+                  <y>0</y>
+                  <z>0</z>
+                </localPos>
+                <localRot>
+                  <x>0</x>
+                  <y>0</y>
+                  <z>0</z>
+                  <w>1</w>
+                  <eulerAngles>
+                    <x>-0</x>
+                    <y>0</y>
+                    <z>0</z>
+                  </eulerAngles>
+                </localRot>
+                <autoDestroy>false</autoDestroy>
+                <effectDuration>0.933333635</effectDuration>
+                <duration>0.933333635</duration>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0</exeTime>
+            <time>0</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTAirSpeedAdjustActionData">
+                <horizontalX>0</horizontalX>
+                <horizontalZ>0</horizontalZ>
+                <height>1</height>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0.13333334</exeTime>
+            <time>0.13333334</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTEnableCacheInputSkillActionData">
+                <finishResume>false</finishResume>
+                <comboDuration>0.233333334</comboDuration>
+                <duration>0.233333334</duration>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0.183333337</exeTime>
+            <time>0.183333337</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTBoxColliderActionData">
+                <filterId>1</filterId>
+                <localPos>
+                  <x>0</x>
+                  <y>1.69</y>
+                  <z>1.5</z>
+                </localPos>
+                <localRot>
+                  <x>0.7071068</x>
+                  <y>0</y>
+                  <z>0</z>
+                  <w>-0.7071068</w>
+                  <eulerAngles>
+                    <x>270</x>
+                    <y>-0</y>
+                    <z>0</z>
+                  </eulerAngles>
+                </localRot>
+                <size>
+                  <x>2.5</x>
+                  <y>3.5</y>
+                  <z>3</z>
+                </size>
+                <colliderDuration>0.116666667</colliderDuration>
+                <duration>0.116666667</duration>
+              </data>
+              <lstChild>
+                <NEData>
+                  <data xsi:type="BTAddBuffActionData">
+                    <filterId>1</filterId>
+                    <finishResume>false</finishResume>
+                    <addBuffDuration>0</addBuffDuration>
+                    <lstBuffId>
+                      <int>16</int>
+                    </lstBuffId>
+                    <duration>0</duration>
+                  </data>
+                  <lstChild />
+                </NEData>
+                <NEData>
+                  <data xsi:type="BTPlayHitEffectActionData">
+                    <followTarget>false</followTarget>
+                    <effectName>HitEffect</effectName>
+                  </data>
+                  <lstChild />
+                </NEData>
+              </lstChild>
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTTimeDecoratorData">
+            <exeTime>0.366666675</exeTime>
+            <time>0.366666675</time>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTSetSkillPhaseActionData">
+                <finishResume>false</finishResume>
+                <phaseDuration>0.566666961</phaseDuration>
+                <phaseType>Backswing</phaseType>
+                <duration>0.566666961</duration>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+      </lstChild>
+    </NEData>
+  </lstChild>
+</NEData>

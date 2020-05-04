@@ -12,6 +12,7 @@ namespace Game
     {
         private BuffStateSystem buffStateSystem;
         private AnimationSystem animationSystem;
+        private ForbidSystem forbidSystem;
         protected override void OnCreate()
         {
             ObjectPool<BuffData>.Instance.Init(50);
@@ -20,6 +21,7 @@ namespace Game
             buffStateSystem = World.GetOrCreateSystem<BuffStateSystem>();
             buffStateSystem.OnRemoveBuff += BuffStateSystemOnOnRemoveBuff;
             animationSystem = World.GetOrCreateSystem<AnimationSystem>();
+            forbidSystem = World.GetOrCreateSystem<ForbidSystem>();
         }
 
         protected override void OnDestroy()
@@ -203,6 +205,7 @@ namespace Game
             buffData.buffId = buffId;
             buffData.status = BuffExeStatus.Init;
             buffData.damageInfo = GetDefaultDamageInfo(entity);
+            buffData.forbidance = forbidSystem.AddForbiddance(entity, "buff:" + buffId);
 
             for (int i = 0; i < buffCfg.parts.Count; i++)
             {
@@ -210,6 +213,7 @@ namespace Game
                 var buffPartData = ObjectPool<BuffPartData>.Instance.GetObject();
                 buffPartData.buffPartId = partId;
                 buffPartData.enabled = false;
+                buffPartData.forbidance = forbidSystem.AddForbiddance(entity, "buffPart:" + partId);
                 buffData.lstPart.Add(buffPartData);
             }
             AddBuffRemoveOther(buffComponent, buffData, buffCfg);
@@ -418,10 +422,11 @@ namespace Game
 
                 foreach (var buffPartData in buffData.lstPart)
                 {
+                    forbidSystem.RemoveForbiddance(buffComponent.componentEntity, buffPartData.forbidance);
                     ObjectPool<BuffPartData>.Instance.SaveObject(buffPartData);
                 }
                 buffData.lstPart.Clear();
-
+                forbidSystem.RemoveForbiddance(buffComponent.componentEntity, buffData.forbidance);
                 //调用detach方法
                 ObjectPool<BuffData>.Instance.SaveObject(buffData);
             }
