@@ -35,6 +35,7 @@ namespace Game
         private BuffStateSystem buffStateSystem;
         private DamageSystem damageSystem;
         private InAirSystem inAirSystem;
+        private MoveStateSystem moveStateSystem;
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
@@ -62,6 +63,7 @@ namespace Game
             buffSystem = world.GetOrCreateSystem<BuffSystem>();
             damageSystem = world.GetOrCreateSystem<DamageSystem>();
             inAirSystem = world.GetOrCreateSystem<InAirSystem>();
+            moveStateSystem = world.GetOrCreateSystem<MoveStateSystem>();
 
 
             var playerEntity = CreatePlayer();
@@ -111,7 +113,7 @@ namespace Game
             //移动
             var stepMoveComponent = world.AddComponentOnce<StepMoveComponent>(entity);
             var directionMoveComponent = world.AddComponentOnce<DirectionMoveComponent>(entity);
-            directionMoveComponent.desiredSpeed = 5;
+            var moveStateComponent = world.AddComponentOnce<MoveStateComponent>(entity);
             var gravityComponent = world.AddComponentOnce<GravityComponent>(entity);
             var jumpComponent = world.AddComponentOnce<JumpComponent>(entity);
             jumpComponent.forbidance = forbidSystem.AddForbiddance(forbidComponent, "JumpSystem");
@@ -140,6 +142,7 @@ namespace Game
 
             var animationComponent = world.AddComponentOnce<AnimationComponent>(entity);
             animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
+            animationComponent.parameters = animationComponent.animator.parameters;
 
             var comboComponent = world.AddComponentOnce<ComboComponent>(entity);
             var cacheSkillComponent = world.AddComponentOnce<CacheSkillComponent>(entity);
@@ -181,6 +184,7 @@ namespace Game
             transformComponent.position = bornPos;
             //移动
             var stepMoveComponent = world.AddComponentOnce<StepMoveComponent>(entity);
+            var moveStateComponent = world.AddComponentOnce<MoveStateComponent>(entity);
             var gravityComponent = world.AddComponentOnce<GravityComponent>(entity);
             var groundComponent = world.AddComponentOnce<GroundComponent>(entity);
             //面向
@@ -197,6 +201,7 @@ namespace Game
 
             var animationComponent = world.AddComponentOnce<AnimationComponent>(entity);
             animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
+            animationComponent.parameters = animationComponent.animator.parameters;
 
             var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
             var buffStateComponent = world.AddComponentOnce<BuffStateComponent>(entity);
@@ -220,6 +225,7 @@ namespace Game
             buffSystem.Update();
             buffStateSystem.Update();
 
+            moveStateSystem.Update();
             directionMoveSystem.Update();
             jumpSystem.Update();
             inAirSystem.Update();

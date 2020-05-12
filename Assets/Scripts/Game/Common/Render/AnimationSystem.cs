@@ -23,11 +23,11 @@ namespace Game
         public bool HasAnimatorParam(AnimationComponent animationComponent, string paramName)
         {
             if (!ValidAnimator(animationComponent)) return false;
-            var animator = animationComponent.animator;
-            int count = animator.parameterCount;
-            for (int i = 0; i < count; i++)
+            if (animationComponent.parameters == null) return false;
+            var parameters = animationComponent.parameters;
+            for (int i = 0; i < parameters.Length; i++)
             {
-                if (animator.GetParameter(i).name == paramName) return true;
+                if (parameters[i].name == paramName) return true;
             }
             return false;
         }
@@ -165,12 +165,19 @@ namespace Game
             Entities.ForEach((Entity entity, AnimationComponent animationComponent, StepMoveComponent stepMoveComponent, TransformComponent transformComponent) =>
             {
                 var directionMoveComponent = World.GetComponent<DirectionMoveComponent>(entity);
-                if (directionMoveComponent != null && directionMoveComponent.inputDirection != Vector3.zero)
+                if (directionMoveComponent != null && directionMoveComponent.isMoving)
                 {
                     var velocity = stepMoveComponent.desiredVelocity;
                     velocity.y = 0;
                     this.SetAnimatorParam(animationComponent, AnimatorParamDefine.IsMoving, true);
                     this.SetAnimatorParam(animationComponent, AnimatorParamDefine.MoveSpeed, velocity.magnitude);
+                    bool isRun = false;
+                    var moveStateComponent = World.GetComponent<MoveStateComponent>(entity);
+                    if (moveStateComponent != null)
+                    {
+                        isRun = moveStateComponent.moveStateType == MoveStateType.Run;
+                    }
+                    this.SetAnimatorParam(animationComponent, AnimatorParamDefine.IsRun, isRun);
                     //设置移动方向
                     var direction = Quaternion.Inverse(transformComponent.rotation) * velocity;
                     direction.Normalize();
