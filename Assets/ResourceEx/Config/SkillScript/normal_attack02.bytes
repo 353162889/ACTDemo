@@ -331,7 +331,7 @@
                     <finishResume>false</finishResume>
                     <addBuffDuration>0</addBuffDuration>
                     <lstBuffId>
-                      <int>1</int>
+                      <int>5</int>
                     </lstBuffId>
                     <duration>0</duration>
                   </data>
@@ -384,7 +384,7 @@
                     <finishResume>false</finishResume>
                     <addBuffDuration>0</addBuffDuration>
                     <lstBuffId>
-                      <int>1</int>
+                      <int>5</int>
                     </lstBuffId>
                     <duration>0</duration>
                   </data>
@@ -429,7 +429,7 @@
                 <localPos>
                   <x>0</x>
                   <y>0.77</y>
-                  <z>1.674</z>
+                  <z>1.24</z>
                 </localPos>
                 <localRot>
                   <x>0</x>
@@ -445,7 +445,7 @@
                 <size>
                   <x>3.5</x>
                   <y>1.5</y>
-                  <z>2.8</z>
+                  <z>4</z>
                 </size>
                 <colliderDuration>0.0833333358</colliderDuration>
                 <duration>0.0833333358</duration>

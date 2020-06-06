@@ -90,6 +90,19 @@ namespace Game
             {
                 inputSystem.OnScreenSroll(scroll);
             }
+
+//            if (Input.GetKeyDown(KeyCode.Mouse0))
+//            {
+//                var cameraSystem = World.GetOrCreateSystem<CameraSystem>();
+//                Ray ray = cameraSystem.GetMainCamera().ScreenPointToRay(Input.mousePosition);
+//                RaycastHit hitInfo;
+//                if (Physics.Raycast(ray, out hitInfo, float.MaxValue, LayerDefine.TerrainMask))
+//                {
+//                    var pointsMoveSystem = World.GetOrCreateSystem<PointsMoveSystem>();
+//                    var inputComponent = World.GetSingletonComponent<InputComponent>();
+//                    pointsMoveSystem.Move(inputComponent.inputEntity, hitInfo.point, true);
+//                }
+//            }
         }
     }
 }

@@ -65,6 +65,8 @@ namespace Game
             while (!SkillManager.Instance.IsFinish()) yield return null;
             BuffManager.Instance.LoadCfgs(null);
             while (!BuffManager.Instance.IsFinish()) yield return null;
+            AIManager.Instance.LoadCfgs(null);
+            while (!AIManager.Instance.IsFinish()) yield return null;
             callback.Invoke();
             yield return null;
         }

@@ -55,9 +55,9 @@ namespace Framework
 
         public BTExecuteStatus GetExecuteStatus(int index)
         {
-            if (index < 0 || index >= lstExecuteStatus.Count) return BTExecuteStatus.Ready;
+            if (index < 0 || index >= lstExecuteStatus.Count) return BTExecuteStatus.Init;
             var value = lstExecuteStatus[index];
-            if (value == null) return BTExecuteStatus.Ready;
+            if (value == null) return BTExecuteStatus.Init;
             return value;
         }
 

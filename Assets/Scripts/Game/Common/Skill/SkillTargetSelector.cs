@@ -9,7 +9,7 @@ namespace Game
     public static class SkillTargetSelectorType
     {
         public static int DefaultSelectorType = 1;
-        public static int DesiredVelocityTargetSelectorType = 2;
+        public static int DirectionMoveInputDirectionSelectorType = 2;
     }
 
     public static class SkillTargetSelector
@@ -28,23 +28,23 @@ namespace Game
                 targetInfo.targetPosition = transformComponent.position;
                 return true;
             }
-            else if (selectorType == SkillTargetSelectorType.DesiredVelocityTargetSelectorType)
+            else if (selectorType == SkillTargetSelectorType.DirectionMoveInputDirectionSelectorType)
             {
-                var stepMoveComponent = world.GetComponent<StepMoveComponent>(skillComponent.componentEntity);
-                if (stepMoveComponent == null) return false;
+                var directionMoveComponent = world.GetComponent<DirectionMoveComponent>(skillComponent.componentEntity);
+                if (directionMoveComponent == null) return false;
                 targetInfo.target = Entity.Null;
-                var desiredVeloctiy = stepMoveComponent.desiredVelocity;
-                desiredVeloctiy.y = 0;
-                if (desiredVeloctiy != Vector3.zero)
+                var inputDirection = directionMoveComponent.inputDirection;
+                inputDirection.y = 0;
+                if (inputDirection != Vector3.zero)
                 {
-                    desiredVeloctiy.Normalize();
+                    inputDirection.Normalize();
                 }
                 else
                 {
-                    desiredVeloctiy = transformComponent.forward;
+                    inputDirection = transformComponent.forward;
                 }
 
-                targetInfo.targetDirection = desiredVeloctiy;
+                targetInfo.targetDirection = inputDirection;
                 targetInfo.targetPosition = transformComponent.position;
                 return true;
             }

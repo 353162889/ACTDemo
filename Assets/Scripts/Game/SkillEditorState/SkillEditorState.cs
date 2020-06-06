@@ -36,6 +36,9 @@ namespace Game
         private DamageSystem damageSystem;
         private InAirSystem inAirSystem;
         private MoveStateSystem moveStateSystem;
+        private PropertySystem propertySystem;
+        private PointsMoveSystem pointsMoveSystem;
+        private AISystem aiSystem;
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
@@ -64,6 +67,9 @@ namespace Game
             damageSystem = world.GetOrCreateSystem<DamageSystem>();
             inAirSystem = world.GetOrCreateSystem<InAirSystem>();
             moveStateSystem = world.GetOrCreateSystem<MoveStateSystem>();
+            propertySystem = world.GetOrCreateSystem<PropertySystem>();
+            pointsMoveSystem = world.GetOrCreateSystem<PointsMoveSystem>();
+            aiSystem = world.GetOrCreateSystem<AISystem>();
 
 
             var playerEntity = CreatePlayer();
@@ -150,6 +156,14 @@ namespace Game
             var buffStateComponent = world.AddComponentOnce<BuffStateComponent>(entity);
             var buffComponent = world.AddComponentOnce<BuffComponent>(entity);
             var buffFloatComponent = world.AddComponentOnce<InAirComponent>(entity);
+            var propertyComponent = world.AddComponentOnce<PropertyComponent>(entity);
+            propertyComponent.moveSpeed = moveStateSystem.GetMoveDesiredSpeed(moveStateComponent);
+
+            var pointsMoveComponent = world.AddComponentOnce<PointsMoveComponent>(entity);
+
+            var entityCommonInfoComponent = world.AddComponentOnce<EntityCommonInfoComponent>(entity);
+            entityCommonInfoComponent.bornPosition = bornPos;
+            entityCommonInfoComponent.bornForward = transformComponent.forward;
 
             return entity;
         }
@@ -185,6 +199,7 @@ namespace Game
             //移动
             var stepMoveComponent = world.AddComponentOnce<StepMoveComponent>(entity);
             var moveStateComponent = world.AddComponentOnce<MoveStateComponent>(entity);
+            moveStateComponent.walkSpeed = 2;
             var gravityComponent = world.AddComponentOnce<GravityComponent>(entity);
             var groundComponent = world.AddComponentOnce<GroundComponent>(entity);
             //面向
@@ -207,6 +222,17 @@ namespace Game
             var buffStateComponent = world.AddComponentOnce<BuffStateComponent>(entity);
             var buffComponent = world.AddComponentOnce<BuffComponent>(entity);
             var buffFloatComponent = world.AddComponentOnce<InAirComponent>(entity);
+            var propertyComponent = world.AddComponentOnce<PropertyComponent>(entity);
+            propertyComponent.moveSpeed = moveStateSystem.GetMoveDesiredSpeed(moveStateComponent);
+
+            var pointsMoveComponent = world.AddComponentOnce<PointsMoveComponent>(entity);
+
+            var aiComponent = world.AddComponentOnce<AIComponent>(entity);
+            aiComponent.aiFile = "test_ai";
+
+            var entityCommonInfoComponent = world.AddComponentOnce<EntityCommonInfoComponent>(entity);
+            entityCommonInfoComponent.bornPosition = bornPos;
+            entityCommonInfoComponent.bornForward = transformComponent.forward;
 
             return entity;
         }
@@ -219,6 +245,7 @@ namespace Game
             inputSystem.Update();
             
             mapSystem.Update();
+            aiSystem.Update();
             comboSystem.Update();
             cacheSkillSystem.Update();
             skillSystem.Update();
@@ -227,6 +254,7 @@ namespace Game
 
             moveStateSystem.Update();
             directionMoveSystem.Update();
+            pointsMoveSystem.Update();
             jumpSystem.Update();
             inAirSystem.Update();
             gravitySystem.Update();

@@ -16,7 +16,7 @@ namespace Game
         private JumpSystem jumpSystem;
         private CameraSystem cameraSystem;
         private FaceSystem faceSystem;
-        private MoveStateSystem moveStateSystem;
+        private PropertySystem propertySystem;
         protected override void OnCreate()
         {
             inputComponent = World.AddSingletonComponent<InputComponent>();
@@ -28,7 +28,7 @@ namespace Game
             jumpSystem = World.GetOrCreateSystem<JumpSystem>();
             cameraSystem = World.GetOrCreateSystem<CameraSystem>();
             faceSystem = World.GetOrCreateSystem<FaceSystem>();
-            moveStateSystem = World.GetOrCreateSystem<MoveStateSystem>();
+            propertySystem = World.GetOrCreateSystem<PropertySystem>();
             ObjectPool<InputMoveDirectionCmd>.Instance.Init(5);
             ObjectPool<InputStopMoveDirectionCmd>.Instance.Init(5);
             ObjectPool<InputJumpCmd>.Instance.Init(2);
@@ -131,7 +131,7 @@ namespace Game
                     Vector3 horizonalVelocity = Vector3.zero;
                     if (inputComponent.inputMoveDirection != Vector3.zero)
                     {
-                        horizonalVelocity = GetTransformInputDirection(inputComponent.inputMoveDirection) * moveStateSystem.GetMoveDesiredSpeed(inputComponent.inputEntity);
+                        horizonalVelocity = GetTransformInputDirection(inputComponent.inputMoveDirection) * propertySystem.GetMoveSpeed(inputComponent.inputEntity);
                     }
                     jumpSystem.Jump(inputComponent.inputEntity, horizonalVelocity);
                     ObjectPool<InputJumpCmd>.Instance.SaveObject(jumpCmd);

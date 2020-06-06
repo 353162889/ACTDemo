@@ -2,7 +2,9 @@
 {
     public enum BTExecuteStatus
     {
+        Init,
         Ready,
         Running,
+        Finish,
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Cinemachine.Utility;
 using Framework;
 using Unity.Entities;
+using Unity.Properties;
 using UnityEngine;
 
 namespace Game
@@ -52,11 +53,11 @@ namespace Game
 
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, DirectionMoveComponent directionMoveComponent, GroundComponent groundComponent, InAirComponent inAirComponent, MoveStateComponent moveStateComponent) =>
+            Entities.ForEach((Entity entity, DirectionMoveComponent directionMoveComponent, GroundComponent groundComponent, InAirComponent inAirComponent, PropertyComponent propertyComponent) =>
             {
                 if (directionMoveComponent.isMoving)
                 {
-                    var desiredSpeed = moveStateSystem.GetMoveDesiredSpeed(moveStateComponent);
+                    var desiredSpeed = propertyComponent.moveSpeed;
                     if (desiredSpeed > 0 && directionMoveComponent.inputDirection != Vector3.zero)
                     {
                         if (inAirComponent.isInAir || forbidSystem.IsForbid(entity, ForbidType.InputMove))

@@ -11,6 +11,11 @@
     {
         public BTStatus Handler(IBTContext context, BTData btData)
         {
+            if (context.executeCache.GetExecuteStatus(btData.dataIndex) == BTExecuteStatus.Init)
+            {
+                context.executeCache.SetExecuteStatus(btData.dataIndex, BTExecuteStatus.Ready);
+            }
+
             BTStatus result = Handler((T1)context, btData, (T2)btData.data);
             if (result == BTStatus.Running)
             {
@@ -18,8 +23,8 @@
             }
             else
             {
+                context.executeCache.SetExecuteStatus(btData.dataIndex, BTExecuteStatus.Finish);
                 this.Clear(context, btData);
-                context.executeCache.SetExecuteStatus(btData.dataIndex, BTExecuteStatus.Ready);
             }
             return result;
         }
@@ -44,12 +49,12 @@
                 handler.Clear(context, childBTData);
             }
             context.executeCache.SetCache(btData.dataIndex,null);
-            context.executeCache.SetExecuteStatus(btData.dataIndex, BTExecuteStatus.Ready);
+            context.executeCache.SetExecuteStatus(btData.dataIndex, BTExecuteStatus.Init);
         }
 
         protected bool IsCleared(IBTContext context, BTData btData)
         {
-            return context.executeCache.GetExecuteStatus(btData.dataIndex) == BTExecuteStatus.Ready;
+            return context.executeCache.GetExecuteStatus(btData.dataIndex) == BTExecuteStatus.Init;
         }
 
     }

@@ -30,6 +30,19 @@ namespace BTCore
             return default(T);
         }
 
+        public T GetData<T>(string name, out bool exist)
+        {
+            object result;
+            if (m_cacheData.TryGetValue(name, out result))
+            {
+                exist = true;
+                return (T)result;
+            }
+
+            exist = false;
+            return default(T);
+        }
+
         public void ClearData(string name)
         {
             m_cacheData.Remove(name);

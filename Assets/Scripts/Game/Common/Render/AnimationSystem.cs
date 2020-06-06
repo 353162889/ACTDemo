@@ -165,7 +165,10 @@ namespace Game
             Entities.ForEach((Entity entity, AnimationComponent animationComponent, StepMoveComponent stepMoveComponent, TransformComponent transformComponent) =>
             {
                 var directionMoveComponent = World.GetComponent<DirectionMoveComponent>(entity);
-                if (directionMoveComponent != null && directionMoveComponent.isMoving)
+                var pointsMoveComponent = World.GetComponent<PointsMoveComponent>(entity);
+                bool isMoving = directionMoveComponent != null && directionMoveComponent.isMoving ||
+                                pointsMoveComponent != null && pointsMoveComponent.isMoving;
+                if (isMoving)
                 {
                     var velocity = stepMoveComponent.desiredVelocity;
                     velocity.y = 0;

@@ -73,28 +73,36 @@ public static class CustomMenuItem
         return new NETreeComposeType(lst,dicCategory, fileDir, filePre, fileExt, desc);
     }
 
-    [MenuItem("Tools/OpenSkillNETreeWindow &F1")]
-    public static void OpenSkillNETreeWindow()
+    private static NETreeComposeType[] GetConfig()
     {
-        BTDataHandlerInitialize.InitializeInEditor(true);
         NETreeComposeType[] staticConfig = new NETreeComposeType[]
         {
             CreateNETreeComposeType(typeof(SkillBTContext),"Skill", "Assets/ResourceEx/Config/SkillScript", "skill", "bytes", "技能脚本"),
             CreateNETreeComposeType(typeof(BuffBTContext),"Buff", "Assets/ResourceEx/Config/BuffScript", "buff", "bytes", "Buff脚本"),
+            CreateNETreeComposeType(typeof(AIBTContext),"AI", "Assets/ResourceEx/Config/AIScript", "ai", "bytes", "AI脚本"),
         };
-        NETreeWindow.OpenWindow(staticConfig, 0);
+        return staticConfig;
+    }
+
+    [MenuItem("Tools/OpenSkillNETreeWindow &F1")]
+    public static void OpenSkillNETreeWindow()
+    {
+        BTDataHandlerInitialize.InitializeInEditor(true);
+        NETreeWindow.OpenWindow(GetConfig(), 0);
     }
 
     [MenuItem("Tools/OpenBuffNETreeWindow &F2")]
     public static void OpenBuffNETreeWindow()
     {
         BTDataHandlerInitialize.InitializeInEditor(true);
-        NETreeComposeType[] staticConfig = new NETreeComposeType[]
-        {
-            CreateNETreeComposeType(typeof(SkillBTContext),"Skill", "Assets/ResourceEx/Config/SkillScript", "skill", "bytes", "技能脚本"),
-            CreateNETreeComposeType(typeof(BuffBTContext),"Buff", "Assets/ResourceEx/Config/BuffScript", "buff", "bytes", "Buff脚本"),
-        };
-        NETreeWindow.OpenWindow(staticConfig, 1);
+        NETreeWindow.OpenWindow(GetConfig(), 1);
+    }
+
+    [MenuItem("Tools/OpenAINETreeWindow &F3")]
+    public static void OpenAINETreeWindow()
+    {
+        BTDataHandlerInitialize.InitializeInEditor(true);
+        NETreeWindow.OpenWindow(GetConfig(), 2);
     }
 
 }

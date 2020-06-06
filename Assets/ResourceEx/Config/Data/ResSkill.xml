@@ -7,7 +7,7 @@
 	<resskill casterState="2" cd="0.0" combo="0" id="7" inAirReplace="0" inGroundReplace="0" name="主角空中连击2" script="air_attack02" targetSelector="1"/>
 	<resskill casterState="1" cd="0.0" combo="0" id="10" inAirReplace="0" inGroundReplace="0" name="主角技能1" script="skill1" targetSelector="1"/>
 	<resskill casterState="3" cd="0.0" combo="0" id="11" inAirReplace="0" inGroundReplace="0" name="主角技能2" script="skill2" targetSelector="1"/>
-	<resskill casterState="1" cd="0.0" combo="0" id="12" inAirReplace="0" inGroundReplace="0" name="主角技能3" script="skill3" targetSelector="2"/>
+	<resskill casterState="1" cd="0.0" combo="0" id="12" inAirReplace="0" inGroundReplace="0" name="主角挑空" script="skill3" targetSelector="2"/>
 	<resskill casterState="1" cd="0.0" combo="0" id="1001" inAirReplace="0" inGroundReplace="0" name="翻滚01" script="dodge01" targetSelector="2"/>
 	<resskill casterState="1" cd="0.0" combo="1001" id="1002" inAirReplace="0" inGroundReplace="0" name="攻击02" script="attack02" targetSelector="1"/>
 	<resskill casterState="1" cd="0.0" combo="0" id="1003" inAirReplace="0" inGroundReplace="0" name="攻击03" script="attack03" targetSelector="1"/>
