@@ -7,6 +7,8 @@ namespace Game
     public static class AIBlackBoardKeys
     {
         public static string TargetPosition = "TargetPosition";
+        public static string TargetEntity = "TargetEntity";
+        public static string SkillIDList = "SkillIDList";
     }
 
     public class AIComponent : DataComponent

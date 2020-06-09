@@ -53,14 +53,22 @@ namespace Game
 
         void Update()
         {
+            var temp = ResetObjectPool<List<Entity>>.Instance.GetObject();
             foreach (var pair in m_dicEntity)
             {
                 if (!world.EntityManager.Exists(pair.Key) || pair.Value == null)
                 {
-                    m_dicEntity.Remove(pair.Key);
-                    m_lstUpdateEntity.Remove(pair.Key);
+                    temp.Add(pair.Key);
+                  
                 }
             }
+
+            foreach (var entity in temp)
+            {
+                m_dicEntity.Remove(entity);
+                m_lstUpdateEntity.Remove(entity);
+            }
+            ResetObjectPool<List<Entity>>.Instance.SaveObject(temp);
         }
 
         public virtual bool TryGetNewHitInfo(ref List<EntityHitInfo> lst)

@@ -23,5 +23,10 @@ namespace Game
         public static string AttackColliderStr = "AttackCollider";
         public static int AttackColliderInt = LayerMask.NameToLayer(AttackColliderStr);
         public static int AttackColliderMask = LayerMask.GetMask(AttackColliderStr);
+
+        //目标检测
+        public static string TargetTriggerColliderStr = "TargetTriggerCollider";
+        public static int TargetTriggerColliderInt = LayerMask.NameToLayer(TargetTriggerColliderStr);
+        public static int TargetTriggerColliderMask = LayerMask.GetMask(TargetTriggerColliderStr);
     }
 }

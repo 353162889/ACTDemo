@@ -39,6 +39,7 @@ namespace Game
         private PropertySystem propertySystem;
         private PointsMoveSystem pointsMoveSystem;
         private AISystem aiSystem;
+        private TargetTriggerSystem targetTriggerSystem;
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
@@ -70,7 +71,7 @@ namespace Game
             propertySystem = world.GetOrCreateSystem<PropertySystem>();
             pointsMoveSystem = world.GetOrCreateSystem<PointsMoveSystem>();
             aiSystem = world.GetOrCreateSystem<AISystem>();
-
+            targetTriggerSystem = world.GetOrCreateSystem<TargetTriggerSystem>();
 
             var playerEntity = CreatePlayer();
             cameraSystem.SetMainCamera(Camera.main);
@@ -139,12 +140,21 @@ namespace Game
             physicComponent.rigidbody.useGravity = false;
             physicComponent.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             physicComponent.rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            var goAttackBoxParent = new GameObject();
-            prefabComponent.gameObject.AddChildToParent(goAttackBoxParent, "AttackBoxParent");
-            physicComponent.attackColliderParent = goAttackBoxParent.transform;
-            var rigidBody = physicComponent.attackColliderParent.gameObject.AddComponent<Rigidbody>();
+
+            var goTriggerParent = new GameObject();
+            prefabComponent.gameObject.AddChildToParent(goTriggerParent, "TriggerParent");
+            var rigidBody = goTriggerParent.AddComponent<Rigidbody>();
             rigidBody.isKinematic = true;
             rigidBody.useGravity = false;
+            physicComponent.TriggerParent = goTriggerParent.transform;
+
+            var goAttackBoxParent = new GameObject();
+            goTriggerParent.AddChildToParent(goAttackBoxParent, "AttackBoxParent");
+            physicComponent.attackColliderParent = goAttackBoxParent.transform;
+
+            var goTargetTriggerParent = new GameObject();
+            goTriggerParent.AddChildToParent(goTargetTriggerParent, "TargetTriggerParent");
+            physicComponent.targetTriggerParent = goTargetTriggerParent.transform;
 
             var animationComponent = world.AddComponentOnce<AnimationComponent>(entity);
             animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
@@ -164,6 +174,8 @@ namespace Game
             var entityCommonInfoComponent = world.AddComponentOnce<EntityCommonInfoComponent>(entity);
             entityCommonInfoComponent.bornPosition = bornPos;
             entityCommonInfoComponent.bornForward = transformComponent.forward;
+
+            
 
             return entity;
         }
@@ -206,6 +218,7 @@ namespace Game
             var faceComponent = world.AddComponentOnce<FaceComponent>(entity);
             faceComponent.desiredDegreeSpeed = 720;
 
+            //物理
             var physicComponent = world.AddComponentOnce<PhysicComponent>(entity);
             physicComponent.rigidbody = prefabComponent.gameObject.AddComponentOnce<Rigidbody>();
             physicComponent.collisionListener = prefabComponent.gameObject.AddComponentOnce<CollisionListener>();
@@ -213,6 +226,21 @@ namespace Game
             physicComponent.rigidbody.useGravity = false;
             physicComponent.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             physicComponent.rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+
+            var goTriggerParent = new GameObject();
+            prefabComponent.gameObject.AddChildToParent(goTriggerParent, "TriggerParent");
+            var rigidBody = goTriggerParent.AddComponent<Rigidbody>();
+            rigidBody.isKinematic = true;
+            rigidBody.useGravity = false;
+            physicComponent.TriggerParent = goTriggerParent.transform;
+
+            var goAttackBoxParent = new GameObject();
+            goTriggerParent.AddChildToParent(goAttackBoxParent, "AttackBoxParent");
+            physicComponent.attackColliderParent = goAttackBoxParent.transform;
+
+            var goTargetTriggerParent = new GameObject();
+            goTriggerParent.AddChildToParent(goTargetTriggerParent, "TargetTriggerParent");
+            physicComponent.targetTriggerParent = goTargetTriggerParent.transform;
 
             var animationComponent = world.AddComponentOnce<AnimationComponent>(entity);
             animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
@@ -234,12 +262,15 @@ namespace Game
             entityCommonInfoComponent.bornPosition = bornPos;
             entityCommonInfoComponent.bornForward = transformComponent.forward;
 
+            targetTriggerSystem.AddSphereTargetTriggerComponent(entity, 10, 15, 2);
+
             return entity;
         }
 
         protected override void OnUpdate()
         {
             physicSystem.Update();
+            targetTriggerSystem.Update();
 
             pcInputSystem.Update();
             inputSystem.Update();
