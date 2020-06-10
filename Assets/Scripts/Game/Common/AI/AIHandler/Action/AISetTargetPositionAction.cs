@@ -1,4 +1,5 @@
 ﻿using Framework;
+using Unity.Entities;
 using UnityEngine;
 
 namespace Game
@@ -7,6 +8,7 @@ namespace Game
     {
         //出身位置为中心的半径内随机
         BornPositionRadiusRandom,
+        Target,
     }
     public class AISetTargetPositionActionData
     {
@@ -31,6 +33,15 @@ namespace Game
                 var mapSystem = context.world.GetExistingSystem<MapSystem>();
                 float y = mapSystem.GetGroundInfo(position).point.y;
                 position.y = y;
+                context.blackBoard.SetData(AIBlackBoardKeys.TargetPosition, position);
+            }
+            else if (data.positionType == SetTargetPositionType.Target)
+            {
+                var target = context.aiComponent.blackBoard.target;
+                if (target == Entity.Null) return BTStatus.Fail;
+                var transformComponent = context.world.GetComponent<TransformComponent>(target);
+                if (transformComponent == null) return BTStatus.Fail;
+                var position = transformComponent.position;
                 context.blackBoard.SetData(AIBlackBoardKeys.TargetPosition, position);
             }
             return BTStatus.Success;

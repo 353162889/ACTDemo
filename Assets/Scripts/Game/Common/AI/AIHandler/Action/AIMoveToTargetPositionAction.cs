@@ -13,8 +13,8 @@ namespace Game
             BTExecuteStatus exeStatus = context.executeCache.GetExecuteStatus(btData.dataIndex);
             if (exeStatus == BTExecuteStatus.Ready)
             {
-                bool exist = false;
-                var targetPosition = context.blackBoard.GetData<Vector3>(AIBlackBoardKeys.TargetPosition, out exist);
+                Vector3 targetPosition;
+                var exist = context.blackBoard.GetData<Vector3>(AIBlackBoardKeys.TargetPosition, out targetPosition);
                 if (exist)
                 {
                     var pointsMoveSystem = context.world.GetExistingSystem<PointsMoveSystem>();

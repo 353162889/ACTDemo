@@ -7,10 +7,12 @@ namespace Game
     public class AISystem : ComponentSystem, IBTExecutor
     {
         private AIBTContext aiBTContext;
+        private TargetTriggerSystem targetTriggerSystem;
 
         protected override void OnCreate()
         {
             aiBTContext = new AIBTContext();
+            targetTriggerSystem = World.GetOrCreateSystem<TargetTriggerSystem>();
             base.OnCreate();
         }
 
@@ -27,6 +29,21 @@ namespace Game
                         CLog.LogError("can not find aifile "+ aiComponent.aiFile);
                         return;
                     }
+
+                    var targetTriggerComponent = World.GetComponent<TargetTriggerComponent>(entity);
+                    if (targetTriggerComponent != null)
+                    {
+                        var target = aiComponent.blackBoard.target;
+                        if (target == Entity.Null || !targetTriggerSystem.ValidEntity(targetTriggerComponent,target))
+                        {
+                            aiComponent.blackBoard.ResetTarget();
+                            if (targetTriggerComponent.lstEntity.Count > 0)
+                            {
+                                aiComponent.blackBoard.SetFilterTarget(targetTriggerComponent.lstEntity[0]);
+                            }
+                        }
+                    }
+
                     aiBTContext.Reset();
                     aiBTContext.Init(World, aiComponent, btTreeData, this, Time.deltaTime);
                     BTStatus btState = Execute(aiBTContext);

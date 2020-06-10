@@ -34,6 +34,11 @@ namespace Game
             get { return aiComponent.blackBoard; }
         }
 
+        public AIBlackBoard aiBlackBoard
+        {
+            get { return aiComponent.blackBoard as AIBlackBoard; }
+        }
+
         public BTExecuteCache executeCache
         {
             get { return aiComponent.executeCache; }

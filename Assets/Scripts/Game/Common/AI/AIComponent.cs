@@ -7,7 +7,6 @@ namespace Game
     public static class AIBlackBoardKeys
     {
         public static string TargetPosition = "TargetPosition";
-        public static string TargetEntity = "TargetEntity";
         public static string SkillIDList = "SkillIDList";
     }
 
@@ -15,7 +14,7 @@ namespace Game
     {
         public string aiFile;
         public AIStateType aiStateType = AIStateType.Running;
-        public BTBlackBoard blackBoard = new BTBlackBoard();
+        public AIBlackBoard blackBoard = new AIBlackBoard();
         public BTExecuteCache executeCache = new BTExecuteCache();
     }
 }

@@ -38,6 +38,11 @@ namespace Game
             return targetTriggerComponent;
         }
 
+        public bool ValidEntity(TargetTriggerComponent triggerComponent, Entity entity)
+        {
+            return triggerComponent.lstEntity.Contains(entity);
+        }
+
         protected override void OnUpdate()
         {
             Entities.ForEach((Entity entity, TargetTriggerComponent triggerComponent) =>

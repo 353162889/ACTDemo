@@ -40,6 +40,7 @@ namespace Game
         private PointsMoveSystem pointsMoveSystem;
         private AISystem aiSystem;
         private TargetTriggerSystem targetTriggerSystem;
+        private TraceSystem traceSystem;
         protected override void OnEnter()
         {
             world = new GameObjectWorld("Test");
@@ -72,6 +73,7 @@ namespace Game
             pointsMoveSystem = world.GetOrCreateSystem<PointsMoveSystem>();
             aiSystem = world.GetOrCreateSystem<AISystem>();
             targetTriggerSystem = world.GetOrCreateSystem<TargetTriggerSystem>();
+            traceSystem = world.GetOrCreateSystem<TraceSystem>();
 
             var playerEntity = CreatePlayer();
             cameraSystem.SetMainCamera(Camera.main);
@@ -264,6 +266,8 @@ namespace Game
 
             targetTriggerSystem.AddSphereTargetTriggerComponent(entity, 10, 15, 2);
 
+            var traceComponent = world.AddComponentOnce<TraceComponent>(entity);
+
             return entity;
         }
 
@@ -282,6 +286,7 @@ namespace Game
             skillSystem.Update();
             buffSystem.Update();
             buffStateSystem.Update();
+            traceSystem.Update();
 
             moveStateSystem.Update();
             directionMoveSystem.Update();

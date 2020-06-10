@@ -2,26 +2,44 @@
 <NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <lstChild>
     <NEData>
-      <data xsi:type="BTSequenceData" />
+      <data xsi:type="BTSelectorData" />
       <lstChild>
         <NEData>
-          <data xsi:type="AISetTargetPositionActionData">
-            <positionType>BornPositionRadiusRandom</positionType>
-            <minRadius>4</minRadius>
-            <maxRadius>5</maxRadius>
-          </data>
-          <lstChild />
+          <data xsi:type="BTSequenceData" />
+          <lstChild>
+            <NEData>
+              <data xsi:type="AIExistTargetConditionData" />
+              <lstChild />
+            </NEData>
+            <NEData>
+              <data xsi:type="AITraceTargetActionData" />
+              <lstChild />
+            </NEData>
+          </lstChild>
         </NEData>
         <NEData>
-          <data xsi:type="AIMoveToTargetPositionActionData" />
-          <lstChild />
-        </NEData>
-        <NEData>
-          <data xsi:type="AIRandomWaitActionData">
-            <minTime>1</minTime>
-            <maxTime>1</maxTime>
-          </data>
-          <lstChild />
+          <data xsi:type="BTSequenceData" />
+          <lstChild>
+            <NEData>
+              <data xsi:type="AISetTargetPositionActionData">
+                <positionType>BornPositionRadiusRandom</positionType>
+                <minRadius>4</minRadius>
+                <maxRadius>5</maxRadius>
+              </data>
+              <lstChild />
+            </NEData>
+            <NEData>
+              <data xsi:type="AIMoveToTargetPositionActionData" />
+              <lstChild />
+            </NEData>
+            <NEData>
+              <data xsi:type="AIRandomWaitActionData">
+                <minTime>1</minTime>
+                <maxTime>1</maxTime>
+              </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
         </NEData>
       </lstChild>
     </NEData>
