@@ -14,8 +14,15 @@ namespace Game
             if (btDataLoader == null) btDataLoader = new BTDataLoader<string>();
             btDataLoader.Clear();
             Dictionary<string, string> loadInfo = new Dictionary<string, string>();
-            string aiName = "test_ai";
-            loadInfo.Add(aiName, "Config/AIScript/" + aiName + ".bytes");
+            var lstMonsterCfg = ResCfgSys.Instance.GetCfgLst<ResMonster>();
+            for (int i = 0; i < lstMonsterCfg.Count; i++)
+            {
+                var monsterCfg = lstMonsterCfg[i];
+                if (!string.IsNullOrEmpty(monsterCfg.aiScript))
+                {
+                    loadInfo.Add(monsterCfg.aiScript, "Config/AIScript/" + monsterCfg.aiScript + ".bytes");
+                }
+            }
             btDataLoader.LoadResCfgs(loadInfo, () =>
             {
                 callback?.Invoke();

@@ -1193,7 +1193,7 @@ MonoBehaviour:
   - guid: 7758b834619294d4e81a1a6edef6ae1c
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591709912
+    stamp: 1591800258
     type: 1
     UseGUIDs:
     - 9f7692b277af11d41b73950aed38970d
@@ -3644,7 +3644,7 @@ MonoBehaviour:
   - guid: 649f59cc4da2f004c940e1e06eb10162
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591712424
+    stamp: 1591801802
     type: 1
     UseGUIDs:
     - 6307603c504b0a24f939fc773ffa1441
@@ -4188,7 +4188,7 @@ MonoBehaviour:
     - OnDrawGizmos
     - OnExit
     - SceneEffectPool
-    stamp: 1591712424
+    stamp: 1591801802
     type: 2
     UseGUIDs: []
   - guid: d4effa1f55b84e748aaa9f635451c81d
@@ -36060,7 +36060,9 @@ MonoBehaviour:
     ScriptTokens:
     - ComponentSystem, IBTExecutor
     - AIBTContext
+    - TargetTriggerSystem
     - OnCreate
+    - World
     - OnUpdate
     - Entities
     - Entity
@@ -36068,22 +36070,22 @@ MonoBehaviour:
     - AIStateType
     - AIManager
     - CLog
-    - World
     - Time
     - BTStatus
     - Execute
     - Clear
     - IBTContext
     - BTDataHandlerInitialize
-    stamp: 1591455076
+    stamp: 1591801304
     type: 2
     UseGUIDs: []
   - guid: f13c7480659c582499c5b384a9466329
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591713397
+    stamp: 1591801320
     type: 1
     UseGUIDs:
+    - e18292388df396c4fb36f60b1b33cb4d
     - e93169e030f889c46b7a677dc272194d
     - a85bc2b459c69f543835c3d5da4442c6
     - 80cad60eafc1eea43a01a94f5872f5b9
@@ -36105,13 +36107,12 @@ MonoBehaviour:
     - Game.AIComponent
     ScriptTokens:
     - TargetPosition
-    - TargetEntity
     - SkillIDList
     - DataComponent
     - AIStateType
-    - BTBlackBoard
+    - AIBlackBoard
     - BTExecuteCache
-    stamp: 1591530678
+    stamp: 1591800528
     type: 2
     UseGUIDs: []
   - guid: e93169e030f889c46b7a677dc272194d
@@ -36124,13 +36125,14 @@ MonoBehaviour:
     - IBTExecutor
     - AIComponent
     - BTBlackBoard
+    - AIBlackBoard
     - BTExecuteCache
     - IBTDataHandler
     - GetHandler
     - BTDataHandlerInitialize
     - Init
     - Reset
-    stamp: 1591455197
+    stamp: 1591800511
     type: 2
     UseGUIDs: []
   - guid: 1df98b38f24f42045bb9f1809771e6b3
@@ -36252,7 +36254,7 @@ MonoBehaviour:
   - guid: b8675cd60b089bf4193c8a28ab6ff3e2
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591714097
+    stamp: 1591801481
     type: 1
     UseGUIDs:
     - 94849cca1bbf5e04ab6f85b1e2581fde
@@ -36263,7 +36265,7 @@ MonoBehaviour:
   - guid: 5f82aa55c47d1c64c824b015a4581d51
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591457821
+    stamp: 1591801737
     type: 1
     UseGUIDs:
     - 2518701a92505d440a8ad94a0373c961
@@ -36280,6 +36282,7 @@ MonoBehaviour:
     - Game.AISetTargetPositionAction
     ScriptTokens:
     - BornPositionRadiusRandom
+    - Target
     - BTAction<AIBTContext, AISetTargetPositionActionData>
     - BTStatus
     - Handler
@@ -36288,7 +36291,8 @@ MonoBehaviour:
     - Random
     - Mathf
     - AIBlackBoardKeys
-    stamp: 1591457797
+    - Entity
+    stamp: 1591801481
     type: 2
     UseGUIDs: []
   - guid: e16b23feba7a8f648aefeeb85bff5c12
@@ -36363,10 +36367,11 @@ MonoBehaviour:
     - GameObject
     - LayerDefine
     - SphereCollider
+    - ValidEntity
     - OnUpdate
     - Entities
     - TargetFilter
-    stamp: 1591709912
+    stamp: 1591800258
     type: 2
     UseGUIDs: []
   - guid: 1e43a700a65c68a489f9db7a50334a40
@@ -36430,8 +36435,9 @@ MonoBehaviour:
     - AIBTContext
     - BTData
     - Entity
-    - AIBlackBoardKeys
-    stamp: 1591714097
+    - Clear
+    - IsCleared
+    stamp: 1591801038
     type: 2
     UseGUIDs: []
   - guid: 7607b03067e97b547890e0fe5346d6b5
@@ -36462,8 +36468,7 @@ MonoBehaviour:
     - AIBTContext
     - BTData
     - Entity
-    - AIBlackBoardKeys
-    stamp: 1591713130
+    stamp: 1591801033
     type: 2
     UseGUIDs: []
   - guid: 489d289ea4f98ed44878f4ed9c792d53
@@ -36478,15 +36483,22 @@ MonoBehaviour:
   - guid: aa84dd25d7c62ce40bea17efc466fe97
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591713397
+    stamp: 1591801033
     type: 1
     UseGUIDs:
     - f782b6fa890a9fe4b9b679fa82e04acc
   - guid: e18292388df396c4fb36f60b1b33cb4d
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 0
+    ScriptSymbols:
+    - Game.AIBlackBoard
+    ScriptTokens:
+    - BTBlackBoard
+    - Entity
+    - SetFilterTarget
+    - SetOverrideTarget
+    - ResetTarget
+    - Clear
+    stamp: 1591801025
     type: 2
     UseGUIDs: []
-  timeStamp: 1591796816
+  timeStamp: 1591885827
   priority: 3

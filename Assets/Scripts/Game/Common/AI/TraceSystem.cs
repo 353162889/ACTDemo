@@ -5,9 +5,11 @@ namespace Game
     public class TraceSystem : ComponentSystem
     {
         private PointsMoveSystem pointsMoveSystem;
+        private FaceSystem faceSystem;
         protected override void OnCreate()
         {
             pointsMoveSystem = World.GetOrCreateSystem<PointsMoveSystem>();
+            faceSystem = World.GetOrCreateSystem<FaceSystem>();
         }
 
         public void StartTrace(Entity entity, Entity target)
@@ -16,6 +18,7 @@ namespace Game
             if (traceComponent == null) return;
             traceComponent.isTrace = true;
             traceComponent.target = target;
+            traceComponent.sqrStopMoveDistance = traceComponent.stopMoveDistance * traceComponent.stopMoveDistance;
         }
 
         public void StopTrace(Entity entity)
@@ -28,7 +31,7 @@ namespace Game
 
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, TraceComponent traceComponent, PointsMoveComponent pointsMoveComponent) =>
+            Entities.ForEach((Entity entity, TraceComponent traceComponent, TransformComponent transformComponent, PointsMoveComponent pointsMoveComponent) =>
             {
                 if (traceComponent.isTrace)
                 {
@@ -38,8 +41,19 @@ namespace Game
                         return;
                     }
 
-                    var transformComponent =  World.GetComponent<TransformComponent>(traceComponent.target);
-                    pointsMoveSystem.Move(entity, transformComponent.position, true);
+                    var targetTransformComponent =  World.GetComponent<TransformComponent>(traceComponent.target);
+                    var offset = targetTransformComponent.position - transformComponent.position;
+                    if (offset.sqrMagnitude <
+                        traceComponent.sqrStopMoveDistance)
+                    {
+                        pointsMoveSystem.StopMove(entity);
+                        faceSystem.FaceTo(entity, offset);
+                    }
+                    else
+                    {
+                        pointsMoveSystem.Move(entity, targetTransformComponent.position, true);
+                    }
+                    
                 }
             });
         }

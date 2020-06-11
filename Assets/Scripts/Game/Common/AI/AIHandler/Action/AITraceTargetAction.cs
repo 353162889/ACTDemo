@@ -18,7 +18,10 @@ namespace Game
             if (traceComponent.isTrace) return BTStatus.Running;
             var traceSystem = context.world.GetExistingSystem<TraceSystem>();
             if (traceSystem == null) return BTStatus.Fail;
-            traceSystem.StartTrace(context.aiComponent.componentEntity, target);
+            if (!traceComponent.isTrace || traceComponent.target != target)
+            {
+                traceSystem.StartTrace(context.aiComponent.componentEntity, target);
+            }
             return BTStatus.Running;
         }
 

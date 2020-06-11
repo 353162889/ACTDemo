@@ -83,6 +83,15 @@ namespace Game
             return true;
         }
 
+        public void StopMove(Entity entity)
+        {
+            var pointsMoveComponent = World.GetComponent<PointsMoveComponent>(entity);
+            if (pointsMoveComponent != null)
+            {
+                StopMove(pointsMoveComponent);
+            }
+        }
+
         public void StopMove(PointsMoveComponent moveComponent)
         {
             ClearData(moveComponent);

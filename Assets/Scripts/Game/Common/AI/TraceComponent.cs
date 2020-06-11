@@ -6,5 +6,7 @@ namespace Game
     {
         public bool isTrace;
         public Entity target;
+        public float stopMoveDistance;
+        public float sqrStopMoveDistance;
     }
 }

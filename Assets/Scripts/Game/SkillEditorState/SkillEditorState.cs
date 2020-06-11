@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Cinemachine;
 using Framework;
+using GameData;
 using Unity.Entities;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -174,6 +175,8 @@ namespace Game
             var pointsMoveComponent = world.AddComponentOnce<PointsMoveComponent>(entity);
 
             var entityCommonInfoComponent = world.AddComponentOnce<EntityCommonInfoComponent>(entity);
+            entityCommonInfoComponent.cfgId = 0;
+            entityCommonInfoComponent.entityType = EntityType.Player;
             entityCommonInfoComponent.bornPosition = bornPos;
             entityCommonInfoComponent.bornForward = transformComponent.forward;
 
@@ -210,6 +213,13 @@ namespace Game
                 bornPos.y = y;
             }
             transformComponent.position = bornPos;
+
+            var entityCommonInfoComponent = world.AddComponentOnce<EntityCommonInfoComponent>(entity);
+            entityCommonInfoComponent.cfgId = 1;
+            entityCommonInfoComponent.entityType = EntityType.Monster;
+            entityCommonInfoComponent.bornPosition = bornPos;
+            entityCommonInfoComponent.bornForward = transformComponent.forward;
+
             //移动
             var stepMoveComponent = world.AddComponentOnce<StepMoveComponent>(entity);
             var moveStateComponent = world.AddComponentOnce<MoveStateComponent>(entity);
@@ -258,15 +268,13 @@ namespace Game
             var pointsMoveComponent = world.AddComponentOnce<PointsMoveComponent>(entity);
 
             var aiComponent = world.AddComponentOnce<AIComponent>(entity);
-            aiComponent.aiFile = "test_ai";
-
-            var entityCommonInfoComponent = world.AddComponentOnce<EntityCommonInfoComponent>(entity);
-            entityCommonInfoComponent.bornPosition = bornPos;
-            entityCommonInfoComponent.bornForward = transformComponent.forward;
+            var monsterCfg = ResCfgSys.Instance.GetCfg<ResMonster>(entityCommonInfoComponent.cfgId);
+            aiComponent.aiFile = monsterCfg.aiScript;
 
             targetTriggerSystem.AddSphereTargetTriggerComponent(entity, 10, 15, 2);
 
             var traceComponent = world.AddComponentOnce<TraceComponent>(entity);
+            traceComponent.stopMoveDistance = monsterCfg.traceStopMoveDistance;
 
             return entity;
         }
