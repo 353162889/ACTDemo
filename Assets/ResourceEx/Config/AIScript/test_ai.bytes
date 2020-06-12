@@ -2,24 +2,20 @@
 <NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <lstChild>
     <NEData>
-      <data xsi:type="BTSelectorData" />
+      <data xsi:type="BTSelectorMonitorData" />
       <lstChild>
         <NEData>
           <data xsi:type="BTSequenceData" />
           <lstChild>
             <NEData>
-              <data xsi:type="AIExistTargetConditionData" />
-              <lstChild />
+              <data xsi:type="BTNotConditionData" />
+              <lstChild>
+                <NEData>
+                  <data xsi:type="AIExistTargetConditionData" />
+                  <lstChild />
+                </NEData>
+              </lstChild>
             </NEData>
-            <NEData>
-              <data xsi:type="AITraceTargetActionData" />
-              <lstChild />
-            </NEData>
-          </lstChild>
-        </NEData>
-        <NEData>
-          <data xsi:type="BTSequenceData" />
-          <lstChild>
             <NEData>
               <data xsi:type="AISetTargetPositionActionData">
                 <positionType>BornPositionRadiusRandom</positionType>
@@ -37,6 +33,36 @@
                 <minTime>1</minTime>
                 <maxTime>1</maxTime>
               </data>
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="BTParallelData">
+            <failType>FailOnAll</failType>
+            <successType>SuccessOnAll</successType>
+            <childFinishLoop>true</childFinishLoop>
+          </data>
+          <lstChild>
+            <NEData>
+              <data xsi:type="BTSequenceData" />
+              <lstChild>
+                <NEData>
+                  <data xsi:type="AISearchSkillActionData" />
+                  <lstChild />
+                </NEData>
+                <NEData>
+                  <data xsi:type="AIExistCanCastSkillIdConditionData" />
+                  <lstChild />
+                </NEData>
+                <NEData>
+                  <data xsi:type="AICastSkillActionData" />
+                  <lstChild />
+                </NEData>
+              </lstChild>
+            </NEData>
+            <NEData>
+              <data xsi:type="AITraceTargetActionData" />
               <lstChild />
             </NEData>
           </lstChild>

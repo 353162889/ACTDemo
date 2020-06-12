@@ -15,7 +15,6 @@
                 var childResult = childHandler.Handler(context, childBTData);
                 if (childResult == BTStatus.Fail)
                 {
-                    this.Clear(context, btData);
                     return BTStatus.Fail;
                 }
                 else if (childResult == BTStatus.Running)
@@ -28,7 +27,6 @@
                     context.executeCache.SetCache(btData.dataIndex, selectIndex);
                 }
             }
-            this.Clear(context, btData);
             return BTStatus.Success;
         }
     }

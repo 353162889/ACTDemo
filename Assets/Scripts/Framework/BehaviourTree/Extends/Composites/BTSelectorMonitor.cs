@@ -1,12 +1,12 @@
 ﻿namespace Framework
 {
-    public class BTSelectorData { }
-    public class BTSelector : BTComposite<IBTContext, BTSelectorData>
+    public class BTSelectorMonitorData { }
+    public class BTSelectorMonitor : BTComposite<IBTContext, BTSelectorMonitorData>
     {
-        protected override BTStatus Handler(IBTContext context, BTData btData, BTSelectorData data)
+        protected override BTStatus Handler(IBTContext context, BTData btData, BTSelectorMonitorData data)
         {
-            var selectIndex = context.executeCache.GetCache<int>(btData.dataIndex, -1);
-            if (selectIndex < 0) selectIndex = 0;
+            var selectIndex = 0;
+            BTStatus result = BTStatus.Fail;
             int totalCount = btData.children == null ? 0 : btData.children.Count;
             while (selectIndex < totalCount)
             {
@@ -15,11 +15,13 @@
                 var childResult = childHandler.Handler(context, childBTData);
                 if (childResult == BTStatus.Success)
                 {
-                    return BTStatus.Success;
+                    result = BTStatus.Success;
+                    break;
                 }
                 else if (childResult == BTStatus.Running)
                 {
-                    return BTStatus.Running;
+                    result = BTStatus.Running;
+                    break;
                 }
                 else if (childResult == BTStatus.Fail)
                 {
@@ -27,7 +29,14 @@
                     context.executeCache.SetCache(btData.dataIndex, selectIndex);
                 }
             }
-            return BTStatus.Fail;
+
+            for (int i = selectIndex + 1; i < totalCount; i++)
+            {
+                var childBTData = btData.children[i];
+                var handler = context.GetHandler(childBTData.keyIndex);
+                handler.Clear(context, childBTData);
+            }
+            return result;
         }
 
     }

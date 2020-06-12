@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resmonster aiScript="test_ai" id="1" name="测试怪物" prefab="Enemy" skillIds="" skillRuleIds="" traceStopMoveDistance="2.0"/>
+	<resmonster aiScript="test_ai" id="1" name="测试怪物" prefab="Enemy" skillIds="50001" skillRuleIds="" traceStopMoveDistance="2.0"/>
 </root>

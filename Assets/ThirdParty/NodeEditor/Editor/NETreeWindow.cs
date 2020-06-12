@@ -45,6 +45,8 @@ namespace NodeEditor
             get { return m_cDirector; }
         }
 
+        private GameObject timelinePrefab;
+
         public void SetTimelineEditorNode(NENode node)
         {
             if (node == null) return;
@@ -65,17 +67,21 @@ namespace NodeEditor
             //创建playableDirector实例与timeline资源
             var go = new GameObject("NETimelineGameObject");
             m_cDirector = go.AddComponent<PlayableDirector>();
-            var timelineAsset = TimelineAsset.CreateInstance<NETimelineAsset>();
-            m_cDirector.playableAsset = timelineAsset;
             var neData = GetNEDataByNENode(m_cTimeLineEditorNode);
-            if (!TimeLineUtility.ConvertNEDataToTimeLine(m_cDirector, neData))
+            if (timelinePrefab == null)
+            {
+                string playerPath = "Assets/ResourceEx/Prefab/MainPlayer.prefab";
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(playerPath);
+                timelinePrefab = prefab;
+            }
+            if (!TimeLineUtility.ConvertNEDataToTimeLine(m_cDirector, neData, timelinePrefab))
             {
                 GameObject.DestroyImmediate(m_cDirector.gameObject);
                 m_cDirector = null;
                 EditorUtility.DisplayDialog("提示", "创建timeline资源失败!详细请看Debug", "确定");
                 return;
             }
-            AssetDatabase.CreateAsset(timelineAsset, "Assets/Temp/Timeline_temp.playable");
+            AssetDatabase.CreateAsset(m_cDirector.playableAsset, "Assets/Temp/Timeline_temp.playable");
             AssetDatabase.SaveAssets();
             Selection.activeGameObject = go;
         }
@@ -157,6 +163,7 @@ namespace NodeEditor
         {
             m_cToolBarBtnStyle = null;
             m_cToolBarPopupStyle = null;
+            timelinePrefab = null;
             if (arrTreeComposeData != null)
             {
                 m_arrComposeDesc = new string[arrTreeComposeData.Length];
@@ -301,6 +308,7 @@ namespace NodeEditor
             float centerAreaWidth = position.width - leftAreaWidth - rightAreaWidth;
             if (centerAreaWidth < 0) centerAreaWidth = 0;
 
+            float oldWidth;
             //画布整体描述区域
             Rect leftArea = new Rect(0, titleHeight, leftAreaWidth, position.height - titleHeight);
             GUILayout.BeginArea(leftArea);
@@ -308,12 +316,17 @@ namespace NodeEditor
             leftScrollPos = GUILayout.BeginScrollView(leftScrollPos, false, true);
             if(m_cRoot != null)
             {
-                float oldWidth= EditorGUIUtility.labelWidth;
+                oldWidth= EditorGUIUtility.labelWidth;
                 EditorGUIUtility.labelWidth = 50;
                 NEDataProperties.Draw(m_cRoot.dataProperty, GUILayout.Width(leftArea.width - 50));
                 EditorGUIUtility.labelWidth = oldWidth;
             }
-           
+
+            oldWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 90;
+            timelinePrefab = (GameObject)EditorGUILayout.ObjectField("TimelinePrefab", timelinePrefab, typeof(GameObject), true);
+            EditorGUIUtility.labelWidth = oldWidth;
+
             if (m_cTimeLineEditorNode != null)
             {
                 EditorGUILayout.BeginVertical();

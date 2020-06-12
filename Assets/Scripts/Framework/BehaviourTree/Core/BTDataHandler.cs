@@ -1,4 +1,6 @@
-﻿namespace Framework
+﻿using System;
+
+namespace Framework
 {
     //行为树数据处理类
     public interface IBTDataHandler
@@ -31,7 +33,15 @@
 
         public void Clear(IBTContext context, BTData btData)
         {
-            Clear((T1)context, btData,(T2)btData.data);
+            try
+            {
+                Clear((T1)context, btData, (T2)btData.data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+//            Clear((T1)context, btData,(T2)btData.data);
         }
 
         protected virtual BTStatus Handler(T1 context, BTData btData, T2 data)

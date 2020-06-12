@@ -2,7 +2,11 @@
 <NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <lstChild>
     <NEData>
-      <data xsi:type="BTParallelAndData" />
+      <data xsi:type="BTParallelData">
+        <failType>FailOnAll</failType>
+        <successType>SuccessOnAll</successType>
+        <childFinishLoop>false</childFinishLoop>
+      </data>
       <lstChild>
         <NEData>
           <data xsi:type="BTSelectorData" />

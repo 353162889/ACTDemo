@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using Framework;
+using Unity.Entities;
 
 namespace Game
 {

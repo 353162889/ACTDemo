@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Game;
 
 namespace BTCore
 {
@@ -28,6 +29,19 @@ namespace BTCore
                 return (T) result;
             }
             return defaultValue;
+        }
+
+        public T GetAndSetData<T>(string name, ObjectFactory<T> defaultFactory) where T :new()
+        {
+            object result;
+            if (m_cacheData.TryGetValue(name, out result))
+            {
+                return (T)result;
+            }
+
+            var value = defaultFactory.Generate();
+            m_cacheData.Add(name, value);
+            return value;
         }
 
         public bool GetData<T>(string name, out T result)

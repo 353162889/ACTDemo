@@ -43,7 +43,7 @@ namespace Game
         void Start()
         {
             InitSingleton();
-            SetCursorVisiable(false);
+            SetCursorVisiable(true);
             ReloadCfg(() =>
             {
                 InitState();

@@ -219,6 +219,7 @@ namespace Game
             entityCommonInfoComponent.entityType = EntityType.Monster;
             entityCommonInfoComponent.bornPosition = bornPos;
             entityCommonInfoComponent.bornForward = transformComponent.forward;
+            var monsterCfg = ResCfgSys.Instance.GetCfg<ResMonster>(entityCommonInfoComponent.cfgId);
 
             //移动
             var stepMoveComponent = world.AddComponentOnce<StepMoveComponent>(entity);
@@ -268,7 +269,7 @@ namespace Game
             var pointsMoveComponent = world.AddComponentOnce<PointsMoveComponent>(entity);
 
             var aiComponent = world.AddComponentOnce<AIComponent>(entity);
-            var monsterCfg = ResCfgSys.Instance.GetCfg<ResMonster>(entityCommonInfoComponent.cfgId);
+            
             aiComponent.aiFile = monsterCfg.aiScript;
 
             targetTriggerSystem.AddSphereTargetTriggerComponent(entity, 10, 15, 2);

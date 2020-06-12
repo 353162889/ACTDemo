@@ -71,9 +71,10 @@ namespace NodeEditor
             return timelineData;
         }
 
-        public static bool ConvertNEDataToTimeLine(PlayableDirector director, NEData neData)
+        public static bool ConvertNEDataToTimeLine(PlayableDirector director, NEData neData, GameObject prefab)
         {
-            var timelineAsset = (NETimelineAsset)director.playableAsset;
+            var timelineAsset = TimelineAsset.CreateInstance<NETimelineAsset>();
+            director.playableAsset = timelineAsset;
           
             var goModelMove = new GameObject();
             director.gameObject.AddChildToParent(goModelMove, "ModelMove");
@@ -84,13 +85,11 @@ namespace NodeEditor
             //添加一个AnimationTrack用于放置动画
             var animTrack = timelineAsset.CreateTrack<AnimationTrack>(viewGroupTrack,"ModelAnimationTrack");
             timelineAsset.modelAnimTrack = animTrack;
-            string playerPath = "Assets/ResourceEx/Prefab/MainPlayer.prefab";
-            var playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(playerPath);
-            if (playerPrefab != null)
+            if (prefab != null)
             {
-                var player = GameObject.Instantiate(playerPrefab);
-                goModelMove.AddChildToParent(player.gameObject, "MainPlayer");
-                var animator = player.transform.GetComponentInChildren<Animator>();
+                var model = GameObject.Instantiate(prefab);
+                goModelMove.AddChildToParent(model.gameObject, "TimeLineModel");
+                var animator = model.transform.GetComponentInChildren<Animator>();
                 if (animator != null)
                 {
                     director.SetGenericBinding(animTrack, animator);

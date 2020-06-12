@@ -63,16 +63,17 @@ namespace Game
             return skillId;
         }
 
-        public void CastSkill(Entity entity, int skillId)
+        public bool CastSkill(Entity entity, int skillId)
         {
             var skillComponent = World.GetComponent<SkillComponent>(entity);
-            if (null == skillComponent) return;
+            if (null == skillComponent) return false;
             SkillTargetInfo targetInfo;
-            if (!CanCastSkill(skillComponent, skillId, out targetInfo)) return;
+            if (!CanCastSkill(skillComponent, skillId, out targetInfo)) return false;
             UpdateSkillBreak(entity);
             var skilldata = CreateSkillData(entity, skillId, targetInfo);
             skillComponent.skillData = skilldata;
             CLog.LogArgs("CastSkill", skillId);
+            return true;
         }
 
         public bool CanCastSkill(Entity entity, int skillId)

@@ -129,7 +129,7 @@
           <lstChild>
             <NEData>
               <data xsi:type="BTBoxColliderActionData">
-                <filterId>2</filterId>
+                <overrideFilterId>0</overrideFilterId>
                 <localPos>
                   <x>0</x>
                   <y>1.07</y>
@@ -164,7 +164,7 @@
                 </NEData>
                 <NEData>
                   <data xsi:type="BTAddBuffActionData">
-                    <filterId>2</filterId>
+                    <overrideFilterId>0</overrideFilterId>
                     <finishResume>false</finishResume>
                     <addBuffDuration>0</addBuffDuration>
                     <lstBuffId>

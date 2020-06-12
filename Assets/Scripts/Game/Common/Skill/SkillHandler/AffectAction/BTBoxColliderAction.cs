@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Framework;
+using GameData;
 using Unity.Entities;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Game
 {
     public class BTBoxColliderActionData : IBTTimelineDurationData
     {
-        public int filterId;
+        public int overrideFilterId;
         public Vector3 localPos;
         public Quaternion localRot;
         public Vector3 size;
@@ -72,7 +73,18 @@ namespace Game
                 {
                     tempTargets.Add(entityHitInfo.entity);
                 }
-                TargetFilter.Filter(data.filterId, context.world, context.skillComponent.componentEntity, tempTargets, ref tempResults);
+                int filterId = data.overrideFilterId;
+                if (filterId <= 0)
+                {
+                    filterId = ResCfgSys.Instance.GetCfg<ResSkill>(context.skillData.skillId).targetFitlerId;
+                }
+
+                if (filterId > 0)
+                {
+                    TargetFilter.Filter(filterId, context.world, context.skillComponent.componentEntity,
+                        tempTargets, ref tempResults);
+                }
+
                 for (int i = lst.Count - 1; i > -1 ; i--)
                 {
                     if (!tempResults.Contains(lst[i].entity))

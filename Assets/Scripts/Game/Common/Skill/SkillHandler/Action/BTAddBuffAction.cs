@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Framework;
+using GameData;
 using NodeEditor;
 using Unity.Entities;
 
@@ -7,7 +8,7 @@ namespace Game
 {
     public class BTAddBuffActionData : IBTTimelineDurationData
     {
-        public int filterId;
+        public int overrideFilterId;
         [NEProperty("是否完成当前行为还原该行为（移除添加的buff）")]
         public bool finishResume;
         public float addBuffDuration;
@@ -50,7 +51,19 @@ namespace Game
                         {
                             tempTargets.Add(damageInfo.target);
                         }
-                        TargetFilter.Filter(data.filterId, context.world, context.skillComponent.componentEntity, tempTargets, ref tempResults);
+
+                        int filterId = data.overrideFilterId;
+                        if (filterId <= 0)
+                        {
+                            filterId = ResCfgSys.Instance.GetCfg<ResSkill>(context.skillData.skillId).targetFitlerId;
+                        }
+
+                        if (filterId > 0)
+                        {
+                            TargetFilter.Filter(filterId, context.world,
+                                context.skillComponent.componentEntity, tempTargets, ref tempResults);
+                        }
+
                         for (int i = lst.Count - 1; i > -1; i--)
                         {
                             var damageInfo = lst[i];
@@ -58,7 +71,8 @@ namespace Game
                             {
                                 for (int j = 0; j < data.lstBuffId.Length; j++)
                                 {
-                                    int index = buffSystem.AddBuffByDamageInfo(damageInfo.target, data.lstBuffId[j], damageInfo);
+                                    int index = buffSystem.AddBuffByDamageInfo(damageInfo.target, data.lstBuffId[j],
+                                        damageInfo);
                                     if (index > 0)
                                         cacheData.lstBuffIndex.Add(index);
                                 }

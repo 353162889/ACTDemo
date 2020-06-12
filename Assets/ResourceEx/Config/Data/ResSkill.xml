@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<resskill casterState="1" cd="0.0" combo="1" id="1" inAirReplace="0" inGroundReplace="0" name="主角连击1" script="normal_attack01" targetSelector="1"/>
-	<resskill casterState="1" cd="0.0" combo="0" id="2" inAirReplace="0" inGroundReplace="0" name="主角连击2" script="normal_attack02" targetSelector="1"/>
-	<resskill casterState="1" cd="0.0" combo="0" id="3" inAirReplace="0" inGroundReplace="0" name="主角连击3" script="normal_attack03" targetSelector="1"/>
-	<resskill casterState="2" cd="1.5" combo="2" id="6" inAirReplace="0" inGroundReplace="0" name="主角空中连击1" script="air_attack01" targetSelector="1"/>
-	<resskill casterState="2" cd="0.0" combo="0" id="7" inAirReplace="0" inGroundReplace="0" name="主角空中连击2" script="air_attack02" targetSelector="1"/>
-	<resskill casterState="1" cd="0.0" combo="0" id="10" inAirReplace="0" inGroundReplace="0" name="主角技能1" script="skill1" targetSelector="1"/>
-	<resskill casterState="3" cd="0.0" combo="0" id="11" inAirReplace="0" inGroundReplace="0" name="主角技能2" script="skill2" targetSelector="1"/>
-	<resskill casterState="1" cd="0.0" combo="0" id="12" inAirReplace="0" inGroundReplace="0" name="主角挑空" script="skill3" targetSelector="2"/>
-	<resskill casterState="1" cd="0.0" combo="0" id="1001" inAirReplace="0" inGroundReplace="0" name="翻滚01" script="dodge01" targetSelector="2"/>
-	<resskill casterState="1" cd="0.0" combo="1001" id="1002" inAirReplace="0" inGroundReplace="0" name="攻击02" script="attack02" targetSelector="1"/>
-	<resskill casterState="1" cd="0.0" combo="0" id="1003" inAirReplace="0" inGroundReplace="0" name="攻击03" script="attack03" targetSelector="1"/>
-	<resskill casterState="1" cd="0.0" combo="0" id="1004" inAirReplace="0" inGroundReplace="0" name="攻击04" script="attack04" targetSelector="1"/>
-	<resskill casterState="3" cd="0.0" combo="0" id="10001" inAirReplace="6" inGroundReplace="1" name="普攻" script="" targetSelector="0"/>
+	<resskill casterState="1" cd="0.0" combo="1" id="1" inAirReplace="0" inGroundReplace="0" name="主角连击1" script="normal_attack01" targetFitlerId="1" targetSelector="1"/>
+	<resskill casterState="1" cd="0.0" combo="0" id="2" inAirReplace="0" inGroundReplace="0" name="主角连击2" script="normal_attack02" targetFitlerId="1" targetSelector="1"/>
+	<resskill casterState="1" cd="0.0" combo="0" id="3" inAirReplace="0" inGroundReplace="0" name="主角连击3" script="normal_attack03" targetFitlerId="1" targetSelector="1"/>
+	<resskill casterState="2" cd="1.5" combo="2" id="6" inAirReplace="0" inGroundReplace="0" name="主角空中连击1" script="air_attack01" targetFitlerId="1" targetSelector="1"/>
+	<resskill casterState="2" cd="0.0" combo="0" id="7" inAirReplace="0" inGroundReplace="0" name="主角空中连击2" script="air_attack02" targetFitlerId="1" targetSelector="1"/>
+	<resskill casterState="1" cd="0.0" combo="0" id="10" inAirReplace="0" inGroundReplace="0" name="主角技能1" script="skill1" targetFitlerId="2" targetSelector="1"/>
+	<resskill casterState="3" cd="0.0" combo="0" id="11" inAirReplace="0" inGroundReplace="0" name="主角技能2" script="skill2" targetFitlerId="1" targetSelector="1"/>
+	<resskill casterState="1" cd="0.0" combo="0" id="12" inAirReplace="0" inGroundReplace="0" name="主角挑空" script="skill3" targetFitlerId="2" targetSelector="2"/>
+	<resskill casterState="1" cd="0.0" combo="0" id="1001" inAirReplace="0" inGroundReplace="0" name="翻滚01" script="dodge01" targetFitlerId="0" targetSelector="2"/>
+	<resskill casterState="1" cd="0.0" combo="1001" id="1002" inAirReplace="0" inGroundReplace="0" name="攻击02" script="attack02" targetFitlerId="1" targetSelector="1"/>
+	<resskill casterState="1" cd="0.0" combo="0" id="1003" inAirReplace="0" inGroundReplace="0" name="攻击03" script="attack03" targetFitlerId="1" targetSelector="1"/>
+	<resskill casterState="1" cd="0.0" combo="0" id="1004" inAirReplace="0" inGroundReplace="0" name="攻击04" script="attack04" targetFitlerId="1" targetSelector="1"/>
+	<resskill casterState="3" cd="0.0" combo="0" id="10001" inAirReplace="6" inGroundReplace="1" name="普攻" script="" targetFitlerId="0" targetSelector="1"/>
+	<resskill casterState="1" cd="10.0" combo="0" id="50001" inAirReplace="0" inGroundReplace="0" name="怪物技能" script="m_attack02" targetFitlerId="1" targetSelector="1"/>
 </root>

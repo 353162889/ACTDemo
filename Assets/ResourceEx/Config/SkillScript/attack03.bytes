@@ -16,6 +16,7 @@
                 <animName>Twinblades_attack03</animName>
                 <duration>2</duration>
               </data>
+              <lstChild />
             </NEData>
           </lstChild>
         </NEData>
@@ -171,7 +172,10 @@
                 </movePoints>
                 <duration>-1</duration>
                 <distance>-1</distance>
+                <ignoreRotation>false</ignoreRotation>
+                <useStartRotation>true</useStartRotation>
               </data>
+              <lstChild />
             </NEData>
           </lstChild>
         </NEData>
@@ -190,6 +194,7 @@
                 </forbidArray>
                 <duration>0.933333337</duration>
               </data>
+              <lstChild />
             </NEData>
           </lstChild>
         </NEData>
@@ -201,7 +206,7 @@
           <lstChild>
             <NEData>
               <data xsi:type="BTBoxColliderActionData">
-                <filterId>1</filterId>
+                <overrideFilterId>0</overrideFilterId>
                 <localPos>
                   <x>0</x>
                   <y>1.059</y>
@@ -229,7 +234,7 @@
               <lstChild>
                 <NEData>
                   <data xsi:type="BTAddBuffActionData">
-                    <filterId>1</filterId>
+                    <overrideFilterId>0</overrideFilterId>
                     <finishResume>false</finishResume>
                     <addBuffDuration>0</addBuffDuration>
                     <lstBuffId>
@@ -237,6 +242,7 @@
                     </lstBuffId>
                     <duration>0</duration>
                   </data>
+                  <lstChild />
                 </NEData>
               </lstChild>
             </NEData>
@@ -254,6 +260,7 @@
                 <comboDuration>0.333333343</comboDuration>
                 <duration>0.333333343</duration>
               </data>
+              <lstChild />
             </NEData>
           </lstChild>
         </NEData>
@@ -270,6 +277,7 @@
                 <phaseType>Backswing</phaseType>
                 <duration>1.0666666</duration>
               </data>
+              <lstChild />
             </NEData>
           </lstChild>
         </NEData>
