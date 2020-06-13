@@ -7,6 +7,7 @@ namespace NodeEditor
 {
     public class NETreeComposeType
     {
+        public Type rootDataType { get; private set; }
         public List<Type> lstNodeDataType { get; private set; }
         public Dictionary<string,List<Type>> dicCategory { get; private set; }
         //文件目录（以Assets为根目录）
@@ -15,8 +16,9 @@ namespace NodeEditor
         public string fileExt { get; private set; }//后缀
         public string desc { get; private set; }
 
-        public NETreeComposeType(List<Type> lstNodeAttr, Dictionary<string,List<Type>> dicCategory, string fileDir, string filePre, string fileExt,string desc)
+        public NETreeComposeType(Type rootDataType, List<Type> lstNodeAttr, Dictionary<string,List<Type>> dicCategory, string fileDir, string filePre, string fileExt,string desc)
         {
+            this.rootDataType = rootDataType;
             this.lstNodeDataType = lstNodeAttr;
             this.dicCategory = dicCategory;
             this.fileDir = fileDir;

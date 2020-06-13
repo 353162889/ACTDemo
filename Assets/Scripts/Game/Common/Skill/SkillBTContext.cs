@@ -18,6 +18,13 @@ namespace Game
         {
             get { return m_btTreeData; }
         }
+
+        public BTSkillRootData skillRootData
+        {
+            get { return SkillManager.Instance.GetSkillRootData(m_btTreeData); }
+        }
+
+
         private IBTExecutor m_executor;
         public IBTExecutor executor
         {

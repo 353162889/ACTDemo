@@ -27,7 +27,10 @@ namespace Game
                 var monsterCfg = ResCfgSys.Instance.GetCfg<ResMonster>(commonInfo.cfgId);
                 for (int i = 0; i < monsterCfg.skillIds.Count; i++)
                 {
-                    if (sqrDis < 3 * 3 && skillSystem.CanCastSkill(skillComponent, monsterCfg.skillIds[i]))
+                    int skillId = monsterCfg.skillIds[i];
+                    var skillRootData = SkillManager.Instance.GetSkillRootData(skillId);
+                    float distance = skillRootData != null ? skillRootData.effectiveRange : 0;
+                    if (sqrDis < distance * distance && skillSystem.CanCastSkill(skillComponent, monsterCfg.skillIds[i]))
                     {
                         lstSkillId.Add(monsterCfg.skillIds[i]);
                     }

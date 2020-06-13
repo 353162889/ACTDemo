@@ -313,6 +313,24 @@ namespace Game
                 timelineClip.duration = moveClip.length;
             }
         }
+
+        public static Vector3[] GetAllVector3(float[] points)
+        {
+            Vector3[] result = new Vector3[0];
+            if (points != null && points.Length > 0)
+            {
+                int len = points.Length / AnimationMoveUtility.DataSpace;
+                result = new Vector3[len];
+                for (int i = 0; i < len; i++)
+                {
+                    int startIndex = i * AnimationMoveUtility.DataSpace;
+                    float time = points[startIndex];
+                    Vector3 point = new Vector3(points[startIndex + 1], points[startIndex + 2], points[startIndex + 3]);
+                    result[i] = point;
+                }
+            }
+            return result;
+        }
 #endif
 
     }

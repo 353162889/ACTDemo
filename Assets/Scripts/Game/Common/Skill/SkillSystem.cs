@@ -264,10 +264,10 @@ namespace Game
         public void Clear(IBTContext context)
         {
             var treeData = context.treeData;
-            if (treeData != null && treeData.rootData != null && treeData.rootData.children.Count > 0)
+
+            if (treeData != null && treeData.rootData != null)
             {
-                var childBtData = treeData.rootData.children[0];
-                BTDataHandlerInitialize.GetHandler(childBtData.keyIndex).Clear(context, childBtData);
+                BTDataHandlerInitialize.GetHandler(treeData.rootData.keyIndex).Clear(context, treeData.rootData);
             }
         }
 

@@ -33,11 +33,6 @@
                 {
                     childResult = BTStatus.Success;
                 }
-                if (childResult != BTStatus.Running)
-                {
-                    this.Clear(context, btData);
-                }
-
                 return childResult;
             }
             else

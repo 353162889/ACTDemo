@@ -33,15 +33,7 @@ namespace Framework
 
         public void Clear(IBTContext context, BTData btData)
         {
-            try
-            {
-                Clear((T1)context, btData, (T2)btData.data);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-//            Clear((T1)context, btData,(T2)btData.data);
+            Clear((T1)context, btData,(T2)btData.data);
         }
 
         protected virtual BTStatus Handler(T1 context, BTData btData, T2 data)

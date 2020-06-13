@@ -203,7 +203,7 @@ namespace NodeEditor
             //移除根节点
             if (m_cCanvas != null) m_cCanvas.Dispose();
             m_cCanvas = new NECanvas(composeType.lstNodeDataType, composeType.dicCategory, CreateNENodeDataByDataType, CopyNENodeData);
-            CreateTreeByTreeData(initNEData);
+            CreateTreeByTreeData(composeType.rootDataType, initNEData);
             initNEData = null;
         }
 
@@ -229,7 +229,7 @@ namespace NodeEditor
             }
         }
 
-        private NENode CreateTreeByTreeData(NEData neData)
+        private NENode CreateTreeByTreeData(Type rootDataType, NEData neData)
         {
             if (m_cCanvas != null) m_cCanvas.Clear();
             NENode node = null;
@@ -237,10 +237,19 @@ namespace NodeEditor
             {
                 var composeData = arrTreeComposeData[m_nTreeComposeIndex];
                 Vector2 center = m_cCanvas.scrollViewRect.center;
-                node = m_cCanvas.CreateNode(null, null);
+                object rootData = null;
+                if (rootDataType != null)
+                {
+                    rootData = Activator.CreateInstance(rootDataType);
+                }
+                node = m_cCanvas.CreateNode(null, rootData);
             }
             else
             {
+                if (neData.data == null && rootDataType != null)
+                {
+                    neData.data = Activator.CreateInstance(rootDataType);
+                }
                 node = m_cCanvas.CreateNENode(neData, null);
             }
             m_cRoot = node;
@@ -320,6 +329,7 @@ namespace NodeEditor
                 EditorGUIUtility.labelWidth = 50;
                 NEDataProperties.Draw(m_cRoot.dataProperty, GUILayout.Width(leftArea.width - 50));
                 EditorGUIUtility.labelWidth = oldWidth;
+                EditorGUILayout.Space();
             }
 
             oldWidth = EditorGUIUtility.labelWidth;
@@ -426,7 +436,7 @@ namespace NodeEditor
                 Load(arrTreeComposeData[m_nTreeComposeIndex]);
             }
             GUILayout.Label("", m_cToolBarBtnStyle, GUILayout.Width(position.width - 10 - 100 - 50 - 50 - 50 - 10));
-            if (GUILayout.Button("创建", m_cToolBarBtnStyle, GUILayout.Width(50))) { CreateTreeByTreeData(null); }
+            if (GUILayout.Button("创建", m_cToolBarBtnStyle, GUILayout.Width(50))) { CreateTreeByTreeData(arrTreeComposeData[m_nTreeComposeIndex].rootDataType, null); }
             if (GUILayout.Button("加载", m_cToolBarBtnStyle, GUILayout.Width(50))) { LoadTreeByTreeData(); }
             if (GUILayout.Button("保存", m_cToolBarBtnStyle, GUILayout.Width(50))) { SaveTreeToTreeData(); }
             GUILayout.Label("", m_cToolBarBtnStyle, GUILayout.Width(10));
@@ -461,7 +471,7 @@ namespace NodeEditor
                 //通过前后缀确定当前数据是哪种类型,需要先切换到当前类型，在加载数据，否则数据有可能不对
                 NEData neData = NEUtil.DeSerializerObject(path, typeof(NEData), composeData.lstNodeDataType.ToArray()) as NEData;
                 m_sLoadPath = path;
-                CreateTreeByTreeData(neData);
+                CreateTreeByTreeData(composeData.rootDataType, neData);
             }
         }
 

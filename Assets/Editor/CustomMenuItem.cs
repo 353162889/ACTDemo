@@ -9,13 +9,17 @@ using UnityEngine;
 
 public static class CustomMenuItem
 {
-    static NETreeComposeType CreateNETreeComposeType(Type type,string typeCategory, string fileDir, string filePre, string fileExt, string desc)
+    static NETreeComposeType CreateNETreeComposeType(Type rootDataType, Type contextType,string typeCategory, string fileDir, string filePre, string fileExt, string desc)
     {
         //获取基类的handler（IBTContext）,core的基础扩展
         var arrCommonType = BTDataHandlerInitialize.GetDataTypeByContextType(typeof(IBTContext));
         //当前类型，例如skill下SkillBTContext扩展的类
-        var arrType = BTDataHandlerInitialize.GetDataTypeByContextType(type);
+        var arrType = BTDataHandlerInitialize.GetDataTypeByContextType(contextType);
         List<Type> lst = new List<Type>();
+        if (rootDataType != null)
+        {
+            lst.Add(rootDataType);
+        }
         lst.AddRange(arrCommonType);
         lst.AddRange(arrType);
         Dictionary<string, List<Type>> dicCategory = new Dictionary<string, List<Type>>();
@@ -49,6 +53,7 @@ public static class CustomMenuItem
             for (int i = 0; i < arrType.Length; i++)
             {
                 var curType = arrType[i];
+                if(curType == rootDataType)continue;
                 var handler = BTDataHandlerInitialize.GetHandler(curType);
                 var handlerBaseType = handler.GetType().BaseType;
                 var friendName = handlerBaseType.Name;
@@ -70,16 +75,16 @@ public static class CustomMenuItem
             }
         }
 
-        return new NETreeComposeType(lst,dicCategory, fileDir, filePre, fileExt, desc);
+        return new NETreeComposeType(rootDataType, lst,dicCategory, fileDir, filePre, fileExt, desc);
     }
 
     private static NETreeComposeType[] GetConfig()
     {
         NETreeComposeType[] staticConfig = new NETreeComposeType[]
         {
-            CreateNETreeComposeType(typeof(SkillBTContext),"Skill", "Assets/ResourceEx/Config/SkillScript", "skill", "bytes", "技能脚本"),
-            CreateNETreeComposeType(typeof(BuffBTContext),"Buff", "Assets/ResourceEx/Config/BuffScript", "buff", "bytes", "Buff脚本"),
-            CreateNETreeComposeType(typeof(AIBTContext),"AI", "Assets/ResourceEx/Config/AIScript", "ai", "bytes", "AI脚本"),
+            CreateNETreeComposeType(typeof(BTSkillRootData), typeof(SkillBTContext),"Skill", "Assets/ResourceEx/Config/SkillScript", "skill", "bytes", "技能脚本"),
+            CreateNETreeComposeType(null, typeof(BuffBTContext),"Buff", "Assets/ResourceEx/Config/BuffScript", "buff", "bytes", "Buff脚本"),
+            CreateNETreeComposeType(null, typeof(AIBTContext),"AI", "Assets/ResourceEx/Config/AIScript", "ai", "bytes", "AI脚本"),
         };
         return staticConfig;
     }

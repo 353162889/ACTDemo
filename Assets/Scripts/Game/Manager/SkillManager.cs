@@ -39,5 +39,18 @@ namespace Game
             if (btDataLoader == null) return null;
             return btDataLoader.GetData(id);
         }
+
+        public BTSkillRootData GetSkillRootData(BTTreeData treeData)
+        {
+            if (treeData != null)
+                return treeData.rootData.data as BTSkillRootData;
+            return null;
+        }
+
+        public BTSkillRootData GetSkillRootData(int id)
+        {
+            var treeData = GetSkillBTTreeData(id);
+            return GetSkillRootData(treeData);
+        }
     }
 }

@@ -58,7 +58,6 @@ namespace Framework
                     else
                     {
                         CLog.LogError("BTTimeLine只允许IBTTimeLineData作为子节点，BTTimeLine停止运行!");
-                        this.Clear(context, btData);
                         return BTStatus.Fail;
                     }
                    
@@ -67,7 +66,6 @@ namespace Framework
 
             if (cacheData.count == totalCount)
             {
-                this.Clear(context, btData);
                 return BTStatus.Success;
             }
 

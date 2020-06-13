@@ -120,7 +120,6 @@ namespace Game
 
             if (cacheData.time > data.duration)
             {
-                this.Clear(context, btData);
                 return BTStatus.Success;
             }
 
