@@ -165,7 +165,15 @@ namespace Game
             CLog.LogArgs("CancelSkill","skillId",skillComponent.skillData.skillId, "isBreak", isBreak);
             if (isBreak)
                 skillComponent.skillData.isBreak = true;
-            Clear(skillContext);
+
+            var btTreeData = SkillManager.Instance.GetSkillBTTreeData(skillComponent.skillData.skillId);
+            if (btTreeData != null)
+            {
+                skillContext.Reset();
+                skillContext.Init(World, skillComponent, skillComponent.skillData, btTreeData, this, 0);
+                Clear(skillContext);
+            }
+           
             var skillData = skillComponent.skillData;
             forbidSystem.RemoveForbiddance(entity, skillData.forbidance);
             skillData.forbidance = null;
@@ -175,7 +183,6 @@ namespace Game
             {
                 ObjectPool<SkillData>.Instance.SaveObject(skillData);
             }
-            skillContext.Reset();
         }
 
         private SkillData CreateSkillData(Entity entity, int skillId, SkillTargetInfo targetInfo)

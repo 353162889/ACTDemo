@@ -48,7 +48,7 @@ namespace Game
                         traceComponent.sqrStopMoveDistance)
                     {
                         pointsMoveSystem.StopMove(entity);
-                        faceSystem.FaceTo(entity, offset);
+                        faceSystem.InputFace(entity, offset);
                     }
                     else
                     {

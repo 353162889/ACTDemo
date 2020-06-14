@@ -293,7 +293,9 @@ namespace Game
             comboSystem.Update();
             cacheSkillSystem.Update();
             skillSystem.Update();
+            //buff系统
             buffSystem.Update();
+            //buffStateSystem必须在buff系统之后更新
             buffStateSystem.Update();
             traceSystem.Update();
 

@@ -36672,5 +36672,17 @@ MonoBehaviour:
     stamp: 1592033879
     type: 2
     UseGUIDs: []
+  - guid: e15464a9d7402464f8b573eaa4ee6c2f
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 2
+    UseGUIDs: []
+  - guid: f9ec238f070d9f146bbb1313f84461d2
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 2
+    UseGUIDs: []
   timeStamp: 1592018772
   priority: 3

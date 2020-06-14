@@ -273,8 +273,6 @@ namespace Game
         {
             Entities.ForEach((Entity entity, BuffComponent buffComponent) =>
             {
-                //第一次移除，保证buff移除后添加另一buff的逻辑
-                CheckRemoveBuff(buffComponent);
                 //检测添加buff
                 CheckAddBuff(buffComponent);
                 foreach (var pair in buffComponent.dicIndexToBuffData)
@@ -287,16 +285,29 @@ namespace Game
                 }
                 //检测移除buff，update时检测buff需要移除
                 CheckRemoveBuff(buffComponent);
+
+                int count = 0;
+                while (CheckAddBuff(buffComponent))
+                {
+                    count++;
+                    if (count > 10)
+                    {
+                        CLog.LogError("添加buff进入递归,请检查buff配置");
+                        break;
+                    }
+                }
             });
         }
 
-        private void CheckAddBuff(BuffComponent buffComponent)
+        private bool CheckAddBuff(BuffComponent buffComponent)
         {
+            bool hasAdd = false;
             for (int i = 0; i < buffComponent.lstAdd.Count; i++)
             {
                 var buffData = buffComponent.lstAdd[i];
                 if (buffData.status == BuffExeStatus.Init)
                 {
+                    hasAdd = true;
                     CLog.LogArgs("添加buff", buffData.buffId, Time.time);
                     buffData.status = BuffExeStatus.Running;
                     List<BuffData> lst;
@@ -345,6 +356,7 @@ namespace Game
                 }
             }
             buffComponent.lstAdd.Clear();
+            return hasAdd;
         }
 
         private void CheckRemoveBuff(BuffComponent buffComponent)

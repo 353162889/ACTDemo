@@ -7,12 +7,12 @@ namespace Game
 {
     public class SkillManager : BaseManager<SkillManager>
     {
-        private BTDataLoader<int> btDataLoader;
+        private BTDataLoader<int> btDataLoader = new BTDataLoader<int>();
+        private BTDataLoader<int> loadingBTDataLoader = new BTDataLoader<int>();
 
         public void LoadCfgs(Action callback)
         {
-            if(btDataLoader == null)btDataLoader = new BTDataLoader<int>();
-            btDataLoader.Clear();
+            loadingBTDataLoader.Clear();
             Dictionary<int,string> loadInfo = new Dictionary<int, string>();
             var lstSkill = ResCfgSys.Instance.GetCfgLst<ResSkill>();
             for (int i = 0; i < lstSkill.Count; i++)
@@ -23,20 +23,23 @@ namespace Game
                     loadInfo.Add(resSkill.id, "Config/SkillScript/"+resSkill.script+".bytes");
                 }
             }
-            btDataLoader.LoadResCfgs(loadInfo, () =>
+            loadingBTDataLoader.LoadResCfgs(loadInfo, () =>
             {
+                var temp = btDataLoader;
+                btDataLoader = loadingBTDataLoader;
+                loadingBTDataLoader = temp;
+                loadingBTDataLoader.Clear();
                 callback?.Invoke();
             });
         }
 
         public bool IsFinish()
         {
-            return btDataLoader != null ? btDataLoader.IsFinish() : true;
+            return loadingBTDataLoader.IsFinish();
         }
 
         public BTTreeData GetSkillBTTreeData(int id)
         {
-            if (btDataLoader == null) return null;
             return btDataLoader.GetData(id);
         }
 

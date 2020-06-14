@@ -7,12 +7,12 @@ namespace Game
 {
     public class AIManager : BaseManager<AIManager>
     {
-        private BTDataLoader<string> btDataLoader;
+        private BTDataLoader<string> btDataLoader = new BTDataLoader<string>();
+        private BTDataLoader<string> loadingBTDataLoader = new BTDataLoader<string>();
 
         public void LoadCfgs(Action callback)
         {
-            if (btDataLoader == null) btDataLoader = new BTDataLoader<string>();
-            btDataLoader.Clear();
+            loadingBTDataLoader.Clear();
             Dictionary<string, string> loadInfo = new Dictionary<string, string>();
             var lstMonsterCfg = ResCfgSys.Instance.GetCfgLst<ResMonster>();
             for (int i = 0; i < lstMonsterCfg.Count; i++)
@@ -23,20 +23,23 @@ namespace Game
                     loadInfo.Add(monsterCfg.aiScript, "Config/AIScript/" + monsterCfg.aiScript + ".bytes");
                 }
             }
-            btDataLoader.LoadResCfgs(loadInfo, () =>
+            loadingBTDataLoader.LoadResCfgs(loadInfo, () =>
             {
+                var temp = btDataLoader;
+                btDataLoader = loadingBTDataLoader;
+                loadingBTDataLoader = temp;
+                loadingBTDataLoader.Clear();
                 callback?.Invoke();
             });
         }
 
         public bool IsFinish()
         {
-            return btDataLoader != null ? btDataLoader.IsFinish() : true;
+            return loadingBTDataLoader.IsFinish();
         }
 
         public BTTreeData GetAIBTTreeData(string aiFile)
         {
-            if (btDataLoader == null) return null;
             return btDataLoader.GetData(aiFile);
         }
     }

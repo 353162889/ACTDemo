@@ -50,7 +50,6 @@ namespace Game
                 }
 
                 var go = SceneEffectPool.Instance.CreateEffect(data.effectName, data.autoDestroy, parent);
-                CLog.LogArgs("spawn effect", data.effectName);
                 if (go != null)
                 {
                     cacheData.effectGO = go;
@@ -94,7 +93,6 @@ namespace Game
             if (cacheData.effectGO != null)
             {
                 SceneEffectPool.Instance.DestroyEffectGO(cacheData.effectGO);
-                CLog.LogArgs("dispose effect", data.effectName);
                 cacheData.effectGO = null;
             }
             base.Clear(context, btData, data);

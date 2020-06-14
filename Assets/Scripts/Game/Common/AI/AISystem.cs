@@ -1,4 +1,5 @@
 ﻿using Framework;
+using Microsoft.CSharp.RuntimeBinder;
 using Unity.Entities;
 using UnityEngine;
 
@@ -14,6 +15,21 @@ namespace Game
             aiBTContext = new AIBTContext();
             targetTriggerSystem = World.GetOrCreateSystem<TargetTriggerSystem>();
             base.OnCreate();
+        }
+
+        public void RunScript(Entity entity, string aiFile)
+        {
+            var aiComponent = World.GetComponent<AIComponent>(entity);
+            if (aiComponent.aiFile == aiFile) return;
+            var oldAIFile = aiComponent.aiFile;
+            var btTreeData = AIManager.Instance.GetAIBTTreeData(oldAIFile);
+            if (btTreeData != null)
+            {
+                aiBTContext.Reset();
+                aiBTContext.Init(World, aiComponent, btTreeData, this, Time.deltaTime);
+                Clear(aiBTContext);
+            }
+            aiComponent.aiFile = aiFile;
         }
 
         protected override void OnUpdate()

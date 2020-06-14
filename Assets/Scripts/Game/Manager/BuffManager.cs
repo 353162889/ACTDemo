@@ -7,16 +7,16 @@ namespace Game
 {
     public class BuffManager : BaseManager<BuffManager>
     {
-        private BTDataLoader<int> btDataLoader;
-        private BTDataLoader<int> btPartDataLoader;
+        private BTDataLoader<int> btDataLoader = new BTDataLoader<int>();
+        private BTDataLoader<int> loadingBTDataLoader = new BTDataLoader<int>();
+        private BTDataLoader<int> btPartDataLoader = new BTDataLoader<int>();
+        private BTDataLoader<int> loadingBTPartDataLoader = new BTDataLoader<int>();
         private int finishCount;
 
         public void LoadCfgs(Action callback)
         {
-            if (btDataLoader == null) btDataLoader = new BTDataLoader<int>();
-            if(btPartDataLoader == null) btPartDataLoader = new BTDataLoader<int>();
-            btDataLoader.Clear();
-            btPartDataLoader.Clear();
+            loadingBTDataLoader.Clear();
+            loadingBTPartDataLoader.Clear();
             finishCount = 0;
             Dictionary<int, string> loadBuffInfo = new Dictionary<int, string>();
             Dictionary<int, string> loadBuffPartInfo = new Dictionary<int, string>();
@@ -38,16 +38,24 @@ namespace Game
                     }
                 }
             }
-            btDataLoader.LoadResCfgs(loadBuffInfo, () =>
+            loadingBTDataLoader.LoadResCfgs(loadBuffInfo, () =>
             {
+                var temp = btDataLoader;
+                btDataLoader = loadingBTDataLoader;
+                loadingBTDataLoader = temp;
+                loadingBTDataLoader.Clear();
                 finishCount++;
                 if (finishCount == 2)
                 {
                     callback?.Invoke();
                 }
             });
-            btPartDataLoader.LoadResCfgs(loadBuffPartInfo, () =>
+            loadingBTPartDataLoader.LoadResCfgs(loadBuffPartInfo, () =>
             {
+                var temp = btPartDataLoader;
+                btPartDataLoader = loadingBTPartDataLoader;
+                loadingBTPartDataLoader = temp;
+                loadingBTPartDataLoader.Clear();
                 finishCount++;
                 if (finishCount == 2)
                 {
@@ -58,23 +66,16 @@ namespace Game
 
         public bool IsFinish()
         {
-            if (btDataLoader != null && btPartDataLoader != null)
-            {
-                return btDataLoader.IsFinish() && btPartDataLoader.IsFinish();
-            }
-
-            return true;
+            return loadingBTDataLoader.IsFinish() && loadingBTPartDataLoader.IsFinish();
         }
 
         public BTTreeData GetBuffBTTreeData(int id)
         {
-            if (btDataLoader == null) return null;
             return btDataLoader.GetData(id);
         }
 
         public BTTreeData GetBuffPartBTTreeData(int id)
         {
-            if (btPartDataLoader == null) return null;
             return btPartDataLoader.GetData(id);
         }
     }
