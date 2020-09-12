@@ -1,0 +1,98 @@
+.unity-foldout .unity-foldout__toggle {
+    margin-left: 0;
+}
+
+.utility-node__data {
+    border-left-color: rgba(0, 0, 0, 0.35);
+    border-right-color: rgba(0, 0, 0, 0.35);
+    border-top-color: rgba(0, 0, 0, 0.35);
+    border-bottom-color: rgba(0, 0, 0, 0.35);
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    background-color: rgba(18, 198, 255, 0.43);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}
+
+.utility-node__datatitle {
+    color: rgb(66, 83, 236);
+}
+
+.utility-node__specialdata {
+    background-color: rgba(18, 167, 255, 0.11);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(0, 0, 0, 0.23);
+    border-right-color: rgba(0, 0, 0, 0.23);
+    border-top-color: rgba(0, 0, 0, 0.23);
+    border-bottom-color: rgba(0, 0, 0, 0.23);
+}
+
+.utility-node {
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: rgba(194, 227, 255, 0.25);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: rgba(0, 0, 0, 0.17);
+    border-right-color: rgba(0, 0, 0, 0.17);
+    border-top-color: rgba(0, 0, 0, 0.17);
+    border-bottom-color: rgba(0, 0, 0, 0.17);
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#selectorContainer {
+    margin-left: 20px;
+}
+
+#combineContainer {
+    margin-left: 20px;
+}
+
+#decisionFactorContainer {
+    margin-left: 20px;
+}
+
+#evaluatorContainer {
+    margin-left: 20px;
+}
+
+#actionContainer {
+    margin-left: 20px;
+}
+
+.select_utility_item {
+    background-color: rgb(1, 117, 248);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgb(255, 23, 23);
+    border-right-color: rgb(255, 23, 23);
+    border-top-color: rgb(255, 23, 23);
+    border-bottom-color: rgb(255, 23, 23);
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.utility-debug__info {
+    color: rgba(255, 0, 0, 255);
+    font-size: 15px;
+}

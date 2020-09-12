@@ -113,8 +113,9 @@ namespace Game
                     if (buffStateData.status == BuffStateExeStatus.Init)
                     {
                         cfg.handler.OnStart(m_cBuffStateContext);
+                        buffStateData.status = BuffStateExeStatus.Running;
                     }
-                    else if (buffStateData.status == BuffStateExeStatus.Running)
+                    if (buffStateData.status == BuffStateExeStatus.Running)
                     {
                         cfg.handler.OnUpdate(m_cBuffStateContext);
                     }

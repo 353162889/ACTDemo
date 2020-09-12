@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <lstChild>
+    <NEData>
+      <data xsi:type="BTParallelData">
+        <failType>FailOnAll</failType>
+        <successType>SuccessOnAll</successType>
+        <childFinishLoop>true</childFinishLoop>
+      </data>
+      <lstChild>
+        <NEData>
+          <data xsi:type="BTSequenceData" />
+          <lstChild>
+            <NEData>
+              <data xsi:type="AISearchSkillActionData" />
+              <lstChild />
+            </NEData>
+            <NEData>
+              <data xsi:type="AIExistCanCastSkillIdConditionData" />
+              <lstChild />
+            </NEData>
+            <NEData>
+              <data xsi:type="AICastSkillActionData" />
+              <lstChild />
+            </NEData>
+          </lstChild>
+        </NEData>
+        <NEData>
+          <data xsi:type="AITraceTargetActionData" />
+          <lstChild />
+        </NEData>
+      </lstChild>
+    </NEData>
+  </lstChild>
+</NEData>

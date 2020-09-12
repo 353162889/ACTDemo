@@ -20,16 +20,26 @@ namespace Game
         public void RunScript(Entity entity, string aiFile)
         {
             var aiComponent = World.GetComponent<AIComponent>(entity);
+            if (aiComponent == null) return;
+            RunScript(aiComponent, aiFile);
+        }
+
+        public void RunScript(AIComponent aiComponent, string aiFile)
+        {
             if (aiComponent.aiFile == aiFile) return;
             var oldAIFile = aiComponent.aiFile;
-            var btTreeData = AIManager.Instance.GetAIBTTreeData(oldAIFile);
-            if (btTreeData != null)
+            if (!string.IsNullOrEmpty(oldAIFile))
             {
-                aiBTContext.Reset();
-                aiBTContext.Init(World, aiComponent, btTreeData, this, Time.deltaTime);
-                Clear(aiBTContext);
+                var btTreeData = AIManager.Instance.GetAIBTTreeData(oldAIFile);
+                if (btTreeData != null)
+                {
+                    aiBTContext.Reset();
+                    aiBTContext.Init(World, aiComponent, btTreeData, this, Time.deltaTime);
+                    Clear(aiBTContext);
+                }
             }
             aiComponent.aiFile = aiFile;
+            CLog.LogArgs("RunScript", aiComponent.aiFile);
         }
 
         protected override void OnUpdate()
@@ -38,28 +48,27 @@ namespace Game
             {
                 if (aiComponent.aiStateType == AIStateType.Running)
                 {
+//                    var targetTriggerComponent = World.GetComponent<TargetTriggerComponent>(entity);
+//                    if (targetTriggerComponent != null)
+//                    {
+//                        var target = aiComponent.blackBoard.target;
+//                        if (target == Entity.Null || !targetTriggerSystem.ValidEntity(targetTriggerComponent,target))
+//                        {
+//                            aiComponent.blackBoard.ResetTarget();
+//                            if (targetTriggerComponent.lstEntity.Count > 0)
+//                            {
+//                                aiComponent.blackBoard.SetFilterTarget(targetTriggerComponent.lstEntity[0]);
+//                            }
+//                        }
+//                    }
+
                     if (string.IsNullOrEmpty(aiComponent.aiFile)) return;
                     var btTreeData = AIManager.Instance.GetAIBTTreeData(aiComponent.aiFile);
                     if (btTreeData == null)
                     {
-                        CLog.LogError("can not find aifile "+ aiComponent.aiFile);
+                        CLog.LogError("can not find aifile " + aiComponent.aiFile);
                         return;
                     }
-
-                    var targetTriggerComponent = World.GetComponent<TargetTriggerComponent>(entity);
-                    if (targetTriggerComponent != null)
-                    {
-                        var target = aiComponent.blackBoard.target;
-                        if (target == Entity.Null || !targetTriggerSystem.ValidEntity(targetTriggerComponent,target))
-                        {
-                            aiComponent.blackBoard.ResetTarget();
-                            if (targetTriggerComponent.lstEntity.Count > 0)
-                            {
-                                aiComponent.blackBoard.SetFilterTarget(targetTriggerComponent.lstEntity[0]);
-                            }
-                        }
-                    }
-
                     aiBTContext.Reset();
                     aiBTContext.Init(World, aiComponent, btTreeData, this, Time.deltaTime);
                     BTStatus btState = Execute(aiBTContext);

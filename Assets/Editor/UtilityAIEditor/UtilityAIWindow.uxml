@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <uie:PropertyField name="propertyField">
+        <Style src="UtilityAIWindow.uss" />
+    </uie:PropertyField>
+    <ui:VisualElement name="test">
+        <Style src="UtilityAIWindow.uss" />
+    </ui:VisualElement>
+    <ui:VisualElement style="justify-content: flex-start; flex-grow: 1; flex-shrink: 1; min-width: auto; border-left-color: rgb(23, 130, 255); border-right-color: rgb(23, 130, 255); border-top-color: rgb(23, 130, 255); border-bottom-color: rgb(23, 130, 255);">
+        <Style src="UtilityAIWindow.uss" />
+        <uie:Toolbar style="flex-direction: row-reverse;">
+            <uie:ToolbarButton text="Apply" name="btnApply" style="width: 60px; -unity-text-align: middle-center;" />
+            <uie:ToolbarButton text="Save" name="btnSave" style="width: 60px; -unity-text-align: middle-center;" />
+            <uie:ToolbarButton text="Load" name="btnLoad" style="width: 60px; justify-content: flex-start; -unity-text-align: middle-center;" />
+            <uie:ToolbarButton text="Create" name="btnCreate" style="width: 60px; -unity-text-align: middle-center;" />
+        </uie:Toolbar>
+        <ui:VisualElement name="Container" style="justify-content: space-around; left: auto; top: auto; right: auto; bottom: auto; align-items: stretch; width: auto; height: auto; position: relative; flex-direction: row; flex-grow: 1; flex-shrink: 1;">
+            <ui:VisualElement name="Content" style="align-items: stretch; justify-content: space-between; min-width: 200px; max-width: 10000px; min-height: auto; max-height: none; flex-grow: 1; border-right-width: 2px; border-right-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0); height: auto; flex-basis: 100px;">
+                <ui:ScrollView name="scrollContent" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="DetailInfo" style="min-width: 100px; max-width: 200px; border-left-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; justify-content: space-around; width: auto; background-color: rgb(171, 171, 171); height: 10000px;">
+                <ui:ScrollView name="scrollDetail" style="flex-grow: 1;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

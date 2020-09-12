@@ -136,7 +136,7 @@ MonoBehaviour:
   - guid: 3ee7bf4039538db4bae786c75bd9903a
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1583554117
+    stamp: 1593876400
     type: 1
     UseGUIDs:
     - 188b82757a42b7c448bb30b6e4c1d956
@@ -155,6 +155,7 @@ MonoBehaviour:
     - 227151d2bb6f4b34d9a8185ba4c49ab1
     - 8e8a597648e229b479241f8b8e4012eb
     - e5a550599e829f941bf213f19e4df9f3
+    - 5d31795ff1499b545a75f7c250c1e882
   - guid: 61481c700516ac6478a367a4cacfbba8
     ScriptSymbols: []
     ScriptTokens: []
@@ -1193,7 +1194,7 @@ MonoBehaviour:
   - guid: 7758b834619294d4e81a1a6edef6ae1c
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591889496
+    stamp: 1592103586
     type: 1
     UseGUIDs:
     - 9f7692b277af11d41b73950aed38970d
@@ -2417,7 +2418,7 @@ MonoBehaviour:
     - Update
     - UnityEngine
     - Time
-    stamp: 1588323348
+    stamp: 1592101141
     type: 2
     UseGUIDs: []
   - guid: 66fdde682fbb4d340b3736f0a0a7771b
@@ -3545,10 +3546,9 @@ MonoBehaviour:
   - guid: b314b87c4de104d4c90725b350ef806a
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1583554117
+    stamp: 1599383782
     type: 1
-    UseGUIDs:
-    - 40ac6c38e6a03944f92294497d560718
+    UseGUIDs: []
   - guid: 41dd148c95d72434aadb6c6ab5d733d7
     ScriptSymbols: []
     ScriptTokens: []
@@ -3644,7 +3644,7 @@ MonoBehaviour:
   - guid: 649f59cc4da2f004c940e1e06eb10162
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591953147
+    stamp: 1599397806
     type: 1
     UseGUIDs:
     - 6307603c504b0a24f939fc773ffa1441
@@ -3782,16 +3782,18 @@ MonoBehaviour:
   - guid: 2f2ba16d9fa0e4948a7e8498c8f9d00a
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591943438
+    stamp: 1599575736
     type: 1
     UseGUIDs:
     - 3aeee76ff145bae4fb3dd37bb1b93e17
     - d4c8c951b6f52ca499102c5f0ad1d364
     - 5d73d325c97d90e4bb455faa2fbb84c2
+    - e7ce567cba29bf14fab85a70e48a5719
     - 6bdbfc6daba168648a7f4675e4ed40a7
     - a425e3eac1801784892b7e27ffea1695
     - 9fc0d4010bbf28b4594072e72b8655ab
     - ee77e9d670b960b49aea58612b0f7955
+    - 9be03876e642002448a41754282247ca
     - 01993dfaafbf783429d7c74f8ea99336
   - guid: bb95bf9dd0b78694d87fbf891517c9e0
     ScriptSymbols:
@@ -3873,7 +3875,7 @@ MonoBehaviour:
   - guid: 46d009bd10f2b574ba8c48cf30d55205
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1588324959
+    stamp: 1592101141
     type: 1
     UseGUIDs:
     - 9327e8a39ac89a644aa4a6122af0968f
@@ -4168,6 +4170,7 @@ MonoBehaviour:
     - MoveStateSystem
     - PropertySystem
     - PointsMoveSystem
+    - UtilityAISystem
     - AISystem
     - TargetTriggerSystem
     - TraceSystem
@@ -4190,7 +4193,7 @@ MonoBehaviour:
     - OnDrawGizmos
     - OnExit
     - SceneEffectPool
-    stamp: 1591953147
+    stamp: 1599397806
     type: 2
     UseGUIDs: []
   - guid: d4effa1f55b84e748aaa9f635451c81d
@@ -12916,13 +12919,14 @@ MonoBehaviour:
   - guid: da6b7952aad936a4082624b574379c12
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591454158
+    stamp: 1599291431
     type: 1
     UseGUIDs:
     - 5f82aa55c47d1c64c824b015a4581d51
     - 9ace0dd6bb7b1814897c55c27e487b0e
     - 8b0f55574a1776a4a9ba0036ce0f6aeb
     - 36d86cce449d6c54a82a5fee5e2b19f5
+    - edd5a57cd0c2f284b847d51ce2df361c
   - guid: 11946703e62e9044984bf795d70033b2
     ScriptSymbols: []
     ScriptTokens: []
@@ -12958,7 +12962,7 @@ MonoBehaviour:
   - guid: 35b96abaa33036448a66e4ef5615d706
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591957616
+    stamp: 1592061854
     type: 1
     UseGUIDs:
     - 3813a1f07399b0e489fe9235a266110a
@@ -12979,7 +12983,7 @@ MonoBehaviour:
     - ResCfg
     - ResCfgKey
     - SecurityElement
-    stamp: 1591970836
+    stamp: 1592103579
     type: 2
     UseGUIDs: []
   - guid: 1b4c137ed18822b4db2ece22d02a2cbb
@@ -12987,12 +12991,6 @@ MonoBehaviour:
     ScriptTokens: []
     stamp: 0
     type: 9
-    UseGUIDs: []
-  - guid: 40ac6c38e6a03944f92294497d560718
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 0
-    type: 4
     UseGUIDs: []
   - guid: 188b82757a42b7c448bb30b6e4c1d956
     ScriptSymbols: []
@@ -13009,6 +13007,8 @@ MonoBehaviour:
     - IBTContext,IPoolable
     - World
     - BTTreeData
+    - BTSkillRootData
+    - SkillManager
     - IBTExecutor
     - SkillComponent
     - SkillData
@@ -13019,7 +13019,7 @@ MonoBehaviour:
     - BTDataHandlerInitialize
     - Init
     - Reset
-    stamp: 1584879114
+    stamp: 1592033054
     type: 2
     UseGUIDs: []
   - guid: 3ff8b2f003c929d45abea920166153bd
@@ -13035,10 +13035,8 @@ MonoBehaviour:
     - T1
     - T2
     - BTExecuteStatus
-    - Exception
-    - Console
     - IsCleared
-    stamp: 1591970329
+    stamp: 1592035603
     type: 2
     UseGUIDs: []
   - guid: 20b03d311d6435c4b8445ba6c831597d
@@ -13059,7 +13057,7 @@ MonoBehaviour:
   - guid: 70935af165df26e4d9e67d25702b827f
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1584261686
+    stamp: 1592033953
     type: 1
     UseGUIDs:
     - 4eeff97e74f71e34d81106f7cda9286e
@@ -13089,7 +13087,7 @@ MonoBehaviour:
   - guid: ebddb5234bd3b584f854ca0f0f333f62
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591926785
+    stamp: 1599399181
     type: 1
     UseGUIDs:
     - ab49ae8d7e1f4c4428005c7f01dfa5ad
@@ -13099,6 +13097,7 @@ MonoBehaviour:
     - f6224b192aa736f43831665291072e28
     - 65770aea7a8e6cd48a2fddc0e17d9b04
     - d1be3362868610241a7d08f0d72d6f74
+    - 62d5a3560716c204aa4e49a6c382e9a2
   - guid: 618a00736e577d94b8fefa7ea4a45214
     ScriptSymbols:
     - NodeEditor.NEDataLoader
@@ -13174,7 +13173,7 @@ MonoBehaviour:
     ScriptTokens:
     - List
     - Dictionary
-    stamp: 1569507854
+    stamp: 1592033953
     type: 2
     UseGUIDs: []
   - guid: 86dfff269cd14834caa793e7315afd11
@@ -13306,7 +13305,7 @@ MonoBehaviour:
   - guid: b5161c5ac72bd1b4ca4111cfc0326fe1
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591942746
+    stamp: 1592034464
     type: 1
     UseGUIDs:
     - 82623eeb0564ef846a56a6ab1d8d9107
@@ -13405,9 +13404,10 @@ MonoBehaviour:
   - guid: 4195f23c4b7034f4a9901b345256705c
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1586610707
+    stamp: 1592037281
     type: 1
     UseGUIDs:
+    - 4861cb0dbd53c0547a4b6ffa09a2b44e
     - 8957fcdb53bc4314f9c89bce47c6c9e0
     - 45e3cf06b120abd47906ffc1925590aa
     - 11b87bd0a85db744099e4200234138f0
@@ -13443,7 +13443,7 @@ MonoBehaviour:
   - guid: ab2fed4d56bf65343b82722ba22defa4
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591970329
+    stamp: 1592035603
     type: 1
     UseGUIDs:
     - 0801248c2ee3fc142b1fc45d022a52e2
@@ -13475,6 +13475,7 @@ MonoBehaviour:
     - List
     - Dictionary
     - GetConfig
+    - BTSkillRootData
     - SkillBTContext
     - BuffBTContext
     - AIBTContext
@@ -13483,7 +13484,10 @@ MonoBehaviour:
     - NETreeWindow
     - OpenBuffNETreeWindow
     - OpenAINETreeWindow
-    stamp: 1591454196
+    - OpenUtilityAIWindow
+    - UtilityAIWindow
+    - EditorWindow
+    stamp: 1599399181
     type: 2
     UseGUIDs: []
   - guid: c3bad7ed00ab8634d8cf395d434dd02b
@@ -13591,7 +13595,7 @@ MonoBehaviour:
     - TimeData
     - IBTTimeLineData
     - Time
-    stamp: 1591942746
+    stamp: 1592034464
     type: 2
     UseGUIDs: []
   - guid: 8e03690f3a036004098ce4b6c4987998
@@ -13658,7 +13662,7 @@ MonoBehaviour:
   - guid: 50300c040bb58594fa422ea7decf00a2
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591889397
+    stamp: 1599575094
     type: 1
     UseGUIDs:
     - c677675417e882c4bbb28a41a06a97d7
@@ -13733,7 +13737,9 @@ MonoBehaviour:
     - IsFinish
     - BTTreeData
     - GetSkillBTTreeData
-    stamp: 1581318023
+    - BTSkillRootData
+    - GetSkillRootData
+    stamp: 1592104551
     type: 2
     UseGUIDs: []
   - guid: d941ac4cdba645f4894c224749cc83de
@@ -13748,7 +13754,7 @@ MonoBehaviour:
   - guid: 36d86cce449d6c54a82a5fee5e2b19f5
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591947152
+    stamp: 1592103750
     type: 1
     UseGUIDs:
     - 7880f4e22ff0690479b54f85a65f0fee
@@ -13807,7 +13813,7 @@ MonoBehaviour:
   - guid: 1a9838ac45267384f8dd5c602a637abe
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591969554
+    stamp: 1592035742
     type: 1
     UseGUIDs:
     - c72439f9b877fe949874054eb373eb22
@@ -13851,7 +13857,7 @@ MonoBehaviour:
   - guid: f7fc7930deb59584296f764ea6a219c6
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1589292576
+    stamp: 1592035725
     type: 1
     UseGUIDs:
     - fb26dca0d91a55241ada2fc3e88dff71
@@ -13911,7 +13917,7 @@ MonoBehaviour:
     - OnHandler
     - IBTContext
     - BTData
-    stamp: 1569599669
+    stamp: 1592035725
     type: 2
     UseGUIDs: []
   - guid: 010a56d59678b5448b1cebc954ffcbfd
@@ -13940,7 +13946,7 @@ MonoBehaviour:
     - IBTContext
     - BTData
     - CLog
-    stamp: 1584266832
+    stamp: 1592035742
     type: 2
     UseGUIDs: []
   - guid: d835665927b23a646adebc1a8187e96b
@@ -14010,7 +14016,7 @@ MonoBehaviour:
   - guid: 45e3cf06b120abd47906ffc1925590aa
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591946505
+    stamp: 1592101149
     type: 1
     UseGUIDs:
     - 18b2d6cf7bfa4ed41a3f58e18cd58455
@@ -14100,13 +14106,14 @@ MonoBehaviour:
     - ConvertPointsToTimelineClip
     - TimelineClip
     - Transform
-    stamp: 1588514240
+    - GetAllVector3
+    stamp: 1592040603
     type: 2
     UseGUIDs: []
   - guid: 07c2253acd738e540b03ea790d8be6fe
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591958009
+    stamp: 1592040603
     type: 1
     UseGUIDs:
     - 577a6ab74baaa1249bbe67a8d653f3ce
@@ -14131,7 +14138,23 @@ MonoBehaviour:
     - NENode
     - NETreeWindow
     - EditorWindow
-    stamp: 1588597818
+    - SetSkillEffectiveRange
+    - BTSkillRootData
+    - CLog
+    - GetChildNodeAttackDistance
+    - GetChildNodeMoveDistance
+    - Dictionary
+    - Func
+    - BTBoxColliderActionData
+    - GetBTBoxColliderActionDataDistance
+    - BTSphereColliderActionData
+    - GetBTSphereColliderActionDataDistance
+    - BTAnimationMoveActionData
+    - GetBTAnimationMoveActionDataDistance
+    - Vector3
+    - AnimationMoveUtility
+    - Bounds
+    stamp: 1592044641
     type: 2
     UseGUIDs: []
   - guid: e0fd3212272e8cf4295debe5883e6ac2
@@ -14167,7 +14190,7 @@ MonoBehaviour:
   - guid: c4833b7e89cd82c49a821f3fedbba90e
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1588597350
+    stamp: 1592402895
     type: 1
     UseGUIDs:
     - f8d284dfcfdee8542b8d72a04e1f12a9
@@ -14203,13 +14226,13 @@ MonoBehaviour:
     - Entities
     - TransformComponent
     - Time
-    stamp: 1586098050
+    stamp: 1592103586
     type: 2
     UseGUIDs: []
   - guid: bb52039379070bb4b8bf8d6f8c218ec4
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591890362
+    stamp: 1598891222
     type: 1
     UseGUIDs:
     - bbb487e0ac83e7a4a879c835f71ad114
@@ -14432,9 +14455,10 @@ MonoBehaviour:
   - guid: f09b9847566b98948a98a31a43afccee
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1582974792
+    stamp: 1598878743
     type: 1
-    UseGUIDs: []
+    UseGUIDs:
+    - 6ecefdbd0ab764d468ee3ea12cb4f1dc
   - guid: 61cc73fbb2165f94292dc5f9e82c7988
     ScriptSymbols:
     - NodeEditor.NEPlayableTrack
@@ -14491,7 +14515,7 @@ MonoBehaviour:
   - guid: fc321a9adcbdf964f90a624f0baa06f9
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591947094
+    stamp: 1592044700
     type: 1
     UseGUIDs:
     - 6ab2fc52405e5b44884d270596d4b3c3
@@ -14773,7 +14797,7 @@ MonoBehaviour:
     - Transform
     - SceneEffectPool
     - Clear
-    stamp: 1586098050
+    stamp: 1592101149
     type: 2
     UseGUIDs: []
   - guid: 12ac13817c1a6694ca5393e7fc0c12f1
@@ -14919,7 +14943,7 @@ MonoBehaviour:
   - guid: 11b87bd0a85db744099e4200234138f0
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591946485
+    stamp: 1592035764
     type: 1
     UseGUIDs:
     - 3c5f0e7fc69971149bf60341864167dd
@@ -15011,7 +15035,7 @@ MonoBehaviour:
     - DamageInfo
     - SkillBlackBoardKeys
     - Clear
-    stamp: 1591946485
+    stamp: 1592035764
     type: 2
     UseGUIDs: []
   - guid: e1f78c8f9330be34b89249c1b3a45ebb
@@ -15175,7 +15199,7 @@ MonoBehaviour:
   - guid: 72f7b1f17c7f4f146b05f6b3f4c6932f
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1583762673
+    stamp: 1598891026
     type: 1
     UseGUIDs:
     - 61e4462d3dfcaf0499826f289e4e1480
@@ -15760,10 +15784,11 @@ MonoBehaviour:
   - guid: 3aeee76ff145bae4fb3dd37bb1b93e17
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591943438
+    stamp: 1599575736
     type: 3
     UseGUIDs:
     - 4c5f98a9add420045869700a512a59bd
+    - e7ce567cba29bf14fab85a70e48a5719
     - cc1fa98898bb09d4c94ada504c38c73b
     - aa4af8e291bf54a4cbabdbb58dbfe724
     - b422e820e8b3e614d91d6e4fd2f69f88
@@ -15927,16 +15952,16 @@ MonoBehaviour:
     - Time
     - GetRunningSkill
     - EnableCacheInputSkill
+    - SkillManager
     - Clear
     - OnUpdate
     - Entities
-    - SkillManager
     - BTStatus
     - Execute
     - IBTContext
     - BTDataHandlerInitialize
     - OnDestroy
-    stamp: 1591957616
+    stamp: 1592061854
     type: 2
     UseGUIDs: []
   - guid: 2e90c2508ff56ed4d98c3632317a14f6
@@ -15947,7 +15972,7 @@ MonoBehaviour:
     - ResCfgKey
     - List
     - SecurityElement
-    stamp: 1591970836
+    stamp: 1592103579
     type: 2
     UseGUIDs: []
   - guid: 6f53548860551d34fbc3a27a531b8078
@@ -16049,7 +16074,7 @@ MonoBehaviour:
     - BuffStateData
     - HashSet
     - UNITY_EDITOR
-    stamp: 1588596430
+    stamp: 1592062494
     type: 2
     UseGUIDs: []
   - guid: 59bd7820fdf638d4bb2fdd67066e421c
@@ -16096,7 +16121,7 @@ MonoBehaviour:
     - OnUpdate
     - Entities
     - BuffStateConfig
-    stamp: 1588481595
+    stamp: 1592402895
     type: 2
     UseGUIDs: []
   - guid: 21e290ebe044b6d4790e216860b5bbfc
@@ -16128,7 +16153,7 @@ MonoBehaviour:
     - ResCfgKey
     - List
     - SecurityElement
-    stamp: 1591970836
+    stamp: 1592103579
     type: 2
     UseGUIDs: []
   - guid: 1c06302418f010f4ca6a40b2b98844e4
@@ -16170,9 +16195,9 @@ MonoBehaviour:
     - BuffExeStatus
     - OnUpdate
     - Entities
-    - CheckRemoveBuff
     - CheckAddBuff
     - UpdateBuff
+    - CheckRemoveBuff
     - CLog
     - Time
     - BuffStateType
@@ -16193,7 +16218,7 @@ MonoBehaviour:
     - InitBuffPartOverrideParam
     - IBTContext
     - BTDataHandlerInitialize
-    stamp: 1588597350
+    stamp: 1592103492
     type: 2
     UseGUIDs: []
   - guid: dda6ce5c40e140840b2dff86f2d63445
@@ -16279,7 +16304,7 @@ MonoBehaviour:
     - ResCfgKey
     - List
     - SecurityElement
-    stamp: 1591970836
+    stamp: 1592103579
     type: 2
     UseGUIDs: []
   - guid: cbd2b69789efd334cb07d0243095dc98
@@ -16314,7 +16339,7 @@ MonoBehaviour:
     - BTTreeData
     - GetBuffBTTreeData
     - GetBuffPartBTTreeData
-    stamp: 1584967755
+    stamp: 1592104563
     type: 2
     UseGUIDs: []
   - guid: f8d284dfcfdee8542b8d72a04e1f12a9
@@ -16403,7 +16428,7 @@ MonoBehaviour:
     - ResCfgKey
     - List
     - SecurityElement
-    stamp: 1591970836
+    stamp: 1592103579
     type: 2
     UseGUIDs: []
   - guid: da14e11173e2fe747a2370600d76302b
@@ -35483,7 +35508,7 @@ MonoBehaviour:
     - DamageInfo
     - SkillBlackBoardKeys
     - Clear
-    stamp: 1591946428
+    stamp: 1592035755
     type: 2
     UseGUIDs: []
   - guid: 574a890a9f5f64146a5ac899a71955ca
@@ -35950,26 +35975,27 @@ MonoBehaviour:
     - TargetTriggerSystem
     - OnCreate
     - World
-    - OnUpdate
-    - Entities
+    - RunScript
     - Entity
     - AIComponent
-    - AIStateType
     - AIManager
-    - CLog
     - Time
+    - Clear
+    - CLog
+    - OnUpdate
+    - Entities
+    - AIStateType
     - BTStatus
     - Execute
-    - Clear
     - IBTContext
     - BTDataHandlerInitialize
-    stamp: 1591801304
+    stamp: 1599575742
     type: 2
     UseGUIDs: []
   - guid: f13c7480659c582499c5b384a9466329
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591969056
+    stamp: 1599575742
     type: 1
     UseGUIDs:
     - e18292388df396c4fb36f60b1b33cb4d
@@ -35978,7 +36004,10 @@ MonoBehaviour:
     - 80cad60eafc1eea43a01a94f5872f5b9
     - 489d289ea4f98ed44878f4ed9c792d53
     - 7607b03067e97b547890e0fe5346d6b5
+    - e15464a9d7402464f8b573eaa4ee6c2f
+    - f9ec238f070d9f146bbb1313f84461d2
     - 1df98b38f24f42045bb9f1809771e6b3
+    - 61eaf41f0b444ef498b057d0f6b8a05b
   - guid: 821bd80f9c03a304c96e51a8f7db3bbb
     ScriptSymbols:
     - Game.AIStateType
@@ -36036,14 +36065,19 @@ MonoBehaviour:
     ScriptTokens:
     - BaseManager<AIManager>
     - BTDataLoader
-    - LoadCfgs
+    - UtilityAIDataLoader
     - Action
+    - LoadCfgs
     - Dictionary
     - ResCfgSys
+    - CheckFinish
+    - List
     - IsFinish
     - BTTreeData
     - GetAIBTTreeData
-    stamp: 1591889397
+    - UtilityAIData
+    - GetUtilityAIData
+    stamp: 1599575094
     type: 2
     UseGUIDs: []
   - guid: 052e0fe7df8ba4b4c92d4dc9d40f3048
@@ -36053,7 +36087,7 @@ MonoBehaviour:
     - DataComponent
     - Vector3
     - Queue
-    stamp: 1591285042
+    stamp: 1598891222
     type: 2
     UseGUIDs: []
   - guid: 1fea86e42316b6848be326a51fcf733e
@@ -36142,7 +36176,7 @@ MonoBehaviour:
   - guid: b8675cd60b089bf4193c8a28ab6ff3e2
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591971386
+    stamp: 1592034591
     type: 1
     UseGUIDs:
     - 36c4c1edd978e7344865a5a6e2c4b586
@@ -36155,10 +36189,12 @@ MonoBehaviour:
   - guid: 5f82aa55c47d1c64c824b015a4581d51
     ScriptSymbols: []
     ScriptTokens: []
-    stamp: 1591968027
+    stamp: 1599572283
     type: 1
     UseGUIDs:
     - 2518701a92505d440a8ad94a0373c961
+    - fbb85c213fce8ac4ab0436d76af3294d
+    - 31e40678cea9fbe479fe7f9053ff6a0b
   - guid: 2518701a92505d440a8ad94a0373c961
     ScriptSymbols: []
     ScriptTokens: []
@@ -36348,7 +36384,7 @@ MonoBehaviour:
     - TraceComponent
     - TransformComponent
     - PointsMoveComponent
-    stamp: 1591969056
+    stamp: 1592062308
     type: 2
     UseGUIDs: []
   - guid: f782b6fa890a9fe4b9b679fa82e04acc
@@ -36408,7 +36444,7 @@ MonoBehaviour:
     - ResCfgKey
     - List
     - SecurityElement
-    stamp: 1591970836
+    stamp: 1592103579
     type: 2
     UseGUIDs: []
   - guid: c6aa966eae4e10546877386fe1e55a4c
@@ -36425,7 +36461,7 @@ MonoBehaviour:
     - ResCfgKey
     - List
     - SecurityElement
-    stamp: 1591970836
+    stamp: 1592103579
     type: 2
     UseGUIDs: []
   - guid: 8c0069644c995884b93ef391d768d5a9
@@ -36638,7 +36674,8 @@ MonoBehaviour:
     - ObjectFactory
     - EntityType
     - ResCfgSys
-    stamp: 1591971386
+    - SkillManager
+    stamp: 1592034591
     type: 2
     UseGUIDs: []
   - guid: 3b9cdf7f6ae6ea54da2b90e7b364ef85
@@ -36668,21 +36705,1475 @@ MonoBehaviour:
   - guid: 4861cb0dbd53c0547a4b6ffa09a2b44e
     ScriptSymbols:
     - Game.BTSkillRootData
-    ScriptTokens: []
-    stamp: 1592033879
+    - Game.BTSkillRoot
+    ScriptTokens:
+    - NENodeBtn
+    - BTDecorator<SkillBTContext, BTSkillRootData>
+    stamp: 1592037281
     type: 2
     UseGUIDs: []
   - guid: e15464a9d7402464f8b573eaa4ee6c2f
-    ScriptSymbols: []
-    ScriptTokens: []
-    stamp: 0
+    ScriptSymbols:
+    - Game.UtilityAIComponent
+    ScriptTokens:
+    - DataComponent
+    - UtilityAI
+    - UtilityContext
+    stamp: 1599397751
     type: 2
     UseGUIDs: []
   - guid: f9ec238f070d9f146bbb1313f84461d2
+    ScriptSymbols:
+    - Game.UtilityAISystem
+    ScriptTokens:
+    - ComponentSystem
+    - AISystem
+    - TargetTriggerSystem
+    - OnCreate
+    - World
+    - LoadAI
+    - UtilityAIComponent
+    - AIManager
+    - UtilityContext
+    - UtilityAI
+    - OnUpdate
+    - Entities
+    - Entity
+    - AIComponent
+    - TransformComponent
+    - BTUtilityAction
+    - CLog
+    stamp: 1599575636
+    type: 2
+    UseGUIDs: []
+  - guid: 50b9dced23a0fee45aa6e1a81bfb6402
+    ScriptSymbols:
+    - Framework.ICompositeDecisionFactor
+    ScriptTokens:
+    - IDecisionFactor
+    - AddDecisionFactor
+    stamp: 1593877881
+    type: 2
+    UseGUIDs: []
+  - guid: a0a2daeb500d2c94293f8d5f9c5cd601
+    ScriptSymbols:
+    - Framework.CompositeUtilityGoalData
+    - Framework.CompositeUtilityGoal
+    ScriptTokens:
+    - Serializable
+    - ICompositeUtilityGoalData
+    - IUtilityActionData
+    - IDecisionFactorData
+    - ISelectorData
+    - List
+    - IUtilityGoalData
+    - Range
+    - UtilityBase<CompositeUtilityGoalData>, ICompositeUtilityGoal
+    - IUtilityGoal
+    - IDecisionFactor
+    - IUtilitySelector
+    - UtilityValue
+    - Decision
+    - IUtilityContext
+    - UtilityNotifyType
+    - IUtilityAction
+    - Selector
+    - ResetObjectPool
+    - AddUtilityGoal
+    - OnInit
+    stamp: 1599492854
+    type: 2
+    UseGUIDs: []
+  - guid: 715551b3078264246bdc322e532e101b
+    ScriptSymbols:
+    - Framework.SigmoidTwoPointEvaluatorData
+    - Framework.SigmoidTwoPointEvaluator
+    ScriptTokens:
+    - Serializable
+    - IEvaluatorData
+    - Vector2
+    - TwoPointEvaluatorBase<SigmoidTwoPointEvaluatorData>
+    - OnEvaluate
+    - Mathf
+    - Xa
+    - Xb
+    - Math
+    - MinK
+    - MaxK
+    - Initialize
+    - Ya
+    - Yb
+    - OnInit
+    stamp: 1599232886
+    type: 2
+    UseGUIDs: []
+  - guid: 714f99443ce68c745ac3f296b0f8873b
+    ScriptSymbols:
+    - Framework.IntervalType
+    - Framework.Interval
+    - Framework., IComparable
+    ScriptTokens:
+    - Open
+    - Closed
+    - LowerBound
+    - UpperBound
+    - LowerBoundType
+    - UpperBoundType
+    - Contains
+    - ArgumentException
+    - ToString
+    - Range
+    stamp: 1593878961
+    type: 2
+    UseGUIDs: []
+  - guid: 91c8df3d9c0213f448b09703d64d47ed
+    ScriptSymbols:
+    - Framework.IntervalExtensions
+    ScriptTokens:
+    - IntervalType
+    - Open
+    - Closed
+    - Overlaps
+    - Interval
+    - Adjacent
+    - Mathf
+    - LeftAdjacent
+    - RightAdjacent
+    - LessThan
+    - GreaterThan
+    - CompareTo
+    - Length
+    stamp: 1593879262
+    type: 2
+    UseGUIDs: []
+  - guid: 028c80c8b78b1d4438154b5b2070b93d
+    ScriptSymbols:
+    - Framework.IUtilityValueCombine
+    ScriptTokens:
+    - IUtility
+    - Combine
+    - ICollection
+    - UtilityValue
+    stamp: 1594220323
+    type: 2
+    UseGUIDs: []
+  - guid: 82293d6c0ab1a3b4f97bbc4b6a1f6e19
+    ScriptSymbols:
+    - Framework.DecisionFactorBase
+    - Framework.DecisionFactorBase., IUtilityContext
+    ScriptTokens:
+    - TContext
+    - UtilityBase
+    - IDecisionFactor
+    - IDecisionFactorData
+    - IDecisionFactorEvaluator
+    - UtilityValue
+    - Decision
+    - IUtilityContext
+    - UtilityNotifyType
+    - OnInit
+    stamp: 1599574886
+    type: 2
+    UseGUIDs: []
+  - guid: f2f4d2e9c1bee80439582c4365971d84
+    ScriptSymbols:
+    - Framework.ITwoPointEvaluator
+    - Framework.TwoPointEvaluatorBase
+    - Framework.TwoPointEvaluatorBase.EvaluatorDxZeroException
+    - Framework.TwoPointEvaluatorBase.EvaluatorXaGreaterThanXbException
+    ScriptTokens:
+    - IDecisionFactorEvaluator
+    - Vector2
+    - PtA
+    - PtB
+    - MinX
+    - MaxX
+    - MinY
+    - MaxY
+    - Interval
+    - XInterval
+    - YInterval
+    - EvaluatorBase
+    - IComparable
+    - IUtilityData
+    - Xa
+    - Ya
+    - Xb
+    - Yb
+    - Math
+    - CompareTo
+    - Initialize
+    - Mathf
+    - Exception
+    stamp: 1595508845
+    type: 2
+    UseGUIDs: []
+  - guid: 534c44ed1296d334099f49732bd90d09
+    ScriptSymbols:
+    - Framework.IUtilityGoal
+    ScriptTokens:
+    - IUtility
+    - UtilityValue
+    - Decision
+    - IUtilityContext
+    - IUtilityAction
+    - Selector
+    stamp: 1594220323
+    type: 2
+    UseGUIDs: []
+  - guid: e3339e46987aaf74886427b7718fa3ee
+    ScriptSymbols:
+    - Framework.IUtilityContext
+    ScriptTokens: []
+    stamp: 1593853522
+    type: 2
+    UseGUIDs: []
+  - guid: 0508439c373e5ad41bedce1d77c2ce87
+    ScriptSymbols:
+    - Framework.CompositeTwoPointEvaluatorData
+    - Framework.CompositeTwoPointEvaluator
+    ScriptTokens:
+    - Serializable
+    - IEvaluatorData
+    - List
+    - TwoPointEvaluatorBase<CompositeTwoPointEvaluatorData>
+    - OnEvaluate
+    - FindEvaluator
+    - LinearHoleInterpolator
+    - Add
+    - ITwoPointEvaluator
+    - DoesNotOverlapWithAnyEvaluator
+    - Evaluators
+    - UpdateXyPoints
+    - SingleEvaluatorXyPointsUpdate
+    - MultiEvaluatorXyPointsUpdate
+    - Xa
+    - Ya
+    - Xb
+    - Yb
+    - XInterval
+    - FindInternalEvaluator
+    - FindLeftAndRightInterpolators
+    - KeyValuePair
+    - OnInit
+    stamp: 1599232856
+    type: 2
+    UseGUIDs: []
+  - guid: 557de324cf7baa2438af2f4aadca9329
+    ScriptSymbols:
+    - Framework.LinearTwoPointEvaluatorData
+    - Framework.LinearTwoPointEvaluator
+    ScriptTokens:
+    - Serializable
+    - IEvaluatorData
+    - Vector2
+    - TwoPointEvaluatorBase<LinearTwoPointEvaluatorData>
+    - OnEvaluate
+    - Mathf
+    - Ya
+    - Xa
+    - Initialize
+    - Yb
+    - Xb
+    - OnInit
+    stamp: 1599232878
+    type: 2
+    UseGUIDs: []
+  - guid: 16e2d07c70431434b81023264f27b233
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599379460
+    type: 1
+    UseGUIDs:
+    - 50b9dced23a0fee45aa6e1a81bfb6402
+    - 2f3089ea74a594e43bbfadd94e357724
+    - 5d4fa35cf4e52f6498798930323c79bc
+    - 0c73189c61a057042a24a319e348682a
+    - 95eea8f3ad9d113448a1f656397109cb
+    - 99c8405a3ad3a444ea98a0a4f9f9e70d
+    - 604aeb1e50e8c6e498f3f700514b1e7b
+    - e3339e46987aaf74886427b7718fa3ee
+    - 371a9d528f0f87b46afb96a73d2c4062
+    - 534c44ed1296d334099f49732bd90d09
+    - 0e28e39dc692ebd42b8c109f3598b9e4
+    - 028c80c8b78b1d4438154b5b2070b93d
+  - guid: 374e89c6d4486b24a8b183d8f75c2ad0
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599492854
+    type: 1
+    UseGUIDs:
+    - a0a2daeb500d2c94293f8d5f9c5cd601
+    - cb7e809a1e0cecf4ca8df4a2015a49f8
+  - guid: 99c8405a3ad3a444ea98a0a4f9f9e70d
+    ScriptSymbols:
+    - Framework.IUtilityAction
+    ScriptTokens:
+    - IUtility
+    stamp: 1595142104
+    type: 2
+    UseGUIDs: []
+  - guid: a97ac43eed9a777499206169d211dbb4
+    ScriptSymbols:
+    - Framework.UtilityValue
+    ScriptTokens:
+    - Serializable
+    - IEquatable<UtilityValue>, IComparable<UtilityValue>
+    - Value
+    - Mathf
+    - CalCombine
+    - Weight
+    - Combined
+    - IsZero
+    - IsOne
+    - Equals
+    - GetHashCode
+    - CompareTo
+    - ToString
+    stamp: 1593939052
+    type: 2
+    UseGUIDs: []
+  - guid: fab98ab5a15afdf4fa76f9478b77c655
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599574886
+    type: 1
+    UseGUIDs:
+    - cb4e1eda4fbd2dc4ead179b2a8a003d0
+    - 82293d6c0ab1a3b4f97bbc4b6a1f6e19
+  - guid: cb4e1eda4fbd2dc4ead179b2a8a003d0
+    ScriptSymbols:
+    - Framework.CompositeDecisionFactorData
+    - Framework.CompositeDecisionFactor
+    ScriptTokens:
+    - Serializable
+    - ICompositeDecisionFactorData
+    - IEvaluatorData
+    - ICombineData
+    - List
+    - IDecisionFactorData
+    - Range
+    - UtilityBase<CompositeDecisionFactorData>, ICompositeDecisionFactor
+    - IUtilityValueCombine
+    - IDecisionFactor
+    - UtilityValue
+    - Decision
+    - IUtilityContext
+    - ResetObjectPool
+    - UtilityNotifyType
+    - AddDecisionFactor
+    - OnInit
+    stamp: 1599399308
+    type: 2
+    UseGUIDs: []
+  - guid: cb7e809a1e0cecf4ca8df4a2015a49f8
+    ScriptSymbols:
+    - Framework.UtilityGoalData
+    - Framework.UtilityGoal
+    ScriptTokens:
+    - Serializable
+    - IUtilityGoalData
+    - IUtilityActionData
+    - IDecisionFactorData
+    - Range
+    - UtilityBase<UtilityGoalData>, IUtilityGoal
+    - IUtilityAction
+    - IDecisionFactor
+    - UtilityValue
+    - Decision
+    - IUtilityContext
+    - UtilityNotifyType
+    - Selector
+    - OnInit
+    stamp: 1599492849
+    type: 2
+    UseGUIDs: []
+  - guid: eb6482dcb5e8d0b41a6c77460de3ee32
+    ScriptSymbols:
+    - Framework.UtilityAIData
+    - Framework.UtilityDebugInfo
+    - Framework.UtilityDebugEventDispatcher
+    - Framework.UtilityDebugEvent
+    - Framework.UtilityAI
+    ScriptTokens:
+    - Serializable
+    - IUtilityAIData
+    - ISelectorData
+    - List
+    - IUtilityGoalData
+    - IUtilityData
+    - UtilityNotifyType
+    - EventDispatcher
+    - Instance
+    - SendDebugInfo
+    - SendUtilityAIData
+    - IUtilityAI
+    - IUtilityGoal
+    - IUtilitySelector
+    - StaticInitialize
+    - ResetObjectPool
+    - UtilityValue
+    - Init
+    - AddUtilityGoal
+    - IUtilityAction
+    - Select
+    - IUtilityContext
+    - SetDebug
+    - Notify
+    - IUtility
+    - CreateUtility
+    - UtilityAIInitialize
+    - Activator
+    stamp: 1599663746
+    type: 2
+    UseGUIDs: []
+  - guid: 0c73189c61a057042a24a319e348682a
+    ScriptSymbols:
+    - Framework.IDecisionFactorEvaluator
+    ScriptTokens:
+    - IUtility
+    - Evaluate
+    stamp: 1594220324
+    type: 2
+    UseGUIDs: []
+  - guid: 5d31795ff1499b545a75f7c250c1e882
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599663746
+    type: 1
+    UseGUIDs:
+    - eb6482dcb5e8d0b41a6c77460de3ee32
+    - 207c31d4086d1974e8e101cef58940d0
+    - a0a4d39d207a9dd43ab0d5785f537bfa
+    - 7b6ebea21478a314c95b2e07f291f701
+    - 1b5f38b6594568b4481fe9aab71fddcf
+    - fab98ab5a15afdf4fa76f9478b77c655
+    - fd8b3e80df5037245b865f9e0c17c4b3
+    - 16e2d07c70431434b81023264f27b233
+    - 7c909e63af6aaf14cb87e71704afa464
+    - cfcb3fbec73f02e45ad612a33832559f
+    - 374e89c6d4486b24a8b183d8f75c2ad0
+    - a5be416706b13ca4d8c3c19950f293f2
+  - guid: 5d4fa35cf4e52f6498798930323c79bc
+    ScriptSymbols:
+    - Framework.IDecisionFactor
+    ScriptTokens:
+    - IUtility
+    - UtilityValue
+    - Decision
+    - IUtilityContext
+    stamp: 1594220324
+    type: 2
+    UseGUIDs: []
+  - guid: fd8b3e80df5037245b865f9e0c17c4b3
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599573723
+    type: 1
+    UseGUIDs:
+    - 0508439c373e5ad41bedce1d77c2ce87
+    - a9d416f6ef12c7f49822d1a217d41d5b
+    - 557de324cf7baa2438af2f4aadca9329
+    - 4a95bf760d6690341b0232bcfba5a969
+    - 4e1bb4c66129ad24ab6145ae11629e85
+    - 715551b3078264246bdc322e532e101b
+    - f2f4d2e9c1bee80439582c4365971d84
+    - ff6c31c165bc6bc49a625c0015cbbb11
+  - guid: 0e28e39dc692ebd42b8c109f3598b9e4
+    ScriptSymbols:
+    - Framework.IUtilitySelector
+    ScriptTokens:
+    - IUtility
+    - Select
+    - List
+    - UtilityValue
+    stamp: 1594220324
+    type: 2
+    UseGUIDs: []
+  - guid: 4e1bb4c66129ad24ab6145ae11629e85
+    ScriptSymbols:
+    - Framework.PowerTwoPointEvaluatorData
+    - Framework.PowerTwoPointEvaluator
+    ScriptTokens:
+    - Serializable
+    - IEvaluatorData
+    - Vector2
+    - TwoPointEvaluatorBase<PowerTwoPointEvaluatorData>
+    - OnEvaluate
+    - Mathf
+    - Xa
+    - Xb
+    - Math
+    - Ya
+    - Initialize
+    - Yb
+    - MinP
+    - MaxP
+    - OnInit
+    stamp: 1599232970
+    type: 2
+    UseGUIDs: []
+  - guid: 2f3089ea74a594e43bbfadd94e357724
+    ScriptSymbols:
+    - Framework.ICompositeUtilityGoal
+    ScriptTokens:
+    - IUtilityGoal
+    - AddUtilityGoal
+    stamp: 1593873821
+    type: 2
+    UseGUIDs: []
+  - guid: cfcb3fbec73f02e45ad612a33832559f
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1593939052
+    type: 1
+    UseGUIDs:
+    - 714f99443ce68c745ac3f296b0f8873b
+    - 91c8df3d9c0213f448b09703d64d47ed
+    - a97ac43eed9a777499206169d211dbb4
+  - guid: 20902cc948b23ce418d0e5a7c49d6829
+    ScriptSymbols:
+    - Framework.ChebyshevData
+    - Framework.Chebyshev
+    ScriptTokens:
+    - Serializable
+    - ICombineData
+    - UtilityBase<ChebyshevData>, IUtilityValueCombine
+    - Combine
+    - ICollection
+    - UtilityValue
+    - Mathf
+    - List
+    - OnInit
+    stamp: 1599232929
+    type: 2
+    UseGUIDs: []
+  - guid: c3179bdb477e0d84f9ce3b0c37017be5
+    ScriptSymbols:
+    - Framework.WeightedMetricsData
+    - Framework.WeightedMetrics
+    ScriptTokens:
+    - Serializable
+    - ICombineData
+    - UtilityBase<WeightedMetricsData>, IUtilityValueCombine
+    - PNormMin
+    - PNormMax
+    - PNorm
+    - Mathf
+    - Combine
+    - ICollection
+    - UtilityValue
+    - List
+    - Math
+    - OnInit
+    stamp: 1599232952
+    type: 2
+    UseGUIDs: []
+  - guid: 15d368a8d27feeb41a754fee12a924eb
+    ScriptSymbols:
+    - Framework.MultiplicativePseudoMeasureData
+    - Framework.MultiplicativePseudoMeasure
+    ScriptTokens:
+    - Serializable
+    - ICombineData
+    - UtilityBase<MultiplicativePseudoMeasureData>, IUtilityValueCombine
+    - Combine
+    - ICollection
+    - UtilityValue
+    - OnInit
+    stamp: 1599232944
+    type: 2
+    UseGUIDs: []
+  - guid: a5be416706b13ca4d8c3c19950f293f2
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599232952
+    type: 1
+    UseGUIDs:
+    - 20902cc948b23ce418d0e5a7c49d6829
+    - ea89aaffe4157b04b8a3f391cfec2539
+    - 975ccdb79dfe39a4c8dea470484494c7
+    - 15d368a8d27feeb41a754fee12a924eb
+    - c3179bdb477e0d84f9ce3b0c37017be5
+  - guid: 975ccdb79dfe39a4c8dea470484494c7
+    ScriptSymbols:
+    - Framework.ConstrainedWeightedMetricsData
+    - Framework.ConstrainedWeightedMetrics
+    ScriptTokens:
+    - Serializable
+    - ICombineData
+    - UtilityBase<ConstrainedWeightedMetricsData>, IUtilityValueCombine
+    - WeightedMetrics
+    - PNormMin
+    - PNormMax
+    - PNorm
+    - LowerBound
+    - Mathf
+    - Combine
+    - ICollection
+    - UtilityValue
+    - OnInit
+    stamp: 1599232939
+    type: 2
+    UseGUIDs: []
+  - guid: ea89aaffe4157b04b8a3f391cfec2539
+    ScriptSymbols:
+    - Framework.ConstrainedChebyshevData
+    - Framework.ConstrainedChebyshev
+    ScriptTokens:
+    - Serializable
+    - ICombineData
+    - UtilityBase<ConstrainedChebyshevData>, IUtilityValueCombine
+    - Chebyshev
+    - LowerBound
+    - Mathf
+    - Combine
+    - ICollection
+    - UtilityValue
+    - OnInit
+    stamp: 1599232934
+    type: 2
+    UseGUIDs: []
+  - guid: 50c8baaa6f28abb47ab2af749cef9a30
+    ScriptSymbols:
+    - Framework.RandomSelectorData
+    - Framework.RandomSelector
+    ScriptTokens:
+    - Serializable
+    - ISelectorData
+    - UtilityBase<RandomSelectorData>, IUtilitySelector
+    - Select
+    - List
+    - UtilityValue
+    - Random
+    - OnInit
+    stamp: 1599058643
+    type: 2
+    UseGUIDs: []
+  - guid: 115dc249af66e9d409969e63ec84c810
+    ScriptSymbols:
+    - Framework.MaxUtilitySelectorData
+    - Framework.MaxUtilitySelector
+    ScriptTokens:
+    - Serializable
+    - ISelectorData
+    - UtilityBase<MaxUtilitySelectorData>, IUtilitySelector
+    - Select
+    - List
+    - UtilityValue
+    - OnInit
+    stamp: 1599399532
+    type: 2
+    UseGUIDs: []
+  - guid: 9a19af61241c9794bbc8760a677fc27e
+    ScriptSymbols:
+    - Framework.SequentialSelectorData
+    - Framework.SequentialSelector
+    ScriptTokens:
+    - Serializable
+    - ISelectorData
+    - UtilityBase<SequentialSelectorData>, IUtilitySelector
+    - Select
+    - List
+    - UtilityValue
+    - OnInit
+    stamp: 1599058651
+    type: 2
+    UseGUIDs: []
+  - guid: 7c909e63af6aaf14cb87e71704afa464
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599399532
+    type: 1
+    UseGUIDs:
+    - 115dc249af66e9d409969e63ec84c810
+    - 50c8baaa6f28abb47ab2af749cef9a30
+    - 9a19af61241c9794bbc8760a677fc27e
+    - 4eb0f04becf24284fad635ef679c2148
+  - guid: 4eb0f04becf24284fad635ef679c2148
+    ScriptSymbols:
+    - Framework.WeightedRandomSelectorData
+    - Framework.WeightedRandomSelector
+    ScriptTokens:
+    - Serializable
+    - ISelectorData
+    - UtilityBase<WeightedRandomSelectorData>, IUtilitySelector
+    - Proportion
+    - Mathf
+    - Select
+    - List
+    - UtilityValue
+    - KeyValuePair
+    - Random
+    - Array
+    - OnInit
+    stamp: 1599058656
+    type: 2
+    UseGUIDs: []
+  - guid: f343ae6d17a78ba43a9af312183fdd54
     ScriptSymbols: []
     ScriptTokens: []
     stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 2528b193e9d24a448868afe22eb04153
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1593935363
+    type: 1
+    UseGUIDs:
+    - f343ae6d17a78ba43a9af312183fdd54
+  - guid: 6ecefdbd0ab764d468ee3ea12cb4f1dc
+    ScriptSymbols:
+    - TestContext
+    - UtilityAITest
+    ScriptTokens:
+    - Serializable
+    - IUtilityContext
+    - Range
+    - MonoBehaviour
+    - UtilityAI
+    - Start
+    - Update
+    stamp: 1595513192
     type: 2
     UseGUIDs: []
-  timeStamp: 1592018772
+  - guid: 9be03876e642002448a41754282247ca
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1593954447
+    type: 3
+    UseGUIDs:
+    - 6ecefdbd0ab764d468ee3ea12cb4f1dc
+  - guid: 61eaf41f0b444ef498b057d0f6b8a05b
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1594046989
+    type: 1
+    UseGUIDs:
+    - f4d86768943fd0b47bb37650bdc0eede
+    - ceecb0bfde6926540ba4f6c0bb759f46
+    - eb2003a0b635fe14bb313fd6eaa5f2b3
+  - guid: f4d86768943fd0b47bb37650bdc0eede
+    ScriptSymbols:
+    - Game.UtilityContext
+    ScriptTokens:
+    - IUtilityContext
+    - Entity
+    - UtilityAIComponent
+    stamp: 1594046989
+    type: 2
+    UseGUIDs: []
+  - guid: 0aadf1185ed9ccc4f86e4111de238280
+    ScriptSymbols:
+    - Game.BTUtilityActionData
+    - Game.BTUtilityAction
+    ScriptTokens:
+    - Serializable
+    - IUtilityActionData
+    - UtilityBase<BTUtilityActionData>, IUtilityAction
+    - OnInit
+    stamp: 1599492903
+    type: 2
+    UseGUIDs: []
+  - guid: eb2003a0b635fe14bb313fd6eaa5f2b3
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599574906
+    type: 1
+    UseGUIDs:
+    - 925f63636a310db4182ac07ff55193d4
+    - 905f20f0f3e237c4c96f7bc27316656a
+    - 8e55ba9fcac33594993d11fbcba94e01
+    - 1b14c05eee89250488c8eb831299f2de
+    - d74644379cf587c4ea2210c75557c478
+  - guid: ceecb0bfde6926540ba4f6c0bb759f46
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599492903
+    type: 1
+    UseGUIDs:
+    - 0aadf1185ed9ccc4f86e4111de238280
+  - guid: 905f20f0f3e237c4c96f7bc27316656a
+    ScriptSymbols:
+    - Game.BattleDecisionFactorData
+    - Game.BattleDecisionFactor
+    ScriptTokens:
+    - IDecisionFactorData
+    - IEvaluatorData
+    - Range
+    - DecisionFactorBase<UtilityContext, BattleDecisionFactorData>
+    - UtilityValue
+    - Decision
+    - UtilityContext
+    stamp: 1599574906
+    type: 2
+    UseGUIDs: []
+  - guid: 1b14c05eee89250488c8eb831299f2de
+    ScriptSymbols:
+    - Game.PeaceDecisionFactorData
+    - Game.PeaceDecisionFactor
+    ScriptTokens:
+    - IDecisionFactorData
+    - IEvaluatorData
+    - Range
+    - DecisionFactorBase<UtilityContext, PeaceDecisionFactorData>
+    - UtilityValue
+    - Decision
+    - UtilityContext
+    - Mathf
+    stamp: 1599573247
+    type: 2
+    UseGUIDs: []
+  - guid: 8e55ba9fcac33594993d11fbcba94e01
+    ScriptSymbols:
+    - Game.PatrolDecisionFactorData
+    - Game.PatrolDecisionFactor
+    ScriptTokens:
+    - DecisionFactorData
+    - DecisionFactorBase<UtilityContext, PatrolDecisionFactorData>
+    - UtilityValue
+    - Decision
+    - UtilityContext
+    stamp: 1595513231
+    type: 2
+    UseGUIDs: []
+  - guid: 925f63636a310db4182ac07ff55193d4
+    ScriptSymbols:
+    - Game.AttackDecisionFactorData
+    - Game.AttackDecisionFactor
+    ScriptTokens:
+    - DecisionFactorData
+    - DecisionFactorBase<UtilityContext, AttackDecisionFactorData>
+    - UtilityValue
+    - Decision
+    - UtilityContext
+    stamp: 1595513153
+    type: 2
+    UseGUIDs: []
+  - guid: d74644379cf587c4ea2210c75557c478
+    ScriptSymbols:
+    - Game.TraceDecisionFactorData
+    - Game.TraceDecisionFactor
+    ScriptTokens:
+    - DecisionFactorData
+    - DecisionFactorBase<UtilityContext, TraceDecisionFactorData>
+    - UtilityValue
+    - Decision
+    - UtilityContext
+    stamp: 1595513166
+    type: 2
+    UseGUIDs: []
+  - guid: 604aeb1e50e8c6e498f3f700514b1e7b
+    ScriptSymbols:
+    - Framework.UtilityNotifyType
+    - Framework.IUtilityAI
+    ScriptTokens:
+    - Evaluator
+    - Decision
+    - Selector
+    - Notify
+    - IUtility
+    - CreateUtility
+    - IUtilityData
+    stamp: 1599379460
+    type: 2
+    UseGUIDs: []
+  - guid: 95eea8f3ad9d113448a1f656397109cb
+    ScriptSymbols:
+    - Framework.IUtility
+    ScriptTokens:
+    - IUtilityAI
+    - IUtilityData
+    - Init
+    stamp: 1595143965
+    type: 2
+    UseGUIDs: []
+  - guid: 371a9d528f0f87b46afb96a73d2c4062
+    ScriptSymbols:
+    - Framework.IUtilityData
+    - Framework.IUtilityAIData
+    - Framework.ISelectorData
+    - Framework.IUtilityGoalData
+    - Framework.IEvaluatorData
+    - Framework.ICombineData
+    - Framework.IDecisionFactorData
+    - Framework.ICompositeDecisionFactorData
+    - Framework.IUtilityActionData
+    - Framework.ICompositeUtilityGoalData
+    ScriptTokens:
+    - List
+    stamp: 1598774012
+    type: 2
+    UseGUIDs: []
+  - guid: a9d416f6ef12c7f49822d1a217d41d5b
+    ScriptSymbols:
+    - Framework.EvaluatorBase
+    ScriptTokens:
+    - UtilityBase
+    - IDecisionFactorEvaluator
+    - IUtilityData
+    - Evaluate
+    - OnEvaluate
+    - UtilityNotifyType
+    stamp: 1595144134
+    type: 2
+    UseGUIDs: []
+  - guid: 7b6ebea21478a314c95b2e07f291f701
+    ScriptSymbols:
+    - Framework.UtilityBase
+    ScriptTokens:
+    - IUtility
+    - IUtilityData
+    - IUtilityAI
+    - Init
+    - CLog
+    - OnInit
+    stamp: 1595507865
+    type: 2
+    UseGUIDs: []
+  - guid: 62d5a3560716c204aa4e49a6c382e9a2
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599664789
+    type: 1
+    UseGUIDs:
+    - e69fc324702a06b4eb06eef5aee1fad3
+    - df8234c57823094469db44102a2d383d
+    - 63a828fa2d24f5c4a9897474b0cecc8a
+    - 4e8891fb5e4e2b2489ecd4c9895f3edc
+    - 4b44620673ff1c34bb717ad7c694ba7c
+    - 9ef3d2d586a5da7498dbb811e50fc257
+    - 4f569efa94877fa43b02a6a60a1e078c
+    - e65a7282f861c6648b286ac33c090dfa
+    - b3918fdb9af79e94e80036b871b9a346
+    - f05e16f60ef76004cb9000f1aed6d40a
+    - e80a77c34997e894482195a1e0be1c01
+    - d0ca10b1062089148839531ae1753186
+    - 58c5d6f5a4fa84440a2a6f29087fca24
+    - 1bd7de5d355ec1448bdfecd085821662
+    - 87e691a6a151f8045b8431b04b6c5dfc
+    - fb09a657dd5fbb74b9c3147e468f613c
+    - fd5851925d5d3b04184396bacb735901
+    - 00c8a11157b99714d8be554c65a5516f
+    - fe2d4b27085210548a25b88c3223633d
+  - guid: 63a828fa2d24f5c4a9897474b0cecc8a
+    ScriptSymbols:
+    - UtilityDataToSerializeProperty
+    - VisualElementExtension
+    - UtilityAIWindow
+    ScriptTokens:
+    - ScriptableObject
+    - SerializeReference
+    - SerializedProperty
+    - GetSerializeProperty
+    - SerializedObject
+    - GetElementInParent
+    - VisualElement
+    - GetFirstLayerChildElement
+    - EditorWindow
+    - UtilityNodeItem
+    - List
+    - UtilityDebugInfo
+    - Dictionary
+    - OnEnable
+    - UtilityAIInitialize
+    - AssetDatabase
+    - OnCreate
+    - OnSave
+    - OnLoad
+    - UtilityDebugEventDispatcher
+    - UtilityDebugEvent
+    - OnDebug
+    - OnStartView
+    - UpdateDataToItem
+    - EditorApplication
+    - EditorApplicationOnPlayModeStateChanged
+    - OnDisable
+    - PlayModeStateChange
+    - Debug
+    - UtilityAIData
+    - Create
+    - UtilityNotifyType
+    - MouseUpEvent
+    - UtilityAIDataItem
+    - CheckName
+    - EditorUtility
+    - JsonConvert
+    - UtilityAIDataLoader
+    - System
+    - Application
+    - StreamReader
+    - Encoding
+    - Exception
+    - OnGUI
+    stamp: 1599664789
+    type: 2
+    UseGUIDs: []
+  - guid: 4b44620673ff1c34bb717ad7c694ba7c
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 4e8891fb5e4e2b2489ecd4c9895f3edc
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 1970bd6011bcf9d4ea3e51f6d4f282fa
+    ScriptSymbols:
+    - Framework.DecisionFactorData
+    ScriptTokens:
+    - Serializable
+    - IDecisionFactorData
+    - IEvaluatorData
+    - Range
+    stamp: 1599399322
+    type: 2
+    UseGUIDs: []
+  - guid: 1b5f38b6594568b4481fe9aab71fddcf
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599399322
+    type: 1
+    UseGUIDs:
+    - 1970bd6011bcf9d4ea3e51f6d4f282fa
+  - guid: a0a4d39d207a9dd43ab0d5785f537bfa
+    ScriptSymbols:
+    - Framework.UtilityAIInitialize
+    ScriptTokens:
+    - Dictionary
+    - UNITY_EDITOR
+    - InitializeInEditor
+    - Initialize
+    - RuntimeInitializeOnLoadMethod
+    - RuntimeInitializeLoadType
+    - Assembly
+    - IUtility
+    - IUtilityData
+    - List
+    - GetUtilityType
+    - GetUtilityDataTypesByInterface
+    - GetAllDataType
+    stamp: 1599291302
+    type: 2
+    UseGUIDs: []
+  - guid: ff6c31c165bc6bc49a625c0015cbbb11
+    ScriptSymbols:
+    - Framework.ZeroEvaluatorData
+    - Framework.ZeroEvaluator
+    ScriptTokens:
+    - Serializable
+    - IEvaluatorData
+    - EvaluatorBase<ZeroEvaluatorData>
+    - OnInit
+    - OnEvaluate
+    stamp: 1599573723
+    type: 2
+    UseGUIDs: []
+  - guid: fd5851925d5d3b04184396bacb735901
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: fb09a657dd5fbb74b9c3147e468f613c
+    ScriptSymbols:
+    - UtilityNodeContainerItem
+    ScriptTokens:
+    - UtilityNodeItem
+    - ChildNodeStyle
+    - Foldout
+    - MoveChildUp
+    - MoveChildDown
+    - RemoveChildItem
+    - AddChildItem
+    - VisualElement
+    stamp: 1599322439
+    type: 2
+    UseGUIDs: []
+  - guid: e7ce567cba29bf14fab85a70e48a5719
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 00c8a11157b99714d8be554c65a5516f
+    ScriptSymbols:
+    - UtilityNodeItem
+    ScriptTokens:
+    - VisualElement
+    - UtilityDataToSerializeProperty
+    - UtilityNodeContainerItem
+    - AssetDatabase
+    - PropertyField
+    - ContextualMenuManipulator
+    - OnMenu
+    - EditorWindow
+    - TrickleDown
+    - Serializable
+    - Deserializable
+    - ContextualMenuPopulateEvent
+    - OnAddAction
+    - DropdownMenu
+    stamp: 1599664398
+    type: 2
+    UseGUIDs: []
+  - guid: fe2d4b27085210548a25b88c3223633d
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: e69fc324702a06b4eb06eef5aee1fad3
+    ScriptSymbols:
+    - UtilityAIDataItem
+    ScriptTokens:
+    - UtilityNodeContainerItem
+    - VisualElement
+    - Serializable
+    - UtilityAIData
+    - UtilityNodeItem
+    - ISelectorData
+    - List
+    - IUtilityGoalData
+    - Deserializable
+    - ICompositeUtilityGoalData
+    - UtilityCompositeGoalDataItem
+    - UtilityGoalDataItem
+    - OnAddAction
+    - DropdownMenu
+    - UtilityAIInitialize
+    - Activator
+    stamp: 1599488428
+    type: 2
+    UseGUIDs: []
+  - guid: df8234c57823094469db44102a2d383d
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: e65a7282f861c6648b286ac33c090dfa
+    ScriptSymbols:
+    - UtilityCompositeGoalDataItem
+    ScriptTokens:
+    - UtilityNodeContainerItem
+    - VisualElement
+    - Serializable
+    - CompositeUtilityGoalData
+    - UtilityNodeItem
+    - IDecisionFactorData
+    - ISelectorData
+    - List
+    - IUtilityGoalData
+    - Deserializable
+    - ICompositeDecisionFactorData
+    - UtilityCompositeDecisionFactorDataItem
+    - DecisionFactorData
+    - UtilityDecisionFactorDataItem
+    - ICompositeUtilityGoalData
+    - UtilityGoalDataItem
+    - OnAddAction
+    - DropdownMenu
+    - UtilityAIInitialize
+    - Activator
+    stamp: 1599488460
+    type: 2
+    UseGUIDs: []
+  - guid: b3918fdb9af79e94e80036b871b9a346
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 1bd7de5d355ec1448bdfecd085821662
+    ScriptSymbols:
+    - UtilityGoalDataItem
+    ScriptTokens:
+    - UtilityNodeItem
+    - VisualElement
+    - Serializable
+    - UtilityGoalData
+    - IDecisionFactorData
+    - IUtilityActionData
+    - Deserializable
+    - ICompositeDecisionFactorData
+    - UtilityCompositeDecisionFactorDataItem
+    - DecisionFactorData
+    - UtilityDecisionFactorDataItem
+    - OnAddAction
+    - DropdownMenu
+    - UtilityAIInitialize
+    - Activator
+    stamp: 1599488168
+    type: 2
+    UseGUIDs: []
+  - guid: 87e691a6a151f8045b8431b04b6c5dfc
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: d0ca10b1062089148839531ae1753186
+    ScriptSymbols:
+    - UtilityDecisionFactorDataItem
+    ScriptTokens:
+    - UtilityNodeItem
+    - VisualElement
+    - Serializable
+    - DecisionFactorData
+    - IEvaluatorData
+    - Deserializable
+    - CompositeTwoPointEvaluatorData
+    - UtilityCompositeTwoPointEvaluatorDataItem
+    - OnAddAction
+    - DropdownMenu
+    - UtilityAIInitialize
+    - Activator
+    stamp: 1599290169
+    type: 2
+    UseGUIDs: []
+  - guid: 9ef3d2d586a5da7498dbb811e50fc257
+    ScriptSymbols:
+    - UtilityCompositeDecisionFactorDataItem
+    ScriptTokens:
+    - UtilityNodeContainerItem
+    - VisualElement
+    - Serializable
+    - CompositeDecisionFactorData
+    - UtilityNodeItem
+    - ICombineData
+    - List
+    - IDecisionFactorData
+    - Deserializable
+    - ICompositeDecisionFactorData
+    - DecisionFactorData
+    - UtilityDecisionFactorDataItem
+    - OnAddAction
+    - DropdownMenu
+    - UtilityAIInitialize
+    - Activator
+    stamp: 1599289998
+    type: 2
+    UseGUIDs: []
+  - guid: 4f569efa94877fa43b02a6a60a1e078c
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 58c5d6f5a4fa84440a2a6f29087fca24
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: f05e16f60ef76004cb9000f1aed6d40a
+    ScriptSymbols:
+    - UtilityCompositeTwoPointEvaluatorDataItem
+    ScriptTokens:
+    - UtilityNodeContainerItem
+    - Serializable
+    - CompositeTwoPointEvaluatorData
+    - List
+    - UtilityNodeItem
+    - IEvaluatorData
+    - Deserializable
+    - OnAddAction
+    - DropdownMenu
+    - UtilityAIInitialize
+    - Activator
+    stamp: 1599290323
+    type: 2
+    UseGUIDs: []
+  - guid: e80a77c34997e894482195a1e0be1c01
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: edd5a57cd0c2f284b847d51ce2df361c
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599574555
+    type: 1
+    UseGUIDs:
+    - 6b3f9acebef9e8a40856ab1bf8828de6
+  - guid: 207c31d4086d1974e8e101cef58940d0
+    ScriptSymbols:
+    - Framework.FieldOnlyResolver
+    - Framework.UtilityAIDataLoader
+    ScriptTokens:
+    - DefaultContractResolver
+    - List
+    - MemberInfo
+    - GetSerializableMembers
+    - JsonSerializerSettings
+    - TypeNameHandling
+    - ReferenceLoopHandling
+    - MissingMemberHandling
+    - NullValueHandling
+    - ContractResolver
+    - Dictionary
+    - UtilityAIData
+    - MultiResourceObjectLoader
+    - Action
+    - Get
+    - IsFinish
+    - LoadResCfgs
+    - Clear
+    - Load
+    - Application
+    - OnComplete
+    - OnProgress
+    - UNITY_EDITOR
+    - UnityEditor
+    - ParseData
+    - UnityEngine
+    - TextAsset
+    - JsonConvert
+    - Exception
+    - CLog
+    stamp: 1599491710
+    type: 2
+    UseGUIDs: []
+  - guid: 01ef782d02bb1994dbe418b69432552b
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599383787
+    type: 1
+    UseGUIDs:
+    - 17aef65a15b471f468b5fbeb4ff0c6a1
+    - d6807fedb8dcaf04682d2c84f0ab753f
+  - guid: f14685143ccae3f48ab9acce8ee32b8e
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599383787
+    type: 1
+    UseGUIDs:
+    - 9a6f8c7c1ea72ce46831c5e1b6150d0c
+    - 06314f49bdda26043963578d60a0a7ee
+    - 577d9725f58264943855b8ac185531fe
+    - 76f828f47ce26cc43991113c6a39dbbf
+  - guid: 14f21d7a1e53a8c4e87b25526a7eb63c
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599383787
+    type: 1
+    UseGUIDs:
+    - 6a3c684705042f345975d924f6983e36
+    - aadad8ac54f29e44583510294ac5c312
+  - guid: 1418141139a6ac443b18cb05c0643a29
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599383787
+    type: 1
+    UseGUIDs:
+    - 9b6ba260dada0ea4a871a42011f8b87d
+    - 36f7323c55864364d8bb88c736e4bca6
+  - guid: 06314f49bdda26043963578d60a0a7ee
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 36f7323c55864364d8bb88c736e4bca6
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 76f828f47ce26cc43991113c6a39dbbf
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599383787
+    type: 1
+    UseGUIDs:
+    - 4e7d9a07cc3f02a41a575406e7230846
+  - guid: d6807fedb8dcaf04682d2c84f0ab753f
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 17aef65a15b471f468b5fbeb4ff0c6a1
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 4
+    UseGUIDs: []
+  - guid: 577d9725f58264943855b8ac185531fe
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 1599383787
+    type: 1
+    UseGUIDs:
+    - 14f21d7a1e53a8c4e87b25526a7eb63c
+    - 01ef782d02bb1994dbe418b69432552b
+    - 1418141139a6ac443b18cb05c0643a29
+  - guid: 6a3c684705042f345975d924f6983e36
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 4
+    UseGUIDs: []
+  - guid: 9a6f8c7c1ea72ce46831c5e1b6150d0c
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: aadad8ac54f29e44583510294ac5c312
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 9b6ba260dada0ea4a871a42011f8b87d
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 4
+    UseGUIDs: []
+  - guid: 4e7d9a07cc3f02a41a575406e7230846
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 6b3f9acebef9e8a40856ab1bf8828de6
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 31e40678cea9fbe479fe7f9053ff6a0b
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  - guid: 4a95bf760d6690341b0232bcfba5a969
+    ScriptSymbols:
+    - Framework.OneEvaluatorData
+    - Framework.OneEvaluator
+    ScriptTokens:
+    - Serializable
+    - IEvaluatorData
+    - EvaluatorBase<OneEvaluatorData>
+    - OnInit
+    - OnEvaluate
+    stamp: 1599573645
+    type: 2
+    UseGUIDs: []
+  - guid: fbb85c213fce8ac4ab0436d76af3294d
+    ScriptSymbols: []
+    ScriptTokens: []
+    stamp: 0
+    type: 9
+    UseGUIDs: []
+  timeStamp: 1599913454
   priority: 3

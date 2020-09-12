@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement class="utility-node__data">
+        <Style src="UtilityAIWindow.uss" />
+        <ui:Label text="Label" name="labelName" style="background-color: rgba(0, 0, 0, 0);" />
+        <ui:VisualElement name="dataContainer" style="flex-shrink: 1;" />
+        <ui:Label text="Debug" display-tooltip-when-elided="True" name="labelDebug" class="utility-debug__info" />
+    </ui:VisualElement>
+    <ui:VisualElement class="utility-node__specialdata">
+        <Style src="UtilityAIWindow.uss" />
+        <ui:Label text="CombineData" class="utility-node__datatitle" />
+        <ui:VisualElement name="combineContainer" />
+    </ui:VisualElement>
+    <ui:Foldout text="Children" name="foldout">
+        <Style src="UtilityAIWindow.uss" />
+    </ui:Foldout>
+</ui:UXML>

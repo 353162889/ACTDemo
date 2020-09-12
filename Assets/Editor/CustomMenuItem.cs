@@ -110,5 +110,11 @@ public static class CustomMenuItem
         NETreeWindow.OpenWindow(GetConfig(), 2);
     }
 
+    [MenuItem("Tools/OpenUtilityAIWindow")]
+    public static void OpenUtilityAIWindow()
+    {
+        UtilityAIWindow wnd = EditorWindow.GetWindow<UtilityAIWindow>();
+        wnd.titleContent = new GUIContent("UtilityAIWindow");
+    }
 }
 

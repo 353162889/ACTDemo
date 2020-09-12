@@ -39,6 +39,7 @@ namespace Game
         private MoveStateSystem moveStateSystem;
         private PropertySystem propertySystem;
         private PointsMoveSystem pointsMoveSystem;
+        private UtilityAISystem utilityAISystem;
         private AISystem aiSystem;
         private TargetTriggerSystem targetTriggerSystem;
         private TraceSystem traceSystem;
@@ -72,6 +73,7 @@ namespace Game
             moveStateSystem = world.GetOrCreateSystem<MoveStateSystem>();
             propertySystem = world.GetOrCreateSystem<PropertySystem>();
             pointsMoveSystem = world.GetOrCreateSystem<PointsMoveSystem>();
+            utilityAISystem = world.GetOrCreateSystem<UtilityAISystem>();
             aiSystem = world.GetOrCreateSystem<AISystem>();
             targetTriggerSystem = world.GetOrCreateSystem<TargetTriggerSystem>();
             traceSystem = world.GetOrCreateSystem<TraceSystem>();
@@ -270,12 +272,16 @@ namespace Game
 
             var aiComponent = world.AddComponentOnce<AIComponent>(entity);
             
-            aiComponent.aiFile = monsterCfg.aiScript;
+//            aiComponent.aiFile = monsterCfg.aiScript;
 
             targetTriggerSystem.AddSphereTargetTriggerComponent(entity, 10, 15, 2);
 
             var traceComponent = world.AddComponentOnce<TraceComponent>(entity);
             traceComponent.stopMoveDistance = monsterCfg.traceStopMoveDistance;
+
+            var utilityAIComponent = world.AddComponentOnce<UtilityAIComponent>(entity);
+            utilityAISystem.LoadAI(utilityAIComponent, "test");
+            utilityAISystem.StartDebug(entity);
 
             return entity;
         }
@@ -289,6 +295,7 @@ namespace Game
             inputSystem.Update();
             
             mapSystem.Update();
+            utilityAISystem.Update();
             aiSystem.Update();
             comboSystem.Update();
             cacheSkillSystem.Update();
