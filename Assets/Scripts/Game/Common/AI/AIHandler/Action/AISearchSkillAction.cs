@@ -22,7 +22,7 @@ namespace Game
             if (commonInfo.entityType == EntityType.Monster)
             {
                 var hostTransformComponent = context.world.GetComponent<TransformComponent>(context.aiComponent.componentEntity);
-                var targetTransformComponent = context.world.GetComponent<TransformComponent>(context.aiBlackBoard.target);
+                var targetTransformComponent = context.world.GetComponent<TransformComponent>(context.worldState.target);
                 float sqrDis = (hostTransformComponent.position - targetTransformComponent.position).sqrMagnitude;
                 var monsterCfg = ResCfgSys.Instance.GetCfg<ResMonster>(commonInfo.cfgId);
                 for (int i = 0; i < monsterCfg.skillIds.Count; i++)

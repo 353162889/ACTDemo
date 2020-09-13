@@ -21,7 +21,7 @@ namespace Game
     {
         public override UtilityValue Decision(UtilityContext context)
         {
-            return new UtilityValue(context.targetFactor, weight);
+            return new UtilityValue(context.worldState.targetFactor, weight);
         }
     }
 }

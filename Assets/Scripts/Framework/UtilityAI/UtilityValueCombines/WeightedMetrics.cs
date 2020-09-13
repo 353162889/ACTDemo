@@ -9,21 +9,12 @@ namespace Framework
     [Serializable]
     public class WeightedMetricsData : ICombineData
     {
-
+        [Range(1.0f, 10000.0f)]
+        public float pow = 2f;
     }
     public sealed class WeightedMetrics : UtilityBase<WeightedMetricsData>, IUtilityValueCombine
     {
-        float _p;
-        public readonly float PNormMin = 1.0f;
-        public readonly float PNormMax = 10000.0f;
-
-        public float PNorm
-        {
-            get { return _p; }
-            set { _p = Mathf.Clamp(value, PNormMin, PNormMax); }
-        }
-
-        public float Combine(ICollection<UtilityValue> elements)
+        public static float StaticCombine(ICollection<UtilityValue> elements, float pow)
         {
             var count = elements.Count;
             if (count == 0)
@@ -39,24 +30,23 @@ namespace Framework
             var vlist = new List<float>(count);
             foreach (var el in elements)
             {
-                var v = el.Weight / wsum * (float) Math.Pow(el.Value, _p);
+                var v = el.Weight / wsum * (float)Math.Pow(el.Value, pow);
                 vlist.Add(v);
             }
 
             var sum = vlist.Sum();
-            var res = (float) Math.Pow(sum, 1 / _p);
+            var res = (float)Math.Pow(sum, 1 / pow);
 
             return res;
         }
 
-        public WeightedMetrics()
+        public float Combine(ICollection<UtilityValue> elements)
         {
-            PNorm = 2.0f;
+            return StaticCombine(elements, this.convertData.pow);
         }
 
-        public WeightedMetrics(float pNorm)
+        public WeightedMetrics()
         {
-            PNorm = pNorm;
         }
 
         protected override void OnInit(WeightedMetricsData data)

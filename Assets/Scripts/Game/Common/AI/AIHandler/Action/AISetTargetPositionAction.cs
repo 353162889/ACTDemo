@@ -37,7 +37,7 @@ namespace Game
             }
             else if (data.positionType == SetTargetPositionType.Target)
             {
-                var target = context.aiComponent.blackBoard.target;
+                var target = context.worldState.target;
                 if (target == Entity.Null) return BTStatus.Fail;
                 var transformComponent = context.world.GetComponent<TransformComponent>(target);
                 if (transformComponent == null) return BTStatus.Fail;

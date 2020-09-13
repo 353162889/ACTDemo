@@ -5,22 +5,61 @@ namespace Game
 {
     public class UtilityContext : IUtilityContext
     {
-        public Entity entity
+        private string m_aiFile;
+        public string aiFile
         {
-            get { return utilityAIComponent.componentEntity; }
+            get { return m_aiFile; }
         }
-        public UtilityAIComponent utilityAIComponent { get; private set; }
 
-        /// <summary>
-        /// 目标参数（0表示有目标，1表示无目标）
-        /// </summary>
-        public float targetFactor { get; set; }
-
-        public float targetDistance { get; set; }
-
-        public UtilityContext(UtilityAIComponent utilityAIComponent)
+        private World m_world;
+        public World world
         {
-            this.utilityAIComponent = utilityAIComponent;
+            get { return m_world; }
+        }
+
+
+        private AIComponent m_aiComponent;
+        public AIComponent aiComponent
+        {
+            get { return m_aiComponent; }
+        }
+
+        private UtilityAI m_utilityAI;
+        public UtilityAI utilityAI
+        {
+            get { return m_utilityAI; }
+        }
+
+        public AIWorldState worldState
+        {
+            get { return m_aiComponent.worldState; }
+        }
+
+        public void Init(string aiFile, World world, AIComponent aiComponent, UtilityAI utilityAI)
+        {
+            this.Reset();
+            this.m_aiFile = aiFile;
+            this.m_world = world;
+            this.m_aiComponent = aiComponent;
+            this.m_utilityAI = utilityAI;
+
+        }
+
+        public void ReloadUtilityAI(UtilityAI reloadUtilityAI)
+        {
+            if (this.m_utilityAI != null)
+            {
+                reloadUtilityAI.SetDebug(this.m_utilityAI.isDebug);
+            }
+            this.m_utilityAI = reloadUtilityAI;
+        }
+
+        public void Reset()
+        {
+            this.m_aiFile = null;
+            this.m_world = null;
+            this.m_aiComponent = null;
+            this.m_utilityAI = null;
         }
     }
 }

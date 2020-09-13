@@ -93,6 +93,22 @@
 }
 
 .utility-debug__info {
-    color: rgba(255, 0, 0, 255);
+    color: rgb(255, 0, 0);
     font-size: 15px;
+}
+
+.select_utility_action {
+    background-color: rgb(99, 248, 1);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgb(255, 23, 23);
+    border-right-color: rgb(255, 23, 23);
+    border-top-color: rgb(255, 23, 23);
+    border-bottom-color: rgb(255, 23, 23);
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }

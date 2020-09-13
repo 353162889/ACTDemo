@@ -3,6 +3,6 @@
         <Style src="UtilityAIWindow.uss" />
         <ui:Label text="Label" name="labelName" />
         <ui:VisualElement name="dataContainer" style="flex-shrink: 1;" />
-        <ui:Label text="debug" display-tooltip-when-elided="True" name="labelDebug" class="utility-debug__info" style="white-space: normal;" />
+        <ui:Label display-tooltip-when-elided="True" name="labelDebug" class="utility-debug__info" style="white-space: normal;" />
     </ui:VisualElement>
 </ui:UXML>

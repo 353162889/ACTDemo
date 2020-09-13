@@ -12,9 +12,9 @@ namespace Game
 
     public class AIComponent : DataComponent
     {
-        public string aiFile;
         public AIStateType aiStateType = AIStateType.Running;
-        public AIBlackBoard blackBoard = new AIBlackBoard();
-        public BTExecuteCache executeCache = new BTExecuteCache();
+        public AIWorldState worldState = new AIWorldState();
+        public AIBTContext btContext = new AIBTContext();
+        public UtilityContext utilityContext = new UtilityContext();
     }
 }

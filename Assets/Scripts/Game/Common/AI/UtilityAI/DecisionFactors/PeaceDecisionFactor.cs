@@ -20,7 +20,7 @@ namespace Game
     {
         public override UtilityValue Decision(UtilityContext context)
         {
-            return new UtilityValue(Mathf.Abs(context.targetFactor - 1), weight);
+            return new UtilityValue(Mathf.Abs(context.worldState.targetFactor - 1), weight);
         }
     }
 }

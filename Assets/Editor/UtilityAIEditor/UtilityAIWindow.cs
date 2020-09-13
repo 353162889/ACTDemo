@@ -151,15 +151,20 @@ public class UtilityAIWindow : EditorWindow
         }
     }
 
-    private void OnDebug(int key, object args)
+    private void ClearDebug()
     {
-        var lst = (List<UtilityDebugInfo>) args;
         rootContainer.Query<UtilityNodeItem>().ForEach(item =>
         {
             item.dataContainer.parent.RemoveFromClassList("select_utility_item");
             item.dataContainer.parent.RemoveFromClassList("select_utility_action");
             item.SetDebugText("");
         });
+    }
+
+    private void OnDebug(int key, object args)
+    {
+        var lst = (List<UtilityDebugInfo>) args;
+        ClearDebug();
         for (int i = 0; i < lst.Count; i++)
         {
             var debugInfo = lst[i];

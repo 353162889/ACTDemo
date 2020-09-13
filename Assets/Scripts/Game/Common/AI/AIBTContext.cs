@@ -6,6 +6,12 @@ namespace Game
 {
     public class AIBTContext : IBTContext,IPoolable
     {
+        private string m_aiFile;
+        public string aiFile
+        {
+            get { return m_aiFile; }
+        }
+
         private World m_world;
         public World world
         {
@@ -31,17 +37,19 @@ namespace Game
 
         public BTBlackBoard blackBoard
         {
-            get { return aiComponent.blackBoard; }
+            get { return m_aiBlackBoard; }
         }
 
+        private AIBlackBoard m_aiBlackBoard = new AIBlackBoard();
         public AIBlackBoard aiBlackBoard
         {
-            get { return aiComponent.blackBoard as AIBlackBoard; }
+            get { return m_aiBlackBoard; }
         }
 
+        private BTExecuteCache m_executeCache = new BTExecuteCache();
         public BTExecuteCache executeCache
         {
-            get { return aiComponent.executeCache; }
+            get { return m_executeCache; }
         }
 
         public IBTDataHandler GetHandler(int index)
@@ -49,28 +57,52 @@ namespace Game
             return BTDataHandlerInitialize.GetHandler(index);
         }
 
-        private float m_fDeltaTime;
+        public AIWorldState worldState
+        {
+            get { return m_aiComponent.worldState; }
+        }
+
+        private float m_fDeltaTime = 0f;
         public float deltaTime
         {
             get { return m_fDeltaTime; }
         }
 
-        public void Init(World world, AIComponent aiComponent, BTTreeData btTreeData, IBTExecutor executor, float deltaTime)
+        public void Init(string aiFile, World world, AIComponent aiComponent, BTTreeData btTreeData, IBTExecutor executor)
         {
+            Reset();
+            this.m_aiFile = aiFile;
             this.m_world = world;
             this.m_aiComponent = aiComponent;
             this.m_btTreeData = btTreeData;
             this.m_executor = executor;
+        }
+
+        public void SetDeltaTime(float deltaTime)
+        {
             this.m_fDeltaTime = deltaTime;
         }
 
         public void Reset()
         {
+            ClearCacheData();
+            this.m_aiFile = "";
             this.m_world = null;
             this.m_aiComponent = null;
             this.m_btTreeData = null;
             this.m_executor = null;
             this.m_fDeltaTime = 0;
+            m_executeCache.Clear();
+            m_aiBlackBoard.Clear();
+        }
+
+        public void ClearCacheData()
+        {
+            if (treeData != null && treeData.rootData != null && treeData.rootData.children.Count > 0)
+            {
+                var childBtData = treeData.rootData.children[0];
+                BTDataHandlerInitialize.GetHandler(childBtData.keyIndex).Clear(this, childBtData);
+            }
         }
     }
 }

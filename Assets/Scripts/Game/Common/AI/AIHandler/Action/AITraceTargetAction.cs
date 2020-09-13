@@ -11,7 +11,7 @@ namespace Game
     {
         protected override BTStatus Handler(AIBTContext context, BTData btData, AITraceTargetActionData data)
         {
-            Entity target = context.aiBlackBoard.target;
+            Entity target = context.worldState.target;
             if (target == Entity.Null) return BTStatus.Fail;
             var traceComponent = context.world.GetComponent<TraceComponent>(context.aiComponent.componentEntity);
             if (traceComponent == null) return BTStatus.Fail;

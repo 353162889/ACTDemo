@@ -9,7 +9,8 @@ namespace Framework
     [Serializable]
     public class ConstrainedChebyshevData : ICombineData
     {
-
+        [Range(0, 1f)]
+        public float lowerBound;
     }
     public sealed class ConstrainedChebyshev : UtilityBase<ConstrainedChebyshevData>, IUtilityValueCombine
     {
@@ -19,15 +20,10 @@ namespace Framework
         /// <summary>
         ///   If the combined value of any utility is below this, the value of this combine will be 0.
         /// </summary>
-        public float LowerBound
-        {
-            get { return _lowerBound; }
-            set { _lowerBound = Mathf.Clamp01(value); }
-        }
 
         public float Combine(ICollection<UtilityValue> elements)
         {
-            if (elements.Any(el => el.Combined < LowerBound))
+            if (elements.Any(el => el.Combined < this.convertData.lowerBound))
                 return 0.0f;
 
             return _measure.Combine(elements);
@@ -35,12 +31,6 @@ namespace Framework
 
         public ConstrainedChebyshev()
         {
-            _measure = new Chebyshev();
-        }
-
-        public ConstrainedChebyshev(float lowerBound)
-        {
-            LowerBound = lowerBound;
             _measure = new Chebyshev();
         }
 

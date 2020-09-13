@@ -12,7 +12,7 @@ namespace Game
     {
         protected override bool Evaluate(AIBTContext context, BTData btData, AIExistTargetConditionData data)
         {
-            return context.aiBlackBoard.target != Entity.Null;
+            return context.worldState.target != Entity.Null;
         }
     }
 }
