@@ -6,7 +6,11 @@
     public interface IUtilityGoal : IUtility
     {
         UtilityValue Decision(IUtilityContext context);
-        IUtilityAction Selector(IUtilityContext context);
+        IUtilityGoal Selector(IUtilityContext context);
         float weight { get; }
+        IUtilityAction action { get; }
+        ICompositeUtilityGoal parent { get; set; }
+        float startTime { get; set; }
+        bool selected { get; set; }
     }
 }

@@ -126,7 +126,7 @@ public class UtilityNodeItem : VisualElement
                 action => { this.parentContainer.MoveChildUp(this); });
             evt.menu.AppendAction("↓",
                 action => { this.parentContainer.MoveChildDown(this); });
-            evt.menu.AppendAction("delete", action => { this.parentContainer.RemoveChildItem(this); });
+            evt.menu.AppendAction("delete", action => { this.parent.Remove(this); });
         }
 
         this.OnAddAction(evt.menu);

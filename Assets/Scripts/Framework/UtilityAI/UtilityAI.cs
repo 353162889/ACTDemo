@@ -58,6 +58,8 @@ namespace Framework
         public static int SendDebugInfo = 1;
         public static int SendUtilityAIData = 2;
         public static int UpdateUtilityAIData = 3;
+        public static int StartDebug = 4;
+        public static int StopDebug = 5;
     }
 
     public class UtilityAI : IUtilityAI
@@ -65,6 +67,11 @@ namespace Framework
         private UtilityAIData utilityAIData;
         private List<IUtilityGoal> m_lstUtilityGoal;
         private IUtilitySelector m_cSelector;
+        private IUtilityGoal m_cCurrentGoal;
+        public IUtilityGoal currentGoal
+        {
+            get { return m_cCurrentGoal; }
+        }
         private bool m_bDebug = false;
         public bool isDebug
         {
@@ -111,7 +118,7 @@ namespace Framework
             return true;
         }
 
-        public IUtilityAction Select(IUtilityContext context)
+        public void Select(IUtilityContext context)
         {
             var cacheUtilityValues = ResetObjectPool<List<UtilityValue>>.Instance.GetObject();
             for (int i = 0; i < m_lstUtilityGoal.Count; i++)
@@ -123,10 +130,10 @@ namespace Framework
             int index = m_cSelector.Select(cacheUtilityValues);
             ResetObjectPool<List<UtilityValue>>.Instance.SaveObject(cacheUtilityValues);
             IUtilityGoal utilityGoal = index >= 0 ? m_lstUtilityGoal[index] : null;
-            var action = utilityGoal?.Selector(context);
-            if (action != null)
+            var resultUtilityGoal = utilityGoal?.Selector(context);
+            if (resultUtilityGoal != null)
             {
-                Notify(action, UtilityNotifyType.BeSelected);
+                Notify(resultUtilityGoal, UtilityNotifyType.BeSelected);
             }
 
             if (m_bDebug)
@@ -136,7 +143,25 @@ namespace Framework
                 m_lstDebugCacheInfo = new List<UtilityDebugInfo>();
             }
 
-            return action;
+            var oldGoal = m_cCurrentGoal;
+            m_cCurrentGoal = resultUtilityGoal;
+            if (oldGoal != m_cCurrentGoal)
+            {
+                var temp = oldGoal;
+                while (temp != null)
+                {
+                    if (temp.selected != false) temp.startTime = context.time;
+                    temp.selected = false;
+                    temp = temp.parent;
+                }
+                temp = m_cCurrentGoal;
+                while (temp != null)
+                {
+                    if (temp.selected != true) temp.startTime = context.time;
+                    temp.selected = true;
+                    temp = temp.parent;
+                }
+            }
         }
 
         public void SetDebug(bool debug)
@@ -171,5 +196,7 @@ namespace Framework
 
             return null;
         }
+
+        
     }
 }

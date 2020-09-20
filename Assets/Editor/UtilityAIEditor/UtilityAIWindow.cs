@@ -69,6 +69,25 @@ public class UtilityAIWindow : EditorWindow
 
     private Dictionary<object, UtilityNodeItem> mDataToItem = new Dictionary<object, UtilityNodeItem>();
     private bool isEditor;
+
+    [MenuItem("GameObject/Test", false, 0)]
+    static void StartDebugAI(MenuCommand command)
+    {
+        var go = Selection.activeGameObject;
+        if (go == null) return;
+        var aiComponent = go.GetComponentInParent<AIComponent>();
+        if (aiComponent != null)
+        {
+            UtilityDebugEventDispatcher.Instance.Dispatch(UtilityDebugEvent.StartDebug, aiComponent.componentEntity);
+        }
+    }
+
+    [MenuItem("GameObject/Test", true, 0)]
+    static bool StartDebugAIValide(MenuCommand command)
+    {
+        return EditorApplication.isPlaying;
+    }
+
     public void OnEnable()
     {
         UtilityAIInitialize.InitializeInEditor(true);
@@ -168,7 +187,7 @@ public class UtilityAIWindow : EditorWindow
         for (int i = 0; i < lst.Count; i++)
         {
             var debugInfo = lst[i];
-            if (debugInfo.notifyType == UtilityNotifyType.Selector && debugInfo.msg == null)
+            if (debugInfo.notifyType == UtilityNotifyType.Selector && ((IUtilityGoal)debugInfo.msg).action == null)
             {
                 continue;
             }

@@ -269,15 +269,16 @@ namespace Game
             var pointsMoveComponent = world.AddComponentOnce<PointsMoveComponent>(entity);
 
             var aiComponent = world.AddComponentOnce<AIComponent>(entity);
-            aiSystem.RunUtilityAI(aiComponent, "test");
-            aiSystem.StartUtilityDebug(entity);
-            
-//            aiComponent.aiFile = monsterCfg.aiScript;
 
             targetTriggerSystem.AddSphereTargetTriggerComponent(entity, 10, 15, 2);
 
             var traceComponent = world.AddComponentOnce<TraceComponent>(entity);
             traceComponent.stopMoveDistance = monsterCfg.traceStopMoveDistance;
+
+            //这里创建之后在初始化一些数据
+            aiSystem.InitSensor(entity);
+            aiSystem.RunUtilityAI(aiComponent, "test");
+//            aiSystem.StartUtilityDebug(entity);
 
             return entity;
         }

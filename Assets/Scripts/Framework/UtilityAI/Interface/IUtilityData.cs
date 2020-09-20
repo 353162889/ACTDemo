@@ -40,6 +40,8 @@ namespace Framework
         IUtilityActionData actionData { get; }
         IDecisionFactorData decisionFactorData { get; }
         float weight { get; }
+        IEvaluatorData selectedInertiaEvaluatorData { get; }
+        IEvaluatorData unselectedInertiaEvaluatorData { get; }
     }
 
     public interface ICompositeUtilityGoalData : IUtilityGoalData

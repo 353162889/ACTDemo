@@ -1,4 +1,5 @@
-﻿using Framework;
+﻿using System.Collections.Generic;
+using Framework;
 using Microsoft.CSharp.RuntimeBinder;
 using Unity.Entities;
 using UnityEngine;
@@ -8,17 +9,59 @@ namespace Game
     public class AISystem : ComponentSystem, IBTExecutor
     {
         private TargetTriggerSystem targetTriggerSystem;
+        private List<GlobalSensor> lstGlobalSensor;
 
         protected override void OnCreate()
         {
             targetTriggerSystem = World.GetOrCreateSystem<TargetTriggerSystem>();
             UtilityDebugEventDispatcher.Instance.AddEvent(UtilityDebugEvent.UpdateUtilityAIData, OnReloadUtilityAI);
+            UtilityDebugEventDispatcher.Instance.AddEvent(UtilityDebugEvent.StartDebug, OnStartDebug);
+            UtilityDebugEventDispatcher.Instance.AddEvent(UtilityDebugEvent.StopDebug, OnStopDebug);
+            lstGlobalSensor = new List<GlobalSensor>();
+            lstGlobalSensor.Add(new AttackFactorSensor(World));
             base.OnCreate();
         }
 
         protected override void OnDestroy()
         {
             UtilityDebugEventDispatcher.Instance.RemoveEvent(UtilityDebugEvent.UpdateUtilityAIData, OnReloadUtilityAI);
+            UtilityDebugEventDispatcher.Instance.RemoveEvent(UtilityDebugEvent.StartDebug, OnStartDebug);
+            UtilityDebugEventDispatcher.Instance.RemoveEvent(UtilityDebugEvent.StopDebug, OnStopDebug);
+            foreach (var sensor in lstGlobalSensor)
+            {
+                sensor.Destroy();
+            }
+        }
+
+        private void OnStartDebug(int key, object args)
+        {
+            var entity = (Entity) args;
+            this.StartUtilityDebug(entity);
+        }
+
+        private void OnStopDebug(int key, object args)
+        {
+            this.StopUtilityDebug();
+        }
+
+        public void InitSensor(Entity entity)
+        {
+            var aiComponent = World.GetComponent<AIComponent>(entity);
+            aiComponent.lstSensor.Add(new TargeSensor(World, entity, aiComponent.worldState));
+            aiComponent.lstSensor.Add(new TargetDistanceSensor(World, entity, aiComponent.worldState));
+
+            for (int i = 0; i < aiComponent.lstSensor.Count; i++)
+            {
+                if (aiComponent.lstSensor[i] is IUpdateSensor)
+                {
+                    aiComponent.lstUpdateSensor.Add((IUpdateSensor)aiComponent.lstSensor[i]);
+                }
+            }
+
+            foreach (var globalSensor in lstGlobalSensor)
+            {
+                globalSensor.UpdateEntity(entity);
+            }
         }
 
         public void RunBTScript(Entity entity, string aiFile)
@@ -93,35 +136,20 @@ namespace Game
             {
                 if (aiComponent.aiStateType == AIStateType.Running)
                 {
-                    var worldState = aiComponent.worldState;
-                    var targetTriggerComponent = World.GetComponent<TargetTriggerComponent>(entity);
-                    if (targetTriggerComponent != null)
+                    var lstUpdateSensor = aiComponent.lstUpdateSensor;
+                    int count = lstUpdateSensor.Count;
+                    for (int i = 0; i < count; i++)
                     {
-                        var target = aiComponent.worldState.target;
-                        if (target == Entity.Null || !targetTriggerSystem.ValidEntity(targetTriggerComponent, target))
-                        {
-                            aiComponent.worldState.ResetTarget();
-                            if (targetTriggerComponent.lstEntity.Count > 0)
-                            {
-                                aiComponent.worldState.SetFilterTarget(targetTriggerComponent.lstEntity[0]);
-                            }
-                        }
+                        lstUpdateSensor[i].Update(Time.deltaTime);
                     }
-
-                    worldState.targetFactor = aiComponent.worldState.target == Entity.Null ? 0 : 1;
-                    worldState.targetDistance = 9999;
-                    if (worldState.targetFactor > 0)
-                    {
-                        var targetTransformComponent = World.GetComponent<TransformComponent>(aiComponent.worldState.target);
-                        worldState.targetDistance = (transformComponent.position - targetTransformComponent.position).magnitude;
-                    }
-                    
                     UtilityContext utilityContext = aiComponent.utilityContext;
                     if (!string.IsNullOrEmpty(utilityContext.aiFile))
                     {
-                        BTUtilityAction action = (BTUtilityAction) utilityContext.utilityAI.Select(utilityContext);
-                        if (action != null)
+                        utilityContext.utilityAI.Select(utilityContext);
+                        IUtilityGoal utilityGoal = (IUtilityGoal) utilityContext.utilityAI.currentGoal;
+                        if (utilityGoal.action != null)
                         {
+                            var action = (BTUtilityAction) utilityGoal.action;
                             if (!string.IsNullOrEmpty(action.aiFile))
                             {
                                 this.RunBTScript(aiComponent, action.aiFile);

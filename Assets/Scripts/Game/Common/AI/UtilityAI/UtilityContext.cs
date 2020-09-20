@@ -1,10 +1,19 @@
 ﻿using Framework;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Game
 {
     public class UtilityContext : IUtilityContext
     {
+        public float time
+        {
+            get
+            {
+                return Time.time;
+            }
+        }
+
         private string m_aiFile;
         public string aiFile
         {

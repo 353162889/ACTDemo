@@ -11,6 +11,11 @@ public class TestContext : IUtilityContext
     public float hunger;
     [Range(0, 100)]
     public float thirst;
+
+    public float time
+    {
+        get { return Time.time; }
+    }
 }
 
 //public class HungerDecisionFactor : DecisionFactorBase<TestContext, DecisionFactorData>

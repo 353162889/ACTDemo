@@ -29,6 +29,7 @@ namespace Game
             }
             loadInfo.Add("test_attack", "Config/AIScript/" + "test_attack" + ".bytes");
             loadInfo.Add("test_patrol", "Config/AIScript/" + "test_patrol" + ".bytes");
+            loadInfo.Add("test_standoff", "Config/AIScript/" + "test_standoff" + ".bytes");
             loadingBTDataLoader.LoadResCfgs(loadInfo, () =>
             {
                 var temp = btDataLoader;

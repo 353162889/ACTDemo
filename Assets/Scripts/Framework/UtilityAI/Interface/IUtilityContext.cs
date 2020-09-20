@@ -5,6 +5,6 @@
     /// </summary>
     public interface IUtilityContext
     {
-
+        float time { get; }
     }
 }

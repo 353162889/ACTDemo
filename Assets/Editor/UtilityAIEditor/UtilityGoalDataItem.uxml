@@ -7,6 +7,16 @@
     </ui:VisualElement>
     <ui:VisualElement class="utility-node__specialdata">
         <Style src="UtilityAIWindow.uss" />
+        <ui:Label text="SelectedInertiaEvaluator" class="utility-node__datatitle" />
+        <ui:VisualElement name="selectedInertiaEvaluatorContainer" />
+    </ui:VisualElement>
+    <ui:VisualElement class="utility-node__specialdata">
+        <Style src="UtilityAIWindow.uss" />
+        <ui:Label text="UnselectedInertiaEvaluator" class="utility-node__datatitle" />
+        <ui:VisualElement name="unselectedInertiaEvaluatorContainer" />
+    </ui:VisualElement>
+    <ui:VisualElement class="utility-node__specialdata">
+        <Style src="UtilityAIWindow.uss" />
         <ui:Label text="DecisionFactor" class="utility-node__datatitle" />
         <ui:VisualElement name="decisionFactorContainer" />
     </ui:VisualElement>

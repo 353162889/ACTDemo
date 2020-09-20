@@ -6,6 +6,7 @@ namespace Framework
     [Serializable]
     public class LinearTwoPointEvaluatorData : IEvaluatorData
     {
+        public bool clampX = false;
         public Vector2 pointA;
         public Vector2 pointB;
     }
@@ -22,6 +23,7 @@ namespace Framework
         /// <param name="x">The x value.</param>
         public override float OnEvaluate(float x)
         {
+            x = Mathf.Clamp(x, XInterval.LowerBound, XInterval.UpperBound);
             return Mathf.Clamp01(Ya + _dyOverDx * (x - Xa));
         }
 

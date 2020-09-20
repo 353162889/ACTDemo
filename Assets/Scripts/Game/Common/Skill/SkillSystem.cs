@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Framework;
 using GameData;
 using Unity.Entities;
@@ -12,7 +13,8 @@ namespace Game
         private InAirSystem inAirSystem;
         private SkillBTContext skillContext;
         public event Action<Entity, SkillData> OnSkillStart;
-        public event Action<Entity, SkillData, bool> OnSkillEnd; 
+        public event Action<Entity, SkillData, bool> OnSkillEnd;
+        public event Action<Entity, int> OnSkillCDEnd;
 
         protected override void OnCreate()
         {
@@ -118,13 +120,7 @@ namespace Game
 
         private bool CheckSkillCD(SkillComponent skillComponent, int skillId)
         {
-            float canCastTime;
-            if (skillComponent.dicCdInfo.TryGetValue(skillId, out canCastTime))
-            {
-                return Time.time >= canCastTime;
-            }
-
-            return true;
+            return !skillComponent.dicCdInfo.ContainsKey(skillId);
         }
 
         public bool IsCastingSkill(SkillComponent skillComponent)
@@ -199,6 +195,7 @@ namespace Game
 
         protected override void OnUpdate()
         {
+            float curTime = Time.time;
             Entities.ForEach((Entity entity, SkillComponent skillComponent) =>
             {
                 var skillData = skillComponent.skillData;
@@ -208,7 +205,7 @@ namespace Game
                     if (skillData.skillTime < 0)
                     {
                         var resSkill = ResCfgSys.Instance.GetCfg<ResSkill>(skillData.skillId);
-                        float canCastTime = Time.time + resSkill.cd;
+                        float canCastTime = curTime + resSkill.cd;
                         //技能进入cd
                         if (!skillComponent.dicCdInfo.ContainsKey(skillData.skillId))
                         {
@@ -254,6 +251,22 @@ namespace Game
                     }
                    
                 }
+
+                var lstTemp = ResetObjectPool<List<int>>.Instance.GetObject();
+                foreach (var pair in skillComponent.dicCdInfo)
+                {
+                    if (curTime >= pair.Value)
+                    {
+                        lstTemp.Add(pair.Key);
+                    }
+                }
+
+                foreach (var key in lstTemp)
+                {
+                    skillComponent.dicCdInfo.Remove(key);
+                    OnSkillCDEnd?.Invoke(entity, key);
+                }
+                ResetObjectPool<List<int>>.Instance.SaveObject(lstTemp);
             });
         }
 

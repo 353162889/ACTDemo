@@ -38,6 +38,11 @@ namespace Game
         /// </summary>
         public float targetDistance { get; set; }
 
+        /// <summary>
+        /// 攻击欲望
+        /// </summary>
+        public float attackDesired { get; set; }
+
         public void ResetTarget()
         {
             m_sFilterTarget = Entity.Null;

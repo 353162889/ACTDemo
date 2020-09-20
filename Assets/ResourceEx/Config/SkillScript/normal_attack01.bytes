@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <data xsi:type="BTSkillRootData">
-    <effectiveRange>0</effectiveRange>
+    <effectiveRange>4.705475</effectiveRange>
   </data>
   <lstChild>
     <NEData>

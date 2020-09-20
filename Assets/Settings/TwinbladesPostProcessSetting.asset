@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b1d32d22b03434bb48951e74dee429, type: 3}
+  m_Name: TwinbladesPostProcessSetting
+  m_EditorClassIdentifier: 
+  referenceAvatar: {fileID: 9000000, guid: 5cc9446a731eb4e4f82adf67a433c953, type: 3}
+  arrDir:
+  - {fileID: 102900000, guid: 136e9d1c6db9dff47832967abdd3fd26, type: 3}
+  - {fileID: 102900000, guid: 122d839becbace24898030d6a626cbbf, type: 3}
+  loopAnims:
+  - Idle
+  - Walk
+  - Run
+  - Jump_Loop
+  animMask: {fileID: 31900000, guid: f2dc0294dd816384d9dcd463acf4aca6, type: 2}
+  removePrev: []

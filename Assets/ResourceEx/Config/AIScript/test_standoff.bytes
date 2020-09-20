@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NEData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <lstChild>
+    <NEData>
+      <data xsi:type="AIStandoffActionData">
+        <randomCount>5</randomCount>
+        <minAngle>10</minAngle>
+        <maxAngle>20</maxAngle>
+        <minRadius>7</minRadius>
+        <maxRadius>8</maxRadius>
+      </data>
+      <lstChild />
+    </NEData>
+  </lstChild>
+</NEData>

@@ -8,11 +8,16 @@ public class UtilityCompositeGoalDataItem : UtilityNodeContainerItem
 {
     private VisualElement decisionFactorContainer;
     private VisualElement selectorContainer;
+    private VisualElement selectedInertiaEvaluatorContainer;
+    private VisualElement unselectedInertiaEvaluatorContainer;
 
     public UtilityCompositeGoalDataItem(object data) : base(data)
     {
         decisionFactorContainer = this.Q<VisualElement>("decisionFactorContainer");
         selectorContainer = this.Q<VisualElement>("selectorContainer");
+
+        selectedInertiaEvaluatorContainer = this.Q<VisualElement>("selectedInertiaEvaluatorContainer");
+        unselectedInertiaEvaluatorContainer = this.Q<VisualElement>("unselectedInertiaEvaluatorContainer");
     }
 
     public override object Serializable()
@@ -23,6 +28,20 @@ public class UtilityCompositeGoalDataItem : UtilityNodeContainerItem
 
         nodeItem = this.selectorContainer.GetFirstLayerChildElement<UtilityNodeItem>();
         compositeUtilityGoalData.mSelectorData = (ISelectorData) nodeItem.Serializable();
+
+        nodeItem = this.selectedInertiaEvaluatorContainer.GetFirstLayerChildElement<UtilityNodeItem>();
+        compositeUtilityGoalData.mSelectedInertiaEvaluatorData = null;
+        if (nodeItem != null)
+        {
+            compositeUtilityGoalData.mSelectedInertiaEvaluatorData = (IEvaluatorData)nodeItem.Serializable();
+        }
+
+        nodeItem = this.unselectedInertiaEvaluatorContainer.GetFirstLayerChildElement<UtilityNodeItem>();
+        compositeUtilityGoalData.mUnselectedInertiaEvaluatorData = null;
+        if (nodeItem != null)
+        {
+            compositeUtilityGoalData.mUnselectedInertiaEvaluatorData = (IEvaluatorData)nodeItem.Serializable();
+        }
 
         compositeUtilityGoalData.mLstGoalDatas = new List<IUtilityGoalData>();
         for (int i = 0; i < this.foldout.contentContainer.childCount; i++)
@@ -36,6 +55,38 @@ public class UtilityCompositeGoalDataItem : UtilityNodeContainerItem
     public override void Deserializable()
     {
         CompositeUtilityGoalData compositeUtilityGoalData = this.data as CompositeUtilityGoalData;
+        this.selectedInertiaEvaluatorContainer.Clear();
+        if (compositeUtilityGoalData.mSelectedInertiaEvaluatorData != null)
+        {
+            if (compositeUtilityGoalData.mSelectedInertiaEvaluatorData is CompositeTwoPointEvaluatorData)
+            {
+                this.selectedInertiaEvaluatorContainer.Add(
+                    new UtilityCompositeTwoPointEvaluatorDataItem(
+                        compositeUtilityGoalData.mSelectedInertiaEvaluatorData));
+            }
+            else
+            {
+                this.selectedInertiaEvaluatorContainer.Add(
+                    new UtilityNodeItem(compositeUtilityGoalData.mSelectedInertiaEvaluatorData));
+            }
+        }
+
+        this.unselectedInertiaEvaluatorContainer.Clear();
+        if (compositeUtilityGoalData.mUnselectedInertiaEvaluatorData != null)
+        {
+            if (compositeUtilityGoalData.mUnselectedInertiaEvaluatorData is CompositeTwoPointEvaluatorData)
+            {
+                this.unselectedInertiaEvaluatorContainer.Add(
+                    new UtilityCompositeTwoPointEvaluatorDataItem(compositeUtilityGoalData
+                        .mUnselectedInertiaEvaluatorData));
+            }
+            else
+            {
+                this.unselectedInertiaEvaluatorContainer.Add(
+                    new UtilityNodeItem(compositeUtilityGoalData.mUnselectedInertiaEvaluatorData));
+            }
+        }
+
         decisionFactorContainer.Clear();
         if (compositeUtilityGoalData.decisionFactorData is ICompositeDecisionFactorData)
         {
@@ -75,7 +126,54 @@ public class UtilityCompositeGoalDataItem : UtilityNodeContainerItem
 
     protected override void OnAddAction(DropdownMenu menu)
     {
-        var lst = UtilityAIInitialize.GetUtilityDataTypesByInterface(typeof(ICompositeDecisionFactorData));
+        var lst = UtilityAIInitialize.GetUtilityDataTypesByInterface(typeof(IEvaluatorData));
+        for (int i = 0; i < lst.Count; i++)
+        {
+            var type = lst[i];
+            if (type == typeof(CompositeTwoPointEvaluatorData))
+            {
+                menu.AppendAction(string.Format("selectedInertiaEvaluator/Composite/{0}", lst[i].Name), action =>
+                {
+                    selectedInertiaEvaluatorContainer.Clear();
+                    var item = new UtilityCompositeTwoPointEvaluatorDataItem(Activator.CreateInstance(type));
+                    selectedInertiaEvaluatorContainer.Add(item);
+                });
+            }
+            else
+            {
+                menu.AppendAction(string.Format("selectedInertiaEvaluator/{0}", lst[i].Name), action =>
+                {
+                    selectedInertiaEvaluatorContainer.Clear();
+                    var item = new UtilityNodeItem(Activator.CreateInstance(type));
+                    selectedInertiaEvaluatorContainer.Add(item);
+                });
+            }
+        }
+        for (int i = 0; i < lst.Count; i++)
+        {
+            var type = lst[i];
+            if (type == typeof(CompositeTwoPointEvaluatorData))
+            {
+                menu.AppendAction(string.Format("unselectedInertiaEvaluator/Composite/{0}", lst[i].Name), action =>
+                {
+                    unselectedInertiaEvaluatorContainer.Clear();
+                    var item = new UtilityCompositeTwoPointEvaluatorDataItem(Activator.CreateInstance(type));
+                    unselectedInertiaEvaluatorContainer.Add(item);
+                });
+            }
+            else
+            {
+                menu.AppendAction(string.Format("unselectedInertiaEvaluator/{0}", lst[i].Name), action =>
+                {
+                    unselectedInertiaEvaluatorContainer.Clear();
+                    var item = new UtilityNodeItem(Activator.CreateInstance(type));
+                    unselectedInertiaEvaluatorContainer.Add(item);
+                });
+            }
+
+        }
+
+        lst = UtilityAIInitialize.GetUtilityDataTypesByInterface(typeof(ICompositeDecisionFactorData));
         for (int i = 0; i < lst.Count; i++)
         {
             var type = lst[i];
