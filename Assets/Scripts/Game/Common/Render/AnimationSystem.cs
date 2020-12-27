@@ -23,13 +23,7 @@ namespace Game
         public bool HasAnimatorParam(AnimationComponent animationComponent, string paramName)
         {
             if (!ValidAnimator(animationComponent)) return false;
-            if (animationComponent.parameters == null) return false;
-            var parameters = animationComponent.parameters;
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                if (parameters[i].name == paramName) return true;
-            }
-            return false;
+            return animationComponent.dictParameters.ContainsKey(paramName);
         }
 
         public void SetAnimatorParam(Entity entity, string paramName, float paramValue)
@@ -129,13 +123,9 @@ namespace Game
         public AnimatorControllerParameter GetAnimationParamType(AnimationComponent animationComponent, string animationParam)
         {
             if (!ValidAnimator(animationComponent)) return null;
-            var count = animationComponent.animator.parameterCount;
-            for (int i = 0; i < count; i++)
-            {
-                var param = animationComponent.animator.GetParameter(i);
-                if (param.name == animationParam) return param;
-            }
-
+            AnimatorControllerParameter param = null;
+            if (animationComponent.dictParameters.TryGetValue(animationParam, out param))
+                return param;
             return null;
         }
 

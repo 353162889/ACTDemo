@@ -6,4 +6,6 @@
 	<resbuffpartlogic buffIds="14" duration="0.0" eventTriggerCount="1" eventTriggerType="HOST_BUFF_DETACH" id="1301" interval="0.0" overrideDistance="0" properties="" script=""/>
 	<resbuffpartlogic buffIds="13" duration="0.0" eventTriggerCount="1" eventTriggerType="HOST_BUFF_DETACH" id="1501" interval="0.0" overrideDistance="0" properties="" script=""/>
 	<resbuffpartlogic buffIds="13" duration="0.0" eventTriggerCount="1" eventTriggerType="HOST_BUFF_DETACH" id="1601" interval="0.0" overrideDistance="0" properties="" script=""/>
+	<resbuffpartlogic buffIds="7" duration="0.0" eventTriggerCount="1" eventTriggerType="HOST_BUFF_DETACH" id="601" interval="0.0" overrideDistance="0" properties="" script=""/>
+	<resbuffpartlogic buffIds="14" duration="0.0" eventTriggerCount="1" eventTriggerType="HOST_BUFF_DETACH" id="701" interval="0.0" overrideDistance="0" properties="" script=""/>
 </root>

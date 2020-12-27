@@ -33,6 +33,7 @@ namespace Game
     public class BuffStateConfig
     {
         private static BuffStateHandler baseBuffStateHandler = new BuffStateHandler();
+        private static StiffnessStateHandler stiffnessStateHandler = new StiffnessStateHandler();
 
         public List<ForbidType> forbids;
         public IBuffStateHandler handler;
@@ -53,7 +54,7 @@ namespace Game
             }},
             { BuffStateType.STIFFNESS, new BuffStateConfig(){
                 forbids = new List<ForbidType>(){ForbidType.Jump,ForbidType.InputMove, ForbidType.Ability, ForbidType.InputFace},
-                handler = baseBuffStateHandler,
+                handler = stiffnessStateHandler,
                 refuseStates = new List<BuffStateType>(),
                 removeStates = new List<BuffStateType>(),
             }},

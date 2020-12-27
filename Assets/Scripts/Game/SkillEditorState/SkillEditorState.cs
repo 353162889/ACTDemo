@@ -160,8 +160,7 @@ namespace Game
             physicComponent.targetTriggerParent = goTargetTriggerParent.transform;
 
             var animationComponent = world.AddComponentOnce<AnimationComponent>(entity);
-            animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
-            animationComponent.parameters = animationComponent.animator.parameters;
+            animationComponent.SetAnimator(prefabComponent.transform.GetComponentInChildren<Animator>());
 
             var comboComponent = world.AddComponentOnce<ComboComponent>(entity);
             var cacheSkillComponent = world.AddComponentOnce<CacheSkillComponent>(entity);
@@ -256,8 +255,7 @@ namespace Game
             physicComponent.targetTriggerParent = goTargetTriggerParent.transform;
 
             var animationComponent = world.AddComponentOnce<AnimationComponent>(entity);
-            animationComponent.animator = prefabComponent.transform.GetComponentInChildren<Animator>();
-            animationComponent.parameters = animationComponent.animator.parameters;
+            animationComponent.SetAnimator(prefabComponent.transform.GetComponentInChildren<Animator>());
 
             var skillComponent = world.AddComponentOnce<SkillComponent>(entity);
             var buffStateComponent = world.AddComponentOnce<BuffStateComponent>(entity);
@@ -278,7 +276,7 @@ namespace Game
             //这里创建之后在初始化一些数据
             aiSystem.InitSensor(entity);
             aiSystem.RunUtilityAI(aiComponent, "test");
-//            aiSystem.StartUtilityDebug(entity);
+            aiSystem.StartUtilityDebug(entity);
 
             return entity;
         }

@@ -24,6 +24,40 @@ public class HumaniodAnimationPostProcess
         ProcessModel(setting);
     }
 
+    [MenuItem("Assets/UpdateAvatar")]
+    static void UpdateAvatar()
+    {
+        var assetList = Provider.GetAssetListFromSelection();
+        for (int i = 0; i < assetList.Count; i++)
+        {
+            if (assetList[i].isFolder)
+            {
+                var folderDir = assetList[i].assetPath;
+                if (folderDir.EndsWith("/")) folderDir = folderDir.Substring(0, folderDir.Length - 1);
+                var guids = AssetDatabase.FindAssets("t:GameObject", new[] { folderDir });
+                foreach (var guid in guids)
+                {
+                    var asset = Provider.GetAssetByGUID(guid);
+                    UpdateAvatar(asset.assetPath);
+                }
+            }
+            else
+            {
+                UpdateAvatar(assetList[i].assetPath);
+            }
+        }
+    }
+
+    static void UpdateAvatar(string assetPath)
+    {
+
+        var importer = AssetImporter.GetAtPath(assetPath);
+        if (!(importer is ModelImporter)) return;
+        var modelImporter = (ModelImporter)importer;
+        modelImporter.sourceAvatar = modelImporter.sourceAvatar;
+        modelImporter.SaveAndReimport();
+    }
+
     static void ProcessModel(HumaniodAnimationPostProcessSetting setting)
     {
         var assetList = Provider.GetAssetListFromSelection();

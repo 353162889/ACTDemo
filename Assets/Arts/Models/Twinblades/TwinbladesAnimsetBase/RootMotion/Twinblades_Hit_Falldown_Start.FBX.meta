@@ -22,9 +22,18 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'thigh_l'
+      : position error = 14.466974 mm\n\t'calf_l' : position error = 7.503148 mm\n\t'foot_l'
+      : position error = 12.283940 mm\n\t'ball_l' : position error = 6.704489 mm\n\t'thigh_r'
+      : position error = 14.465435 mm\n\t'calf_r' : position error = 7.504184 mm\n\t'foot_r'
+      : position error = 12.284653 mm\n\t'ball_r' : position error = 6.704859 mm\n"
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Unreal Take' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'spine_01' has translation animation that
+      will be discarded.\n\t'spine_02' has translation animation that will be discarded.\n\t'neck_01'
+      has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -672,17 +681,47 @@ ModelImporter:
     - name: SK_Mannequin(Clone)
       parentName: 
       position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-      scale: {x: 1, y: 1, z: 1}
-    - name: SK_Mannequin 1
-      parentName: SK_Mannequin(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: root
       parentName: SK_Mannequin(Clone)
       position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_foot_root
+      parentName: root
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_foot_l
+      parentName: ik_foot_root
+      position: {x: -0.1707627, y: 0.080721274, z: 0.13465731}
+      rotation: {x: 0.020530319, y: 0.71223336, z: -0.011723512, w: 0.7015445}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_foot_r
+      parentName: ik_foot_root
+      position: {x: 0.17076288, y: 0.08072148, z: 0.13465573}
+      rotation: {x: 0.70154446, y: 0.011724248, z: 0.71223336, w: -0.020531043}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_hand_root
+      parentName: root
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_hand_gun
+      parentName: ik_hand_root
+      position: {x: 0.56646097, y: 0.0033541175, z: 1.1167965}
+      rotation: {x: 0.6188495, y: 0.06954111, z: -0.38913614, w: 0.6787948}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_hand_l
+      parentName: ik_hand_gun
+      position: {x: -0.77885425, y: -0.6960191, z: 0.438695}
+      rotation: {x: 0.68747425, y: 0.61435795, z: -0.38722545, w: -0.00000030318785}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ik_hand_r
+      parentName: ik_hand_gun
+      position: {x: 3.5527135e-16, y: 0, z: 3.5527136e-17}
+      rotation: {x: -2.3592231e-16, y: -6.5481574e-33, z: 2.7755567e-17, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: pelvis
       parentName: root
@@ -712,7 +751,7 @@ ModelImporter:
     - name: upperarm_l
       parentName: clavicle_l
       position: {x: -0.15784872, y: 1.4317954e-11, z: 6.35913e-11}
-      rotation: {x: 0.059959397, y: 0.03741096, z: 0.15131618, w: 0.9859557}
+      rotation: {x: 0.0599594, y: 0.037410963, z: 0.1513162, w: 0.9859558}
       scale: {x: 1, y: 1, z: 1}
     - name: lowerarm_l
       parentName: upperarm_l
@@ -762,7 +801,7 @@ ModelImporter:
     - name: pinky_02_l
       parentName: pinky_01_l
       position: {x: -0.035709806, y: 1.866988e-10, z: 3.9181813e-12}
-      rotation: {x: 0.010402302, y: 0.0041405093, z: -0.038471844, w: 0.99919695}
+      rotation: {x: 0.010402302, y: 0.0041405098, z: -0.038471844, w: 0.999197}
       scale: {x: 1, y: 1, z: 1}
     - name: pinky_03_l
       parentName: pinky_02_l
@@ -772,7 +811,7 @@ ModelImporter:
     - name: ring_01_l
       parentName: hand_l
       position: {x: -0.11497884, y: 0.017535266, z: 0.028469123}
-      rotation: {x: -0.09728449, y: 0.07056123, z: -0.116225526, w: 0.98592526}
+      rotation: {x: -0.09728447, y: 0.07056123, z: -0.11622551, w: 0.98592526}
       scale: {x: 1, y: 1, z: 1}
     - name: ring_02_l
       parentName: ring_01_l
@@ -984,40 +1023,10 @@ ModelImporter:
       position: {x: -0.2209424, y: 2.220446e-18, z: -3.5527136e-17}
       rotation: {x: -0.047445264, y: -0.000021898266, z: 0.000491179, w: 0.9988738}
       scale: {x: 1, y: 1, z: 1}
-    - name: ik_foot_root
-      parentName: root
+    - name: SK_Mannequin 1
+      parentName: SK_Mannequin(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: ik_foot_l
-      parentName: ik_foot_root
-      position: {x: -0.1707627, y: 0.080721274, z: 0.13465731}
-      rotation: {x: 0.020530319, y: 0.71223336, z: -0.011723512, w: 0.7015445}
-      scale: {x: 1, y: 1, z: 1}
-    - name: ik_foot_r
-      parentName: ik_foot_root
-      position: {x: 0.17076288, y: 0.08072148, z: 0.13465573}
-      rotation: {x: 0.70154446, y: 0.011724248, z: 0.71223336, w: -0.020531043}
-      scale: {x: 1, y: 1, z: 1}
-    - name: ik_hand_root
-      parentName: root
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: ik_hand_gun
-      parentName: ik_hand_root
-      position: {x: 0.56646097, y: 0.0033541175, z: 1.1167965}
-      rotation: {x: 0.6188495, y: 0.06954111, z: -0.38913614, w: 0.6787948}
-      scale: {x: 1, y: 1, z: 1}
-    - name: ik_hand_l
-      parentName: ik_hand_gun
-      position: {x: -0.77885425, y: -0.6960191, z: 0.438695}
-      rotation: {x: 0.68747425, y: 0.61435795, z: -0.38722545, w: -0.00000030318785}
-      scale: {x: 1, y: 1, z: 1}
-    - name: ik_hand_r
-      parentName: ik_hand_gun
-      position: {x: 3.5527135e-16, y: 0, z: 3.5527136e-17}
-      rotation: {x: -2.3592231e-16, y: -6.5481574e-33, z: 2.7755567e-17, w: 1}
       scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
